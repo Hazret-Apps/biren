@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "997162249545",
+    "project_id": "biren-d1ded",
+    "storage_bucket": "biren-d1ded.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997162249545:android:dd3b54f2d47a3c60357e98",
+        "android_client_info": {
+          "package_name": "com.hazret.biren"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997162249545-77tjji696drceb0r697djvhb0gd24spd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLREmNa7sFAhmUkKsoyJyOmiD8tdfCpzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997162249545-77tjji696drceb0r697djvhb0gd24spd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

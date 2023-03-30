@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/core/init/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,7 +11,7 @@ void _initSystemUi() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
       systemNavigationBarColor: Colors.white,
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Biren Koçluk',
+      theme: LightTheme().theme,
       debugShowCheckedModeBanner: false,
-      home: Biren(),
+      home: const Biren(),
     );
   }
 }
@@ -38,14 +40,7 @@ class Biren extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "BİREN KOÇLUK",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        foregroundColor: const Color(0xfffc6406),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        title: const Text("BİREN KOÇLUK"),
       ),
     );
   }
