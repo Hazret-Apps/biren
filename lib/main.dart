@@ -1,7 +1,7 @@
 import 'package:biren_kocluk/core/constants/app_constants.dart';
 import 'package:biren_kocluk/core/init/lang/language_manager.dart';
 import 'package:biren_kocluk/core/init/theme/theme.dart';
-import 'package:biren_kocluk/features/login/login_view.dart';
+import 'package:biren_kocluk/features/register/register_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
