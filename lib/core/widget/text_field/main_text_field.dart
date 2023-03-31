@@ -9,9 +9,11 @@ class AuthTextField extends StatefulWidget {
     required this.keyboardType,
     this.isNext = true,
     this.prefixIcon,
+    required this.controller,
   });
 
   final String hintText;
+  final TextEditingController controller;
   final TextInputType keyboardType;
   final bool isNext;
   final Icon? prefixIcon;
@@ -21,12 +23,21 @@ class AuthTextField extends StatefulWidget {
 }
 
 class _AuthTextFieldState extends State<AuthTextField> {
-  bool isObscure = true;
+  late bool isObscure;
+
+  @override
+  void initState() {
+    super.initState();
+    isObscure =
+        widget.keyboardType == TextInputType.visiblePassword ? true : false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.keyboardType,
       obscureText: isObscure,
+      controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
