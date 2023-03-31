@@ -31,6 +31,9 @@ dependencies:
   flutter_svg: ^1.1.3
   font_awesome_flutter: ^10.3.0
 
+  #Utilty
+  kartal: ^2.8.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
