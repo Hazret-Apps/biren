@@ -1,0 +1,8 @@
+{
+    "auth": {
+        "register": "Kayıt Ol",
+        "nameSurname": "Ad Soyad",
+        "mail": "Mail",
+        "password": "Şifre"
+    }
+}
