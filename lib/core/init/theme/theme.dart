@@ -6,15 +6,17 @@ class LightTheme {
 
   LightTheme() {
     theme = ThemeData(
+      primarySwatch: Colors.orange,
+      primaryColor: LightThemeColors.white,
       scaffoldBackgroundColor: LightThemeColors.scaffoldBackgroundColor,
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        centerTitle: true,
-        foregroundColor: LightThemeColors.white,
-        backgroundColor: LightThemeColors.blazeOrange,
+        foregroundColor: LightThemeColors.blazeOrange,
+        backgroundColor: LightThemeColors.scaffoldBackgroundColor,
         titleTextStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
+          color: LightThemeColors.blazeOrange,
         ),
       ),
     );
