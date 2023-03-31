@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/core/gen/assets.gen.dart';
 import 'package:biren_kocluk/core/widget/button/main_button.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Image get _birenImage => Image.asset("assets/icons/icon.png", scale: 1.5 / 1);
+  Image get _birenImage => Image.asset(Assets.icons.icon.path, scale: 1.5 / 1);
 
   AuthTextField get _nameTextField {
     return const AuthTextField(
