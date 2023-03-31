@@ -1,8 +1,9 @@
 import 'package:biren_kocluk/core/constants/app_constants.dart';
 import 'package:biren_kocluk/core/init/lang/language_manager.dart';
 import 'package:biren_kocluk/core/init/theme/theme.dart';
-import 'package:biren_kocluk/features/register/register_view.dart';
+import 'package:biren_kocluk/features/register/view/register_view.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,7 +13,7 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: LanguageManager.instance.supportedLocales,
-      path: AppConstants.LANG_ASSET_PATH,
+      path: AppConstants.LANG_ASSET_PATH, 
       fallbackLocale: LanguageManager.instance.trLocale,
       child: const Biren(),
     ),
@@ -22,6 +23,7 @@ void main() async {
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp();
 }
 
 void _initSystemUi() {
@@ -48,7 +50,7 @@ class Biren extends StatelessWidget {
       title: 'Biren Koçluk',
       theme: LightTheme().theme,
       debugShowCheckedModeBanner: false,
-      home: const LoginView(),
+      home: LoginView(),
     );
   }
 }

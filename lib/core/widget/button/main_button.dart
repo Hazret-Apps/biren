@@ -15,7 +15,7 @@ class AuthButton extends StatelessWidget {
       borderRadius: context.normalBorderRadius,
       child: Container(
         width: double.infinity,
-        height: 75,
+        height: 70,
         decoration: BoxDecoration(
           borderRadius: context.normalBorderRadius,
           gradient: const LinearGradient(

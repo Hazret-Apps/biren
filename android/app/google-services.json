@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:997162249545:android:dd3b54f2d47a3c60357e98",
+        "mobilesdk_app_id": "1:997162249545:android:c05018c92e78c420357e98",
         "android_client_info": {
-          "package_name": "com.hazret.biren"
+          "package_name": "com.hazret.biren_kocluk"
         }
       },
       "oauth_client": [
