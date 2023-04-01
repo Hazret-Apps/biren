@@ -73,6 +73,7 @@ class LoginView extends StatelessWidget {
       hintText: LocaleKeys.auth_password.tr(),
       keyboardType: TextInputType.visiblePassword,
       prefixIcon: const Icon(Icons.lock_outline),
+      isLast: true,
     );
   }
 

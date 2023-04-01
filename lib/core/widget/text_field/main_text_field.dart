@@ -7,7 +7,7 @@ class AuthTextField extends StatefulWidget {
     super.key,
     required this.hintText,
     required this.keyboardType,
-    this.isNext = true,
+    this.isLast = false,
     this.prefixIcon,
     required this.controller,
   });
@@ -15,7 +15,7 @@ class AuthTextField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final bool isNext;
+  final bool isLast;
   final Icon? prefixIcon;
 
   @override
@@ -35,6 +35,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction:
+          widget.isLast ? TextInputAction.done : TextInputAction.next,
       keyboardType: widget.keyboardType,
       obscureText: isObscure,
       controller: widget.controller,
