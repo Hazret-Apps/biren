@@ -33,6 +33,7 @@ dependencies:
 
   #Utilty
   kartal: ^2.8.0
+  awesome_snackbar_content: ^0.1.2
 
 dev_dependencies:
   flutter_test:
