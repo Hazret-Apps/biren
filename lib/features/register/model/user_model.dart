@@ -6,6 +6,7 @@ class UserModel {
   final String name;
   final String mail;
   final String password;
+  final bool isVerified;
   final Timestamp createdTime;
 
   const UserModel({
@@ -13,5 +14,6 @@ class UserModel {
     required this.mail,
     required this.password,
     required this.createdTime,
+    required this.isVerified,
   });
 }
