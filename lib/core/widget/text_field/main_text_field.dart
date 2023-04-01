@@ -1,4 +1,7 @@
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/core/init/validation/regex_validations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -54,6 +57,17 @@ class _AuthTextFieldState extends State<AuthTextField> {
           borderRadius: context.normalBorderRadius,
         ),
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return LocaleKeys.validatons_emptyValidation.tr();
+        }
+        if (widget.keyboardType == TextInputType.emailAddress) {
+          if (!RegexValidations.instance.emailRegex.hasMatch(value)) {
+            return LocaleKeys.validatons_mailValidation.tr();
+          }
+        }
+        return null;
+      },
     );
   }
 
