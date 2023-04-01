@@ -15,7 +15,9 @@ class RegisterService {
         password: userModel.password.trim(),
       );
       _firebaseAuth.currentUser!.updateDisplayName(userModel.name.trim());
-      FirebaseCollections.users.reference.add({
+      FirebaseCollections.users.reference
+          .doc(_firebaseAuth.currentUser!.uid)
+          .set({
         "name": userModel.name.trim(),
         "mail": userModel.mail.trim(),
         "password": userModel.password.trim(),
