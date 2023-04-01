@@ -4,5 +4,9 @@
         "nameSurname": "Ad Soyad",
         "mail": "Mail",
         "password": "Şifre"
+    },
+    "validatons": {
+        "mailValidation": "Lütfen geçerli bir mail adresi giriniz",
+        "emptyValidation": "Bu alan boş bırakılamaz"
     }
 }

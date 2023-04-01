@@ -14,6 +14,7 @@ class LoginView extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +24,28 @@ class LoginView extends StatelessWidget {
         centerTitle: true,
         title: Text(LocaleKeys.auth_register.tr()),
       ),
-      body: Padding(
-        padding: context.horizontalPaddingNormal,
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _birenImage,
-                  _nameTextField,
-                  context.emptySizedHeightBoxLow3x,
-                  _mailTextField,
-                  context.emptySizedHeightBoxLow3x,
-                  _passwordTextField,
-                ],
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: context.horizontalPaddingNormal,
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _birenImage,
+                    _nameTextField,
+                    context.emptySizedHeightBoxLow3x,
+                    _mailTextField,
+                    context.emptySizedHeightBoxLow3x,
+                    _passwordTextField,
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-            _registerButton(),
-          ],
+              const Spacer(),
+              _registerButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -73,20 +77,23 @@ class LoginView extends StatelessWidget {
       hintText: LocaleKeys.auth_password.tr(),
       keyboardType: TextInputType.visiblePassword,
       prefixIcon: const Icon(Icons.lock_outline),
+      isLast: true,
     );
   }
 
   AuthButton _registerButton() {
     return AuthButton(
       onPressed: () {
-        RegisterService().registerUser(
-          UserModel(
-            name: _nameController.text,
-            mail: _mailController.text,
-            password: _passwordController.text,
-            createdTime: Timestamp.now(),
-          ),
-        );
+        if (_formKey.currentState!.validate()) {
+          RegisterService().registerUser(
+            UserModel(
+              name: _nameController.text,
+              mail: _mailController.text,
+              password: _passwordController.text,
+              createdTime: Timestamp.now(),
+            ),
+          );
+        }
       },
       text: LocaleKeys.auth_register.tr(),
     );

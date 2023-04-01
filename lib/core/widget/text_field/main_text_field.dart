@@ -1,4 +1,7 @@
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/core/init/validation/regex_validations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -7,7 +10,7 @@ class AuthTextField extends StatefulWidget {
     super.key,
     required this.hintText,
     required this.keyboardType,
-    this.isNext = true,
+    this.isLast = false,
     this.prefixIcon,
     required this.controller,
   });
@@ -15,7 +18,7 @@ class AuthTextField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final bool isNext;
+  final bool isLast;
   final Icon? prefixIcon;
 
   @override
@@ -35,6 +38,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction:
+          widget.isLast ? TextInputAction.done : TextInputAction.next,
       keyboardType: widget.keyboardType,
       obscureText: isObscure,
       controller: widget.controller,
@@ -52,6 +57,17 @@ class _AuthTextFieldState extends State<AuthTextField> {
           borderRadius: context.normalBorderRadius,
         ),
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return LocaleKeys.validatons_emptyValidation.tr();
+        }
+        if (widget.keyboardType == TextInputType.emailAddress) {
+          if (!RegexValidations.instance.emailRegex.hasMatch(value)) {
+            return LocaleKeys.validatons_mailValidation.tr();
+          }
+        }
+        return null;
+      },
     );
   }
 
