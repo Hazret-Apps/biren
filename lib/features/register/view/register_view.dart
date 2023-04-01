@@ -91,6 +91,7 @@ class LoginView extends StatelessWidget {
               mail: _mailController.text,
               password: _passwordController.text,
               createdTime: Timestamp.now(),
+              isVerified: false,
             ),
             context,
           );

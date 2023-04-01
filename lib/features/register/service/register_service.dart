@@ -20,6 +20,7 @@ class RegisterService {
         "mail": userModel.mail.trim(),
         "password": userModel.password.trim(),
         "createdTime": userModel.createdTime,
+        "isVerified": userModel.isVerified,
       }).whenComplete(() {
         Navigator.pushAndRemoveUntil(
           context,
