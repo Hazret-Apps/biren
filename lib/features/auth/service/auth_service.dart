@@ -1,11 +1,16 @@
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/features/register/model/user_model.dart';
+import 'package:biren_kocluk/core/model/user_model.dart';
+import 'package:biren_kocluk/features/empty/empty_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class RegisterService {
+class AuthService {
+  static final String? userName =
+      FirebaseAuth.instance.currentUser?.displayName;
+  static final String? mail = FirebaseAuth.instance.currentUser?.email;
+  static final String? userId = FirebaseAuth.instance.currentUser?.uid;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<void> registerUser(UserModel userModel, BuildContext context) async {
@@ -27,6 +32,29 @@ class RegisterService {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const WaitingView()),
+          (route) => false,
+        );
+      });
+    } catch (e) {}
+  }
+
+  Future<void> loginUser(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
+    try {
+      await _firebaseAuth
+          .signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+          .whenComplete(() {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const EmptyView(),
+          ),
           (route) => false,
         );
       });

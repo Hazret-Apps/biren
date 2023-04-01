@@ -1,9 +1,12 @@
+import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/gen/assets.gen.dart';
 import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
+import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/core/model/user_model.dart';
 import 'package:biren_kocluk/core/widget/button/main_button.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
-import 'package:biren_kocluk/features/register/model/user_model.dart';
-import 'package:biren_kocluk/features/register/service/register_service.dart';
+import 'package:biren_kocluk/features/auth/register/viewmodel/register_viewmodel.dart';
+import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -11,43 +14,65 @@ import 'package:kartal/kartal.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  late final RegisterViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(LocaleKeys.auth_register.tr()),
+    return BaseView<RegisterViewModel>(
+      onModelReady: (model) {
+        model.setContext(context);
+        viewModel = model;
+      },
+      viewModel: RegisterViewModel(),
+      onPageBuilder: (context, value) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _appBar(),
+        body: _body(context),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: context.horizontalPaddingNormal,
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _birenImage,
-                    _nameTextField,
-                    context.emptySizedHeightBoxLow3x,
-                    _mailTextField,
-                    context.emptySizedHeightBoxLow3x,
-                    _passwordTextField,
-                  ],
-                ),
+    );
+  }
+
+  Form _body(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: context.horizontalPaddingNormal,
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  _birenImage,
+                  _nameTextField,
+                  context.emptySizedHeightBoxLow3x,
+                  _mailTextField,
+                  context.emptySizedHeightBoxLow3x,
+                  _passwordTextField,
+                ],
               ),
-              const Spacer(),
-              _registerButton(context),
-            ],
-          ),
+            ),
+            const Spacer(),
+            _registerButton(context),
+            context.emptySizedHeightBoxLow3x,
+            _alreadyHaveAccount(context),
+            _loginButton(context),
+          ],
         ),
       ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      centerTitle: true,
+      title: Text(LocaleKeys.auth_register.tr()),
     );
   }
 
@@ -85,7 +110,7 @@ class RegisterView extends StatelessWidget {
     return AuthButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          RegisterService().registerUser(
+          AuthService().registerUser(
             UserModel(
               name: _nameController.text,
               mail: _mailController.text,
@@ -98,6 +123,27 @@ class RegisterView extends StatelessWidget {
         }
       },
       text: LocaleKeys.auth_register.tr(),
+    );
+  }
+
+  Text _alreadyHaveAccount(BuildContext context) {
+    return Text(
+      "Zaten hesabın var mı?",
+      style: context.textTheme.titleSmall,
+    );
+  }
+
+  TextButton _loginButton(BuildContext context) {
+    return TextButton(
+      child: Text(
+        "Giriş Yap",
+        style: context.textTheme.titleSmall?.copyWith(
+          color: LightThemeColors.blazeOrange,
+        ),
+      ),
+      onPressed: () {
+        viewModel.callLoginView();
+      },
     );
   }
 }
