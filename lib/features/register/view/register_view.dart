@@ -3,7 +3,7 @@ import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/widget/button/main_button.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
 import 'package:biren_kocluk/features/register/model/user_model.dart';
-import 'package:biren_kocluk/features/register/service/firebase_service.dart';
+import 'package:biren_kocluk/features/register/service/register_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              _registerButton(),
+              _registerButton(context),
             ],
           ),
         ),
@@ -81,7 +81,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  AuthButton _registerButton() {
+  AuthButton _registerButton(BuildContext context) {
     return AuthButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
@@ -91,7 +91,9 @@ class LoginView extends StatelessWidget {
               mail: _mailController.text,
               password: _passwordController.text,
               createdTime: Timestamp.now(),
+              isVerified: false,
             ),
+            context,
           );
         }
       },
