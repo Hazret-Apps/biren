@@ -9,8 +9,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class RegisterView extends StatelessWidget {
+  RegisterView({super.key});
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
