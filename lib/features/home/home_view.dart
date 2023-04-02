@@ -13,6 +13,15 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.exit_to_app,
+              color: LightThemeColors.black,
+            ),
+          ),
+        ],
         title: Text(
           "Merhaba\n${AuthService.userName} 👋",
           style: context.textTheme.titleLarge?.copyWith(
@@ -31,8 +40,9 @@ class HomeView extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return AnnouncementCard(querySnapshot: snapshot);
+                  } else {
+                    return const SizedBox.shrink();
                   }
-                  return const SizedBox.shrink();
                 },
               ),
             ],

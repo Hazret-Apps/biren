@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/core/gen/assets.gen.dart';
+import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:biren_kocluk/features/empty/empty_view.dart';
 import 'package:biren_kocluk/features/home/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';

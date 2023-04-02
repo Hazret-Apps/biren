@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
-import 'package:biren_kocluk/core/gen/assets.gen.dart';
+import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/button/main_button.dart';
