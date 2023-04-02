@@ -1,6 +1,5 @@
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/core/model/user_model.dart';
-import 'package:biren_kocluk/features/empty/empty_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,7 @@ class AuthService {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const EmptyView(),
+            builder: (context) => const WaitingView(),
           ),
           (route) => false,
         );
