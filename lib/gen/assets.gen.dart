@@ -19,6 +19,26 @@ class $AssetsIconsGen {
   List<AssetGenImage> get values => [icon];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/announcement.png
+  AssetGenImage get announcement =>
+      const AssetGenImage('assets/images/announcement.png');
+
+  /// File path: assets/images/login.png
+  AssetGenImage get login => const AssetGenImage('assets/images/login.png');
+
+  /// File path: assets/images/student.png
+  AssetGenImage get student => const AssetGenImage('assets/images/student.png');
+
+  /// File path: assets/images/task.png
+  AssetGenImage get task => const AssetGenImage('assets/images/task.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [announcement, login, student, task];
+}
+
 class $AssetsJsonsGen {
   const $AssetsJsonsGen();
 
@@ -39,6 +59,7 @@ class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }
 
