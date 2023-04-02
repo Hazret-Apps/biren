@@ -44,26 +44,22 @@ class RegisterView extends StatelessWidget {
       key: _formKey,
       child: Padding(
         padding: context.horizontalPaddingNormal,
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _birenImage,
-                  _nameTextField,
-                  context.emptySizedHeightBoxLow3x,
-                  _mailTextField,
-                  context.emptySizedHeightBoxLow3x,
-                  _passwordTextField,
-                ],
-              ),
-            ),
-            const Spacer(),
-            _registerButton(context),
-            context.emptySizedHeightBoxLow3x,
-            _alreadyHaveAccount(context),
-            _loginButton(context),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _birenImage,
+              _nameTextField,
+              context.emptySizedHeightBoxLow3x,
+              _mailTextField,
+              context.emptySizedHeightBoxLow3x,
+              _passwordTextField,
+              context.emptySizedHeightBoxLow3x,
+              _registerButton(context),
+              context.emptySizedHeightBoxLow3x,
+              _alreadyHaveAccount(context),
+              _loginButton(context),
+            ],
+          ),
         ),
       ),
     );
