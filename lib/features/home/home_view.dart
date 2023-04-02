@@ -15,7 +15,9 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              AuthService().logOut(context);
+            },
             icon: const Icon(
               Icons.exit_to_app,
               color: LightThemeColors.black,
