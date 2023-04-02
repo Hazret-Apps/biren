@@ -41,24 +41,20 @@ class LoginView extends StatelessWidget {
       key: _formKey,
       child: Padding(
         padding: context.horizontalPaddingNormal,
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _birenImage,
-                  _mailTextField,
-                  context.emptySizedHeightBoxLow3x,
-                  _passwordTextField,
-                ],
-              ),
-            ),
-            const Spacer(),
-            _loginButton(context),
-            context.emptySizedHeightBoxLow3x,
-            _alreadyHaveAccount(context),
-            _registerButton(context),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _birenImage,
+              _mailTextField,
+              context.emptySizedHeightBoxLow3x,
+              _passwordTextField,
+              context.emptySizedHeightBoxLow3x,
+              _loginButton(context),
+              context.emptySizedHeightBoxLow3x,
+              _alreadyHaveAccount(context),
+              _registerButton(context),
+            ],
+          ),
         ),
       ),
     );
