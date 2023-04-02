@@ -11,6 +11,10 @@ class AuthService {
       FirebaseAuth.instance.currentUser?.displayName;
   static final String? mail = FirebaseAuth.instance.currentUser?.email;
   static final String? userId = FirebaseAuth.instance.currentUser?.uid;
+
+  static const String adminMail = "yoneticigirisimaili";
+  static const String adminPassword = "yoneticigirisisifresi";
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<void> registerUser(UserModel userModel, BuildContext context) async {
