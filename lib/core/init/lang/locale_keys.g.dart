@@ -1,6 +1,8 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+// ignore_for_file: constant_identifier_names
+
+abstract class LocaleKeys {
   static const auth_register = 'auth.register';
   static const auth_nameSurname = 'auth.nameSurname';
   static const auth_mail = 'auth.mail';
@@ -9,5 +11,4 @@ abstract class  LocaleKeys {
   static const validatons_mailValidation = 'validatons.mailValidation';
   static const validatons_emptyValidation = 'validatons.emptyValidation';
   static const validatons = 'validatons';
-
 }

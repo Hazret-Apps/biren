@@ -35,7 +35,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     Navigator.pushAndRemoveUntil(
       viewModelContext,
       MaterialPageRoute(
-        builder: (context) => AdminHomeView(),
+        builder: (context) => const AdminHomeView(),
       ),
       (route) => false,
     );
