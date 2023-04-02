@@ -24,6 +24,17 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
   }
 
   @override
+  void callAdminHomeView() {
+    final _$actionInfo = _$_LoginViewModelBaseActionController.startAction(
+        name: '_LoginViewModelBase.callAdminHomeView');
+    try {
+      return super.callAdminHomeView();
+    } finally {
+      _$_LoginViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 

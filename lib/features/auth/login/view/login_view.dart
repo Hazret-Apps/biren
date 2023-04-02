@@ -91,6 +91,10 @@ class LoginView extends StatelessWidget {
   AuthButton _loginButton(BuildContext context) {
     return AuthButton(
       onPressed: () {
+        if (_mailController.text == AuthService.adminMail &&
+            _passwordController.text == AuthService.adminPassword) {
+          viewModel.callAdminHomeView();
+        }
         if (_formKey.currentState!.validate()) {
           AuthService().loginUser(
             _mailController.text.trim(),
