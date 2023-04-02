@@ -19,10 +19,39 @@ class $AssetsIconsGen {
   List<AssetGenImage> get values => [icon];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/announcement.png
+  AssetGenImage get announcement =>
+      const AssetGenImage('assets/images/announcement.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [announcement];
+}
+
+class $AssetsJsonsGen {
+  const $AssetsJsonsGen();
+
+  $AssetsJsonsLangGen get lang => const $AssetsJsonsLangGen();
+}
+
+class $AssetsJsonsLangGen {
+  const $AssetsJsonsLangGen();
+
+  /// File path: assets/jsons/lang/tr-TR.json
+  String get trTR => 'assets/jsons/lang/tr-TR.json';
+
+  /// List of all assets
+  List<String> get values => [trTR];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }
 
 class AssetGenImage {
