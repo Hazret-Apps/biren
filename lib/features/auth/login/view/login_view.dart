@@ -54,10 +54,10 @@ class LoginView extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            _registerButton(context),
+            _loginButton(context),
             context.emptySizedHeightBoxLow3x,
             _alreadyHaveAccount(context),
-            _loginButton(context),
+            _registerButton(context),
           ],
         ),
       ),
@@ -92,7 +92,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  AuthButton _registerButton(BuildContext context) {
+  AuthButton _loginButton(BuildContext context) {
     return AuthButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
@@ -103,7 +103,7 @@ class LoginView extends StatelessWidget {
           );
         }
       },
-      text: LocaleKeys.auth_register.tr(),
+      text: "Giriş Yap",
     );
   }
 
@@ -114,10 +114,10 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  TextButton _loginButton(BuildContext context) {
+  TextButton _registerButton(BuildContext context) {
     return TextButton(
       child: Text(
-        "Kayıt Ol",
+        LocaleKeys.auth_register.tr(),
         style: context.textTheme.titleSmall?.copyWith(
           color: LightThemeColors.blazeOrange,
         ),
