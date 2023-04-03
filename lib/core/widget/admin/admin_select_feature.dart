@@ -37,6 +37,10 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         imagePath = Assets.images.login.path;
         title = "Giriş Talepleri";
         break;
+      case AdminFeatureTypes.study:
+        imagePath = Assets.images.study.path;
+        title = "Etüt İstekleri";
+        break;
       default:
     }
   }
