@@ -38,7 +38,7 @@ class _AdminHomeViewState extends State<AdminHomeView> {
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
         ),
         children: const [
           AdminSelectFeature(featureTypes: AdminFeatureTypes.announcement),

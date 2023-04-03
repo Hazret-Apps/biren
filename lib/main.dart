@@ -53,7 +53,7 @@ class Biren extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       title: 'Biren Koçluk',
-      theme: LightTheme().theme,
+      theme: LightTheme(context).theme,
       debugShowCheckedModeBanner: false,
       home: AuthService.userId == null
           ? RegisterView()

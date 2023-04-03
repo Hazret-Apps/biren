@@ -12,8 +12,8 @@ class AuthService {
   static final String? mail = FirebaseAuth.instance.currentUser?.email;
   static final String? userId = FirebaseAuth.instance.currentUser?.uid;
 
-  static const String adminMail = "yoneticigirisimaili";
-  static const String adminPassword = "yoneticigirisisifresi";
+  static const String adminMail = "admin";
+  static const String adminPassword = "123";
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
