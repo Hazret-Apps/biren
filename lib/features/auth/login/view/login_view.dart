@@ -1,9 +1,9 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
+import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/button/main_button.dart';
-import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
+import 'package:biren_kocluk/core/widget/text_field/auth_text_field.dart';
 import 'package:biren_kocluk/features/auth/login/viewmodel/login_viewmodel.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:easy_localization/easy_localization.dart';

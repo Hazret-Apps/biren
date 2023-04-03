@@ -1,5 +1,6 @@
 import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/features/admin/view/add_announcment_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -16,6 +17,7 @@ class AdminSelectFeature extends StatefulWidget {
 class _AdminSelectFeatureState extends State<AdminSelectFeature> {
   late String imagePath;
   late String title;
+  late Widget callView;
 
   @override
   void initState() {
@@ -24,22 +26,27 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case AdminFeatureTypes.announcement:
         imagePath = Assets.images.announcement.path;
         title = "Duyuru Oluştur";
+        callView = const AddAnnouncmentView();
         break;
       case AdminFeatureTypes.task:
         imagePath = Assets.images.task.path;
         title = "Ödev Oluştur";
+        callView = const AddAnnouncmentView();
         break;
       case AdminFeatureTypes.student:
         imagePath = Assets.images.student.path;
         title = "Öğrenciler";
+        callView = const AddAnnouncmentView();
         break;
       case AdminFeatureTypes.login:
         imagePath = Assets.images.login.path;
         title = "Giriş Talepleri";
+        callView = const AddAnnouncmentView();
         break;
       case AdminFeatureTypes.study:
         imagePath = Assets.images.study.path;
         title = "Etüt İstekleri";
+        callView = const AddAnnouncmentView();
         break;
       default:
     }
@@ -50,21 +57,31 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: context.height * 0.2,
-          width: context.width * 0.4,
-          decoration: BoxDecoration(
-            color: LightThemeColors.white,
-            borderRadius: context.normalBorderRadius,
-            image: DecorationImage(
-              image: AssetImage(imagePath),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => callView,
+              ),
+            );
+          },
+          child: Container(
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+              color: LightThemeColors.white,
+              borderRadius: context.normalBorderRadius,
+              image: DecorationImage(
+                image: AssetImage(imagePath),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
-        context.emptySizedHeightBoxLow,
         Text(
           title,
-          style: context.textTheme.titleLarge,
+          style: context.textTheme.titleMedium,
         ),
       ],
     );
