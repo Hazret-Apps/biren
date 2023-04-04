@@ -23,7 +23,7 @@ abstract class _RegisterViewModelBase with Store, BaseViewModel {
     Navigator.pushAndRemoveUntil(
       viewModelContext,
       MaterialPageRoute(
-        builder: (context) => LoginView(),
+        builder: (context) => const LoginView(),
       ),
       (route) => false,
     );

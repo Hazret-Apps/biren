@@ -12,11 +12,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class RegisterView extends StatelessWidget {
-  RegisterView({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
   final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _mailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -29,10 +36,10 @@ class RegisterView extends StatelessWidget {
       onModelReady: (model) {
         model.setContext(context);
         viewModel = model;
+        FocusScope.of(context).unfocus();
       },
       viewModel: RegisterViewModel(),
       onPageBuilder: (context, value) => Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: _appBar(),
         body: _body(context),
       ),
