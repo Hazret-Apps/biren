@@ -1,9 +1,11 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
+import 'package:biren_kocluk/features/admin/service/announcment_service.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcment_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class AddAnnouncmentView extends StatefulWidget {
   const AddAnnouncmentView({super.key});
@@ -40,37 +42,63 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
   Scaffold _buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: SingleChildScrollView(
-        padding: context.horizontalPaddingNormal,
-        child: Column(
-          children: [
-            _addPhotoContainer(),
-            context.emptySizedHeightBoxLow3x,
-            MainTextField(
-              hintText: "Duyuru Başlığı",
-              keyboardType: TextInputType.name,
-              controller: _titleController,
-            ),
-            context.emptySizedHeightBoxLow3x,
-            MainTextField(
-              hintText: "Duyuru Açıklaması",
-              keyboardType: TextInputType.name,
-              controller: _titleController,
-            ),
-            context.emptySizedHeightBoxLow3x,
-            _petAgeRangeDropDown
-          ],
-        ),
-      ),
+      body: Observer(builder: (_) {
+        return SingleChildScrollView(
+          padding: context.horizontalPaddingNormal,
+          child: Column(
+            children: [
+              viewModel.image == null
+                  ? _addPhotoContainer()
+                  : _photoContainer(context),
+              context.emptySizedHeightBoxLow3x,
+              MainTextField(
+                hintText: "Duyuru Başlığı",
+                keyboardType: TextInputType.name,
+                controller: _titleController,
+              ),
+              context.emptySizedHeightBoxLow3x,
+              MainTextField(
+                hintText: "Duyuru Açıklaması",
+                keyboardType: TextInputType.name,
+                controller: _titleController,
+              ),
+              context.emptySizedHeightBoxLow3x,
+              _petAgeRangeDropDown
+            ],
+          ),
+        );
+      }),
       floatingActionButton: _floatingActionButton(),
     );
+  }
+
+  Observer _photoContainer(BuildContext context) {
+    return Observer(builder: (_) {
+      return InkWell(
+        onTap: () {
+          viewModel.selectImage();
+        },
+        child: Container(
+          height: 175,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: context.normalBorderRadius,
+            color: LightThemeColors.snowbank,
+            image: DecorationImage(
+              image: FileImage(viewModel.fileImage!),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   InkWell _addPhotoContainer() {
     return InkWell(
       borderRadius: context.normalBorderRadius,
-      onTap: () {
-        _bottomSheet(context);
+      onTap: () async {
+        viewModel.selectImage();
       },
       child: Container(
         height: 175,
@@ -84,42 +112,6 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
           size: 36,
         ),
       ),
-    );
-  }
-
-  Future<dynamic> _bottomSheet(context) {
-    return showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              _pickGalleryButton(context),
-              _pickCameraButton(context),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  ListTile _pickCameraButton(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.photo_camera),
-      title: const Text("Kamera"),
-      onTap: () {
-        Navigator.of(context).pop();
-      },
-    );
-  }
-
-  ListTile _pickGalleryButton(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.photo_library),
-      title: const Text("Galeri"),
-      onTap: () {
-        Navigator.of(context).pop();
-      },
     );
   }
 
@@ -153,7 +145,9 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
 
   FloatingActionButton _floatingActionButton() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        var imageUrl = AnnouncmentService().uploadImage(viewModel.image!);
+      },
       child: const Icon(Icons.add),
     );
   }
