@@ -19,7 +19,6 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final TextEditingController _mailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -32,10 +31,10 @@ class _LoginViewState extends State<LoginView> {
       onModelReady: (model) {
         model.setContext(context);
         viewModel = model;
+        FocusScope.of(context).unfocus();
       },
       viewModel: LoginViewModel(),
       onPageBuilder: (context, value) => Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: _appBar(),
         body: _body(context),
       ),
