@@ -19,10 +19,51 @@ class $AssetsIconsGen {
   List<AssetGenImage> get values => [icon];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/announcement.png
+  AssetGenImage get announcement =>
+      const AssetGenImage('assets/images/announcement.png');
+
+  /// File path: assets/images/login.png
+  AssetGenImage get login => const AssetGenImage('assets/images/login.png');
+
+  /// File path: assets/images/student.png
+  AssetGenImage get student => const AssetGenImage('assets/images/student.png');
+
+  /// File path: assets/images/study.png
+  AssetGenImage get study => const AssetGenImage('assets/images/study.png');
+
+  /// File path: assets/images/task.png
+  AssetGenImage get task => const AssetGenImage('assets/images/task.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [announcement, login, student, study, task];
+}
+
+class $AssetsJsonsGen {
+  const $AssetsJsonsGen();
+
+  $AssetsJsonsLangGen get lang => const $AssetsJsonsLangGen();
+}
+
+class $AssetsJsonsLangGen {
+  const $AssetsJsonsLangGen();
+
+  /// File path: assets/jsons/lang/tr-TR.json
+  String get trTR => 'assets/jsons/lang/tr-TR.json';
+
+  /// List of all assets
+  List<String> get values => [trTR];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }
 
 class AssetGenImage {

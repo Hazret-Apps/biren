@@ -33,7 +33,7 @@ dependencies:
 
   #Utilty
   kartal: ^2.8.0
-  awesome_snackbar_content: ^0.1.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/jsons/
+    - assets/images/
     - assets/jsons/lang/
 
   # fonts:

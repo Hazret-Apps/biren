@@ -1,11 +1,11 @@
 import 'package:biren_kocluk/core/constants/app_constants.dart';
 import 'package:biren_kocluk/core/init/lang/language_manager.dart';
 import 'package:biren_kocluk/core/init/theme/theme.dart';
-import 'package:biren_kocluk/core/service/auth/auth_service.dart';
+import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
+import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/empty/empty_view.dart';
 import 'package:biren_kocluk/features/home/home_view.dart';
-import 'package:biren_kocluk/features/register/view/register_view.dart';
-import 'package:biren_kocluk/features/wait/waiting_view.dart';
+import 'package:biren_kocluk/features/home/view/wait/waiting_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,7 +53,7 @@ class Biren extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       title: 'Biren Koçluk',
-      theme: LightTheme().theme,
+      theme: LightTheme(context).theme,
       debugShowCheckedModeBanner: false,
       home: AuthService.userId == null
           ? RegisterView()
