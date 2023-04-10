@@ -13,11 +13,11 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
       ActionController(name: '_RegisterViewModelBase', context: context);
 
   @override
-  void callLoginView() {
+  void callLoginView(BuildContext context) {
     final _$actionInfo = _$_RegisterViewModelBaseActionController.startAction(
         name: '_RegisterViewModelBase.callLoginView');
     try {
-      return super.callLoginView();
+      return super.callLoginView(context);
     } finally {
       _$_RegisterViewModelBaseActionController.endAction(_$actionInfo);
     }

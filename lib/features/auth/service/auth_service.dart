@@ -70,7 +70,7 @@ class AuthService {
           () => Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => RegisterView(),
+              builder: (context) => const RegisterView(),
             ),
             (route) => false,
           ),

@@ -29,7 +29,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return BaseView<LoginViewModel>(
       onModelReady: (model) {
-        model.setContext(context);
+        // model.setContext(context);
         viewModel = model;
         FocusScope.of(context).unfocus();
       },
@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
       onPressed: () {
         if (_mailController.text == AuthService.adminMail &&
             _passwordController.text == AuthService.adminPassword) {
-          viewModel.callAdminHomeView();
+          viewModel.callAdminHomeView(context);
         }
         if (_formKey.currentState!.validate()) {
           AuthService().loginUser(
@@ -128,7 +128,7 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
       onPressed: () {
-        viewModel.callRegisterView();
+        viewModel.callRegisterView(context);
       },
     );
   }

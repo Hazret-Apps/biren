@@ -18,7 +18,7 @@ class _AdminHomeViewState extends State<AdminHomeView> {
   Widget build(BuildContext context) {
     return BaseView<AdminHomeViewModel>(
       onModelReady: (model) {
-        model.setContext(context);
+        // model.setContext(context);
         viewModel = model;
       },
       viewModel: AdminHomeViewModel(),

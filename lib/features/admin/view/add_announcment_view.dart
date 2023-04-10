@@ -1,7 +1,6 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
-import 'package:biren_kocluk/features/admin/service/announcment_service.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcment_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -31,7 +30,7 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
   Widget build(BuildContext context) {
     return BaseView(
       onModelReady: (model) {
-        model.setContext(context);
+        // model.setContext(context);
         viewModel = model;
       },
       viewModel: AddAnnouncmentViewModel(),
@@ -146,7 +145,7 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
   FloatingActionButton _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        var imageUrl = AnnouncmentService().uploadImage(viewModel.image!);
+        // var imageUrl = AnnouncmentService().uploadImage(viewModel.image!);
       },
       child: const Icon(Icons.add),
     );

@@ -34,7 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return BaseView<RegisterViewModel>(
       onModelReady: (model) {
-        model.setContext(context);
+        // model.setContext(context);
         viewModel = model;
         FocusScope.of(context).unfocus();
       },
@@ -145,7 +145,7 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
       onPressed: () {
-        viewModel.callLoginView();
+        viewModel.callLoginView(context);
       },
     );
   }

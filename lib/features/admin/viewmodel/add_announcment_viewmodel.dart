@@ -2,8 +2,6 @@
 
 import 'dart:io';
 
-import 'package:biren_kocluk/core/base/model/base_view_model.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
@@ -12,14 +10,14 @@ part 'add_announcment_viewmodel.g.dart';
 class AddAnnouncmentViewModel = _AddAnnouncmentViewModelBase
     with _$AddAnnouncmentViewModel;
 
-abstract class _AddAnnouncmentViewModelBase with Store, BaseViewModel {
-  @override
-  void setContext(BuildContext context) {
-    viewModelContext = context;
-  }
+abstract class _AddAnnouncmentViewModelBase with Store {
+  // @override
+  // void setContext(BuildContext context) {
+  //   viewModelContext = context;
+  // }
 
-  @override
-  void init() {}
+  // @override
+  // void init() {}
 
   @observable
   XFile? image;

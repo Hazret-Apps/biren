@@ -13,22 +13,22 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
       ActionController(name: '_LoginViewModelBase', context: context);
 
   @override
-  void callRegisterView() {
+  void callRegisterView(BuildContext context) {
     final _$actionInfo = _$_LoginViewModelBaseActionController.startAction(
         name: '_LoginViewModelBase.callRegisterView');
     try {
-      return super.callRegisterView();
+      return super.callRegisterView(context);
     } finally {
       _$_LoginViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void callAdminHomeView() {
+  void callAdminHomeView(BuildContext context) {
     final _$actionInfo = _$_LoginViewModelBaseActionController.startAction(
         name: '_LoginViewModelBase.callAdminHomeView');
     try {
-      return super.callAdminHomeView();
+      return super.callAdminHomeView(context);
     } finally {
       _$_LoginViewModelBaseActionController.endAction(_$actionInfo);
     }
