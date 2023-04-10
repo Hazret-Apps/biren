@@ -5,10 +5,10 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
-part 'add_announcment_viewmodel.g.dart';
+part 'add_announcement_viewmodel.g.dart';
 
-class AddAnnouncmentViewModel = _AddAnnouncmentViewModelBase
-    with _$AddAnnouncmentViewModel;
+class AddAnnouncementViewModel = _AddAnnouncmentViewModelBase
+    with _$AddAnnouncementViewModel;
 
 abstract class _AddAnnouncmentViewModelBase with Store {
   // @override

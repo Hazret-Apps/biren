@@ -1,22 +1,26 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/core/model/announcement_card_model.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
-import 'package:biren_kocluk/features/admin/viewmodel/add_announcment_viewmodel.dart';
+import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
+import 'package:biren_kocluk/features/admin/viewmodel/add_announcement_viewmodel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class AddAnnouncmentView extends StatefulWidget {
-  const AddAnnouncmentView({super.key});
+class AddAnnouncementView extends StatefulWidget {
+  const AddAnnouncementView({super.key});
 
   @override
-  State<AddAnnouncmentView> createState() => _AddAnnouncmentViewState();
+  State<AddAnnouncementView> createState() => _AddAnnouncementViewState();
 }
 
-class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
-  late AddAnnouncmentViewModel viewModel;
+class _AddAnnouncementViewState extends State<AddAnnouncementView> {
+  late AddAnnouncementViewModel viewModel;
 
   final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   final List<String> greadeList = [
     "5",
@@ -33,7 +37,7 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
         // model.setContext(context);
         viewModel = model;
       },
-      viewModel: AddAnnouncmentViewModel(),
+      viewModel: AddAnnouncementViewModel(),
       onPageBuilder: (context, value) => _buildScaffold(context),
     );
   }
@@ -59,7 +63,7 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
               MainTextField(
                 hintText: "Duyuru Açıklaması",
                 keyboardType: TextInputType.name,
-                controller: _titleController,
+                controller: _descriptionController,
               ),
               context.emptySizedHeightBoxLow3x,
               _petAgeRangeDropDown
@@ -144,8 +148,16 @@ class _AddAnnouncmentViewState extends State<AddAnnouncmentView> {
 
   FloatingActionButton _floatingActionButton() {
     return FloatingActionButton(
-      onPressed: () {
-        // var imageUrl = AnnouncmentService().uploadImage(viewModel.image!);
+      onPressed: () async {
+        var imageUrl = AnnouncementService().uploadImage(viewModel.image!);
+        AnnouncementService().addAnnouncement(
+          AnnouncementModel(
+            title: _titleController.text.trim(),
+            description: _descriptionController.text.trim(),
+            createdTime: Timestamp.now(),
+            imagePath: viewModel.image == null ? null : await imageUrl,
+          ),
+        );
       },
       child: const Icon(Icons.add),
     );

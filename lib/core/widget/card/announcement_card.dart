@@ -23,20 +23,19 @@ class AnnouncementCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: LightThemeColors.snowbank,
             borderRadius: context.normalBorderRadius,
+            image: querySnapshot.data!.docs[index]["imagePath"] == null
+                ? null
+                : DecorationImage(
+                    image: NetworkImage(
+                      querySnapshot.data!.docs[index]["imagePath"],
+                    ),
+                    fit: BoxFit.cover,
+                  ),
           ),
           child: Padding(
             padding: context.paddingLow,
             child: Stack(
               children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: querySnapshot.data!.docs[index]["imagePath"] == null
-                      ? Expanded(
-                          child: Container(color: LightThemeColors.snowbank))
-                      : Image.asset(
-                          querySnapshot.data!.docs[index]["imagePath"],
-                        ),
-                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
