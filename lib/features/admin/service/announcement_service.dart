@@ -1,13 +1,15 @@
 import 'dart:io';
-
 import 'package:biren_kocluk/core/model/announcement_card_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AnnouncementService {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+
   String downloadUrl = "";
 
   Future<String> uploadImage(XFile image) async {
