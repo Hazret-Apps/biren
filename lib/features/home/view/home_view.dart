@@ -1,7 +1,9 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
+import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/card/announcement_card.dart';
+import 'package:biren_kocluk/core/widget/card/feature_select_card.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/viewmodel/home_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,24 +39,39 @@ class HomeView extends StatelessWidget {
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                context.emptySizedHeightBoxLow,
-                StreamBuilder<QuerySnapshot>(
-                  stream:
-                      FirebaseCollections.announcement.reference.snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return AnnouncementCard(querySnapshot: snapshot);
-                    } else {
-                      return const SizedBox.shrink();
-                    }
-                  },
+          child: ListView(
+            children: [
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseCollections.announcement.reference.snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AnnouncementCard(querySnapshot: snapshot);
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+              context.emptySizedHeightBoxLow3x,
+              Padding(
+                padding: context.horizontalPaddingNormal,
+                child: const Column(
+                  children: [
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        FeatureSelectCard(
+                          featureTypes: FeatureTypes.task,
+                        ),
+                        Spacer(),
+                        FeatureSelectCard(
+                          featureTypes: FeatureTypes.study,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

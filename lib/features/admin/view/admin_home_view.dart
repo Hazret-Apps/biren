@@ -41,11 +41,11 @@ class _AdminHomeViewState extends State<AdminHomeView> {
           crossAxisSpacing: 10,
         ),
         children: const [
-          AdminSelectFeature(featureTypes: AdminFeatureTypes.announcement),
-          AdminSelectFeature(featureTypes: AdminFeatureTypes.task),
-          AdminSelectFeature(featureTypes: AdminFeatureTypes.student),
-          AdminSelectFeature(featureTypes: AdminFeatureTypes.login),
-          AdminSelectFeature(featureTypes: AdminFeatureTypes.study),
+          AdminSelectFeature(featureTypes: FeatureTypes.announcement),
+          AdminSelectFeature(featureTypes: FeatureTypes.task),
+          AdminSelectFeature(featureTypes: FeatureTypes.student),
+          AdminSelectFeature(featureTypes: FeatureTypes.login),
+          AdminSelectFeature(featureTypes: FeatureTypes.study),
         ],
       ),
     );
