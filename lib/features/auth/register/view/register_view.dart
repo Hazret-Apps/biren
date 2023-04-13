@@ -118,6 +118,7 @@ class _RegisterViewState extends State<RegisterView> {
               name: _nameController.text,
               mail: _mailController.text,
               password: _passwordController.text,
+              grade: 0,
               createdTime: Timestamp.now(),
               isVerified: false,
             ),

@@ -7,9 +7,11 @@ class UserModel {
   final String mail;
   final String password;
   final bool isVerified;
+  final int grade;
   final Timestamp createdTime;
 
   const UserModel({
+    required this.grade,
     required this.name,
     required this.mail,
     required this.password,
