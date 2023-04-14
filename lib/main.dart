@@ -5,6 +5,7 @@ import 'package:biren_kocluk/core/init/theme/theme.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
+import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,15 +63,18 @@ class Biren extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const WaitingView();
+                  return const LoadingView();
                 }
                 if (snapshot.hasData) {
                   if (snapshot.data!["isVerified"]) {
                     return const HomeView();
                   }
-                  return const WaitingView();
+                  if (snapshot.data!["isVerified"] == false) {
+                    return const WaitingView();
+                  }
+                  return const LoadingView();
                 }
-                return const WaitingView();
+                return const LoadingView();
               },
             ),
     );
