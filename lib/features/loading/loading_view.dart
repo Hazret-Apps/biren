@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoadingView extends StatelessWidget {
@@ -7,7 +8,7 @@ class LoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(color: LightThemeColors.blazeOrange),
       ),
     );
   }
