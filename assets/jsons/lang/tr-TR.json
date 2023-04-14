@@ -17,7 +17,7 @@
     },
     "features": {
         "createAnnouncement": "Duyuru Oluştur",
-        "createHomework": "Ödev Oluştur",
+        "createHomework": "Ders Programı Oluştur",
         "students": "Öğrenciler",
         "loginRequests": "Giriş Talepleri",
         "studyRequests": "Etüt Takepleri"
