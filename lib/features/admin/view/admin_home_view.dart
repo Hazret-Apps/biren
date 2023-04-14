@@ -1,7 +1,9 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/widget/admin/admin_select_feature.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/admin_home_viewmodel.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomeView extends StatefulWidget {
@@ -30,7 +32,7 @@ class _AdminHomeViewState extends State<AdminHomeView> {
   }
 
   AppBar get _buildAppBar => AppBar(
-        title: const Text("Yönetici"),
+        title: Text(LocaleKeys.adminText.tr()),
       );
 
   SafeArea _body() {

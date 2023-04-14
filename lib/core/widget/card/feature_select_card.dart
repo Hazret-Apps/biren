@@ -1,7 +1,9 @@
 import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/admin/view/add_announcement_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -25,12 +27,12 @@ class _FeatureSelectCardState extends State<FeatureSelectCard> {
     switch (widget.featureTypes) {
       case FeatureTypes.task:
         imagePath = Assets.images.task.path;
-        title = "Görevler";
+        title = LocaleKeys.studentFeatures_tasks.tr();
         callView = const AddAnnouncementView();
         break;
       case FeatureTypes.study:
         imagePath = Assets.images.study.path;
-        title = "Etüt İste";
+        title = LocaleKeys.studentFeatures_requestAStudy.tr();
         callView = const AddAnnouncementView();
         break;
       default:

@@ -132,7 +132,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Text _alreadyHaveAccount(BuildContext context) {
     return Text(
-      "Zaten hesabın var mı?",
+      LocaleKeys.auth_alreadyHaveAnAccount.tr(),
       style: context.textTheme.titleSmall,
     );
   }
@@ -140,7 +140,7 @@ class _RegisterViewState extends State<RegisterView> {
   TextButton _loginButton(BuildContext context) {
     return TextButton(
       child: Text(
-        "Giriş Yap",
+        LocaleKeys.auth_login.tr(),
         style: context.textTheme.titleSmall?.copyWith(
           color: LightThemeColors.blazeOrange,
         ),

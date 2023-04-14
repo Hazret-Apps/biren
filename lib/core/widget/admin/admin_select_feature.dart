@@ -1,7 +1,9 @@
 import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/admin/view/add_announcement_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -25,27 +27,27 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
     switch (widget.featureTypes) {
       case FeatureTypes.announcement:
         imagePath = Assets.images.announcement.path;
-        title = "Duyuru Oluştur";
+        title = LocaleKeys.features_createAnnouncement.tr();
         callView = const AddAnnouncementView();
         break;
       case FeatureTypes.task:
         imagePath = Assets.images.task.path;
-        title = "Ödev Oluştur";
+        title = LocaleKeys.features_createHomework.tr();
         callView = const AddAnnouncementView();
         break;
       case FeatureTypes.student:
         imagePath = Assets.images.student.path;
-        title = "Öğrenciler";
+        title = LocaleKeys.features_students.tr();
         callView = const AddAnnouncementView();
         break;
       case FeatureTypes.login:
         imagePath = Assets.images.login.path;
-        title = "Giriş Talepleri";
+        title = LocaleKeys.features_loginRequests.tr();
         callView = const AddAnnouncementView();
         break;
       case FeatureTypes.study:
         imagePath = Assets.images.study.path;
-        title = "Etüt İstekleri";
+        title = LocaleKeys.features_studyRequests.tr();
         callView = const AddAnnouncementView();
         break;
       default:

@@ -3,10 +3,35 @@
         "register": "Kayıt Ol",
         "nameSurname": "Ad Soyad",
         "mail": "Mail",
-        "password": "Şifre"
+        "password": "Şifre",
+        "login": "Giriş Yap",
+        "dontHaveAnAccount": "Hesabın yok mu?",
+        "alreadyHaveAnAccount": "Zaten hesabın var mı?"
+    },
+    "admin": {
+        "adminText": "Yönetici"
     },
     "validatons": {
         "mailValidation": "Lütfen geçerli bir mail adresi giriniz",
         "emptyValidation": "Bu alan boş bırakılamaz"
-    }
+    },
+    "features": {
+        "createAnnouncement": "Duyuru Oluştur",
+        "createHomework": "Ödev Oluştur",
+        "students": "Öğrenciler",
+        "loginRequests": "Giriş Talepleri",
+        "studyRequests": "Etüt Takepleri"
+    },
+    "studentFeatures": {
+        "tasks": "Görevler",
+        "requestAStudy": "Etüt İste"
+    },
+    "titles": {
+        "announcementTitle": "Duyuru Başlığı"
+    },
+    "descriptions": {
+        "announcementDescriptions": "Duyuru Açıklaması"
+    },
+    "classText": "Sınıf",
+    "hello": "Merhaba"
 }

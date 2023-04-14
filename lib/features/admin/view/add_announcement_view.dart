@@ -1,10 +1,12 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/model/announcement_card_model.dart';
 import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
 import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcement_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -55,13 +57,13 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
                   : _photoContainer(context),
               context.emptySizedHeightBoxLow3x,
               MainTextField(
-                hintText: "Duyuru Başlığı",
+                hintText: LocaleKeys.titles_announcementTitle.tr(),
                 keyboardType: TextInputType.name,
                 controller: _titleController,
               ),
               context.emptySizedHeightBoxLow3x,
               MainTextField(
-                hintText: "Duyuru Açıklaması",
+                hintText: LocaleKeys.descriptions_announcementDescriptions.tr(),
                 keyboardType: TextInputType.name,
                 controller: _descriptionController,
               ),
@@ -126,9 +128,7 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
           borderSide: BorderSide.none,
         ),
       ),
-      hint: const Text(
-        "Sınıf",
-      ),
+      hint: Text(LocaleKeys.classText.tr()),
       value: grade,
       items: greadeList
           .map(
@@ -164,6 +164,6 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
   }
 
   AppBar _appBar() => AppBar(
-        title: const Text("Duyuru Oluştur"),
+        title: Text(LocaleKeys.features_createAnnouncement.tr()),
       );
 }
