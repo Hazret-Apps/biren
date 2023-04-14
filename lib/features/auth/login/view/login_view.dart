@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
   AppBar _appBar() {
     return AppBar(
       centerTitle: true,
-      title: const Text("Giriş Yap"),
+      title: Text(LocaleKeys.auth_login.tr()),
     );
   }
 
@@ -108,13 +108,13 @@ class _LoginViewState extends State<LoginView> {
           );
         }
       },
-      text: "Giriş Yap",
+      text: LocaleKeys.auth_login.tr(),
     );
   }
 
   Text _alreadyHaveAccount(BuildContext context) {
     return Text(
-      "Hesabın yok mu?",
+      LocaleKeys.auth_alreadyHaveAnAccount.tr(),
       style: context.textTheme.titleSmall,
     );
   }

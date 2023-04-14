@@ -1,12 +1,14 @@
 import 'package:biren_kocluk/core/base/view/base_view.dart';
 import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/core/widget/card/announcement_card.dart';
 import 'package:biren_kocluk/core/widget/card/feature_select_card.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/viewmodel/home_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -32,7 +34,7 @@ class HomeView extends StatelessWidget {
             ),
           ],
           title: Text(
-            "Merhaba\n${AuthService.userName} 👋",
+            "${LocaleKeys.hello.tr()}\n${AuthService.userName} 👋",
             style: context.textTheme.titleLarge?.copyWith(
               color: LightThemeColors.black,
             ),
