@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/core/model/user_model.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
@@ -34,14 +37,21 @@ class AuthService {
         "createdTime": userModel.createdTime,
         "isVerified": userModel.isVerified,
         "uid": _firebaseAuth.currentUser!.uid,
-      }).whenComplete(() {
+      });
+      if (AuthService.userId != null) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const WaitingView()),
           (route) => false,
         );
-      });
-    } catch (e) {}
+      }
+    } on FirebaseAuthException catch (e) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        desc: e.message,
+      ).show();
+    }
   }
 
   Future<void> loginUser(
@@ -52,21 +62,22 @@ class AuthService {
     try {
       _loadingDialog(context);
 
-      await _firebaseAuth
-          .signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
-      )
-          .whenComplete(() {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const WaitingView(),
-          ),
-          (route) => false,
-        );
-      });
-    } catch (e) {}
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const WaitingView()),
+        (route) => false,
+      );
+    } on FirebaseAuthException catch (e) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        desc: e.message,
+      ).show();
+    }
   }
 
   Future<dynamic> _loadingDialog(BuildContext context) {
