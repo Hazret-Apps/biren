@@ -9,6 +9,7 @@ class UserModel {
   final bool isVerified;
   final int grade;
   final Timestamp createdTime;
+  final String uid;
 
   const UserModel({
     required this.grade,
@@ -17,5 +18,6 @@ class UserModel {
     required this.password,
     required this.createdTime,
     required this.isVerified,
+    required this.uid,
   });
 }

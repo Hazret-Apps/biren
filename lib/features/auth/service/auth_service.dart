@@ -23,7 +23,7 @@ class AuthService {
         email: userModel.mail.trim(),
         password: userModel.password.trim(),
       );
-      _firebaseAuth.currentUser!.updateDisplayName(userModel.name.trim());
+      await _firebaseAuth.currentUser!.updateDisplayName(userModel.name.trim());
       FirebaseCollections.users.reference
           .doc(_firebaseAuth.currentUser!.uid)
           .set({
@@ -32,6 +32,7 @@ class AuthService {
         "password": userModel.password.trim(),
         "createdTime": userModel.createdTime,
         "isVerified": userModel.isVerified,
+        "uid": _firebaseAuth.currentUser!.uid,
       }).whenComplete(() {
         Navigator.pushAndRemoveUntil(
           context,
