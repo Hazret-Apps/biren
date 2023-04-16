@@ -39,6 +39,7 @@ dependencies:
   kartal: ^2.8.0
   carousel_slider: ^4.2.1
   awesome_dialog: ^3.0.2
+  loading_animation_widget: ^1.2.0+4
 
 dev_dependencies:
   flutter_test:

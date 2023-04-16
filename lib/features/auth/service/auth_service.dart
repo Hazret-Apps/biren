@@ -19,6 +19,7 @@ class AuthService {
 
   Future<void> registerUser(UserModel userModel, BuildContext context) async {
     try {
+      _loadingDialog(context);
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: userModel.mail.trim(),
         password: userModel.password.trim(),
@@ -49,6 +50,8 @@ class AuthService {
     BuildContext context,
   ) async {
     try {
+      _loadingDialog(context);
+
       await _firebaseAuth
           .signInWithEmailAndPassword(
         email: email,
@@ -66,7 +69,18 @@ class AuthService {
     } catch (e) {}
   }
 
+  Future<dynamic> _loadingDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
   Future<void> logOut(BuildContext context) async {
+    _loadingDialog(context);
     _firebaseAuth.signOut().whenComplete(
           () => Navigator.pushAndRemoveUntil(
             context,
