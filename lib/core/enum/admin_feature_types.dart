@@ -1,1 +1,1 @@
-enum FeatureTypes { announcement, task, student, login, study }
+enum FeatureTypes { announcement, task, students, login, study }

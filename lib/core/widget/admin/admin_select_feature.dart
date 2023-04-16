@@ -2,6 +2,7 @@ import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/admin/view/add_announcement_view.dart';
+import 'package:biren_kocluk/features/admin/view/students_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +36,10 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         title = LocaleKeys.features_createHomework.tr();
         callView = const AddAnnouncementView();
         break;
-      case FeatureTypes.student:
+      case FeatureTypes.students:
         imagePath = Assets.images.student.path;
         title = LocaleKeys.features_students.tr();
-        callView = const AddAnnouncementView();
+        callView = const StudentsView();
         break;
       case FeatureTypes.login:
         imagePath = Assets.images.login.path;
