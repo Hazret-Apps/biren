@@ -3,15 +3,12 @@ import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class CrossOrTickContainer extends StatelessWidget {
-  const CrossOrTickContainer({
-    super.key,
-    required this.crossTickEnum,
-    required this.onTap,
-  });
+class CrossTickContainer extends StatelessWidget {
+  const CrossTickContainer(
+      {super.key, required this.onTap, required this.crossTickEnum});
 
-  final CrossTickEnum crossTickEnum;
   final VoidCallback onTap;
+  final CrossTickEnum crossTickEnum;
 
   @override
   Widget build(BuildContext context) {

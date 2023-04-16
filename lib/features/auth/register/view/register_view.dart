@@ -115,6 +115,7 @@ class _RegisterViewState extends State<RegisterView> {
         if (_formKey.currentState!.validate()) {
           AuthService().registerUser(
             UserModel(
+              uid: "",
               name: _nameController.text,
               mail: _mailController.text,
               password: _passwordController.text,
