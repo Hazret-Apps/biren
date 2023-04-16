@@ -7,6 +7,7 @@ import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
 import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class Biren extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AuthService.userId == null
           ? const RegisterView()
-          : StreamBuilder(
+          : StreamBuilder<DocumentSnapshot>(
               stream: FirebaseCollections.users.reference
                   .doc(AuthService.userId)
                   .snapshots(),
