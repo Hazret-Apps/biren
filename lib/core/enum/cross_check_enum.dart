@@ -1,0 +1,1 @@
+enum CrossTickEnum { cross, tick }
