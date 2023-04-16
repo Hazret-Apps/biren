@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/reject/rejected_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,13 +21,16 @@ class _WaitingViewState extends State<WaitingView> {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .snapshots(),
       builder: (context, snapshot) {
-        if (snapshot.data?["isVerified"] == false) {
-          return _waiting(context);
-        }
-        if (snapshot.data?["isVerified"] ?? false) {
-          return const HomeView();
+        if (snapshot.data == null) {
+          return const RejectedView();
         } else {
-          return _waiting(context);
+          if (snapshot.data?["isVerified"] == false) {
+            return _waiting(context);
+          } else if (snapshot.data?["isVerified"] ?? false) {
+            return const HomeView();
+          } else {
+            return _waiting(context);
+          }
         }
       },
     );
