@@ -24,13 +24,6 @@ class StudentsView extends StatelessWidget {
                 return ListTile(
                   title: _userName(snapshot, index),
                   leading: _avatar(snapshot, index),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.delete_forever,
-                      color: LightThemeColors.red,
-                    ),
-                  ),
                 );
               },
             );
