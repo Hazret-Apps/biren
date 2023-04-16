@@ -7,6 +7,19 @@ class LightTheme {
 
   LightTheme(BuildContext context) {
     theme = ThemeData(
+      colorScheme: ColorScheme(
+        brightness: Brightness.light,
+        primary: LightThemeColors.blazeOrange.withOpacity(.3),
+        onPrimary: LightThemeColors.white,
+        secondary: LightThemeColors.white,
+        onSecondary: LightThemeColors.white,
+        error: LightThemeColors.red,
+        onError: LightThemeColors.red,
+        background: LightThemeColors.scaffoldBackgroundColor,
+        onBackground: LightThemeColors.white,
+        surface: LightThemeColors.white,
+        onSurface: LightThemeColors.black,
+      ),
       useMaterial3: true,
       primarySwatch: Colors.orange,
       primaryColor: LightThemeColors.white,
