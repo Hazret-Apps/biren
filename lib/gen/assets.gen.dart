@@ -12,8 +12,8 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/icon.png
-  AssetGenImage get icon => const AssetGenImage('assets/icons/icon.png');
+  /// File path: assets/icons/logo.png
+  AssetGenImage get icon => const AssetGenImage('assets/icons/logo.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [icon];
