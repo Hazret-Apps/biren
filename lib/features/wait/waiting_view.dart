@@ -1,8 +1,10 @@
 import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/auth/service/auth_service.dart';
+import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/reject/rejected_view.dart';
 import 'package:biren_kocluk/gen/assets.gen.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -16,22 +18,23 @@ class WaitingView extends StatefulWidget {
 class _WaitingViewState extends State<WaitingView> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseCollections.users.reference
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(AuthService.userId)
           .snapshots(),
       builder: (context, snapshot) {
-        if (snapshot.data == null) {
-          return const RejectedView();
-        } else {
-          if (snapshot.data?["isVerified"] == false) {
-            return _waiting(context);
-          } else if (snapshot.data?["isVerified"] ?? false) {
-            return const HomeView();
+        if (snapshot.hasData) {
+          if (snapshot.data?.exists ?? false) {
+            if (snapshot.data!["isVerified"]) {
+              return const HomeView();
+            } else {
+              return _waiting(context);
+            }
           } else {
-            return _waiting(context);
+            return const RejectedView();
           }
         }
+        return const LoadingView();
       },
     );
   }
