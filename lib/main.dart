@@ -68,11 +68,11 @@ class Biren extends StatelessWidget {
                   if (snapshot.data?.exists ?? false) {
                     if (snapshot.data!["isVerified"]) {
                       return const HomeView();
-                    } else {
+                    } else if (!snapshot.data!["isVerified"]) {
                       return const WaitingView();
+                    } else {
+                      return const RejectedView();
                     }
-                  } else {
-                    return const RejectedView();
                   }
                 }
                 return const LoadingView();
