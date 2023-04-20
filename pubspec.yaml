@@ -69,6 +69,7 @@ flutter:
     - assets/jsons/
     - assets/images/
     - assets/jsons/lang/
+    - assets/jsons/study/
 
   # fonts:
   #   - family: Schyler

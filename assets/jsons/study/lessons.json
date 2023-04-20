@@ -1,7 +1,6 @@
 [
   {
-    "grade": 5,
-    "lessons": {
+    "5": {
       "turkish": {
         "1": "Sözcükte Anlam",
         "2": "Cümlede Anlam",
@@ -120,8 +119,7 @@
     }
   },
   {
-    "grade": 6,
-    "lessons": {
+    "6": {
       "turkish": {
         "1": "Kök, Ekler, Ek fiil",
         "2": "Gerçek Anlam, Mecaz Anlam, Terim Anlam",
@@ -357,9 +355,9 @@
     }
   },
   {
-    "grade": 7,
-    "lessons": {
-      "turkish": {
+    "7": {
+      "lessons": {
+        "turkish": {
         "1": "Fiiller",
         "2": "Sözcükte Anlam",
         "3": "Cümlede Anlam",
@@ -374,8 +372,8 @@
         "13": "Yazım Kuralları",
         "14": "Noktalama İşaretleri",
         "15": "Metin Türleri"
-      },
-      "math": {
+        },
+        "math": {
         "1": "Tam Sayılarla İşlemler",
         "2": "Rasyonel Sayılar",
         "3": "Rasyonel Sayılarla İşlemler",
@@ -388,8 +386,8 @@
         "10": "Çember ve Daire",
         "12": "Veri Analizi",
         "13": "Cisimlerin Farklı Yönlerden Görünümleri"
-      },
-      "science":{
+        },
+        "science":{
         "1": "Uzay Araştırmaları",
         "2": "Güneş Sistemi Ötesi: Gök Cisimleri",
         "3": "Hücre",
@@ -409,8 +407,8 @@
         "17": "İnsanda Üreme, Büyüme ve Gelişme",
         "18": "Bitki ve Hayvanlarda Üreme, Büyüme ve Gelişme",
         "19": "Ampullerin Bağlanma Şekilleri"
-      },
-      "english": {
+        },
+        "english": {
         "1": "Appearance And Personality",
         "2": "Sports",
         "3": "Biographies",
@@ -421,8 +419,8 @@
         "8": "Public Buildings",
         "9": "Environment",
         "10": "Planets"
-      },
-      "regligion": {
+        },
+        "regligion": {
         "1": "Görülen ve Görülmeyen Varlıklar",
         "2": "Melekler ve Özellikleri",
         "3": "Dünya ve Ahiret Hayatı",
@@ -446,8 +444,8 @@
         "21": "Din Anlayışındaki Yorum Farklılıklarının Sebepleri",
         "22": "İslam Düşüncesinde Yorum Biçimleri",
         "23": "İslam Düşüncesinde Tasavvufi Yorumlar"
-      },
-      "social": {
+        },
+        "social": {
         "1": "İletişim Kurarak Anlaşırız",
         "2": "Olumlu İletişim, Mutlu Birey Ve Toplum",
         "3": "Medyanın Hayatımızdaki Yeri",
@@ -479,12 +477,12 @@
         "29": "Biz De Varız",
         "30": "Biz Konuksever Bir Milletiz",
         "31": "Dünyayı Biz Kurtaracağız"
+        }
       }
     }
   },
   {
-    "grade": 8,
-    "lessons": {
+    "8": {
       "turkish": {
         "1": "Fiilimsiler",
         "2": "Sözcükte Anlam",
@@ -593,4 +591,4 @@
       }
     }
   }
-]
+  ]

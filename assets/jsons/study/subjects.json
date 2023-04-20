@@ -1,0 +1,12 @@
+[
+    {
+      "subjects": {
+        "turkish": "Türkçe",
+        "math": "Matematik",
+        "science": "Fen Bilimleri",
+        "english": "İngilizce",
+        "regligion": "Din",
+        "social": "Sosyal Bilgiler"
+      }
+    }
+]
