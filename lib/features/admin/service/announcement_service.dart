@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:biren_kocluk/core/model/announcement_card_model.dart';
+import 'package:biren_kocluk/product/model/announcement_card_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';

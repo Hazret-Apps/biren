@@ -1,5 +1,5 @@
-import 'package:biren_kocluk/core/enum/cross_check_enum.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 

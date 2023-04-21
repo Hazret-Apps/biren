@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/core/model/user_model.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';

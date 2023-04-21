@@ -1,6 +1,6 @@
-import 'package:biren_kocluk/core/constants/app_constants.dart';
-import 'package:biren_kocluk/core/init/lang/language_manager.dart';
-import 'package:biren_kocluk/core/init/theme/theme.dart';
+import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/init/lang/language_manager.dart';
+import 'package:biren_kocluk/product/init/theme/theme.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
