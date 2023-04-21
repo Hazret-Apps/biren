@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

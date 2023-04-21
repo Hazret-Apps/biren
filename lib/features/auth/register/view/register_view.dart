@@ -1,10 +1,10 @@
-import 'package:biren_kocluk/core/base/view/base_view.dart';
-import 'package:biren_kocluk/gen/assets.gen.dart';
-import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
-import 'package:biren_kocluk/core/model/user_model.dart';
-import 'package:biren_kocluk/core/widget/button/main_button.dart';
-import 'package:biren_kocluk/core/widget/text_field/auth_text_field.dart';
+import 'package:biren_kocluk/product/base/view/base_view.dart';
+import 'package:biren_kocluk/product/gen/assets.gen.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/user_model.dart';
+import 'package:biren_kocluk/product/widget/button/main_button.dart';
+import 'package:biren_kocluk/product/widget/text_field/auth_text_field.dart';
 import 'package:biren_kocluk/features/auth/register/viewmodel/register_viewmodel.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

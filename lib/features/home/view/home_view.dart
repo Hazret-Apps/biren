@@ -1,12 +1,11 @@
-import 'package:biren_kocluk/core/base/view/base_view.dart';
-import 'package:biren_kocluk/core/enum/admin_feature_types.dart';
-import 'package:biren_kocluk/core/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
-import 'package:biren_kocluk/core/widget/card/announcement_card.dart';
-import 'package:biren_kocluk/core/widget/card/feature_select_card.dart';
+import 'package:biren_kocluk/product/base/view/base_view.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/widget/card/announcement_card.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/viewmodel/home_viewmodel.dart';
+import 'package:biren_kocluk/product/widget/card/study_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -23,22 +22,9 @@ class HomeView extends StatelessWidget {
       onPageBuilder: (context, value) => Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(
-              onPressed: () {
-                AuthService().logOut(context);
-              },
-              icon: const Icon(
-                Icons.exit_to_app,
-                color: LightThemeColors.black,
-              ),
-            ),
+            _signOutButton(context),
           ],
-          title: Text(
-            "${LocaleKeys.hello.tr()}\n${AuthService.userName} 👋",
-            style: context.textTheme.titleLarge?.copyWith(
-              color: LightThemeColors.black,
-            ),
-          ),
+          title: _hiText(context),
         ),
         body: SafeArea(
           child: ListView(
@@ -53,29 +39,55 @@ class HomeView extends StatelessWidget {
                   }
                 },
               ),
-              context.emptySizedHeightBoxLow3x,
-              Padding(
-                padding: context.horizontalPaddingNormal,
-                child: const Column(
-                  children: [
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        FeatureSelectCard(
-                          featureTypes: FeatureTypes.task,
-                        ),
-                        Spacer(),
-                        FeatureSelectCard(
-                          featureTypes: FeatureTypes.study,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back_ios),
+                        onPressed: () {},
+                        color: LightThemeColors.blazeOrange,
+                      ),
+                      Text(
+                        "Bugün",
+                        style: context.textTheme.titleMedium,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_forward_ios),
+                        onPressed: () {},
+                        color: LightThemeColors.blazeOrange,
+                      ),
+                    ],
+                  ),
+                  const StudyCard(),
+                ],
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Text _hiText(BuildContext context) {
+    return Text(
+      "${LocaleKeys.hello.tr()}\n${AuthService.userName} 👋",
+      style: context.textTheme.titleMedium?.copyWith(
+        color: LightThemeColors.black,
+        fontSize: 20,
+      ),
+    );
+  }
+
+  IconButton _signOutButton(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        AuthService().logOut(context);
+      },
+      icon: const Icon(
+        Icons.exit_to_app,
+        color: LightThemeColors.black,
       ),
     );
   }

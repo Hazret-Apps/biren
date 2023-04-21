@@ -1,8 +1,8 @@
-import 'package:biren_kocluk/core/base/view/base_view.dart';
-import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
-import 'package:biren_kocluk/core/model/announcement_card_model.dart';
-import 'package:biren_kocluk/core/widget/text_field/main_text_field.dart';
+import 'package:biren_kocluk/product/base/view/base_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/announcement_card_model.dart';
+import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcement_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

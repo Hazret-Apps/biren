@@ -1,5 +1,5 @@
-import 'package:biren_kocluk/core/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/core/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
