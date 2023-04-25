@@ -45,6 +45,8 @@ dependencies:
   awesome_dialog: ^3.0.2
   loading_animation_widget: ^1.2.0+4
   table_calendar: ^3.0.9
+  intl:
+  date_field: ^3.0.5
 
 dev_dependencies:
   flutter_test:
