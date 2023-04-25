@@ -47,7 +47,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
           AdminSelectFeature(featureTypes: FeatureTypes.task),
           AdminSelectFeature(featureTypes: FeatureTypes.students),
           AdminSelectFeature(featureTypes: FeatureTypes.login),
-          AdminSelectFeature(featureTypes: FeatureTypes.study),
         ],
       ),
     );

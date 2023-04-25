@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/features/admin/view/create_homework_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -35,7 +36,14 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case FeatureTypes.task:
         imagePath = Assets.images.task.path;
         title = LocaleKeys.features_createHomework.tr();
-        callView = const AddAnnouncementView();
+        callView = AddEvent(
+          firstDate: DateTime.now().subtract(
+            const Duration(days: 1000),
+          ),
+          lastDate: DateTime.now().add(
+            const Duration(days: 1000),
+          ),
+        );
         break;
       case FeatureTypes.students:
         imagePath = Assets.images.student.path;
@@ -46,11 +54,6 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         imagePath = Assets.images.login.path;
         title = LocaleKeys.features_loginRequests.tr();
         callView = const LoginRequiestView();
-        break;
-      case FeatureTypes.study:
-        imagePath = Assets.images.study.path;
-        title = LocaleKeys.features_studyRequests.tr();
-        callView = const AddAnnouncementView();
         break;
       default:
     }

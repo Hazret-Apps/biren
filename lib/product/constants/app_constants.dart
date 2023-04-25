@@ -2,4 +2,5 @@
 
 class AppConstants {
   static const LANG_ASSET_PATH = "assets/jsons/lang";
+  static const TR_LANG = "tr_TR";
 }
