@@ -1,8 +1,15 @@
+import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
+import 'package:biren_kocluk/features/home/view/home_view.dart';
+import 'package:biren_kocluk/features/loading/loading_view.dart';
+import 'package:biren_kocluk/features/reject/rejected_view.dart';
+import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/language_manager.dart';
 import 'package:biren_kocluk/product/init/theme/theme.dart';
-import 'package:biren_kocluk/features/home/view/home_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,28 +57,27 @@ class Biren extends StatelessWidget {
       title: 'Biren Koçluk',
       theme: LightTheme(context).theme,
       debugShowCheckedModeBanner: false,
-      home: const HomeView(),
-      // home: AuthService.userId == null
-      //     ? const RegisterView()
-      //     : StreamBuilder<DocumentSnapshot>(
-      //         stream: FirebaseCollections.users.reference
-      //             .doc(AuthService.userId)
-      //             .snapshots(),
-      //         builder: (context, snapshot) {
-      //           if (snapshot.hasData) {
-      //             if (snapshot.data?.exists ?? false) {
-      //               if (snapshot.data!["isVerified"]) {
-      //                 return const HomeView();
-      //               } else if (snapshot.data!["isVerified"] == false) {
-      //                 return const WaitingView();
-      //               } else {
-      //                 return const RejectedView();
-      //               }
-      //             }
-      //           }
-      //           return const LoadingView();
-      //         },
-      //       ),
+      home: FirebaseAuth.instance.currentUser != null
+          ? StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseCollections.users.reference
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data?.exists ?? false) {
+                    if (snapshot.data!["isVerified"]) {
+                      return const HomeView();
+                    } else if (snapshot.data!["isVerified"] == false) {
+                      return const WaitingView();
+                    } else {
+                      return const RejectedView();
+                    }
+                  }
+                }
+                return const LoadingView();
+              },
+            )
+          : const RegisterView(),
     );
   }
 }
