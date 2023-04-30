@@ -38,13 +38,11 @@ class AuthService {
         "isVerified": userModel.isVerified,
         "uid": _firebaseAuth.currentUser!.uid,
       });
-      if (AuthService.userId != null) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const WaitingView()),
-          (route) => false,
-        );
-      }
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const WaitingView()),
+        (route) => false,
+      );
     } on FirebaseAuthException catch (e) {
       AwesomeDialog(
         context: context,
