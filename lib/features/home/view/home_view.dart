@@ -11,6 +11,7 @@ import 'package:biren_kocluk/product/widget/card/announcement_card.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -53,7 +54,9 @@ class _HomeViewState extends State<HomeView> {
     _events = {};
 
     final snap = await FirebaseFirestore.instance
-        .collection('homeworks')
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("homeworks")
         .where('date', isGreaterThanOrEqualTo: firstDay)
         .where('date', isLessThanOrEqualTo: lastDay)
         .withConverter(

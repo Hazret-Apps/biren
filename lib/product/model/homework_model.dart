@@ -18,7 +18,7 @@ class Homework {
     final data = snapshot.data()!;
     return Homework(
       date: data['date'].toDate(),
-      title: data['title'],
+      title: data['topic'],
       description: data['description'],
       id: snapshot.id,
     );
