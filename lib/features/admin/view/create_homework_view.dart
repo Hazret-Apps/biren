@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
@@ -27,22 +28,22 @@ class _AddEventState extends State<AddEvent> {
 
   final _descriptionController = TextEditingController();
 
-  Map<String, dynamic> topics = {};
-  Map<String, dynamic> subjects = {};
-  String? subjectValue;
-  String? userValue;
-  String? topicValue;
-  String? subject;
-  String? topic;
+  String? selectedUserValue;
+  String? selectedSubjectValue;
+  String? selectedTopicValue;
+
   int? grade;
 
-  Future<void> loadTopic(String userId) async {
+  Map<String, dynamic> subjects = {};
+  Map<String, dynamic> topics = {};
+
+  Future<void> load() async {
+    final selectedUser =
+        await FirebaseCollections.users.reference.doc(selectedUserValue).get();
+    grade = await selectedUser["grade"];
     int? jsonNumber;
 
     switch (grade) {
-      case 0:
-        jsonNumber = 0;
-        break;
       case 5:
         jsonNumber = 0;
         break;
@@ -58,54 +59,100 @@ class _AddEventState extends State<AddEvent> {
       default:
     }
 
-    final jsonString = await DefaultAssetBundle.of(context)
+    final topicJsonString = await DefaultAssetBundle.of(context)
         .loadString('assets/jsons/study/lessons.json');
-    final data = json.decode(jsonString);
-
-    topic = data[jsonNumber][grade.toString()]?[subject.toString()][topicValue];
-  }
-
-  Future<void> loadUser(String userId) async {
-    QuerySnapshot<Object?> userData = await FirebaseCollections.users.reference
-        .where("uid", isEqualTo: userId)
-        .get();
-    grade = userData.docs[0]["grade"];
-    int? jsonNumber;
-
-    switch (grade) {
-      case 0:
-        jsonNumber = 0;
-        break;
-      case 5:
-        jsonNumber = 0;
-        break;
-      case 6:
-        jsonNumber = 1;
-        break;
-      case 7:
-        jsonNumber = 2;
-        break;
-      case 8:
-        jsonNumber = 3;
-        break;
-      default:
-    }
-
-    final jsonString = await DefaultAssetBundle.of(context)
-        .loadString('assets/jsons/study/lessons.json');
-
-    final jsonStringTwo = await DefaultAssetBundle.of(context)
+    final subjectJsonString = await DefaultAssetBundle.of(context)
         .loadString('assets/jsons/study/subjects.json');
-
-    final data = json.decode(jsonString);
-    final dataTwo = json.decode(jsonStringTwo);
+    final topicData = await json.decode(topicJsonString);
+    final subjectData = await json.decode(subjectJsonString);
 
     setState(() {
-      subjects = dataTwo[0]["subjects"];
-      topics =
-          data[jsonNumber][grade.toString()]?[subject.toString()] ?? {"": ""};
+      subjects = subjectData[0]["subjects"];
+      topics = topicData[jsonNumber]?[grade.toString()]
+              ?[selectedSubjectValue] ??
+          {"": ""};
     });
   }
+
+  // Map<String, dynamic> topics = {};
+  // Map<String, dynamic> subjects = {};
+  // String? subjectValue;
+  // String? userValue;
+  // String? topicValue;
+  // String? subject;
+  // String? topic;
+  // int? grade;
+
+  // Future<void> loadTopic(String userId) async {
+  //   int? jsonNumber;
+
+  //   switch (grade) {
+  //     case 0:
+  //       jsonNumber = 0;
+  //       break;
+  //     case 5:
+  //       jsonNumber = 0;
+  //       break;
+  //     case 6:
+  //       jsonNumber = 1;
+  //       break;
+  //     case 7:
+  //       jsonNumber = 2;
+  //       break;
+  //     case 8:
+  //       jsonNumber = 3;
+  //       break;
+  //     default:
+  //   }
+
+  //   final jsonString = await DefaultAssetBundle.of(context)
+  //       .loadString('assets/jsons/study/lessons.json');
+  //   final data = json.decode(jsonString);
+
+  //   topic = data[jsonNumber][grade.toString()]?[subject.toString()][topicValue];
+  // }
+
+  // Future<void> loadUser(String userId) async {
+  //   QuerySnapshot<Object?> userData = await FirebaseCollections.users.reference
+  //       .where("uid", isEqualTo: userId)
+  //       .get();
+  //   grade = userData.docs[0]["grade"];
+  //   int? jsonNumber;
+
+  //   switch (grade) {
+  //     case 0:
+  //       jsonNumber = 0;
+  //       break;
+  //     case 5:
+  //       jsonNumber = 0;
+  //       break;
+  //     case 6:
+  //       jsonNumber = 1;
+  //       break;
+  //     case 7:
+  //       jsonNumber = 2;
+  //       break;
+  //     case 8:
+  //       jsonNumber = 3;
+  //       break;
+  //     default:
+  //   }
+
+  //   final jsonString = await DefaultAssetBundle.of(context)
+  //       .loadString('assets/jsons/study/lessons.json');
+
+  //   final jsonStringTwo = await DefaultAssetBundle.of(context)
+  //       .loadString('assets/jsons/study/subjects.json');
+
+  //   final data = json.decode(jsonString);
+  //   final dataTwo = json.decode(jsonStringTwo);
+
+  //   setState(() {
+  //     subjects = dataTwo[0]["subjects"];
+  //     topics =
+  //         data[jsonNumber][grade.toString()]?[subject.toString()] ?? {"": ""};
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,84 +165,48 @@ class _AddEventState extends State<AddEvent> {
         children: [
           _dateFormField(),
           context.emptySizedHeightBoxLow3x,
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseCollections.users.reference.snapshots(),
-            builder: (context, snapshot) {
-              List<DropdownMenuItem> users = [];
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                final items = snapshot.data!.docs.reversed.toList();
-                for (var itemNumber in items) {
-                  users.add(
-                    DropdownMenuItem(
-                      value: itemNumber.id,
-                      child: Text(
-                        itemNumber["name"],
-                      ),
-                    ),
-                  );
-                }
-                return DropdownButtonFormField(
-                  isExpanded: true,
-                  value: userValue,
-                  hint: const Text("Öğrenci Seçiniz"),
-                  onChanged: (value) async {
-                    setState(() {
-                      userValue = value;
-                      loadUser(userValue!);
-                      if (userValue != null) {
-                        subjectValue = null;
-                        topicValue = null;
-                      }
-                    });
-                  },
-                  items: users,
-                );
-              }
-            },
-          ),
+          _selectUserDropdown(),
           context.emptySizedHeightBoxLow3x,
           DropdownButtonFormField(
             isExpanded: true,
-            value: subjectValue,
+            value: selectedSubjectValue,
             hint: const Text("Ders seçiniz"),
             onChanged: (value) {
-              loadUser(userValue!);
               setState(() {
-                subjectValue = value;
-                subject = subjectValue;
-                if (topicValue != null) {
-                  topicValue = null;
+                selectedSubjectValue = value;
+                load();
+                if (selectedTopicValue != null) {
+                  selectedTopicValue = null;
                 }
+                // subject = subjectValue;
+                // if (topicValue != null) {
+                //   topicValue = null;
+                // }
               });
             },
             items: subjects.entries.map<DropdownMenuItem<String>>((entry) {
               return DropdownMenuItem<String>(
                 value: entry.key,
-                child: Text(entry.value.toString()),
+                child: Text(entry.value),
               );
             }).toList(),
           ),
           context.emptySizedHeightBoxLow3x,
           DropdownButtonFormField(
             isExpanded: true,
-            value: topicValue,
+            value: selectedTopicValue,
             hint: const Text("Konu seçiniz"),
             onChanged: (value) {
               setState(() {
-                loadTopic(userValue!);
-                topicValue = value as String?;
+                selectedTopicValue = value;
               });
             },
-            items: subjectValue == null
-                ? []
-                : topics.entries.map<DropdownMenuItem<String>>((entry) {
-                    return DropdownMenuItem<String>(
-                      value: entry.key,
-                      child: Text(entry.value),
-                    );
-                  }).toList(),
+            items: topics.entries.map<DropdownMenuItem<String>>((entry) {
+              return DropdownMenuItem<String>(
+                value: entry.value,
+                child: Text(entry.value),
+              );
+            }).toList(),
           ),
           context.emptySizedHeightBoxLow3x,
           _descriptionTextField(),
@@ -203,6 +214,50 @@ class _AddEventState extends State<AddEvent> {
           _button()
         ],
       ),
+    );
+  }
+
+  StreamBuilder<QuerySnapshot<Object?>> _selectUserDropdown() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseCollections.users.reference.snapshots(),
+      builder: (context, snapshot) {
+        List<DropdownMenuItem> userItems = [];
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final users = snapshot.data!.docs.reversed.toList();
+          for (var user in users) {
+            userItems.add(
+              DropdownMenuItem(
+                value: user.id,
+                child: Text(
+                  user["name"],
+                ),
+              ),
+            );
+          }
+          return DropdownButtonFormField(
+            isExpanded: true,
+            value: selectedUserValue,
+            hint: const Text("Öğrenci Seçiniz"),
+            onChanged: (value) async {
+              setState(() {
+                selectedUserValue = value;
+                load();
+                if (selectedTopicValue != null) {
+                  selectedTopicValue = null;
+                }
+                // loadUser(userValue!);
+                // if (userValue != null) {
+                //   subjectValue = null;
+                //   topicValue = null;
+                // }
+              });
+            },
+            items: userItems,
+          );
+        }
+      },
     );
   }
 
@@ -241,13 +296,13 @@ class _AddEventState extends State<AddEvent> {
 
   void _addHomework() async {
     await FirebaseCollections.users.reference
-        .doc(userValue)
+        .doc(selectedUserValue)
         .collection("homeworks")
         .add({
       "description": _descriptionController.text,
-      "userId": userValue,
-      "subject": subjectValue,
-      "topic": topic,
+      "userId": selectedUserValue,
+      "subject": selectedSubjectValue,
+      "topic": selectedTopicValue,
       "date": Timestamp.fromDate(_selectedDate),
     });
   }
