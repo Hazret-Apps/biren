@@ -54,7 +54,7 @@ class Biren extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      title: 'Biren Koçluk',
+      title: "Biren Koçluk",
       theme: LightTheme(context).theme,
       debugShowCheckedModeBanner: false,
       home: FirebaseAuth.instance.currentUser != null
