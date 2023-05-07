@@ -35,10 +35,8 @@ class AuthButton extends StatelessWidget {
   Text _text(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context)
-          .textTheme
-          .titleLarge
-          ?.copyWith(color: LightThemeColors.white),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: LightThemeColors.white, fontWeight: FontWeight.bold),
     );
   }
 }
