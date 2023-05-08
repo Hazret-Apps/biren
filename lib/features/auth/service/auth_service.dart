@@ -35,6 +35,7 @@ class AuthService {
         "mail": userModel.mail.trim(),
         "password": userModel.password.trim(),
         "createdTime": userModel.createdTime,
+        "grade": "Sınıf Yok",
         "isVerified": userModel.isVerified,
         "uid": _firebaseAuth.currentUser!.uid,
       });
