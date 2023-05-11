@@ -1,13 +1,13 @@
 import 'dart:io';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/announcement_card_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AnnouncementService {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   String downloadUrl = "";
@@ -21,12 +21,16 @@ class AnnouncementService {
     return downloadUrl;
   }
 
-  Future<void> addAnnouncement(AnnouncementModel announcementModel) async {
-    _firebaseFirestore.collection("announcement").add({
+  Future<void> addAnnouncement(
+    AnnouncementModel announcementModel,
+    context,
+  ) async {
+    await FirebaseCollections.announcement.reference.add({
       "createdTime": announcementModel.createdTime,
       "description": announcementModel.description,
       "imagePath": announcementModel.imagePath,
       "title": announcementModel.title,
     });
+    Navigator.pop(context);
   }
 }
