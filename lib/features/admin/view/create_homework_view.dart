@@ -251,5 +251,6 @@ class _AddEventState extends State<AddEvent> {
       "topic": selectedTopicValue,
       "date": Timestamp.fromDate(_selectedDate),
     });
+    Navigator.pop(context);
   }
 }

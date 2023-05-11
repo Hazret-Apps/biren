@@ -150,13 +150,14 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
     return FloatingActionButton(
       onPressed: () async {
         var imageUrl = AnnouncementService().uploadImage(viewModel.image!);
-        AnnouncementService().addAnnouncement(
+        await AnnouncementService().addAnnouncement(
           AnnouncementModel(
             title: _titleController.text.trim(),
             description: _descriptionController.text.trim(),
             createdTime: Timestamp.now(),
             imagePath: viewModel.image == null ? null : await imageUrl,
           ),
+          context,
         );
       },
       child: const Icon(Icons.add),
