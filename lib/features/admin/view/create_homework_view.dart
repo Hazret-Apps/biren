@@ -40,7 +40,9 @@ class _AddEventState extends State<AddEvent> {
   Future<void> load() async {
     final selectedUser =
         await FirebaseCollections.users.reference.doc(selectedUserValue).get();
-    grade = await selectedUser["grade"];
+    grade = await selectedUser["grade"] == "Sınıf Yok"
+        ? null
+        : selectedUser["grade"];
     int? jsonNumber;
 
     switch (grade) {
@@ -67,10 +69,12 @@ class _AddEventState extends State<AddEvent> {
     final subjectData = await json.decode(subjectJsonString);
 
     setState(() {
-      subjects = subjectData[0]["subjects"];
-      topics = topicData[jsonNumber]?[grade.toString()]
-              ?[selectedSubjectValue] ??
-          {"": ""};
+      if (grade != null) {
+        subjects = subjectData[0]["subjects"];
+        topics = topicData[jsonNumber]?[grade.toString()]
+                ?[selectedSubjectValue] ??
+            {"": ""};
+      }
     });
   }
 
@@ -109,12 +113,14 @@ class _AddEventState extends State<AddEvent> {
           selectedTopicValue = value;
         });
       },
-      items: topics.entries.map<DropdownMenuItem<String>>((entry) {
-        return DropdownMenuItem<String>(
-          value: entry.value,
-          child: Text(entry.value),
-        );
-      }).toList(),
+      items: selectedSubjectValue == null || grade == null
+          ? null
+          : topics.entries.map<DropdownMenuItem<String>>((entry) {
+              return DropdownMenuItem<String>(
+                value: entry.value,
+                child: Text(entry.value),
+              );
+            }).toList(),
     );
   }
 
@@ -153,12 +159,14 @@ class _AddEventState extends State<AddEvent> {
           }
         });
       },
-      items: subjects.entries.map<DropdownMenuItem<String>>((entry) {
-        return DropdownMenuItem<String>(
-          value: entry.key,
-          child: Text(entry.value),
-        );
-      }).toList(),
+      items: selectedUserValue == null || grade == null
+          ? null
+          : subjects.entries.map<DropdownMenuItem<String>>((entry) {
+              return DropdownMenuItem<String>(
+                value: entry.key,
+                child: Text(entry.value),
+              );
+            }).toList(),
     );
   }
 
@@ -198,6 +206,8 @@ class _AddEventState extends State<AddEvent> {
                 if (selectedTopicValue != null) {
                   selectedTopicValue = null;
                 }
+                selectedSubjectValue = null;
+                selectedSubjectText = null;
               });
             },
             items: userItems,
