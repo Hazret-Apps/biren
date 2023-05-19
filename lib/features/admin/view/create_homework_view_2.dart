@@ -2,6 +2,10 @@
 
 import 'dart:convert';
 
+import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -42,7 +46,8 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
     setState(() {
       subjects = subjectData[0]["subjects"];
       topics = topicData[widget.jsonNumber][widget.studentGrade.toString()]
-          ?[selectedSubjectValue];
+              ?[selectedSubjectValue] ??
+          {"": ""};
     });
   }
 
@@ -57,6 +62,10 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ders Ve Konu Seç"),
+        actions: [
+          _nextIcon(),
+          context.emptySizedWidthBoxNormal,
+        ],
       ),
       body: SingleChildScrollView(
         padding: context.horizontalPaddingNormal,
@@ -67,6 +76,25 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
             _selectTopicDropdown(),
           ],
         ),
+      ),
+    );
+  }
+
+  GestureDetector _nextIcon() {
+    return GestureDetector(
+      onTap: () {
+        if (selectedSubjectValue == null || selectedTopicValue == null) {
+          return;
+        } else {
+          _addHomework();
+        }
+      },
+      child: Icon(
+        Icons.done_rounded,
+        size: 28,
+        color: selectedSubjectValue != null && selectedTopicValue != null
+            ? LightThemeColors.blazeOrange
+            : LightThemeColors.blazeOrange.withOpacity(.6),
       ),
     );
   }
@@ -136,17 +164,22 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
     );
   }
 
-  // void _addHomework() async {
-  //   await FirebaseCollections.users.reference
-  //       .doc(selectedUserValue)
-  //       .collection("homeworks")
-  //       .add({
-  //     "description": _descriptionController.text,
-  //     "userId": selectedUserValue,
-  //     "subject": selectedSubjectText,
-  //     "topic": selectedTopicValue,
-  //     "date": Timestamp.fromDate(_selectedDate),
-  //   });
-  //   Navigator.pop(context);
-  // }
+  void _addHomework() async {
+    await FirebaseCollections.users.reference
+        .doc(widget.studentValue)
+        .collection("homeworks")
+        .add({
+      "userId": widget.studentValue,
+      "subject": selectedSubjectText,
+      "topic": selectedTopicValue,
+      "date": Timestamp.fromDate(widget.selectedDate),
+    });
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AdminHomeView(),
+      ),
+      (route) => false,
+    );
+  }
 }

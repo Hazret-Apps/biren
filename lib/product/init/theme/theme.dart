@@ -39,12 +39,13 @@ class LightTheme {
       hoverColor: LightThemeColors.blazeOrange,
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        foregroundColor: LightThemeColors.blazeOrange,
+        // foregroundColor: LightThemeColors.blazeOrange,
         backgroundColor: LightThemeColors.scaffoldBackgroundColor,
         titleTextStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
-          color: LightThemeColors.blazeOrange,
+          color: LightThemeColors.black,
+          // color: LightThemeColors.blazeOrange,
         ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(

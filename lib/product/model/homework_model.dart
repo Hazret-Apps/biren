@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
-  final String title;
-  final String? description;
+  final String lesson;
   final DateTime date;
+  final topic;
   final String id;
   Homework({
-    required this.title,
-    this.description,
     required this.date,
+    required this.lesson,
+    required this.topic,
     required this.id,
   });
 
@@ -18,8 +18,8 @@ class Homework {
     final data = snapshot.data()!;
     return Homework(
       date: data['date'].toDate(),
-      title: data['topic'],
-      description: data['description'],
+      lesson: data['subject'],
+      topic: data['topic'],
       id: snapshot.id,
     );
   }
@@ -27,8 +27,9 @@ class Homework {
   Map<String, Object?> toFirestore() {
     return {
       "date": Timestamp.fromDate(date),
-      "title": title,
-      "description": description
+      "subject": lesson,
+      "topic": topic,
+      "id": id,
     };
   }
 }

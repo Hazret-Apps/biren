@@ -93,8 +93,8 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  AuthButton _loginButton(BuildContext context) {
-    return AuthButton(
+  MainButton _loginButton(BuildContext context) {
+    return MainButton(
       onPressed: () {
         if (_mailController.text == AuthService.adminMail &&
             _passwordController.text == AuthService.adminPassword) {

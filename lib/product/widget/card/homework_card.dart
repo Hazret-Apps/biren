@@ -12,11 +12,9 @@ class HomeworkItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        event.title,
+        event.lesson,
       ),
-      subtitle: Text(
-        event.description ?? "",
-      ),
+      subtitle: Text(event.topic),
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class AuthButton extends StatelessWidget {
-  const AuthButton({super.key, required this.onPressed, required this.text});
+class MainButton extends StatelessWidget {
+  const MainButton({super.key, required this.onPressed, required this.text});
 
   final VoidCallback onPressed;
   final String text;
