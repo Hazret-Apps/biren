@@ -131,7 +131,7 @@ class _StudentEditViewState extends State<StudentEditView> {
   SizedBox _submitButton() {
     return SizedBox(
       height: 60,
-      child: AuthButton(
+      child: MainButton(
         onPressed: () {
           if (selectedGradeValue != null) {
             FirebaseCollections.users.reference

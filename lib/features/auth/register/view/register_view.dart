@@ -109,8 +109,8 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  AuthButton _registerButton(BuildContext context) {
-    return AuthButton(
+  MainButton _registerButton(BuildContext context) {
+    return MainButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           AuthService().registerUser(
