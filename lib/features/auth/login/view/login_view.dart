@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
 
   Text _alreadyHaveAccount(BuildContext context) {
     return Text(
-      LocaleKeys.auth_alreadyHaveAnAccount.tr(),
+      LocaleKeys.auth_dontHaveAnAccount.tr(),
       style: context.textTheme.titleSmall,
     );
   }
