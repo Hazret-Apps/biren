@@ -3,6 +3,7 @@ import 'package:biren_kocluk/product/base/view/base_view.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/announcement_card_model.dart';
+import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcement_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -72,10 +73,36 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
           LocaleKeys.features_createAnnouncement.tr(),
         ),
         actions: [
-          _doneIcon(),
+          _doneActionButton(),
           context.emptySizedWidthBoxNormal,
         ],
       );
+
+  DoneActionButton _doneActionButton() {
+    return DoneActionButton(
+      color: _titleController.text != "" && _descriptionController.text != ""
+          ? LightThemeColors.blazeOrange
+          : LightThemeColors.blazeOrange.withOpacity(.6),
+      onTap: () async {
+        if (_titleController.text == "" || _descriptionController.text == "") {
+          return;
+        } else {
+          var imageUrl = viewModel.image != null
+              ? AnnouncementService().uploadImage(viewModel.image!)
+              : null;
+          await AnnouncementService().addAnnouncement(
+            AnnouncementModel(
+              title: _titleController.text.trim(),
+              description: _descriptionController.text.trim(),
+              createdTime: Timestamp.now(),
+              imagePath: viewModel.image == null ? null : await imageUrl,
+            ),
+            context,
+          );
+        }
+      },
+    );
+  }
 
   Observer _photoContainer(BuildContext context) {
     return Observer(builder: (_) {
@@ -116,36 +143,6 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
           Icons.add_photo_alternate,
           size: 36,
         ),
-      ),
-    );
-  }
-
-  GestureDetector _doneIcon() {
-    return GestureDetector(
-      onTap: () async {
-        if (_titleController.text == "" || _descriptionController.text == "") {
-          return;
-        } else {
-          var imageUrl = viewModel.image != null
-              ? AnnouncementService().uploadImage(viewModel.image!)
-              : null;
-          await AnnouncementService().addAnnouncement(
-            AnnouncementModel(
-              title: _titleController.text.trim(),
-              description: _descriptionController.text.trim(),
-              createdTime: Timestamp.now(),
-              imagePath: viewModel.image == null ? null : await imageUrl,
-            ),
-            context,
-          );
-        }
-      },
-      child: Icon(
-        Icons.done_rounded,
-        size: 28,
-        color: _titleController.text != "" && _descriptionController.text != ""
-            ? LightThemeColors.blazeOrange
-            : LightThemeColors.blazeOrange.withOpacity(.6),
       ),
     );
   }

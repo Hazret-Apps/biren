@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -63,7 +64,18 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
       appBar: AppBar(
         title: const Text("Ders Ve Konu Seç"),
         actions: [
-          _doneIcon(),
+          DoneActionButton(
+            color: selectedSubjectValue != null && selectedTopicValue != null
+                ? LightThemeColors.blazeOrange
+                : LightThemeColors.blazeOrange.withOpacity(.6),
+            onTap: () {
+              if (selectedSubjectValue == null || selectedTopicValue == null) {
+                return;
+              } else {
+                _addHomework();
+              }
+            },
+          ),
           context.emptySizedWidthBoxNormal,
         ],
       ),
@@ -76,25 +88,6 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
             _selectTopicDropdown(),
           ],
         ),
-      ),
-    );
-  }
-
-  GestureDetector _doneIcon() {
-    return GestureDetector(
-      onTap: () {
-        if (selectedSubjectValue == null || selectedTopicValue == null) {
-          return;
-        } else {
-          _addHomework();
-        }
-      },
-      child: Icon(
-        Icons.done_rounded,
-        size: 28,
-        color: selectedSubjectValue != null && selectedTopicValue != null
-            ? LightThemeColors.blazeOrange
-            : LightThemeColors.blazeOrange.withOpacity(.6),
       ),
     );
   }
