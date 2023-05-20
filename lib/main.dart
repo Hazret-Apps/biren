@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
+import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
 import 'package:biren_kocluk/features/home/view/home_view.dart';
 import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/reject/rejected_view.dart';
@@ -77,7 +77,7 @@ class Biren extends StatelessWidget {
                 return const LoadingView();
               },
             )
-          : const RegisterView(),
+          : const LoginView(),
     );
   }
 }
