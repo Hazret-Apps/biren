@@ -3,6 +3,7 @@
 import 'package:biren_kocluk/features/admin/view/create_homework_view_2.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/widget/button/next_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
@@ -79,13 +80,13 @@ class _AddEventState extends State<AddEvent> {
           child: const Icon(Icons.close_rounded),
         ),
         actions: [
-          _nextIcon(context),
+          _nextActionButton(context),
           context.emptySizedWidthBoxNormal,
         ],
       );
 
-  GestureDetector _nextIcon(BuildContext context) {
-    return GestureDetector(
+  NextActionButton _nextActionButton(BuildContext context) {
+    return NextActionButton(
       onTap: () {
         if (grade == null ||
             selectedUserValue == null ||
@@ -106,15 +107,12 @@ class _AddEventState extends State<AddEvent> {
           );
         }
       },
-      child: Icon(
-        Icons.arrow_forward_rounded,
-        color: grade != null &&
-                selectedUserValue != null &&
-                selectedDate != null &&
-                jsonNumber != null
-            ? LightThemeColors.blazeOrange
-            : LightThemeColors.blazeOrange.withOpacity(.6),
-      ),
+      color: grade != null &&
+              selectedUserValue != null &&
+              selectedDate != null &&
+              jsonNumber != null
+          ? LightThemeColors.blazeOrange
+          : LightThemeColors.blazeOrange.withOpacity(.6),
     );
   }
 
