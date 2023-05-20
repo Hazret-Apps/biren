@@ -20,7 +20,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
   Widget build(BuildContext context) {
     return BaseView<AdminHomeViewModel>(
       onModelReady: (model) {
-        // model.setContext(context);
         viewModel = model;
       },
       viewModel: AdminHomeViewModel(),
@@ -40,12 +39,13 @@ class _AdminHomeViewState extends State<AdminHomeView> {
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 10,
         ),
         children: const [
-          AdminSelectFeature(featureTypes: FeatureTypes.announcement),
+          AdminSelectFeature(featureTypes: FeatureTypes.infos),
           AdminSelectFeature(featureTypes: FeatureTypes.task),
-          AdminSelectFeature(featureTypes: FeatureTypes.students),
+          AdminSelectFeature(featureTypes: FeatureTypes.announcement),
           AdminSelectFeature(featureTypes: FeatureTypes.login),
         ],
       ),

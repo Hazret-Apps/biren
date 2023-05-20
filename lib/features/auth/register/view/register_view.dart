@@ -79,7 +79,7 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Image get _birenImage => Image.asset(Assets.icons.icon.path, scale: 1.5 / 1);
+  Image get _birenImage => Image.asset(Assets.icons.logo.path, scale: 1.5 / 1);
 
   AuthTextField get _nameTextField {
     return AuthTextField(

@@ -10,12 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
 class AddEvent extends StatefulWidget {
-  final DateTime firstDate;
-  final DateTime lastDate;
   const AddEvent({
     Key? key,
-    required this.firstDate,
-    required this.lastDate,
   }) : super(key: key);
 
   @override

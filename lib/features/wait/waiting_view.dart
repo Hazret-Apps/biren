@@ -30,7 +30,7 @@ class _WaitingViewState extends State<WaitingView> {
                   textAlign: TextAlign.center,
                 ),
                 Image.asset(
-                  Assets.icons.icon.path,
+                  Assets.icons.logo.path,
                   height: 200,
                 ),
               ],

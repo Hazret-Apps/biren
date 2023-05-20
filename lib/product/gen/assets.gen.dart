@@ -13,10 +13,10 @@ class $AssetsIconsGen {
   const $AssetsIconsGen();
 
   /// File path: assets/icons/logo.png
-  AssetGenImage get icon => const AssetGenImage('assets/icons/logo.png');
+  AssetGenImage get logo => const AssetGenImage('assets/icons/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [icon];
+  List<AssetGenImage> get values => [logo];
 }
 
 class $AssetsImagesGen {
@@ -29,6 +29,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/login.png
   AssetGenImage get login => const AssetGenImage('assets/images/login.png');
 
+  /// File path: assets/images/settings.png
+  AssetGenImage get settings =>
+      const AssetGenImage('assets/images/settings.png');
+
   /// File path: assets/images/student.png
   AssetGenImage get student => const AssetGenImage('assets/images/student.png');
 
@@ -39,13 +43,15 @@ class $AssetsImagesGen {
   AssetGenImage get task => const AssetGenImage('assets/images/task.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [announcement, login, student, study, task];
+  List<AssetGenImage> get values =>
+      [announcement, login, settings, student, study, task];
 }
 
 class $AssetsJsonsGen {
   const $AssetsJsonsGen();
 
   $AssetsJsonsLangGen get lang => const $AssetsJsonsLangGen();
+  $AssetsJsonsStudyGen get study => const $AssetsJsonsStudyGen();
 }
 
 class $AssetsJsonsLangGen {
@@ -56,6 +62,19 @@ class $AssetsJsonsLangGen {
 
   /// List of all assets
   List<String> get values => [trTR];
+}
+
+class $AssetsJsonsStudyGen {
+  const $AssetsJsonsStudyGen();
+
+  /// File path: assets/jsons/study/lessons.json
+  String get lessons => 'assets/jsons/study/lessons.json';
+
+  /// File path: assets/jsons/study/subjects.json
+  String get subjects => 'assets/jsons/study/subjects.json';
+
+  /// List of all assets
+  List<String> get values => [lessons, subjects];
 }
 
 class Assets {

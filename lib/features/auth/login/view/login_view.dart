@@ -72,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Image get _birenImage => Image.asset(Assets.icons.icon.path, scale: 1.5 / 1);
+  Image get _birenImage => Image.asset(Assets.icons.logo.path, scale: 1.5 / 1);
 
   AuthTextField get _mailTextField {
     return AuthTextField(
