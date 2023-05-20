@@ -63,7 +63,7 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
       appBar: AppBar(
         title: const Text("Ders Ve Konu Seç"),
         actions: [
-          _nextIcon(),
+          _doneIcon(),
           context.emptySizedWidthBoxNormal,
         ],
       ),
@@ -80,7 +80,7 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
     );
   }
 
-  GestureDetector _nextIcon() {
+  GestureDetector _doneIcon() {
     return GestureDetector(
       onTap: () {
         if (selectedSubjectValue == null || selectedTopicValue == null) {

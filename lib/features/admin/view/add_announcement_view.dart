@@ -1,9 +1,9 @@
+import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
 import 'package:biren_kocluk/product/base/view/base_view.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/announcement_card_model.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
-import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
 import 'package:biren_kocluk/features/admin/viewmodel/add_announcement_viewmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,19 +24,10 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  final List<String> greadeList = [
-    "5",
-    "6",
-    "7",
-    "8",
-  ];
-  String? grade;
-
   @override
   Widget build(BuildContext context) {
     return BaseView(
       onModelReady: (model) {
-        // model.setContext(context);
         viewModel = model;
       },
       viewModel: AddAnnouncementViewModel(),
@@ -66,16 +57,25 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
                 hintText: LocaleKeys.descriptions_announcementDescriptions.tr(),
                 keyboardType: TextInputType.name,
                 controller: _descriptionController,
+                minLines: 3,
+                maxLines: 5,
               ),
-              context.emptySizedHeightBoxLow3x,
-              _petAgeRangeDropDown
             ],
           ),
         );
       }),
-      floatingActionButton: _floatingActionButton(),
     );
   }
+
+  AppBar _appBar() => AppBar(
+        title: Text(
+          LocaleKeys.features_createAnnouncement.tr(),
+        ),
+        actions: [
+          _doneIcon(),
+          context.emptySizedWidthBoxNormal,
+        ],
+      );
 
   Observer _photoContainer(BuildContext context) {
     return Observer(builder: (_) {
@@ -120,51 +120,33 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
     );
   }
 
-  DropdownButtonFormField<String> get _petAgeRangeDropDown {
-    return DropdownButtonFormField(
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: context.normalBorderRadius,
-          borderSide: BorderSide.none,
-        ),
-      ),
-      hint: Text(LocaleKeys.classText.tr()),
-      value: grade,
-      items: greadeList
-          .map(
-            (item) => DropdownMenuItem(
-              value: item,
-              child: Text(item),
+  GestureDetector _doneIcon() {
+    return GestureDetector(
+      onTap: () async {
+        if (_titleController.text == "" || _descriptionController.text == "") {
+          return;
+        } else {
+          var imageUrl = viewModel.image != null
+              ? AnnouncementService().uploadImage(viewModel.image!)
+              : null;
+          await AnnouncementService().addAnnouncement(
+            AnnouncementModel(
+              title: _titleController.text.trim(),
+              description: _descriptionController.text.trim(),
+              createdTime: Timestamp.now(),
+              imagePath: viewModel.image == null ? null : await imageUrl,
             ),
-          )
-          .toList(),
-      onChanged: (val) {
-        setState(() {
-          grade = val;
-        });
+            context,
+          );
+        }
       },
+      child: Icon(
+        Icons.done_rounded,
+        size: 28,
+        color: _titleController.text != "" && _descriptionController.text != ""
+            ? LightThemeColors.blazeOrange
+            : LightThemeColors.blazeOrange.withOpacity(.6),
+      ),
     );
   }
-
-  FloatingActionButton _floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () async {
-        var imageUrl = AnnouncementService().uploadImage(viewModel.image!);
-        await AnnouncementService().addAnnouncement(
-          AnnouncementModel(
-            title: _titleController.text.trim(),
-            description: _descriptionController.text.trim(),
-            createdTime: Timestamp.now(),
-            imagePath: viewModel.image == null ? null : await imageUrl,
-          ),
-          context,
-        );
-      },
-      child: const Icon(Icons.add),
-    );
-  }
-
-  AppBar _appBar() => AppBar(
-        title: Text(LocaleKeys.features_createAnnouncement.tr()),
-      );
 }

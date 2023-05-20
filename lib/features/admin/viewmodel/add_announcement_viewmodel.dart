@@ -11,14 +11,6 @@ class AddAnnouncementViewModel = _AddAnnouncmentViewModelBase
     with _$AddAnnouncementViewModel;
 
 abstract class _AddAnnouncmentViewModelBase with Store {
-  // @override
-  // void setContext(BuildContext context) {
-  //   viewModelContext = context;
-  // }
-
-  // @override
-  // void init() {}
-
   @observable
   XFile? image;
 
