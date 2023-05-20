@@ -11,6 +11,9 @@ class MainTextField extends StatelessWidget {
     this.isLast = false,
     this.prefixIcon,
     required this.controller,
+    this.maxLength,
+    this.maxLines,
+    this.minLines,
   });
 
   final String hintText;
@@ -18,6 +21,9 @@ class MainTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool isLast;
   final Icon? prefixIcon;
+  final int? maxLength;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +31,9 @@ class MainTextField extends StatelessWidget {
       textInputAction: isLast ? TextInputAction.done : TextInputAction.next,
       keyboardType: keyboardType,
       controller: controller,
+      maxLength: maxLength,
+      maxLines: maxLines,
+      minLines: minLines,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,
