@@ -47,6 +47,7 @@ dependencies:
   table_calendar: ^3.0.9
   intl:
   date_field: ^3.0.5
+  awesome_snackbar_content:
 
 dev_dependencies:
   flutter_test:

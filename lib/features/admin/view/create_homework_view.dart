@@ -25,8 +25,9 @@ class _AddEventState extends State<AddEvent> {
   int? jsonNumber;
 
   Future<void> userLoad() async {
-    final selectedUser =
-        await FirebaseCollections.users.reference.doc(selectedUserValue).get();
+    final selectedUser = await FirebaseCollections.students.reference
+        .doc(selectedUserValue)
+        .get();
     grade = await selectedUser["grade"] == "Sınıf Yok"
         ? null
         : selectedUser["grade"];
@@ -130,7 +131,7 @@ class _AddEventState extends State<AddEvent> {
 
   StreamBuilder<QuerySnapshot<Object?>> _selectUserDropdown() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseCollections.users.reference.snapshots(),
+      stream: FirebaseCollections.students.reference.snapshots(),
       builder: (context, snapshot) {
         List<DropdownMenuItem> userItems = [];
         if (!snapshot.hasData) {

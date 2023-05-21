@@ -28,7 +28,7 @@ class AuthService {
         password: userModel.password.trim(),
       );
       await _firebaseAuth.currentUser!.updateDisplayName(userModel.name.trim());
-      FirebaseCollections.users.reference
+      FirebaseCollections.students.reference
           .doc(_firebaseAuth.currentUser!.uid)
           .set({
         "name": userModel.name.trim(),

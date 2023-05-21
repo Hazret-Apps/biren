@@ -10,11 +10,13 @@ class UserModel {
   final String password;
   final bool isVerified;
   final grade;
+  final String? classText;
   final Timestamp createdTime;
   final String uid;
 
   const UserModel({
     this.grade,
+    this.classText,
     required this.name,
     required this.mail,
     required this.password,

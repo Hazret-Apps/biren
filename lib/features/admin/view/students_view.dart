@@ -15,7 +15,7 @@ class StudentsView extends StatelessWidget {
         title: const Text("Kayıtlı Öğrenciler"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseCollections.users.reference
+        stream: FirebaseCollections.students.reference
             .where("isVerified", isEqualTo: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -34,6 +34,7 @@ class StudentsView extends StatelessWidget {
                           builder: (context) => StudentEditView(
                             userModel: UserModel(
                               grade: snapshot.data!.docs[index]["grade"],
+                              classText: snapshot.data!.docs[index]["class"],
                               name: snapshot.data!.docs[index]["name"],
                               mail: snapshot.data!.docs[index]["mail"],
                               password: snapshot.data!.docs[index]["password"],

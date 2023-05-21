@@ -17,7 +17,7 @@ class LoginRequiestView extends StatelessWidget {
         title: const Text("Giriş Talepleri"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseCollections.users.reference
+        stream: FirebaseCollections.students.reference
             .where("isVerified", isEqualTo: false)
             .snapshots(),
         builder: (context, snapshot) {
@@ -81,7 +81,7 @@ class LoginRequiestView extends StatelessWidget {
       desc:
           "${snapshot.data!.docs[index]["name"]} adlı kişiyi reddetmek istediğinizden emin misiniz?",
       btnOkOnPress: () {
-        FirebaseCollections.users.reference
+        FirebaseCollections.students.reference
             .doc(snapshot.data!.docs[index]["uid"])
             .delete();
       },
@@ -100,7 +100,7 @@ class LoginRequiestView extends StatelessWidget {
       desc:
           "${snapshot.data!.docs[index]["name"]} adlı kişiyi kabul etmek istediğinizden emin misiniz?",
       btnOkOnPress: () {
-        FirebaseCollections.users.reference
+        FirebaseCollections.students.reference
             .doc(snapshot.data!.docs[index]["uid"])
             .update({
           "isVerified": true,

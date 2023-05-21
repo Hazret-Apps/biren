@@ -4,6 +4,7 @@ import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
@@ -19,7 +20,6 @@ class StudentEditView extends StatefulWidget {
 
 class _StudentEditViewState extends State<StudentEditView> {
   late final String formattedDate;
-  final List<String> grades = ["5", "6", "7", "8"];
   String? selectedGradeValue;
 
   @override
@@ -50,7 +50,10 @@ class _StudentEditViewState extends State<StudentEditView> {
               _createdDateListTile(context),
               _gradeListTile(context),
               context.emptySizedHeightBoxLow,
-              _submitButton(),
+              if (selectedGradeValue == null)
+                const SizedBox.shrink()
+              else
+                _submitButton(),
             ],
           ),
         ),
@@ -110,21 +113,42 @@ class _StudentEditViewState extends State<StudentEditView> {
         "Sınıf:",
         style: context.textTheme.titleMedium,
       ),
-      trailing: DropdownButton(
-        value: selectedGradeValue,
-        hint: Text(widget.userModel.grade.toString()),
-        items: grades.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
+      trailing:
+          SizedBox(width: context.width / 3, child: _selectClassDropdown()),
+    );
+  }
+
+  StreamBuilder<QuerySnapshot<Object?>> _selectClassDropdown() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseCollections.classes.reference.snapshots(),
+      builder: (context, snapshot) {
+        List<DropdownMenuItem> classItems = [];
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final users = snapshot.data!.docs.reversed.toList();
+          for (var classes in users) {
+            classItems.add(
+              DropdownMenuItem(
+                value: classes["name"],
+                child: Text(
+                  classes["name"],
+                ),
+              ),
+            );
+          }
+          return DropdownButton(
+            value: selectedGradeValue,
+            hint: Text(widget.userModel.classText ?? "Sınıf Yok"),
+            onChanged: (value) async {
+              setState(() {
+                selectedGradeValue = value;
+              });
+            },
+            items: classItems,
           );
-        }).toList(),
-        onChanged: (value) {
-          setState(() {
-            selectedGradeValue = value;
-          });
-        },
-      ),
+        }
+      },
     );
   }
 
@@ -133,14 +157,13 @@ class _StudentEditViewState extends State<StudentEditView> {
       height: 60,
       child: MainButton(
         onPressed: () {
-          if (selectedGradeValue != null) {
-            FirebaseCollections.users.reference
-                .doc(widget.userModel.uid)
-                .update({
-              "grade": int.parse(selectedGradeValue!),
-            });
-            Navigator.pop(context);
-          }
+          FirebaseCollections.students.reference
+              .doc(widget.userModel.uid)
+              .update({
+            "class": selectedGradeValue,
+            "grade": int.parse(selectedGradeValue!.characters.first),
+          });
+          Navigator.pop(context);
         },
         text: "KAYDET",
       ),
