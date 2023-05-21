@@ -158,7 +158,7 @@ class _CreateHomeworkView2State extends State<CreateHomeworkView2> {
   }
 
   void _addHomework() async {
-    await FirebaseCollections.users.reference
+    await FirebaseCollections.students.reference
         .doc(widget.studentValue)
         .collection("homeworks")
         .add({

@@ -59,7 +59,7 @@ class Biren extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: FirebaseAuth.instance.currentUser != null
           ? StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseCollections.users.reference
+              stream: FirebaseCollections.students.reference
                   .doc(FirebaseAuth.instance.currentUser!.uid)
                   .snapshots(),
               builder: (context, snapshot) {
