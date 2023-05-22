@@ -51,7 +51,6 @@ class _ClassesViewState extends State<ClassesView> {
   ];
   String? selectedGradeNumber;
   String? selectedGradeText;
-  final widgetKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
