@@ -120,7 +120,9 @@ class _StudentEditViewState extends State<StudentEditView> {
 
   StreamBuilder<QuerySnapshot<Object?>> _selectClassDropdown() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseCollections.classes.reference.snapshots(),
+      stream: FirebaseCollections.classes.reference
+          .orderBy('name', descending: false)
+          .snapshots(),
       builder: (context, snapshot) {
         List<DropdownMenuItem> classItems = [];
         if (!snapshot.hasData) {

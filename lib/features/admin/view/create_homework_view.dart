@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:biren_kocluk/features/admin/view/create_homework_view_2.dart';
+import 'package:biren_kocluk/features/admin/view/student_edit_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/next_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -21,16 +24,20 @@ class AddEvent extends StatefulWidget {
 class _AddEventState extends State<AddEvent> {
   DateTime? selectedDate;
   String? selectedUserValue;
+  DocumentSnapshot? selectedUser;
   int? grade;
   int? jsonNumber;
 
+  String? statusMessage;
+
   Future<void> userLoad() async {
-    final selectedUser = await FirebaseCollections.students.reference
+    selectedUser = await FirebaseCollections.students.reference
         .doc(selectedUserValue)
         .get();
-    grade = await selectedUser["grade"] == "Sınıf Yok"
+
+    grade = await selectedUser!["grade"] == "Sınıf Yok"
         ? null
-        : selectedUser["grade"];
+        : selectedUser!["grade"];
 
     switch (grade) {
       case 5:
@@ -44,6 +51,11 @@ class _AddEventState extends State<AddEvent> {
         break;
       case 8:
         jsonNumber = 3;
+        break;
+      case null:
+        setState(() {
+          statusMessage = "Seçtiğiniz Öğrencinin Sınıfı Yok Lütfen Önce";
+        });
         break;
       default:
     }
@@ -61,6 +73,46 @@ class _AddEventState extends State<AddEvent> {
             context.emptySizedHeightBoxLow3x,
             _selectUserDropdown(),
             context.emptySizedHeightBoxLow3x,
+            statusMessage != null
+                ? RichText(
+                    text: TextSpan(
+                        text: statusMessage,
+                        style: context.textTheme.titleSmall
+                            ?.copyWith(color: LightThemeColors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: " Sınıf Atayın.",
+                            style: context.textTheme.titleSmall
+                                ?.copyWith(color: LightThemeColors.red),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StudentEditView(
+                                      userModel: UserModel(
+                                        grade: selectedUser!["grade"],
+                                        classText: selectedUser!["class"],
+                                        name: selectedUser!["name"],
+                                        mail: selectedUser!["mail"],
+                                        password: selectedUser!["password"],
+                                        createdTime:
+                                            selectedUser!["createdTime"],
+                                        isVerified: selectedUser!["isVerified"],
+                                        uid: selectedUser!["uid"],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                setState(() {
+                                  statusMessage = null;
+                                  selectedUserValue = null;
+                                });
+                              },
+                          )
+                        ]),
+                  )
+                : const SizedBox.shrink()
           ],
         ),
       ),
@@ -104,10 +156,7 @@ class _AddEventState extends State<AddEvent> {
           );
         }
       },
-      color: grade != null &&
-              selectedUserValue != null &&
-              selectedDate != null &&
-              jsonNumber != null
+      color: grade != null && selectedUserValue != null && selectedDate != null
           ? LightThemeColors.blazeOrange
           : LightThemeColors.blazeOrange.withOpacity(.6),
     );
@@ -154,7 +203,6 @@ class _AddEventState extends State<AddEvent> {
             hint: const Text("Öğrenci Seçiniz"),
             onChanged: (value) async {
               setState(() {
-                userLoad();
                 selectedUserValue = value;
                 userLoad();
               });
