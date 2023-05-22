@@ -1,5 +1,6 @@
+import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
 import 'package:biren_kocluk/features/admin/view/create_homework_view.dart';
-import 'package:biren_kocluk/features/admin/view/school_infos.dart';
+import 'package:biren_kocluk/features/admin/view/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -43,10 +44,25 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         title = LocaleKeys.features_loginRequests.tr();
         callView = const LoginRequiestView();
         break;
-      case FeatureTypes.infos:
-        imagePath = Assets.images.settings.path;
-        title = "Dershane Bilgileri";
-        callView = const SchoolInfosView();
+      case FeatureTypes.classes:
+        imagePath = Assets.images.classes.path;
+        title = "Sınıflar";
+        callView = const ClassesView();
+        break;
+      case FeatureTypes.log:
+        imagePath = Assets.images.history.path;
+        title = "Geçmiş";
+        callView = Scaffold(appBar: AppBar());
+        break;
+      case FeatureTypes.students:
+        imagePath = Assets.images.students.path;
+        title = "Öğrenciler";
+        callView = const StudentsView();
+        break;
+      case FeatureTypes.teachers:
+        imagePath = Assets.images.teachers.path;
+        title = "Öğretmenler";
+        callView = Scaffold(appBar: AppBar());
         break;
       default:
     }
