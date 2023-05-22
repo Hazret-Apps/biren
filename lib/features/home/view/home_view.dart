@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
     _events = {};
 
     final snap = await FirebaseFirestore.instance
-        .collection('users')
+        .collection('students')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection("homeworks")
         .where('date', isGreaterThanOrEqualTo: firstDay)
