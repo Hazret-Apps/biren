@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:biren_kocluk/features/admin/view/student_edit_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';

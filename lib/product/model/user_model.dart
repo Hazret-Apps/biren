@@ -10,7 +10,7 @@ class UserModel {
   final String password;
   final bool isVerified;
   final grade;
-  final String? classText;
+  final classText;
   final Timestamp createdTime;
   final String uid;
 
