@@ -78,15 +78,17 @@ class _LoginAcceptViewState extends State<LoginAcceptView> {
             context.emptySizedHeightBoxLow3x,
             MainButton(
               onPressed: () {
-                FirebaseCollections.students.reference
-                    .doc(widget.userModel.uid)
-                    .update({
-                  "isVerified": true,
-                  "class": selectedGradeValue,
-                  "grade": int.parse(selectedGradeValue!.characters.first),
-                  "studentPhone": studentPhone.text,
-                  "parentPhone": parentPhone.text,
-                });
+                if (selectedGradeValue != null) {
+                  FirebaseCollections.students.reference
+                      .doc(widget.userModel.uid)
+                      .update({
+                    "isVerified": true,
+                    "class": selectedGradeValue,
+                    "grade": int.parse(selectedGradeValue!.characters.first),
+                    "studentPhone": studentPhone.text,
+                    "parentPhone": parentPhone.text,
+                  });
+                }
               },
               text: "Kabul Et",
               color: selectedGradeValue == null ? LightThemeColors.grey : null,
