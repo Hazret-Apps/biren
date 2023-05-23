@@ -1,7 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:biren_kocluk/features/admin/view/login_requiest/login_accept_view.dart';
 import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/admin/cross_check_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,27 @@ class LoginRequiestView extends StatelessWidget {
                         context.emptySizedWidthBoxLow3x,
                         CrossTickContainer(
                           onTap: () {
-                            _okDialog(context, snapshot, index).show();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginAcceptView(
+                                  userModel: UserModel(
+                                    name: snapshot.data!.docs[index]["name"],
+                                    mail: snapshot.data!.docs[index]["mail"],
+                                    password: snapshot.data!.docs[index]
+                                        ["password"],
+                                    createdTime: snapshot.data!.docs[index]
+                                        ["createdTime"],
+                                    isVerified: snapshot.data!.docs[index]
+                                        ["isVerified"],
+                                    uid: snapshot.data!.docs[index]["uid"],
+                                    classText: snapshot.data!.docs[index]
+                                        ["class"],
+                                    grade: snapshot.data!.docs[index]["grade"],
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                           crossTickEnum: CrossTickEnum.tick,
                         ),
@@ -84,27 +106,6 @@ class LoginRequiestView extends StatelessWidget {
         FirebaseCollections.students.reference
             .doc(snapshot.data!.docs[index]["uid"])
             .delete();
-      },
-      btnOkText: "Evet",
-      btnCancelText: "Vazgeç",
-      btnCancelOnPress: () {},
-    );
-  }
-
-  AwesomeDialog _okDialog(BuildContext context,
-      AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index) {
-    return AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      title: "Emin misin?",
-      desc:
-          "${snapshot.data!.docs[index]["name"]} adlı kişiyi kabul etmek istediğinizden emin misiniz?",
-      btnOkOnPress: () {
-        FirebaseCollections.students.reference
-            .doc(snapshot.data!.docs[index]["uid"])
-            .update({
-          "isVerified": true,
-        });
       },
       btnOkText: "Evet",
       btnCancelText: "Vazgeç",
