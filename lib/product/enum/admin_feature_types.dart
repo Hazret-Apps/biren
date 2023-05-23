@@ -5,5 +5,4 @@ enum FeatureTypes {
   students,
   classes,
   log,
-  teachers,
 }

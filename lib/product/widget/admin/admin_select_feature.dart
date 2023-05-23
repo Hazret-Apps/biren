@@ -59,11 +59,6 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         title = "Öğrenciler";
         callView = const StudentsView();
         break;
-      case FeatureTypes.teachers:
-        imagePath = Assets.images.teachers.path;
-        title = "Öğretmenler";
-        callView = Scaffold(appBar: AppBar());
-        break;
       default:
     }
   }
