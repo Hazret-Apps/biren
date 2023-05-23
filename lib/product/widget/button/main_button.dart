@@ -3,27 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton({super.key, required this.onPressed, required this.text});
+  const MainButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    this.color,
+  });
 
   final VoidCallback onPressed;
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onPressed,
-      borderRadius: context.normalBorderRadius,
       child: Container(
         width: double.infinity,
         height: 70,
         decoration: BoxDecoration(
-          borderRadius: context.normalBorderRadius,
-          gradient: const LinearGradient(
-            colors: [
-              LightThemeColors.blazeOrange,
-              LightThemeColors.red,
-            ],
-          ),
+          borderRadius: context.highBorderRadius,
+          color: color,
+          gradient: color == null
+              ? const LinearGradient(
+                  colors: [
+                    LightThemeColors.blazeOrange,
+                    LightThemeColors.red,
+                  ],
+                )
+              : null,
         ),
         child: Center(
           child: _text(context),

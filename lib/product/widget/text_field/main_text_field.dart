@@ -14,6 +14,7 @@ class MainTextField extends StatelessWidget {
     this.maxLength,
     this.maxLines,
     this.minLines,
+    this.customValidation,
   });
 
   final String hintText;
@@ -24,6 +25,7 @@ class MainTextField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final int? minLines;
+  final String? Function(String?)? customValidation;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +41,13 @@ class MainTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         prefixIconColor: LightThemeColors.black,
       ),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return LocaleKeys.validatons_emptyValidation.tr();
-        }
-        return null;
-      },
+      validator: customValidation ??
+          (value) {
+            if (value!.isEmpty) {
+              return LocaleKeys.validatons_emptyValidation.tr();
+            }
+            return null;
+          },
     );
   }
 }

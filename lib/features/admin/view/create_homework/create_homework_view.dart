@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:biren_kocluk/features/admin/view/create_homework_view_2.dart';
-import 'package:biren_kocluk/features/admin/view/student_edit_view.dart';
+import 'package:biren_kocluk/features/admin/view/create_homework/create_homework_view_2.dart';
+import 'package:biren_kocluk/features/admin/view/students/student_edit_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';

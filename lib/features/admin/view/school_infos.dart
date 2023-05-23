@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
-import 'package:biren_kocluk/features/admin/view/students_view.dart';
+import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
