@@ -87,6 +87,13 @@ class _AddAnnouncementViewState extends State<AddAnnouncementView> {
         if (_titleController.text == "" || _descriptionController.text == "") {
           return;
         } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return const Center(child: CircularProgressIndicator());
+            },
+          );
           var imageUrl = viewModel.image != null
               ? AnnouncementService().uploadImage(viewModel.image!)
               : null;
