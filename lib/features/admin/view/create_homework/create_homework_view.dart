@@ -138,6 +138,13 @@ class _AddEventState extends State<AddEvent> {
                   selectedTopicValue == null) {
                 return;
               } else {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                );
                 _addHomework();
               }
             },

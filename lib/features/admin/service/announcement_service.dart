@@ -32,5 +32,6 @@ class AnnouncementService {
       "title": announcementModel.title,
     });
     Navigator.pop(context);
+    Navigator.pop(context);
   }
 }
