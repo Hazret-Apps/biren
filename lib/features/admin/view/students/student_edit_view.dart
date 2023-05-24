@@ -50,10 +50,7 @@ class _StudentEditViewState extends State<StudentEditView> {
               _createdDateListTile(context),
               _gradeListTile(context),
               context.emptySizedHeightBoxLow,
-              if (selectedGradeValue == null)
-                const SizedBox.shrink()
-              else
-                _submitButton(),
+              _submitButton(),
             ],
           ),
         ),
@@ -158,6 +155,7 @@ class _StudentEditViewState extends State<StudentEditView> {
     return SizedBox(
       height: 60,
       child: MainButton(
+        color: selectedGradeValue == null ? LightThemeColors.grey : null,
         onPressed: () {
           FirebaseCollections.students.reference
               .doc(widget.userModel.uid)
