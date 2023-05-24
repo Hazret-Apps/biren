@@ -160,12 +160,7 @@ class _ClassesViewState extends State<ClassesView> {
                       ],
                     ),
                     const Spacer(),
-                    selectedGradeNumber == null || selectedGradeText == null
-                        ? const SizedBox.shrink()
-                        : SizedBox(
-                            height: 60,
-                            child: _submitButton(context),
-                          ),
+                    SizedBox(height: 60, child: _submitButton(context)),
                   ],
                 ),
               ),
@@ -223,6 +218,9 @@ class _ClassesViewState extends State<ClassesView> {
 
   MainButton _submitButton(BuildContext context) {
     return MainButton(
+      color: selectedGradeNumber == null || selectedGradeText == null
+          ? LightThemeColors.grey
+          : null,
       onPressed: () {
         Navigator.pop(context);
         final snackBar = _snackBar();
