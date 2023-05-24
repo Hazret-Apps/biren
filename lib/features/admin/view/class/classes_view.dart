@@ -179,9 +179,8 @@ class _ClassesViewState extends State<ClassesView> {
   Text _createClassText(BuildContext context) {
     return Text(
       "Sınıf Oluştur",
-      style: context.textTheme.headlineMedium?.copyWith(
-        fontWeight: FontWeight.w600,
-      ),
+      style: context.textTheme.headlineMedium
+          ?.copyWith(fontWeight: FontWeight.w600),
     );
   }
 
