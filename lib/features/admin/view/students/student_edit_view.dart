@@ -157,13 +157,15 @@ class _StudentEditViewState extends State<StudentEditView> {
       child: MainButton(
         color: selectedGradeValue == null ? LightThemeColors.grey : null,
         onPressed: () {
-          FirebaseCollections.students.reference
-              .doc(widget.userModel.uid)
-              .update({
-            "class": selectedGradeValue,
-            "grade": int.parse(selectedGradeValue!.characters.first),
-          });
-          Navigator.pop(context);
+          if (selectedGradeValue != null) {
+            FirebaseCollections.students.reference
+                .doc(widget.userModel.uid)
+                .update({
+              "class": selectedGradeValue,
+              "grade": int.parse(selectedGradeValue!.characters.first),
+            });
+            Navigator.pop(context);
+          }
         },
         text: "KAYDET",
       ),
