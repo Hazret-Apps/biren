@@ -221,15 +221,17 @@ class _ClassesViewState extends State<ClassesView> {
           ? LightThemeColors.grey
           : null,
       onPressed: () {
-        Navigator.pop(context);
-        final snackBar = _snackBar();
+        if (selectedGradeNumber != null || selectedGradeText != null) {
+          Navigator.pop(context);
+          final snackBar = _snackBar();
 
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
 
-        FirebaseCollections.classes.reference
-            .add({"name": "$selectedGradeNumber/$selectedGradeText"});
+          FirebaseCollections.classes.reference
+              .add({"name": "$selectedGradeNumber/$selectedGradeText"});
+        }
       },
       text: "OLUŞTUR",
     );
