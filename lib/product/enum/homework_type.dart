@@ -1,0 +1,4 @@
+enum HomeworkType {
+  student,
+  classText,
+}
