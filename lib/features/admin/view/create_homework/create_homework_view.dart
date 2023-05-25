@@ -1,8 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
-import 'dart:convert';
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
+import 'package:biren_kocluk/features/admin/view/create_homework/mixin/create_homework_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/enum/homework_type.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,99 +11,70 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class AddEvent extends StatefulWidget {
-  const AddEvent({
-    Key? key,
-  }) : super(key: key);
+class CreateHomeworkView extends StatefulWidget {
+  const CreateHomeworkView({Key? key}) : super(key: key);
 
   @override
-  State<AddEvent> createState() => _AddEventState();
+  State<CreateHomeworkView> createState() => _CreateHomeworkViewState();
 }
 
-class _AddEventState extends State<AddEvent> {
-  DateTime? selectedDate;
-  String? selectedUserValue;
-  DocumentSnapshot? selectedUser;
-  int? grade;
-  int? jsonNumber;
-
-  String? selectedSubjectValue;
-  String? selectedSubjectText;
-  String? selectedTopicValue;
-
-  Map<String, dynamic> subjects = {};
-  Map<String, dynamic> topics = {};
-
-  String? statusMessage;
-
-  Future<void> userLoad() async {
-    selectedUser = await FirebaseCollections.students.reference
-        .doc(selectedUserValue)
-        .get();
-
-    grade = await selectedUser!["grade"] == "Sınıf Yok"
-        ? null
-        : selectedUser!["grade"];
-
-    switch (grade) {
-      case 5:
-        jsonNumber = 0;
-        break;
-      case 6:
-        jsonNumber = 1;
-        break;
-      case 7:
-        jsonNumber = 2;
-        break;
-      case 8:
-        jsonNumber = 3;
-        break;
-      case null:
-        setState(() {
-          statusMessage = "Seçtiğiniz Öğrencinin Sınıfı Yok Lütfen Önce";
-        });
-        break;
-      default:
-    }
-  }
-
-  Future<void> loadLessons() async {
-    final topicJsonString = await DefaultAssetBundle.of(context)
-        .loadString('assets/jsons/study/lessons.json');
-    final subjectJsonString = await DefaultAssetBundle.of(context)
-        .loadString('assets/jsons/study/subjects.json');
-    final topicData = await json.decode(topicJsonString);
-    final subjectData = await json.decode(subjectJsonString);
-
-    setState(() {
-      subjects = subjectData[0]["subjects"];
-      topics = topicData[jsonNumber][grade.toString()]?[selectedSubjectValue] ??
-          {"": ""};
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadLessons();
-  }
-
+class _CreateHomeworkViewState extends State<CreateHomeworkView>
+    with CreateHomeworkOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
       body: SafeArea(
-        child: ListView(
+        child: SingleChildScrollView(
           padding: context.horizontalPaddingNormal,
-          children: [
-            _dateFormField(),
-            context.emptySizedHeightBoxLow3x,
-            _selectUserDropdown(),
-            context.emptySizedHeightBoxLow3x,
-            _selectSubjectDropdown(),
-            context.emptySizedHeightBoxLow3x,
-            _selectTopicDropdown(),
-          ],
+          child: Column(
+            children: [
+              _TypeSelectionRow(
+                homeworkType,
+                onChanged: changeHelpType,
+              ),
+              context.emptySizedHeightBoxLow3x,
+              _dateFormField(),
+              context.emptySizedHeightBoxLow3x,
+              isClass
+                  ? SelectTypeDropdown(
+                      selectedValue: selectedGradeValue,
+                      stream: FirebaseCollections.classes.reference
+                          .orderBy('name', descending: false)
+                          .snapshots(),
+                      type: HomeworkType.classText,
+                      onTap: (value) {
+                        setState(() {
+                          selectedGradeValue = value;
+                          loadClass();
+                          selectedSubjectText = null;
+                          selectedSubjectValue = null;
+                          selectedTopicValue = null;
+                          topics = {"": ""};
+                        });
+                      },
+                    )
+                  : SelectTypeDropdown(
+                      selectedValue: selectedUserValue,
+                      stream:
+                          FirebaseCollections.students.reference.snapshots(),
+                      type: HomeworkType.student,
+                      onTap: (value) {
+                        setState(() {
+                          selectedUserValue = value;
+                          loadUser();
+                          selectedSubjectText = null;
+                          selectedSubjectValue = null;
+                          selectedTopicValue = null;
+                        });
+                      },
+                    ),
+              context.emptySizedHeightBoxLow3x,
+              _selectSubjectDropdown(),
+              context.emptySizedHeightBoxLow3x,
+              _selectTopicDropdown(),
+            ],
+          ),
         ),
       ),
     );
@@ -169,45 +141,6 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  StreamBuilder<QuerySnapshot<Object?>> _selectUserDropdown() {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseCollections.students.reference.snapshots(),
-      builder: (context, snapshot) {
-        List<DropdownMenuItem> userItems = [];
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          final users = snapshot.data!.docs.reversed.toList();
-          for (var user in users) {
-            userItems.add(
-              DropdownMenuItem(
-                value: user.id,
-                child: Text(
-                  user["name"],
-                ),
-              ),
-            );
-          }
-          return DropdownButtonFormField(
-            isExpanded: true,
-            value: selectedUserValue,
-            hint: const Text("Öğrenci Seçiniz"),
-            onChanged: (value) async {
-              setState(() {
-                selectedUserValue = value;
-                userLoad();
-                selectedSubjectText = null;
-                selectedSubjectValue = null;
-                selectedTopicValue = null;
-              });
-            },
-            items: userItems,
-          );
-        }
-      },
-    );
-  }
-
   DropdownButtonFormField<String> _selectSubjectDropdown() {
     return DropdownButtonFormField(
       isExpanded: true,
@@ -254,34 +187,30 @@ class _AddEventState extends State<AddEvent> {
 
   DropdownButtonFormField<String> _selectTopicDropdown() {
     return DropdownButtonFormField(
-      isExpanded: true,
-      value: selectedTopicValue,
-      hint: const Text("Konu seçiniz"),
-      onChanged: (value) {
-        setState(() {
-          selectedTopicValue = value;
-        });
-      },
-      items: selectedSubjectValue == null
-          ? null
-          : topics.entries.map<DropdownMenuItem<String>>((entry) {
-              return DropdownMenuItem<String>(
-                value: entry.value,
-                child: Text(entry.value),
-              );
-            }).toList(),
-    );
+        isExpanded: true,
+        value: selectedTopicValue,
+        hint: const Text("Konu seçiniz"),
+        onChanged: (value) {
+          setState(() {
+            selectedTopicValue = value;
+          });
+        },
+        items: topics.entries.map<DropdownMenuItem<String>>((entry) {
+          return DropdownMenuItem<String>(
+            value: entry.value,
+            child: Text(entry.value),
+          );
+        }).toList());
   }
 
   void _addHomework() async {
-    await FirebaseCollections.students.reference
-        .doc(selectedUserValue)
-        .collection("homeworks")
-        .add({
-      "userId": selectedUserValue,
+    await FirebaseCollections.homeworks.reference.add({
       "subject": selectedSubjectText,
       "topic": selectedTopicValue,
       "date": Timestamp.fromDate(selectedDate!),
+      "userOrClass": homeworkType == HomeworkType.classText
+          ? selectedGradeValue
+          : selectedUserValue,
     });
     Navigator.pushAndRemoveUntil(
       context,
@@ -289,6 +218,126 @@ class _AddEventState extends State<AddEvent> {
         builder: (context) => const AdminHomeView(),
       ),
       (route) => false,
+    );
+  }
+}
+
+class _SelectionButton extends StatelessWidget {
+  const _SelectionButton({
+    required this.label,
+    required this.isSelected,
+    required this.onPressed,
+  });
+
+  final String label;
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: context.paddingNormal,
+          side: BorderSide(
+            color: isSelected
+                ? LightThemeColors.blazeOrange
+                : LightThemeColors.snowbank,
+          ),
+        ),
+        onPressed: onPressed,
+        child: FittedBox(
+          child: Text(
+            label,
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TypeSelectionRow extends StatelessWidget {
+  const _TypeSelectionRow(this.selection, {required this.onChanged});
+
+  final HomeworkType selection;
+  final ValueChanged<HomeworkType> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _SelectionButton(
+          label: "Bireysel Ödev",
+          isSelected: selection == HomeworkType.student,
+          onPressed: () => onChanged(HomeworkType.student),
+        ),
+        context.emptySizedWidthBoxLow3x,
+        _SelectionButton(
+          label: "Sınıf Ödev",
+          isSelected: selection == HomeworkType.classText,
+          onPressed: () => onChanged(HomeworkType.classText),
+        ),
+      ],
+    );
+  }
+}
+
+class SelectTypeDropdown extends StatefulWidget {
+  SelectTypeDropdown({
+    super.key,
+    this.selectedValue,
+    this.stream,
+    this.type,
+    required this.onTap,
+  });
+
+  String? selectedValue;
+  Stream<QuerySnapshot<Object?>>? stream;
+  HomeworkType? type;
+  final ValueChanged onTap;
+
+  @override
+  State<SelectTypeDropdown> createState() => _SelectTypeDropdownState();
+}
+
+class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: widget.stream,
+      builder: (context, snapshot) {
+        List<DropdownMenuItem> items = [];
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final users = snapshot.data!.docs.reversed.toList();
+          for (var classes in users) {
+            items.add(
+              DropdownMenuItem(
+                value: classes.id,
+                child: Text(
+                  classes["name"],
+                ),
+              ),
+            );
+          }
+          return DropdownButtonFormField(
+            value: widget.selectedValue,
+            isExpanded: true,
+            hint: Text(
+              widget.type == HomeworkType.classText
+                  ? "Sınıf Seç"
+                  : "Öğrenci Seç",
+            ),
+            onChanged: widget.onTap,
+            items: items,
+          );
+        }
+      },
     );
   }
 }

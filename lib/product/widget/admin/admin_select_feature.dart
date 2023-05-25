@@ -37,7 +37,7 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case FeatureTypes.task:
         imagePath = Assets.images.task.path;
         title = LocaleKeys.features_createHomework.tr();
-        callView = const AddEvent();
+        callView = const CreateHomeworkView();
         break;
       case FeatureTypes.login:
         imagePath = Assets.images.login.path;
