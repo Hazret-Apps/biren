@@ -49,16 +49,10 @@ class _HomeViewState extends State<HomeView> {
   }
 
   _loadFirestoreEvents() async {
-    final firstDay = DateTime(_focusedDay.year, _focusedDay.month, 1);
-    final lastDay = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
     _events = {};
 
-    final snap = await FirebaseFirestore.instance
-        .collection('students')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("homeworks")
-        .where('date', isGreaterThanOrEqualTo: firstDay)
-        .where('date', isLessThanOrEqualTo: lastDay)
+    final snap = await FirebaseCollections.homeworks.reference
+        .where('userOrClass', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .withConverter(
             fromFirestore: Homework.fromFirestore,
             toFirestore: (event, options) => event.toFirestore())
