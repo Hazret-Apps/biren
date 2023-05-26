@@ -5,13 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Homework {
   final String lesson;
   final DateTime date;
+  final String userOrClass;
   final topic;
-  final String id;
   Homework({
     required this.date,
     required this.lesson,
     required this.topic,
-    required this.id,
+    required this.userOrClass,
   });
 
   factory Homework.fromFirestore(
@@ -22,7 +22,7 @@ class Homework {
       date: data['date'].toDate(),
       lesson: data['subject'],
       topic: data['topic'],
-      id: snapshot.id,
+      userOrClass: data['userOrClass'],
     );
   }
 
@@ -31,7 +31,6 @@ class Homework {
       "date": Timestamp.fromDate(date),
       "subject": lesson,
       "topic": topic,
-      "id": id,
     };
   }
 }
