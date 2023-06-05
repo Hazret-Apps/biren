@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:biren_kocluk/features/home/view/homeworks_view.dart';
 import 'package:biren_kocluk/product/base/view/base_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
@@ -7,12 +8,11 @@ import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/viewmodel/home_viewmodel.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
-import 'package:biren_kocluk/product/widget/card/announcement_card.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -88,16 +88,47 @@ class _HomeViewState extends State<HomeView> {
         body: SafeArea(
           child: ListView(
             children: [
-              StreamBuilder<QuerySnapshot>(
-                stream: FirebaseCollections.announcement.reference.snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return AnnouncementCard(querySnapshot: snapshot);
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
+              context.emptySizedHeightBoxLow,
+              Padding(
+                padding: context.horizontalPaddingNormal,
+                child: Row(
+                  children: [
+                    const SelectFeatureCard(
+                      color: LightThemeColors.blazeOrange,
+                      text: "Ödevler",
+                      icon: Icon(
+                        Icons.business_center_rounded,
+                        color: LightThemeColors.white,
+                        size: 50,
+                      ),
+                      callView: HomeworksView(),
+                    ),
+                    context.emptySizedWidthBoxNormal,
+                    const SelectFeatureCard(
+                      color: LightThemeColors.red,
+                      text: "Duyurular",
+                      icon: FaIcon(
+                        FontAwesomeIcons.exclamation,
+                        color: LightThemeColors.white,
+                        size: 50,
+                      ),
+                      callView: HomeworksView(),
+                    ),
+                  ],
+                ),
               ),
+              context.emptySizedHeightBoxLow,
+
+              // StreamBuilder<QuerySnapshot>(
+              //   stream: FirebaseCollections.announcement.reference.snapshots(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       return AnnouncementCard(querySnapshot: snapshot);
+              //     } else {
+              //       return const SizedBox.shrink();
+              //     }
+              //   },
+              // ),
               Column(
                 children: [
                   _calendar,
@@ -172,6 +203,68 @@ class _HomeViewState extends State<HomeView> {
       icon: const Icon(
         Icons.exit_to_app,
         color: LightThemeColors.black,
+      ),
+    );
+  }
+}
+
+class SelectFeatureCard extends StatelessWidget {
+  const SelectFeatureCard({
+    super.key,
+    required this.color,
+    required this.text,
+    required this.icon,
+    required this.callView,
+  });
+
+  final Color color;
+  final String text;
+  final Widget icon;
+  final Widget callView;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => callView,
+          ),
+        );
+      },
+      child: Container(
+        height: 125,
+        width: 125,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: context.normalBorderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.5),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(
+                4,
+                5,
+              ),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon,
+            Text(
+              text,
+              style: const TextStyle(
+                color: LightThemeColors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
