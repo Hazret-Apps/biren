@@ -118,17 +118,6 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               context.emptySizedHeightBoxLow,
-
-              // StreamBuilder<QuerySnapshot>(
-              //   stream: FirebaseCollections.announcement.reference.snapshots(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-              //       return AnnouncementCard(querySnapshot: snapshot);
-              //     } else {
-              //       return const SizedBox.shrink();
-              //     }
-              //   },
-              // ),
               Column(
                 children: [
                   _calendar,
