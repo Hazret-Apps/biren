@@ -8,6 +8,7 @@ import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -214,7 +215,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     });
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => const AdminHomeView(),
       ),
       (route) => false,

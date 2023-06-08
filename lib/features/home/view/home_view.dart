@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:biren_kocluk/features/home/view/homeworks_view.dart';
+import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
 import 'package:biren_kocluk/product/base/view/base_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
@@ -11,6 +11,7 @@ import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
@@ -217,7 +218,7 @@ class SelectFeatureCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
             builder: (context) => callView,
           ),
         );
