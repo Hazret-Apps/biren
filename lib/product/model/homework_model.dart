@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Homework {
   final String lesson;
   final DateTime date;
-  final String userOrClass;
+  final String user;
   final topic;
   final HomeworkMakeTypeEnum makeEnum;
 
@@ -14,7 +14,7 @@ class Homework {
     required this.date,
     required this.lesson,
     required this.topic,
-    required this.userOrClass,
+    required this.user,
     required this.makeEnum,
   });
 
@@ -26,7 +26,7 @@ class Homework {
       date: data['date'].toDate(),
       lesson: data['subject'],
       topic: data['topic'],
-      userOrClass: data['userOrClass'],
+      user: data['user'],
       makeEnum: data['makeEnum'],
     );
   }

@@ -25,8 +25,7 @@ class _HomeworksViewState extends State<HomeworksView> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseCollections.homeworks.reference
-            .where("userOrClass",
-                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .where("user", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -149,9 +148,7 @@ class _HomeworksViewState extends State<HomeworksView> {
                 Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const CheckHomeworkView(
-                      
-                    ),
+                    builder: (context) => const CheckHomeworkView(),
                   ),
                 );
               },
