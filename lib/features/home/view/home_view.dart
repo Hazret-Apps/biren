@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
     _events = {};
 
     final snap = await FirebaseCollections.homeworks.reference
-        .where('userOrClass', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('user', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .withConverter(
             fromFirestore: Homework.fromFirestore,
             toFirestore: (event, options) => event.toFirestore())
