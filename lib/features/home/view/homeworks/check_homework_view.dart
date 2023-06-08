@@ -2,12 +2,12 @@
 
 import 'dart:io';
 
-import 'package:biren_kocluk/features/admin/service/announcement_service.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,8 +23,19 @@ class CheckHomeworkView extends StatefulWidget {
 class _CheckHomeworkViewState extends State<CheckHomeworkView> {
   XFile? imageXfile;
   File? image;
-  late String imageDownloadURL;
   TextEditingController descriptionController = TextEditingController();
+
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+  String downloadUrl = "";
+
+  Future<String> uploadImage(XFile image) async {
+    var snapshot = await _firebaseStorage
+        .ref()
+        .child('homeworkPush/${image.path}')
+        .putFile(File(image.path));
+    downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
 
   void pickImage() async {
     try {
@@ -39,10 +50,10 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
   }
 
   Future<void> onSubmitButton() async {
-    imageDownloadURL = await AnnouncementService().uploadImage(imageXfile!);
+    downloadUrl = await uploadImage(imageXfile!);
     FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
-      "image": imageDownloadURL,
+      "image": downloadUrl,
       "senderName": FirebaseAuth.instance.currentUser!.displayName,
       "senderMail": FirebaseAuth.instance.currentUser!.email,
       "senderUserID": FirebaseAuth.instance.currentUser!.uid,
