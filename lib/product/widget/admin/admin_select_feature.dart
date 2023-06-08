@@ -8,6 +8,7 @@ import 'package:biren_kocluk/features/admin/view/add_announcement_view.dart';
 import 'package:biren_kocluk/features/admin/view/login_requiest/login_requiest_view.dart';
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -72,7 +73,7 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
+              CupertinoPageRoute(
                 builder: (context) => callView,
               ),
             );

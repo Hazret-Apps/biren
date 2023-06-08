@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_viewmodel.g.dart';
@@ -21,7 +21,7 @@ abstract class _RegisterViewModelBase with Store {
   void callLoginView(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => const LoginView(),
       ),
       (route) => false,

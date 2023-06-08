@@ -2,7 +2,7 @@
 
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_viewmodel.g.dart';
@@ -22,7 +22,7 @@ abstract class _LoginViewModelBase with Store {
   void callRegisterView(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => const RegisterView(),
       ),
       (route) => false,
@@ -33,7 +33,7 @@ abstract class _LoginViewModelBase with Store {
   void callAdminHomeView(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => const AdminHomeView(),
       ),
       (route) => false,
