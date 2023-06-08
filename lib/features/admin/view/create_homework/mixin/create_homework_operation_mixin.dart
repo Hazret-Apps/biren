@@ -96,6 +96,5 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
   @override
   void initState() {
     super.initState();
-    loadLessons();
   }
 }

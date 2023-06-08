@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:biren_kocluk/product/enum/homework_make_tpye_enum.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
@@ -7,11 +8,14 @@ class Homework {
   final DateTime date;
   final String userOrClass;
   final topic;
+  final HomeworkMakeTypeEnum makeEnum;
+
   Homework({
     required this.date,
     required this.lesson,
     required this.topic,
     required this.userOrClass,
+    required this.makeEnum,
   });
 
   factory Homework.fromFirestore(
@@ -23,6 +27,7 @@ class Homework {
       lesson: data['subject'],
       topic: data['topic'],
       userOrClass: data['userOrClass'],
+      makeEnum: data['makeEnum'],
     );
   }
 
@@ -31,6 +36,7 @@ class Homework {
       "date": Timestamp.fromDate(date),
       "subject": lesson,
       "topic": topic,
+      "makeEnum": makeEnum,
     };
   }
 }
