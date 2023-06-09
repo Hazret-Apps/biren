@@ -1,6 +1,7 @@
 import 'package:biren_kocluk/features/home/view/homeworks/check_homework_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -86,7 +87,7 @@ class _HomeworksViewState extends State<HomeworksView> {
                       } else if (value == 1) {
                       } else if (value == 2) {
                       } else if (value == 3) {
-                        _checkDialog(context);
+                        _checkDialog(context, snapshot, index);
                       }
                     },
                     itemBuilder: (ctx) => [
@@ -131,7 +132,8 @@ class _HomeworksViewState extends State<HomeworksView> {
     );
   }
 
-  Future<void> _checkDialog(BuildContext context) {
+  Future<void> _checkDialog(
+      BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot, int index) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -148,7 +150,16 @@ class _HomeworksViewState extends State<HomeworksView> {
                 Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const CheckHomeworkView(),
+                    builder: (context) => CheckHomeworkView(
+                      homework: Homework(
+                        date: snapshot.data!.docs[index]["date"].toDate(),
+                        lesson: snapshot.data!.docs[index]["subject"],
+                        topic: snapshot.data!.docs[index]["topic"],
+                        user: snapshot.data!.docs[index]["user"],
+                        makeEnum: snapshot.data!.docs[index]["makeEnum"],
+                        id: snapshot.data!.docs[index].id,
+                      ),
+                    ),
                   ),
                 );
               },

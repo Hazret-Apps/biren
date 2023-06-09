@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +15,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kartal/kartal.dart';
 
 class CheckHomeworkView extends StatefulWidget {
-  const CheckHomeworkView({Key? key}) : super(key: key);
+  const CheckHomeworkView({Key? key, required this.homework}) : super(key: key);
+  final Homework homework;
 
   @override
   State<CheckHomeworkView> createState() => _CheckHomeworkViewState();
@@ -54,6 +56,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
       "image": downloadUrl,
+      "homeworkId": widget.homework.id,
       "senderName": FirebaseAuth.instance.currentUser!.displayName,
       "senderMail": FirebaseAuth.instance.currentUser!.email,
       "senderUserID": FirebaseAuth.instance.currentUser!.uid,
