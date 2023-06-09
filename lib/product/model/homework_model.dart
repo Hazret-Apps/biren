@@ -7,11 +7,11 @@ class Homework {
   final DateTime date;
   final String user;
   final String makeEnum;
-  final String id;
+  final String? id;
   final topic;
 
   Homework({
-    required this.id,
+    this.id,
     required this.date,
     required this.lesson,
     required this.topic,
@@ -29,7 +29,6 @@ class Homework {
       topic: data['topic'],
       user: data['user'],
       makeEnum: data['makeEnum'],
-      id: data["id"],
     );
   }
 

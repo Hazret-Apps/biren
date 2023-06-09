@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/enum/homework_make_tpye_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
@@ -53,7 +54,8 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
 
   Future<void> onSubmitButton() async {
     downloadUrl = await uploadImage(imageXfile!);
-    FirebaseCollections.homeworkPush.reference.add({
+    Navigator.pop(context);
+    await FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
       "image": downloadUrl,
       "homeworkId": widget.homework.id,
@@ -61,7 +63,11 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
       "senderMail": FirebaseAuth.instance.currentUser!.email,
       "senderUserID": FirebaseAuth.instance.currentUser!.uid,
     });
-    Navigator.pop(context);
+    await FirebaseCollections.homeworks.reference
+        .doc(widget.homework.id)
+        .update({
+      "makeEnum": HomeworkMakeTypeEnum.pushed.toString(),
+    });
   }
 
   @override

@@ -1,1 +1,1 @@
-enum HomeworkMakeTypeEnum { made, didntMade, missing, notCome, empty }
+enum HomeworkMakeTypeEnum { made, didntMade, missing, notCome, empty, pushed }
