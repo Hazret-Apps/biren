@@ -8,7 +8,7 @@ import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/viewmodel/home_viewmodel.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
-import 'package:biren_kocluk/product/widget/card/homework_card.dart';
+import 'package:biren_kocluk/product/widget/card/homework_card_mini.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

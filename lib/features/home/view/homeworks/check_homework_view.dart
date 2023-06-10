@@ -3,11 +3,11 @@
 import 'dart:io';
 
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/product/enum/homework_make_tpye_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +57,10 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     Navigator.pop(context);
     await FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
+      "date": Timestamp.fromDate(DateTime.now()),
+      "makeEnum": widget.homework.makeEnum,
+      "topic": widget.homework.topic,
+      "subject": widget.homework.lesson,
       "image": downloadUrl,
       "homeworkId": widget.homework.id,
       "senderName": FirebaseAuth.instance.currentUser!.displayName,
@@ -66,7 +70,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     await FirebaseCollections.homeworks.reference
         .doc(widget.homework.id)
         .update({
-      "makeEnum": HomeworkMakeTypeEnum.pushed.toString(),
+      "makeEnum": "pushed",
     });
   }
 

@@ -61,6 +61,10 @@ class LightTheme {
           ),
         ),
       ),
+      textTheme: TextTheme(
+        titleLarge: context.textTheme.titleLarge
+            ?.copyWith(fontWeight: FontWeight.w800, fontSize: 20),
+      ),
     );
   }
 }
