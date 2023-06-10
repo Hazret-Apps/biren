@@ -21,10 +21,8 @@ class _PushedHomeworksViewState extends State<PushedHomeworksView> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseCollections.homeworkPush.reference
-            .where(
-              "senderUserID",
-              isEqualTo: FirebaseAuth.instance.currentUser!.uid,
-            )
+            .where("senderUserID",
+                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

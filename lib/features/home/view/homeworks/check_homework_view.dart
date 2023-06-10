@@ -58,7 +58,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     await FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
       "date": Timestamp.fromDate(DateTime.now()),
-      "makeEnum": widget.homework.makeEnum,
+      "makeEnum": "pushed",
       "topic": widget.homework.topic,
       "subject": widget.homework.lesson,
       "image": downloadUrl,

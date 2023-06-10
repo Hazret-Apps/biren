@@ -13,7 +13,7 @@ class HomeworksView extends StatelessWidget {
     return Scaffold(
       endDrawer: const HomeworkDrawer(),
       appBar: AppBar(
-        title: const Text("Ödevler"),
+        title: const Text("Aktif Ödevler"),
         actions: const [],
       ),
       body: const _Body(),
@@ -29,6 +29,7 @@ class _Body extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseCollections.homeworks.reference
           .where("user", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .where("makeEnum", isEqualTo: "empty")
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {

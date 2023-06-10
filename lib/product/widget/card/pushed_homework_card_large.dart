@@ -49,7 +49,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
         color = LightThemeColors.red;
         madeText = "Yapılmadı";
         break;
-      case "waiting":
+      case "empty":
         icon = Icons.hourglass_empty_rounded;
         color = LightThemeColors.white;
         madeText = "Gönderilmedi";
@@ -99,13 +99,18 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                   const Spacer(),
                   Text(
                     madeText,
-                    style: context.textTheme.bodyLarge
-                        ?.copyWith(color: LightThemeColors.white),
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      color: color == LightThemeColors.white
+                          ? LightThemeColors.black
+                          : LightThemeColors.white,
+                    ),
                   ),
                   context.emptySizedWidthBoxLow,
                   Icon(
                     icon,
-                    color: LightThemeColors.white,
+                    color: color == LightThemeColors.white
+                        ? LightThemeColors.black
+                        : LightThemeColors.white,
                   ),
                 ],
               ),
@@ -126,7 +131,9 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       "Gönderilme Zamanı: $formattedDate",
       style: context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w400,
-        color: LightThemeColors.white,
+        color: color == LightThemeColors.white
+            ? LightThemeColors.black
+            : LightThemeColors.white,
       ),
     );
   }
@@ -138,7 +145,9 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,
-        color: LightThemeColors.white,
+        color: color == LightThemeColors.white
+            ? LightThemeColors.black
+            : LightThemeColors.white,
       ),
     );
   }
@@ -149,7 +158,9 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       snapshot.data!.docs[index]["subject"],
       style: context.textTheme.titleLarge?.copyWith(
         fontWeight: FontWeight.w600,
-        color: LightThemeColors.white,
+        color: color == LightThemeColors.white
+            ? LightThemeColors.black
+            : LightThemeColors.white,
       ),
     );
   }
