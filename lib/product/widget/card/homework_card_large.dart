@@ -74,7 +74,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                       } else if (value == 2) {
                       } else if (value == 3) {
                         _checkDialog(context, widget.snapshot, widget.index);
-                      }
+                      } else if (value == 4) {}
                     },
                     itemBuilder: (ctx) => [
                       _buildPopupMenuItem(
@@ -95,12 +95,20 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                         Icons.info_outline_rounded,
                         context,
                       ),
-                      _buildPopupMenuItem(
-                        "Tamamlandı",
-                        3,
-                        Icons.check_rounded,
-                        context,
-                      ),
+                      widget.snapshot.data!.docs[widget.index]["makeEnum"] ==
+                              "pushed"
+                          ? _buildPopupMenuItem(
+                              "Gönderildi",
+                              4,
+                              Icons.arrow_circle_right_outlined,
+                              context,
+                            )
+                          : _buildPopupMenuItem(
+                              "Tamamlandı",
+                              3,
+                              Icons.check_rounded,
+                              context,
+                            ),
                     ],
                   )
                 ],
@@ -109,7 +117,9 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
               context.emptySizedHeightBoxLow,
               Text(
                 formattedDate,
-                style: context.textTheme.bodyLarge,
+                style: context.textTheme.bodyLarge?.copyWith(
+                  color: LightThemeColors.black,
+                ),
               ),
             ],
           ),
@@ -172,10 +182,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
       value: value,
       child: Row(
         children: [
-          Icon(
-            iconData,
-            color: Colors.black,
-          ),
+          Icon(iconData, color: LightThemeColors.black),
           context.emptySizedWidthBoxLow3x,
           Text(title),
         ],
@@ -189,6 +196,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
       snapshot.data!.docs[index]["subject"],
       style: context.textTheme.titleLarge?.copyWith(
         fontWeight: FontWeight.w600,
+        color: LightThemeColors.black,
       ),
     );
   }
@@ -200,6 +208,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,
+        color: LightThemeColors.black,
       ),
     );
   }
