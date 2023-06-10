@@ -32,7 +32,9 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
               _dateFormField(),
               context.emptySizedHeightBoxLow3x,
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseCollections.students.reference.snapshots(),
+                stream: FirebaseCollections.students.reference
+                    .where("isVerified", isEqualTo: true)
+                    .snapshots(),
                 builder: (context, snapshot) {
                   List<DropdownMenuItem> items = [];
                   if (!snapshot.hasData) {
