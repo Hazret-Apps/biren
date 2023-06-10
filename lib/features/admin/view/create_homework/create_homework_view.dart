@@ -3,7 +3,6 @@
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/admin/view/create_homework/mixin/create_homework_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
-import 'package:biren_kocluk/product/enum/homework_make_tpye_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -244,7 +243,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
       "topic": selectedTopicValue,
       "date": Timestamp.fromDate(selectedDate!),
       "user": selectedUserValue,
-      "makeEnum": HomeworkMakeTypeEnum.empty.toString(),
+      "makeEnum": "empty",
     });
     Navigator.pushAndRemoveUntil(
       context,
