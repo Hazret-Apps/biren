@@ -1,5 +1,6 @@
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
 import 'package:biren_kocluk/features/admin/view/create_homework/create_homework_view.dart';
+import 'package:biren_kocluk/features/admin/view/history/histoy_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
@@ -9,7 +10,6 @@ import 'package:biren_kocluk/features/admin/view/login_requiest/login_requiest_v
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
 class AdminSelectFeature extends StatefulWidget {
@@ -53,7 +53,7 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case FeatureTypes.log:
         imagePath = Assets.images.history.path;
         title = "Geçmiş";
-        callView = Scaffold(appBar: AppBar());
+        callView = const HistoryView();
         break;
       case FeatureTypes.students:
         imagePath = Assets.images.students.path;
