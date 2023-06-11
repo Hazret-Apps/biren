@@ -238,6 +238,9 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
       "topic": selectedTopicValue,
       "date": Timestamp.fromDate(selectedDate!),
       "user": selectedUserValue,
+      "assignedName": selectedUser!["name"],
+      "assignedMail": selectedUser!["mail"],
+      "assignedUserID": selectedUser!["uid"],
       "makeEnum": "empty",
     });
     Navigator.pushAndRemoveUntil(

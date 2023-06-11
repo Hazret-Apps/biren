@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/features/home/view/homeworks/homework_history.dart';
+import 'package:biren_kocluk/features/admin/view/homework/all_homework_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/pushed_homeworks_view.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +39,7 @@ class HomeworkDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => const HomeworkHistory(),
+                  builder: (context) => const AllHomeworks(),
                 ),
               );
             },
@@ -52,7 +52,7 @@ class HomeworkDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => const HomeworkHistory(),
+                  builder: (context) => const AllHomeworks(),
                 ),
               );
             },

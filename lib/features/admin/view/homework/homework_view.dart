@@ -1,7 +1,7 @@
 import 'package:biren_kocluk/features/admin/view/homework/incoming_homeworks_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_search_view.dart';
-import 'package:biren_kocluk/features/home/view/homeworks/homework_history.dart';
+import 'package:biren_kocluk/features/admin/view/homework/all_homework_view.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -47,10 +47,10 @@ class _Body extends StatelessWidget {
               callView: IncomingHomeworksView(),
             ),
             SelectFeatureListTile(
-              icon: Icons.history_rounded,
-              title: "Geçmiş Ödevler",
-              subtitle: "Geçmişte verdiğiniz ödevler",
-              callView: HomeworkHistory(),
+              icon: Icons.all_inbox_rounded,
+              title: "Tüm Ödevler",
+              subtitle: "Verilen bütün ödevler",
+              callView: AllHomeworks(),
             ),
             SelectFeatureListTile(
               icon: Icons.account_circle_rounded,
