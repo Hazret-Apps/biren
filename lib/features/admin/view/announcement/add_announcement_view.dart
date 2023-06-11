@@ -12,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class AddAnnouncementView extends StatefulWidget {
-  const AddAnnouncementView({super.key});
+class CreateAnnouncementView extends StatefulWidget {
+  const CreateAnnouncementView({super.key});
 
   @override
-  State<AddAnnouncementView> createState() => _AddAnnouncementViewState();
+  State<CreateAnnouncementView> createState() => _CreateAnnouncementViewState();
 }
 
-class _AddAnnouncementViewState extends State<AddAnnouncementView> {
+class _CreateAnnouncementViewState extends State<CreateAnnouncementView> {
   late AddAnnouncementViewModel viewModel;
 
   final TextEditingController _titleController = TextEditingController();
