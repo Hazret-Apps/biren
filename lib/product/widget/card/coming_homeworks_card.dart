@@ -60,116 +60,154 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
       child: Container(
         height: context.height / 5,
         decoration: BoxDecoration(
-            color: color,
-            borderRadius: context.normalBorderRadius,
-            boxShadow: [
-              BoxShadow(
-                color: LightThemeColors.grey.withOpacity(0.5),
-                blurRadius: 10,
-                offset: const Offset(
-                  5,
-                  15,
-                ),
+          color: color,
+          borderRadius: context.normalBorderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: LightThemeColors.grey.withOpacity(0.5),
+              blurRadius: 10,
+              offset: const Offset(
+                5,
+                15,
               ),
-            ]),
+            ),
+          ],
+        ),
         child: Padding(
           padding: context.horizontalPaddingNormal + context.verticalPaddingLow,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Row(
-                children: [
-                  _subjectText(widget.snapshot, widget.index, context),
-                  const Spacer(),
-                  PopupMenuButton(
-                    offset: const Offset(-10, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: context.normalBorderRadius,
+              Container(
+                height: context.height / 6,
+                width: context.width / 4,
+                decoration: BoxDecoration(
+                  borderRadius: context.normalBorderRadius,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      widget.snapshot.data!.docs[widget.index]["image"],
                     ),
-                    onSelected: (value) {
-                      if (value == 0) {
-                        if (mounted) {
-                          FirebaseCollections.homeworkPush.reference
-                              .doc(widget.snapshot.data!.docs[widget.index].id)
-                              .update({
-                            "makeEnum": "made",
-                          });
-                          FirebaseCollections.homeworks.reference
-                              .doc(widget.snapshot.data!.docs[widget.index]
-                                  ["homeworkId"])
-                              .update({
-                            "makeEnum": "made",
-                          });
-                          setState(() {
-                            color = LightThemeColors.green;
-                          });
-                        }
-                      } else if (value == 1) {
-                        if (mounted) {
-                          FirebaseCollections.homeworkPush.reference
-                              .doc(widget.snapshot.data!.docs[widget.index].id)
-                              .update({
-                            "makeEnum": "didntMade",
-                          });
-                          FirebaseCollections.homeworks.reference
-                              .doc(widget.snapshot.data!.docs[widget.index]
-                                  ["homeworkId"])
-                              .update({
-                            "makeEnum": "didntMade",
-                          });
-                          setState(() {
-                            color = LightThemeColors.red;
-                          });
-                        }
-                      } else if (value == 2) {
-                        if (mounted) {
-                          FirebaseCollections.homeworkPush.reference
-                              .doc(widget.snapshot.data!.docs[widget.index].id)
-                              .update({
-                            "makeEnum": "missing",
-                          });
-                          FirebaseCollections.homeworks.reference
-                              .doc(widget.snapshot.data!.docs[widget.index]
-                                  ["homeworkId"])
-                              .update({
-                            "makeEnum": "missing",
-                          });
-                          setState(() {
-                            color = const Color.fromARGB(255, 254, 207, 15);
-                          });
-                        }
-                      }
-                    },
-                    itemBuilder: (ctx) => [
-                      _buildPopupMenuItem(
-                        "Yaptı",
-                        0,
-                        Icons.check_box_outlined,
-                        context,
-                      ),
-                      _buildPopupMenuItem(
-                        "Yapmadı",
-                        1,
-                        Icons.close,
-                        context,
-                      ),
-                      _buildPopupMenuItem(
-                        "Eksik",
-                        2,
-                        Icons.remove_circle_outline,
-                        context,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              _topicText(widget.snapshot, widget.index, context),
-              context.emptySizedHeightBoxLow,
-              Text(
-                formattedDate,
-                style: context.textTheme.bodyLarge?.copyWith(
-                  color: LightThemeColors.white,
+                    fit: BoxFit.cover,
+                  ),
                 ),
+              ),
+              context.emptySizedWidthBoxLow3x,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: context.width / 1.804,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _senderStudentText(
+                          widget.snapshot,
+                          widget.index,
+                          context,
+                        ),
+                        const Spacer(),
+                        PopupMenuButton(
+                          offset: const Offset(-10, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: context.normalBorderRadius,
+                          ),
+                          onSelected: (value) {
+                            if (value == 0) {
+                              if (mounted) {
+                                FirebaseCollections.homeworkPush.reference
+                                    .doc(widget
+                                        .snapshot.data!.docs[widget.index].id)
+                                    .update({
+                                  "makeEnum": "made",
+                                });
+                                FirebaseCollections.homeworks.reference
+                                    .doc(widget.snapshot.data!
+                                        .docs[widget.index]["homeworkId"])
+                                    .update({
+                                  "makeEnum": "made",
+                                });
+                                setState(() {
+                                  color = LightThemeColors.green;
+                                });
+                              }
+                            } else if (value == 1) {
+                              if (mounted) {
+                                FirebaseCollections.homeworkPush.reference
+                                    .doc(widget
+                                        .snapshot.data!.docs[widget.index].id)
+                                    .update({
+                                  "makeEnum": "didntMade",
+                                });
+                                FirebaseCollections.homeworks.reference
+                                    .doc(widget.snapshot.data!
+                                        .docs[widget.index]["homeworkId"])
+                                    .update({
+                                  "makeEnum": "didntMade",
+                                });
+                                setState(() {
+                                  color = LightThemeColors.red;
+                                });
+                              }
+                            } else if (value == 2) {
+                              if (mounted) {
+                                FirebaseCollections.homeworkPush.reference
+                                    .doc(widget
+                                        .snapshot.data!.docs[widget.index].id)
+                                    .update({
+                                  "makeEnum": "missing",
+                                });
+                                FirebaseCollections.homeworks.reference
+                                    .doc(widget.snapshot.data!
+                                        .docs[widget.index]["homeworkId"])
+                                    .update({
+                                  "makeEnum": "missing",
+                                });
+                                setState(() {
+                                  color =
+                                      const Color.fromARGB(255, 254, 207, 15);
+                                });
+                              }
+                            }
+                          },
+                          itemBuilder: (ctx) => [
+                            _buildPopupMenuItem(
+                              "Yaptı",
+                              0,
+                              Icons.check_box_outlined,
+                              context,
+                            ),
+                            _buildPopupMenuItem(
+                              "Yapmadı",
+                              1,
+                              Icons.close,
+                              context,
+                            ),
+                            _buildPopupMenuItem(
+                              "Eksik",
+                              2,
+                              Icons.remove_circle_outline,
+                              context,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: context.width / 1.804,
+                    child: _topicText(
+                      widget.snapshot,
+                      widget.index,
+                      context,
+                    ),
+                  ),
+                  context.emptySizedHeightBoxLow,
+                  Text(
+                    formattedDate,
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      color: LightThemeColors.white,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -196,21 +234,23 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
     );
   }
 
-  Text _subjectText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
-      BuildContext context) {
-    return Text(
-      snapshot.data!.docs[index]["subject"],
-      style: context.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-        color: LightThemeColors.white,
-      ),
-    );
-  }
-
   Text _topicText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
       snapshot.data!.docs[index]["topic"],
+      style: context.textTheme.bodyLarge?.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: 18,
+        color: LightThemeColors.white,
+      ),
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Text _senderStudentText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot,
+      int index, BuildContext context) {
+    return Text(
+      snapshot.data!.docs[index]["senderName"],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,
