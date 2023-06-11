@@ -8,27 +8,38 @@ class HomeworksLogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Ödevler")),
-      body: SafeArea(
-        child: StreamBuilder(
-          stream: FirebaseCollections.homeworkPush.reference.snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  return ComingHomeworkCardLarge(
-                    snapshot: snapshot,
-                    index: index,
-                  );
-                },
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
+      appBar: _appBar,
+      body: const _Body(),
+    );
+  }
+
+  AppBar get _appBar => AppBar(title: const Text("Gelen Ödevler"));
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: StreamBuilder(
+        stream: FirebaseCollections.homeworkPush.reference.snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                return ComingHomeworkCardLarge(
+                  snapshot: snapshot,
+                  index: index,
+                );
+              },
             );
-          },
-        ),
+          }
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        },
       ),
     );
   }
