@@ -1,8 +1,6 @@
 enum FeatureTypes {
   announcement,
-  task,
-  login,
+  homeworks,
   students,
   classes,
-  log,
 }
