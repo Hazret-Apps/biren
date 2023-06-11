@@ -71,6 +71,11 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
         .doc(widget.homework.id)
         .update({
       "makeEnum": "pushed",
+      "image": downloadUrl,
+      "description": descriptionController.text,
+      "senderName": FirebaseAuth.instance.currentUser!.displayName,
+      "senderMail": FirebaseAuth.instance.currentUser!.email,
+      "senderUserID": FirebaseAuth.instance.currentUser!.uid,
     });
   }
 
