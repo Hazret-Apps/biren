@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/history/announcement_log_view.dart';
-import 'package:biren_kocluk/features/admin/view/homework/homeworks_log_view.dart';
+import 'package:biren_kocluk/features/admin/view/homework/incoming_homeworks_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -16,7 +16,7 @@ class HistoryView extends StatelessWidget {
 
     final List<Widget> itemWidgets = [
       const AnnouncementLogView(),
-      const HomeworksLogView(),
+      const IncomingHomeworksView(),
     ];
 
     void callView(context, int index) {

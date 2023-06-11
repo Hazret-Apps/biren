@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/features/admin/view/homework/homeworks_log_view.dart';
+import 'package:biren_kocluk/features/admin/view/homework/incoming_homeworks_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_search_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homework_history.dart';
@@ -44,7 +44,7 @@ class _Body extends StatelessWidget {
               icon: Icons.warning_amber_rounded,
               title: "Gelen Ödevler",
               subtitle: "Öğrencilerin gönderdiği ödevler",
-              callView: HomeworksLogView(),
+              callView: IncomingHomeworksView(),
             ),
             SelectFeatureListTile(
               icon: Icons.history_rounded,
