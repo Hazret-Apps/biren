@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
-import 'package:biren_kocluk/features/admin/view/create_homework/create_homework_view.dart';
+import 'package:biren_kocluk/features/admin/view/homework/homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -34,7 +34,7 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case FeatureTypes.homeworks:
         imagePath = Assets.images.task.path;
         title = "Ödevler";
-        callView = const CreateHomeworkView();
+        callView = const HomeworkView();
         break;
       case FeatureTypes.classes:
         imagePath = Assets.images.classes.path;

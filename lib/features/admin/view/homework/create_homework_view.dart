@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
-import 'package:biren_kocluk/features/admin/view/create_homework/mixin/create_homework_operation_mixin.dart';
+import 'package:biren_kocluk/features/admin/view/homework/mixin/create_homework_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
@@ -118,13 +118,6 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
 
   AppBar _appBar(BuildContext context) => AppBar(
         title: const Text("Ders Programı Oluştur"),
-        automaticallyImplyLeading: false,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.close_rounded),
-        ),
         actions: [
           DoneActionButton(
             color: grade == null ||

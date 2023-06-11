@@ -95,9 +95,8 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: context.width / 1.804,
+                    width: context.width / 1.81,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         _senderStudentText(
                           widget.snapshot,
@@ -193,7 +192,7 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                     ),
                   ),
                   SizedBox(
-                    width: context.width / 1.804,
+                    width: context.width / 1.83,
                     child: _topicText(
                       widget.snapshot,
                       widget.index,
