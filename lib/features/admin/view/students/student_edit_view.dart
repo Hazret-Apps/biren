@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/admin/view/students/mixin/student_edit_operation_mixin.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
 class StudentEditView extends StatefulWidget {
@@ -18,19 +17,8 @@ class StudentEditView extends StatefulWidget {
   State<StudentEditView> createState() => _StudentEditViewState();
 }
 
-class _StudentEditViewState extends State<StudentEditView> {
-  late final String formattedDate;
-  String? selectedGradeValue;
-
-  @override
-  void initState() {
-    super.initState();
-    formattedDate = DateFormat(
-      DateFormat.YEAR_MONTH_DAY,
-      "tr_TR",
-    ).format(widget.userModel.createdTime.toDate());
-  }
-
+class _StudentEditViewState extends State<StudentEditView>
+    with StudentEditOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,9 +105,7 @@ class _StudentEditViewState extends State<StudentEditView> {
 
   StreamBuilder<QuerySnapshot<Object?>> _selectClassDropdown() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseCollections.classes.reference
-          .orderBy('name', descending: false)
-          .snapshots(),
+      stream: stream,
       builder: (context, snapshot) {
         List<DropdownMenuItem> classItems = [];
         if (!snapshot.hasData) {
@@ -157,15 +143,7 @@ class _StudentEditViewState extends State<StudentEditView> {
       child: MainButton(
         color: selectedGradeValue == null ? LightThemeColors.grey : null,
         onPressed: () {
-          if (selectedGradeValue != null) {
-            FirebaseCollections.students.reference
-                .doc(widget.userModel.uid)
-                .update({
-              "class": selectedGradeValue,
-              "grade": int.parse(selectedGradeValue!.characters.first),
-            });
-            Navigator.pop(context);
-          }
+          onSubmitButton();
         },
         text: "KAYDET",
       ),

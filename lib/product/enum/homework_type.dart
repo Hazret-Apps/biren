@@ -1,4 +1,0 @@
-// enum HomeworkType {
-//   student,
-//   classText,
-// }
