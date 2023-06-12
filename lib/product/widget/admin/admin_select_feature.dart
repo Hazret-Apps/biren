@@ -1,5 +1,6 @@
 import 'package:biren_kocluk/features/admin/view/announcement/announcements_view.dart';
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
+import 'package:biren_kocluk/features/admin/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
@@ -45,6 +46,11 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         imagePath = Assets.images.students.path;
         title = "Öğrenciler";
         callView = const StudentsView();
+        break;
+      case FeatureTypes.exams:
+        imagePath = Assets.images.exams.path;
+        title = "Denemeler";
+        callView = const ExamsView();
         break;
       default:
     }

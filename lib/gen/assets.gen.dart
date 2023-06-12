@@ -35,6 +35,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/login.png
   AssetGenImage get login => const AssetGenImage('assets/images/login.png');
 
+  /// File path: assets/images/exams.png
+  AssetGenImage get exams => const AssetGenImage('assets/images/exams.png');
+
   /// File path: assets/images/students.png
   AssetGenImage get students =>
       const AssetGenImage('assets/images/students.png');
