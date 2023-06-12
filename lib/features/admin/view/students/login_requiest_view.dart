@@ -1,5 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:biren_kocluk/features/admin/view/login_requiest/login_accept_view.dart';
+import 'package:biren_kocluk/features/admin/view/students/login_accept_view.dart';
 import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
