@@ -42,6 +42,7 @@ dependencies:
   date_field: ^3.0.5
   awesome_snackbar_content:
   lottie: ^2.4.0
+  syncfusion_flutter_xlsio: ^21.2.9
   
 
 dev_dependencies:

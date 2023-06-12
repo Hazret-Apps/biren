@@ -3,4 +3,5 @@ enum FeatureTypes {
   homeworks,
   students,
   classes,
+  exams,
 }
