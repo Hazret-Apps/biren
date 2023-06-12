@@ -2,10 +2,11 @@
 
 import 'dart:convert';
 
+import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
   // HomeworkType homeworkType = HomeworkType.student;
@@ -21,6 +22,10 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
   String? selectedSubjectText;
   String? selectedTopicValue;
   String? selectedGradeValue;
+
+  final Stream<QuerySnapshot> stream = FirebaseCollections.students.reference
+      .where("isVerified", isEqualTo: true)
+      .snapshots();
 
   // void changeHelpType(HomeworkType type) => setState(() => homeworkType = type);
 
@@ -50,6 +55,26 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
         break;
       default:
     }
+  }
+
+  void addHomework() async {
+    await FirebaseCollections.homeworks.reference.add({
+      "subject": selectedSubjectText,
+      "topic": selectedTopicValue,
+      "date": Timestamp.fromDate(selectedDate!),
+      "user": selectedUserValue,
+      "assignedName": selectedUser!["name"],
+      "assignedMail": selectedUser!["mail"],
+      "assignedUserID": selectedUser!["uid"],
+      "makeEnum": "empty",
+    });
+    Navigator.pushAndRemoveUntil(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const AdminHomeView(),
+      ),
+      (route) => false,
+    );
   }
 
   // Future<void> loadClass() async {

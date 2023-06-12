@@ -1,13 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
-import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/mixin/create_homework_operation_mixin.dart';
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -32,9 +29,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
               _dateFormField(),
               context.emptySizedHeightBoxLow3x,
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseCollections.students.reference
-                    .where("isVerified", isEqualTo: true)
-                    .snapshots(),
+                stream: stream,
                 builder: (context, snapshot) {
                   List<DropdownMenuItem> items = [];
                   if (!snapshot.hasData) {
@@ -146,7 +141,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
                     return const Center(child: CircularProgressIndicator());
                   },
                 );
-                _addHomework();
+                addHomework;
               }
             },
           ),
@@ -230,26 +225,6 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
             child: Text(entry.value),
           );
         }).toList());
-  }
-
-  void _addHomework() async {
-    await FirebaseCollections.homeworks.reference.add({
-      "subject": selectedSubjectText,
-      "topic": selectedTopicValue,
-      "date": Timestamp.fromDate(selectedDate!),
-      "user": selectedUserValue,
-      "assignedName": selectedUser!["name"],
-      "assignedMail": selectedUser!["mail"],
-      "assignedUserID": selectedUser!["uid"],
-      "makeEnum": "empty",
-    });
-    Navigator.pushAndRemoveUntil(
-      context,
-      CupertinoPageRoute(
-        builder: (context) => const AdminHomeView(),
-      ),
-      (route) => false,
-    );
   }
 }
 

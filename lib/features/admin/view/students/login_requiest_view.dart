@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/features/admin/view/students/login_accept_view.dart';
+import 'package:biren_kocluk/features/admin/view/students/mixin/login_requiest_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/admin/cross_check_container.dart';
@@ -10,9 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class LoginRequiestView extends StatelessWidget {
+class LoginRequiestView extends StatefulWidget {
   const LoginRequiestView({super.key});
 
+  @override
+  State<LoginRequiestView> createState() => _LoginRequiestViewState();
+}
+
+class _LoginRequiestViewState extends State<LoginRequiestView>
+    with LoginRequiestOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +26,7 @@ class LoginRequiestView extends StatelessWidget {
         title: const Text("Giriş Talepleri"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseCollections.students.reference
-            .where("isVerified", isEqualTo: false)
-            .snapshots(),
+        stream: stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty) {
@@ -39,7 +43,7 @@ class LoginRequiestView extends StatelessWidget {
                   return ListTile(
                     leading: _avatar(snapshot, index),
                     title: Text(
-                      snapshot.data!.docs[index]["name"],
+                      name(snapshot, index),
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -58,18 +62,14 @@ class LoginRequiestView extends StatelessWidget {
                               CupertinoPageRoute(
                                 builder: (context) => LoginAcceptView(
                                   userModel: UserModel(
-                                    name: snapshot.data!.docs[index]["name"],
-                                    mail: snapshot.data!.docs[index]["mail"],
-                                    password: snapshot.data!.docs[index]
-                                        ["password"],
-                                    createdTime: snapshot.data!.docs[index]
-                                        ["createdTime"],
-                                    isVerified: snapshot.data!.docs[index]
-                                        ["isVerified"],
+                                    name: name(snapshot, index),
+                                    mail: mail(snapshot, index),
+                                    password: password(snapshot, index),
+                                    createdTime: createdTime(snapshot, index),
+                                    isVerified: isVerified(snapshot, index),
                                     uid: snapshot.data!.docs[index]["uid"],
-                                    classText: snapshot.data!.docs[index]
-                                        ["class"],
-                                    grade: snapshot.data!.docs[index]["grade"],
+                                    classText: classText(snapshot, index),
+                                    grade: grade(snapshot, index),
                                   ),
                                 ),
                               ),
@@ -102,11 +102,9 @@ class LoginRequiestView extends StatelessWidget {
       dialogType: DialogType.warning,
       title: "Emin misin?",
       desc:
-          "${snapshot.data!.docs[index]["name"]} adlı kişiyi reddetmek istediğinizden emin misiniz?",
+          "${name(snapshot, index)} adlı kişiyi reddetmek istediğinizden emin misiniz?",
       btnOkOnPress: () {
-        FirebaseCollections.students.reference
-            .doc(snapshot.data!.docs[index]["uid"])
-            .delete();
+        deleteUser(snapshot, index);
       },
       btnOkText: "Evet",
       btnCancelText: "Vazgeç",
@@ -119,7 +117,7 @@ class LoginRequiestView extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: LightThemeColors.blazeOrange.withOpacity(.3),
       child: Text(
-        snapshot.data!.docs[index]["name"].toString().characters.first,
+        name(snapshot, index).characters.first,
       ),
     );
   }
