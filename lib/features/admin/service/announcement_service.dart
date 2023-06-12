@@ -1,14 +1,12 @@
 import 'dart:io';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/announcement_card_model.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AnnouncementService {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
-  final FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   String downloadUrl = "";
 
