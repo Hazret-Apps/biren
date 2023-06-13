@@ -1,11 +1,10 @@
-import 'package:biren_kocluk/product/base/view/base_view.dart';
+import 'package:biren_kocluk/features/auth/register/mixin/register_operation_mixin.dart';
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/auth_text_field.dart';
-import 'package:biren_kocluk/features/auth/register/viewmodel/register_viewmodel.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,36 +18,19 @@ class RegisterView extends StatefulWidget {
   State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
-  final TextEditingController _nameController = TextEditingController();
-
-  final TextEditingController _mailController = TextEditingController();
-
-  final TextEditingController _passwordController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-
-  late final RegisterViewModel viewModel;
-
+class _RegisterViewState extends State<RegisterView>
+    with RegisterOperationMixin {
   @override
   Widget build(BuildContext context) {
-    return BaseView<RegisterViewModel>(
-      onModelReady: (model) {
-        // model.setContext(context);
-        viewModel = model;
-        FocusScope.of(context).unfocus();
-      },
-      viewModel: RegisterViewModel(),
-      onPageBuilder: (context, value) => Scaffold(
-        appBar: _appBar(),
-        body: _body(context),
-      ),
+    return Scaffold(
+      appBar: _appBar(),
+      body: _body(context),
     );
   }
 
   Form _body(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Padding(
         padding: context.horizontalPaddingNormal,
         child: SingleChildScrollView(
@@ -83,7 +65,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   AuthTextField get _nameTextField {
     return AuthTextField(
-      controller: _nameController,
+      controller: nameController,
       hintText: LocaleKeys.auth_nameSurname.tr(),
       keyboardType: TextInputType.name,
       prefixIcon: const Icon(Icons.person_outline),
@@ -92,7 +74,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   AuthTextField get _mailTextField {
     return AuthTextField(
-      controller: _mailController,
+      controller: mailController,
       hintText: LocaleKeys.auth_mail.tr(),
       keyboardType: TextInputType.emailAddress,
       prefixIcon: const Icon(Icons.mail),
@@ -101,7 +83,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   AuthTextField get _passwordTextField {
     return AuthTextField(
-      controller: _passwordController,
+      controller: passwordController,
       hintText: LocaleKeys.auth_password.tr(),
       keyboardType: TextInputType.visiblePassword,
       prefixIcon: const Icon(Icons.lock_outline),
@@ -112,13 +94,13 @@ class _RegisterViewState extends State<RegisterView> {
   MainButton _registerButton(BuildContext context) {
     return MainButton(
       onPressed: () {
-        if (_formKey.currentState!.validate()) {
+        if (formKey.currentState!.validate()) {
           AuthService().registerUser(
             UserModel(
               uid: "",
-              name: _nameController.text,
-              mail: _mailController.text,
-              password: _passwordController.text,
+              name: nameController.text,
+              mail: mailController.text,
+              password: passwordController.text,
               grade: 0,
               createdTime: Timestamp.now(),
               isVerified: false,
@@ -147,7 +129,7 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
       onPressed: () {
-        viewModel.callLoginView(context);
+        callLoginView(context);
       },
     );
   }

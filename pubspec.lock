@@ -467,14 +467,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_mobx:
-    dependency: "direct main"
-    description:
-      name: flutter_mobx
-      sha256: "0da4add0016387a7bf309a0d0c41d36c6b3ae25ed7a176409267f166509e723e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.6+5"
   flutter_native_splash:
     dependency: "direct dev"
     description:
@@ -733,22 +725,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  mobx:
-    dependency: "direct main"
-    description:
-      name: mobx
-      sha256: "6738620307a424d2c9ad8b873f4dce391c44e9135eb4e75668ac8202fec7a9b8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.4"
-  mobx_codegen:
-    dependency: "direct main"
-    description:
-      name: mobx_codegen
-      sha256: "86122e410d8ea24dda0c69adb5c2a6ccadd5ce02ad46e144764e0d0184a06181"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   package_config:
     dependency: transitive
     description:
@@ -1026,14 +1002,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  source_gen:
-    dependency: transitive
-    description:
-      name: source_gen
-      sha256: c2bea18c95cfa0276a366270afaa2850b09b4a76db95d546f3d003dcc7011298
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.7"
   source_span:
     dependency: transitive
     description:
