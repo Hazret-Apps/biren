@@ -333,10 +333,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: a38574032c5f1dd06c4aee541789906c12ccaab8ba01446e800d9c5b79c4a978
+      sha256: ed5337a5660c506388a9f012be0288fb38b49020ce2b45fe1f8b8323fe429f99
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   file:
     dependency: transitive
     description:
@@ -637,14 +637,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  jiffy:
-    dependency: transitive
-    description:
-      name: jiffy
-      sha256: cc1d4b75016a9156c29b5d61f0c9176c3e0fb0580cc5a0e0422b5d2cab3fbfff
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.1"
   js:
     dependency: transitive
     description:
@@ -685,14 +677,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  lottie:
-    dependency: "direct main"
-    description:
-      name: lottie
-      sha256: f461105d3a35887b27089abf9c292334478dd292f7b47ecdccb6ae5c37a22c80
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.0"
   mask_text_input_formatter:
     dependency: transitive
     description:
@@ -1074,30 +1058,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      sha256: "4aa69e3541d38810533b1455aa38997a89755f9928e16ef813b62b2e8bcc398c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "21.2.9"
-  syncfusion_flutter_xlsio:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_xlsio
-      sha256: d92b84584f7007efb43d7d0bcfd6a8b882c03fcdb593c5bb41ead63e8cbe6e52
-      url: "https://pub.dev"
-    source: hosted
-    version: "21.2.9"
-  syncfusion_officecore:
-    dependency: transitive
-    description:
-      name: syncfusion_officecore
-      sha256: "46ce6d6058438ee24bc00c0c98b8ae4dcb2f43daabf8d9f6fe2699555fe6ed08"
-      url: "https://pub.dev"
-    source: hosted
-    version: "21.2.9"
   table_calendar:
     dependency: "direct main"
     description:
@@ -1283,5 +1243,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  dart: ">=3.0.0-277.0.dev <4.0.0"
+  flutter: ">=3.3.0"
