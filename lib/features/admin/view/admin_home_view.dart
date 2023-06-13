@@ -1,8 +1,6 @@
-import 'package:biren_kocluk/product/base/view/base_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/admin/admin_select_feature.dart';
-import 'package:biren_kocluk/features/admin/viewmodel/admin_home_viewmodel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -14,19 +12,11 @@ class AdminHomeView extends StatefulWidget {
 }
 
 class _AdminHomeViewState extends State<AdminHomeView> {
-  late AdminHomeViewModel viewModel;
-
   @override
   Widget build(BuildContext context) {
-    return BaseView<AdminHomeViewModel>(
-      onModelReady: (model) {
-        viewModel = model;
-      },
-      viewModel: AdminHomeViewModel(),
-      onPageBuilder: (context, value) => Scaffold(
-        appBar: _buildAppBar,
-        body: _body(),
-      ),
+    return Scaffold(
+      appBar: _buildAppBar,
+      body: _body(),
     );
   }
 

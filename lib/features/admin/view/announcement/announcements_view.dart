@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/features/admin/view/announcement/add_announcement_view.dart';
+import 'package:biren_kocluk/features/admin/view/announcement/create_announcement_view.dart';
 import 'package:biren_kocluk/features/admin/view/announcement/announcement_history_view.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,9 @@
-import 'package:biren_kocluk/product/base/view/base_view.dart';
+import 'package:biren_kocluk/features/auth/login/mixin/login_operation_mixin.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/auth_text_field.dart';
-import 'package:biren_kocluk/features/auth/login/viewmodel/login_viewmodel.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,33 +16,18 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final TextEditingController _mailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-
-  late LoginViewModel viewModel;
-
+class _LoginViewState extends State<LoginView> with LoginOperationMixin {
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginViewModel>(
-      onModelReady: (model) {
-        // model.setContext(context);
-        viewModel = model;
-        FocusScope.of(context).unfocus();
-      },
-      viewModel: LoginViewModel(),
-      onPageBuilder: (context, value) => Scaffold(
-        appBar: _appBar(),
-        body: _body(context),
-      ),
+    return Scaffold(
+      appBar: _appBar(),
+      body: _body(context),
     );
   }
 
   Form _body(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Padding(
         padding: context.horizontalPaddingNormal,
         child: SingleChildScrollView(
@@ -76,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
 
   AuthTextField get _mailTextField {
     return AuthTextField(
-      controller: _mailController,
+      controller: mailController,
       hintText: LocaleKeys.auth_mail.tr(),
       keyboardType: TextInputType.emailAddress,
       prefixIcon: const Icon(Icons.mail),
@@ -85,7 +69,7 @@ class _LoginViewState extends State<LoginView> {
 
   AuthTextField get _passwordTextField {
     return AuthTextField(
-      controller: _passwordController,
+      controller: passwordController,
       hintText: LocaleKeys.auth_password.tr(),
       keyboardType: TextInputType.visiblePassword,
       prefixIcon: const Icon(Icons.lock_outline),
@@ -96,15 +80,15 @@ class _LoginViewState extends State<LoginView> {
   MainButton _loginButton(BuildContext context) {
     return MainButton(
       onPressed: () {
-        if (_mailController.text == AuthService.adminMail &&
-            _passwordController.text == AuthService.adminPassword) {
-          viewModel.callAdminHomeView(context);
+        //! Admin test hızlı olsun diye böyle ayrı bir uygulamaya taşınacak
+        if (mailController.text == AuthService.adminMail &&
+            passwordController.text == AuthService.adminPassword) {
+          callAdminHomeView(context);
         }
-        if (_formKey.currentState!.validate()) {
-          
+        if (formKey.currentState!.validate()) {
           AuthService().loginUser(
-            _mailController.text.trim(),
-            _passwordController.text.trim(),
+            mailController.text.trim(),
+            passwordController.text.trim(),
             context,
           );
         }
@@ -129,7 +113,7 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
       onPressed: () {
-        viewModel.callRegisterView(context);
+        callRegisterView(context);
       },
     );
   }
