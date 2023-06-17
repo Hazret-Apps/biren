@@ -27,7 +27,8 @@ class SelectFeatureListTile extends StatelessWidget {
       child: ListTile(
         title: Text(title),
         subtitle: Text(subtitle),
-        titleTextStyle: context.textTheme.titleMedium,
+        titleTextStyle: context.textTheme.bodyMedium,
+        subtitleTextStyle: context.textTheme.bodyLarge,
         leading: Icon(
           icon,
           size: 30,

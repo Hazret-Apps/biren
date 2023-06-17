@@ -84,6 +84,7 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
         _signOutButton(context),
       ],
       title: _hiText(context),
+      centerTitle: false,
     );
   }
 
@@ -93,6 +94,10 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
         headerStyle: const HeaderStyle(
           titleCentered: true,
           formatButtonVisible: false,
+        ),
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekendStyle: context.textTheme.titleMedium!,
+          weekdayStyle: context.textTheme.titleMedium!,
         ),
         locale: AppConstants.TR_LANG,
         eventLoader: getEventsForTheDay,
@@ -113,6 +118,11 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
           });
         },
         calendarStyle: CalendarStyle(
+          defaultTextStyle: context.textTheme.titleMedium!,
+          outsideTextStyle: context.textTheme.titleMedium!.copyWith(
+            color: LightThemeColors.grey,
+          ),
+          weekendTextStyle: context.textTheme.titleMedium!,
           todayDecoration: BoxDecoration(
             shape: BoxShape.circle,
             color: LightThemeColors.blazeOrange.withOpacity(.6),
@@ -129,10 +139,7 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
   Text _hiText(BuildContext context) {
     return Text(
       "${LocaleKeys.hello.tr()}\n${AuthService.userName} 👋",
-      style: context.textTheme.titleMedium?.copyWith(
-        color: LightThemeColors.black,
-        fontSize: 20,
-      ),
+      style: context.textTheme.bodyMedium,
     );
   }
 
