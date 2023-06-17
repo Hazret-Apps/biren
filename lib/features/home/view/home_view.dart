@@ -1,5 +1,6 @@
+import 'package:biren_kocluk/features/home/view/announcement/announcements_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
-import 'package:biren_kocluk/features/home/view/mixin/home_operation_mixin.dart';
+import 'package:biren_kocluk/features/home/mixin/home_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -56,7 +57,7 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
                     color: LightThemeColors.white,
                     size: 50,
                   ),
-                  callView: HomeworksView(),
+                  callView: AnnouncementView(),
                 ),
               ],
             ),

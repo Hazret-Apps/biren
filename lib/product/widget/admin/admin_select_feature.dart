@@ -30,7 +30,7 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
       case FeatureTypes.announcement:
         imagePath = Assets.images.announcement.path;
         title = "Duyurular";
-        callView = const AnnouncementView();
+        callView = const AnnouncementsView();
         break;
       case FeatureTypes.homeworks:
         imagePath = Assets.images.task.path;
