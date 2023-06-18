@@ -1,6 +1,5 @@
 import 'package:biren_kocluk/features/auth/login/mixin/login_operation_mixin.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
-import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/auth_text_field.dart';
@@ -20,20 +19,33 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      // appBar: _appBar(),
       body: _body(context),
     );
   }
 
-  Form _body(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Padding(
-        padding: context.horizontalPaddingNormal,
+  SafeArea _body(BuildContext context) {
+    return SafeArea(
+      child: Form(
+        key: formKey,
         child: SingleChildScrollView(
+          padding: context.horizontalPaddingNormal,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _birenImage,
+              context.emptySizedHeightBoxHigh,
+              Text(
+                "Tekrar Hoşgeldin!",
+                style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
+              ),
+              context.emptySizedHeightBoxLow,
+              Text(
+                "Seni tekrar gördüğümüze çok \nsevindik",
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyMedium
+                    ?.copyWith(color: LightThemeColors.grey),
+              ),
+              context.emptySizedHeightBoxNormal,
               _mailTextField,
               context.emptySizedHeightBoxLow3x,
               _passwordTextField,
@@ -48,15 +60,6 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
       ),
     );
   }
-
-  AppBar _appBar() {
-    return AppBar(
-      centerTitle: true,
-      title: Text(LocaleKeys.auth_login.tr()),
-    );
-  }
-
-  Image get _birenImage => Image.asset(Assets.icons.logo.path, scale: 1.5 / 1);
 
   AuthTextField get _mailTextField {
     return AuthTextField(

@@ -43,6 +43,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
       obscureText: isObscure,
       controller: widget.controller,
       decoration: InputDecoration(
+        fillColor: LightThemeColors.white,
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
         prefixIconColor: LightThemeColors.black,
