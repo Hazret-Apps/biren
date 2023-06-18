@@ -1,5 +1,4 @@
 import 'package:biren_kocluk/features/auth/register/mixin/register_operation_mixin.dart';
-import 'package:biren_kocluk/product/gen/assets.gen.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
@@ -23,20 +22,31 @@ class _RegisterViewState extends State<RegisterView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
       body: _body(context),
     );
   }
 
-  Form _body(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Padding(
-        padding: context.horizontalPaddingNormal,
+  SafeArea _body(BuildContext context) {
+    return SafeArea(
+      child: Form(
+        key: formKey,
         child: SingleChildScrollView(
+          padding: context.horizontalPaddingNormal,
           child: Column(
             children: [
-              _birenImage,
+              context.emptySizedHeightBoxHigh,
+              Text(
+                "Merhaba!",
+                style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
+              ),
+              context.emptySizedHeightBoxLow,
+              Text(
+                "Seni aramızda göreceğimiz için \nçok heyecanlıyız!",
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyMedium
+                    ?.copyWith(color: LightThemeColors.grey),
+              ),
+              context.emptySizedHeightBoxNormal,
               _nameTextField,
               context.emptySizedHeightBoxLow3x,
               _mailTextField,
@@ -53,15 +63,6 @@ class _RegisterViewState extends State<RegisterView>
       ),
     );
   }
-
-  AppBar _appBar() {
-    return AppBar(
-      centerTitle: true,
-      title: Text(LocaleKeys.auth_register.tr()),
-    );
-  }
-
-  Image get _birenImage => Image.asset(Assets.icons.logo.path, scale: 1.5 / 1);
 
   AuthTextField get _nameTextField {
     return AuthTextField(
