@@ -20,9 +20,20 @@ class MainButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        height: 70,
+        height: context.height / 13,
         decoration: BoxDecoration(
-          borderRadius: context.highBorderRadius,
+          boxShadow: const [
+            BoxShadow(
+              color: LightThemeColors.blazeOrange,
+              spreadRadius: 0,
+              blurRadius: 15,
+              offset: Offset(
+                0,
+                0,
+              ),
+            ),
+          ],
+          borderRadius: context.lowBorderRadius + context.lowBorderRadius,
           color: color,
           gradient: color == null
               ? const LinearGradient(

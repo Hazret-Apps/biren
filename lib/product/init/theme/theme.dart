@@ -72,8 +72,13 @@ class LightTheme {
     return InputDecorationTheme(
       filled: true,
       fillColor: LightThemeColors.snowbank,
+      hintStyle: const TextStyle(
+        fontFamily: "Poppins",
+        color: LightThemeColors.grey,
+        fontWeight: FontWeight.bold,
+      ),
       border: OutlineInputBorder(
-        borderRadius: context.normalBorderRadius,
+        borderRadius: context.lowBorderRadius + context.lowBorderRadius,
         borderSide: BorderSide.none,
       ),
     );
