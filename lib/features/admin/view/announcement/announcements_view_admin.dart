@@ -4,8 +4,8 @@ import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.da
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class AnnouncementsView extends StatelessWidget {
-  const AnnouncementsView({super.key});
+class AnnouncementsViewAdmin extends StatelessWidget {
+  const AnnouncementsViewAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
