@@ -45,15 +45,15 @@ class LightTheme {
 
   TextTheme _textTheme() {
     return TextTheme(
-      displayLarge: MyTypography.headline1,
-      displayMedium: MyTypography.headline2,
-      displaySmall: MyTypography.headline3,
-      headlineMedium: MyTypography.caption1,
-      bodyLarge: MyTypography.body1,
-      bodyMedium: MyTypography.body2,
-      titleMedium: MyTypography.subhead,
-      bodySmall: MyTypography.caption2,
-    );
+        displayLarge: MyTypography.headline1,
+        displayMedium: MyTypography.headline2,
+        displaySmall: MyTypography.headline3,
+        headlineMedium: MyTypography.caption1,
+        bodyLarge: MyTypography.body1,
+        bodyMedium: MyTypography.body2,
+        titleMedium: MyTypography.subhead,
+        bodySmall: MyTypography.caption2,
+        labelMedium: MyTypography.label);
   }
 
   TextButtonThemeData _textButton() {

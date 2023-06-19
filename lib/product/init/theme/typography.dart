@@ -51,4 +51,11 @@ class MyTypography {
     fontWeight: FontWeight.w400,
     color: LightThemeColors.black,
   );
+
+  static TextStyle label = const TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: LightThemeColors.grey,
+  );
 }
