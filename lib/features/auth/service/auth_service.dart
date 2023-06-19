@@ -92,15 +92,15 @@ class AuthService {
   }
 
   Future<void> logOut(BuildContext context) async {
-    _loadingDialog(context);
-    _firebaseAuth.signOut().whenComplete(
-          () => Navigator.pushAndRemoveUntil(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => const RegisterView(),
-            ),
-            (route) => false,
-          ),
-        );
+    Navigator.pop(context);
+    _firebaseAuth.signOut().whenComplete(() {
+      Navigator.pushAndRemoveUntil(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => const RegisterView(),
+        ),
+        (route) => false,
+      );
+    });
   }
 }
