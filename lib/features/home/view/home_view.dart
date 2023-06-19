@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:biren_kocluk/features/home/view/announcement/announcements_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
 import 'package:biren_kocluk/features/home/mixin/home_operation_mixin.dart';
@@ -24,6 +26,7 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const HomeViewDrawer(),
       appBar: _appBar(context),
       body: _body(context),
     );
@@ -80,9 +83,6 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      actions: [
-        _signOutButton(context),
-      ],
       title: _hiText(context),
       centerTitle: false,
     );
@@ -96,25 +96,25 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
           formatButtonVisible: false,
         ),
         daysOfWeekStyle: DaysOfWeekStyle(
-          weekendStyle: context.textTheme.titleMedium!,
-          weekdayStyle: context.textTheme.titleMedium!,
+          weekendStyle: context.textTheme.titleMedium!.copyWith(fontSize: 12),
+          weekdayStyle: context.textTheme.titleMedium!.copyWith(fontSize: 12),
         ),
         locale: AppConstants.TR_LANG,
         eventLoader: getEventsForTheDay,
         focusedDay: focusedDay,
         firstDay: firstDay,
         lastDay: lastDay,
-        onPageChanged: (focusedDay) {
+        onPageChanged: (newFocusedDay) {
           setState(() {
-            focusedDay = focusedDay;
+            focusedDay = newFocusedDay;
           });
           loadFirestoreEvents();
         },
         selectedDayPredicate: (day) => isSameDay(day, selectedDay),
-        onDaySelected: (selectedDay, focusedDay) {
+        onDaySelected: (newSelectedDay, newFocusedDay) {
           setState(() {
-            selectedDay = selectedDay;
-            focusedDay = focusedDay;
+            selectedDay = newSelectedDay;
+            focusedDay = newFocusedDay;
           });
         },
         calendarStyle: CalendarStyle(
@@ -140,18 +140,6 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
     return Text(
       "${LocaleKeys.hello.tr()}\n${AuthService.userName} 👋",
       style: context.textTheme.bodyMedium,
-    );
-  }
-
-  IconButton _signOutButton(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        AuthService().logOut(context);
-      },
-      icon: const Icon(
-        Icons.exit_to_app,
-        color: LightThemeColors.black,
-      ),
     );
   }
 }
@@ -214,6 +202,138 @@ class SelectFeatureCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class HomeViewDrawer extends StatelessWidget {
+  const HomeViewDrawer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              color: LightThemeColors.blazeOrange,
+            ),
+            height: context.height / 7,
+            child: Padding(
+              padding: context.verticalPaddingMedium +
+                  context.horizontalPaddingNormal,
+              child: Text(
+                "Biren Koçluk",
+                style: context.textTheme.displaySmall?.copyWith(
+                  color: LightThemeColors.white,
+                ),
+              ),
+            ),
+          ),
+          _HomeViewListTile(
+            "Ödevler",
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const HomeworksView(),
+                ),
+              );
+            },
+            Icons.business_center_rounded,
+          ),
+          _HomeViewListTile(
+            "Duyurular",
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => Scaffold(appBar: AppBar()),
+                ),
+              );
+            },
+            FontAwesomeIcons.triangleExclamation,
+          ),
+          _HomeViewListTile(
+            "Yoklama",
+            () {},
+            Icons.calendar_month_rounded,
+          ),
+          _HomeViewListTile(
+            "Denemeler",
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => Scaffold(appBar: AppBar()),
+                ),
+              );
+            },
+            Icons.auto_graph_rounded,
+          ),
+          _HomeViewListTile(
+            "Çıkış Yap",
+            () {
+              _signOutConfirmDialog(context).show();
+            },
+            Icons.exit_to_app_rounded,
+          )
+        ],
+      ),
+    );
+  }
+
+  AwesomeDialog _signOutConfirmDialog(BuildContext context) {
+    return AwesomeDialog(
+      context: context,
+      dialogType: DialogType.question,
+      animType: AnimType.scale,
+      desc: "Çıkış Yapmak İstediğinden Emin misin?",
+      btnOkText: "EVET",
+      btnOkOnPress: () {
+        AuthService().logOut(context);
+        Navigator.pop(context);
+        final snackBar = _snackBar();
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
+      },
+      btnOkColor: LightThemeColors.red,
+    );
+  }
+
+  SnackBar _snackBar() {
+    return SnackBar(
+      elevation: 0,
+      behavior: SnackBarBehavior.fixed,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: "Çıkış Yapıldı",
+        message: "Çıkış Yapma İşlemi Başarılı",
+        contentType: ContentType.success,
+      ),
+    );
+  }
+}
+
+class _HomeViewListTile extends StatelessWidget {
+  const _HomeViewListTile(this.title, this.onTap, this.icon);
+  final String title;
+  final VoidCallback onTap;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      leading: Icon(icon),
+      onTap: onTap,
     );
   }
 }
