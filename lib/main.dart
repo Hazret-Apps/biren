@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
-import 'package:biren_kocluk/features/home/view/home_view.dart';
+import 'package:biren_kocluk/features/home/view/home_view/home_view.dart';
 import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/reject/rejected_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';

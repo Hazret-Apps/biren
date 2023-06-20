@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:biren_kocluk/features/home/view/home_view.dart';
+import 'package:biren_kocluk/features/home/view/home_view/home_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
