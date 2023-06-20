@@ -67,7 +67,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
 
   Widget _eyeIcon() {
     return IconButton(
-      icon: const Icon(Icons.remove_red_eye_outlined),
+      icon: isObscure
+          ? const Icon(Icons.visibility_outlined)
+          : const Icon(Icons.visibility_off_outlined),
       splashRadius: 1,
       onPressed: () {
         setState(() {
