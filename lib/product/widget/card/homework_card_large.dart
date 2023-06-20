@@ -72,9 +72,8 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                       if (value == 0) {
                       } else if (value == 1) {
                       } else if (value == 2) {
-                      } else if (value == 3) {
                         _checkDialog(context, widget.snapshot, widget.index);
-                      } else if (value == 4) {}
+                      } else if (value == 3) {}
                     },
                     itemBuilder: (ctx) => [
                       _buildPopupMenuItem(
@@ -84,14 +83,8 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                         context,
                       ),
                       _buildPopupMenuItem(
-                        "Ertele",
-                        1,
-                        Icons.alarm_add_rounded,
-                        context,
-                      ),
-                      _buildPopupMenuItem(
                         "Soru Sor",
-                        2,
+                        1,
                         Icons.info_outline_rounded,
                         context,
                       ),
@@ -99,13 +92,13 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                               "pushed"
                           ? _buildPopupMenuItem(
                               "Gönderildi",
-                              4,
+                              3,
                               Icons.arrow_circle_right_outlined,
                               context,
                             )
                           : _buildPopupMenuItem(
                               "Tamamlandı",
-                              3,
+                              2,
                               Icons.check_rounded,
                               context,
                             ),
