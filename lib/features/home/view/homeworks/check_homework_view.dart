@@ -34,7 +34,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
   Future<String> uploadImage(XFile image) async {
     var snapshot = await _firebaseStorage
         .ref()
-        .child('homeworkPush/${image.path}')
+        .child('homeworkPush/${image.name}')
         .putFile(File(image.path));
     downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;
