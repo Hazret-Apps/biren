@@ -88,37 +88,82 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
               ),
             ]),
         child: Padding(
-          padding: context.horizontalPaddingNormal + context.verticalPaddingLow,
-          child: Column(
+          padding:
+              context.horizontalPaddingNormal + context.verticalPaddingNormal,
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              context.emptySizedHeightBoxLow,
-              Row(
-                children: [
-                  _subjectText(widget.snapshot, widget.index, context),
-                  const Spacer(),
-                  Text(
-                    madeText,
-                    style: context.textTheme.bodyLarge?.copyWith(
-                      color: color == LightThemeColors.white
-                          ? LightThemeColors.black
-                          : LightThemeColors.white,
+              madeText == "Gönderilmedi"
+                  ? const SizedBox.shrink()
+                  : _imageContainer(context),
+              color == LightThemeColors.white
+                  ? const SizedBox.shrink()
+                  : context.emptySizedWidthBoxLow3x,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        _subjectText(widget.snapshot, widget.index, context),
+                        const Spacer(),
+                        _madeText(context),
+                        context.emptySizedWidthBoxLow,
+                        _icon(),
+                      ],
                     ),
-                  ),
-                  context.emptySizedWidthBoxLow,
-                  Icon(
-                    icon,
-                    color: color == LightThemeColors.white
-                        ? LightThemeColors.black
-                        : LightThemeColors.white,
-                  ),
-                ],
+                    context.emptySizedHeightBoxLow,
+                    _topicText(widget.snapshot, widget.index, context),
+                    madeText == "Gönderilmedi"
+                        ? const SizedBox.shrink()
+                        : _dateText(widget.snapshot, widget.index, context),
+                  ],
+                ),
               ),
-              context.emptySizedHeightBoxLow,
-              _topicText(widget.snapshot, widget.index, context),
-              context.emptySizedHeightBoxLow,
-              _dateText(widget.snapshot, widget.index, context),
+              // _subjectText(widget.snapshot, widget.index, context),
+              // const Spacer(),
+              // _madeText(context),
+              // context.emptySizedWidthBoxLow,
+              // _icon(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Icon _icon() {
+    return Icon(
+      icon,
+      color: color == LightThemeColors.white
+          ? LightThemeColors.black
+          : LightThemeColors.white,
+    );
+  }
+
+  Text _madeText(BuildContext context) {
+    return Text(
+      madeText,
+      style: context.textTheme.bodyLarge?.copyWith(
+        color: color == LightThemeColors.white
+            ? LightThemeColors.black
+            : LightThemeColors.white,
+      ),
+    );
+  }
+
+  Center _imageContainer(BuildContext context) {
+    return Center(
+      child: Container(
+        height: context.height / 6,
+        width: context.width / 4,
+        decoration: BoxDecoration(
+          borderRadius: context.normalBorderRadius,
+          image: DecorationImage(
+            image: NetworkImage(
+              widget.snapshot.data!.docs[widget.index]["image"],
+            ),
+            fit: BoxFit.cover,
           ),
         ),
       ),
@@ -131,6 +176,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       "Gönderilme Zamanı: $formattedDate",
       style: context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w400,
+        overflow: TextOverflow.ellipsis,
         color: color == LightThemeColors.white
             ? LightThemeColors.black
             : LightThemeColors.white,

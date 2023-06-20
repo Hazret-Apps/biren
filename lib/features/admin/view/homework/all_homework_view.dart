@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/homework/mixin/all_homeworks_operation_mixin.dart';
-import 'package:biren_kocluk/product/widget/card/all_homework_card_large.dart';
+import 'package:biren_kocluk/product/widget/card/pushed_homework_card_large.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _AllHomeworksState extends State<AllHomeworks>
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                return AllHomeworkCardLarg(
+                return PushedHomeworkCardLarge(
                   snapshot: snapshot,
                   index: index,
                 );

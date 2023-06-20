@@ -3,7 +3,6 @@ import 'package:biren_kocluk/product/widget/card/pushed_homework_card_large.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
 
 class PushedHomeworksView extends StatefulWidget {
   const PushedHomeworksView({super.key});
@@ -27,7 +26,6 @@ class _PushedHomeworksViewState extends State<PushedHomeworksView> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              padding: context.horizontalPaddingNormal,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 return PushedHomeworkCardLarge(
