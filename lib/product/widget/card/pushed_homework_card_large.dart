@@ -105,7 +105,10 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                   children: [
                     Row(
                       children: [
-                        _subjectText(widget.snapshot, widget.index, context),
+                        Expanded(
+                            flex: 8,
+                            child: _subjectText(
+                                widget.snapshot, widget.index, context)),
                         const Spacer(),
                         _madeText(context),
                         context.emptySizedWidthBoxLow,
@@ -120,11 +123,6 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                   ],
                 ),
               ),
-              // _subjectText(widget.snapshot, widget.index, context),
-              // const Spacer(),
-              // _madeText(context),
-              // context.emptySizedWidthBoxLow,
-              // _icon(),
             ],
           ),
         ),
@@ -208,6 +206,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
             ? LightThemeColors.black
             : LightThemeColors.white,
       ),
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

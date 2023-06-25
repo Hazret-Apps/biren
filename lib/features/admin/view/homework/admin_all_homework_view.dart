@@ -1,17 +1,17 @@
-import 'package:biren_kocluk/features/admin/view/homework/mixin/all_homeworks_operation_mixin.dart';
+import 'package:biren_kocluk/features/admin/view/homework/mixin/admin_all_homeworks_operation_mixin.dart';
 import 'package:biren_kocluk/product/widget/card/pushed_homework_card_large.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AllHomeworks extends StatefulWidget {
-  const AllHomeworks({super.key});
+class AdminAllHomeworksView extends StatefulWidget {
+  const AdminAllHomeworksView({super.key});
 
   @override
-  State<AllHomeworks> createState() => _AllHomeworksState();
+  State<AdminAllHomeworksView> createState() => _AdminAllHomeworksViewState();
 }
 
-class _AllHomeworksState extends State<AllHomeworks>
-    with AllHomeworksOperationMixin {
+class _AdminAllHomeworksViewState extends State<AdminAllHomeworksView>
+    with AdminAllHomeworksOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,5 +37,5 @@ class _AllHomeworksState extends State<AllHomeworks>
     );
   }
 
-  AppBar get _appBar => AppBar(title: const Text("Geçmiş Ödevler"));
+  AppBar get _appBar => AppBar(title: const Text("Tüm Ödevler"));
 }

@@ -1,4 +1,4 @@
-import 'package:biren_kocluk/features/admin/view/homework/all_homework_view.dart';
+import 'package:biren_kocluk/features/home/view/homeworks/all_homeworks_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/pushed_homeworks_view.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +39,7 @@ class HomeworkDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => const AllHomeworks(),
+                  builder: (context) => const AllHomeworksView(),
                 ),
               );
             },
@@ -52,7 +52,7 @@ class HomeworkDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => const AllHomeworks(),
+                  builder: (context) => Scaffold(appBar: AppBar()),
                 ),
               );
             },
@@ -60,7 +60,15 @@ class HomeworkDrawer extends StatelessWidget {
           ),
           _HomeworkListTile(
             "Eksik Ödevler",
-            () {},
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => Scaffold(appBar: AppBar()),
+                ),
+              );
+            },
             Icons.remove_circle_outline_rounded,
           ),
           _HomeworkListTile(
