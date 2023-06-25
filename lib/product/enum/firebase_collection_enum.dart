@@ -5,6 +5,7 @@ enum FirebaseCollections {
   announcement,
   homeworks,
   homeworkPush,
+  exams,
   classes;
 
   CollectionReference get reference =>

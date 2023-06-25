@@ -1,10 +1,17 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
 import 'package:biren_kocluk/features/admin/view/exams/mixin/enter_exams_operation_mixin.dart';
-import 'package:biren_kocluk/features/admin/view/exams/widget/enter_exam_file_container.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kartal/kartal.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class EnterExamsView extends StatefulWidget {
   const EnterExamsView({super.key});
@@ -29,27 +36,184 @@ class _EnterExamsViewState extends State<EnterExamsView>
 }
 
 class _Body extends StatefulWidget {
-  _Body(this.stream, this.selectedUserValue);
+  _Body(this.stream, this.selectedStudentValue);
 
   final Stream<QuerySnapshot> stream;
-  String? selectedUserValue;
+  String? selectedStudentValue;
 
   @override
   State<_Body> createState() => _BodyState();
 }
 
 class _BodyState extends State<_Body> {
+  String? fileType;
+  XFile? image;
+  String dowloadUrl = "";
+  File? myPDFFile;
+  var file;
+  String? name;
+
+  Future<void> loadPdfToStorage() async {
+    Navigator.pop(context);
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    myPDFFile = File(result!.files.single.path.toString());
+    fileType = "file";
+    file = myPDFFile!.readAsBytesSync();
+    name = DateTime.now().millisecondsSinceEpoch.toString();
+    setState(() {});
+
+    // * Load Storage
+  }
+
+  Future<void> loadImageToStorage(ImageSource imageSource) async {
+    Navigator.pop(context);
+    image = await ImagePicker().pickImage(source: imageSource);
+    fileType = "image";
+    setState(() {});
+  }
+
+  GestureDetector enterExamFileContainer() {
+    return GestureDetector(
+      onTap: () {
+        _showBottomSheet(context);
+      },
+      child: Container(
+        height: context.height / 2,
+        decoration: BoxDecoration(
+          color: LightThemeColors.snowbank,
+          image: image != null
+              ? DecorationImage(
+                  image: FileImage(File(image!.path)),
+                )
+              : null,
+        ),
+        child: image == null
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    fileType == "file"
+                        ? const SizedBox.shrink()
+                        : const Icon(
+                            Icons.add_photo_alternate_outlined,
+                            size: 50,
+                          ),
+                    Padding(
+                      padding: context.horizontalPaddingNormal +
+                          context.verticalPaddingLow,
+                      child: Text(
+                        "Deneme sonucunun bir ekran görüntüsünü, "
+                        "PDF'ini veya fotoğrafını ekle",
+                        style: context.textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : null,
+      ),
+    );
+  }
+
+  _showBottomSheet(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _AddFileBottomSheetListTile(
+              "Dosya",
+              () {
+                loadPdfToStorage();
+              },
+              Icons.insert_drive_file_outlined,
+            ),
+            _AddFileBottomSheetListTile(
+              "Galeri",
+              () {
+                loadImageToStorage(ImageSource.gallery);
+              },
+              Icons.image_outlined,
+            ),
+            _AddFileBottomSheetListTile(
+              "Kamera",
+              () {
+                loadImageToStorage(ImageSource.camera);
+              },
+              Icons.camera_alt_outlined,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    PdfViewerController? pdfViewerController;
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const EnterExamFileContainer(),
+            fileType == "file"
+                ? GestureDetector(
+                    onTap: () {
+                      _showBottomSheet(context);
+                    },
+                    child: SizedBox(
+                      height: context.height / 2,
+                      child: SfPdfViewer.file(
+                        myPDFFile!,
+                        controller: pdfViewerController,
+                      ),
+                    ),
+                  )
+                : enterExamFileContainer(),
             context.emptySizedHeightBoxLow3x,
             _selectStudentDropdown(context),
+            context.emptySizedHeightBoxLow3x,
+            _submitButton(context)
           ],
         ),
+      ),
+    );
+  }
+
+  Padding _submitButton(BuildContext context) {
+    return Padding(
+      padding: context.horizontalPaddingNormal,
+      child: MainButton(
+        color: fileType == null || widget.selectedStudentValue == null
+            ? LightThemeColors.grey
+            : LightThemeColors.blazeOrange,
+        onPressed: () async {
+          if (fileType != null && widget.selectedStudentValue != null) {
+            Navigator.pop(context);
+            // * Load Firebase storage
+            if (fileType == "image") {
+              var snapshot = await FirebaseStorage.instance
+                  .ref()
+                  .child('exams/${image!.name}')
+                  .putFile(File(image!.path));
+              dowloadUrl = await snapshot.ref.getDownloadURL();
+            }
+            if (fileType == "file") {
+              var pdfFile = FirebaseStorage.instance.ref().child("exams/$name");
+              UploadTask task = pdfFile.putData(file);
+              TaskSnapshot snapshot = await task;
+              dowloadUrl = await snapshot.ref.getDownloadURL();
+            }
+            FirebaseCollections.exams.reference.add({
+              "file": dowloadUrl,
+              "student": widget.selectedStudentValue,
+              "createdTime": Timestamp.now(),
+              "fileType": fileType,
+            });
+          }
+        },
+        text: "KAYDET",
       ),
     );
   }
@@ -76,14 +240,14 @@ class _BodyState extends State<_Body> {
               );
             }
             return DropdownButtonFormField(
-              value: widget.selectedUserValue,
+              value: widget.selectedStudentValue,
               isExpanded: true,
               hint: const Text(
                 "Öğrenci Seç",
               ),
               onChanged: (value) {
                 setState(() {
-                  widget.selectedUserValue = value;
+                  widget.selectedStudentValue = value;
                 });
               },
               items: items,
@@ -91,6 +255,27 @@ class _BodyState extends State<_Body> {
           }
         },
       ),
+    );
+  }
+}
+
+class _AddFileBottomSheetListTile extends StatelessWidget {
+  const _AddFileBottomSheetListTile(
+    this.text,
+    this.onTap,
+    this.icon,
+  );
+
+  final String text;
+  final VoidCallback onTap;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(text),
+      leading: Icon(icon),
+      onTap: onTap,
     );
   }
 }
