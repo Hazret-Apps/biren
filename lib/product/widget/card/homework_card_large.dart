@@ -4,7 +4,6 @@ import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
@@ -71,20 +70,13 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                     onSelected: (value) {
                       if (value == 0) {
                       } else if (value == 1) {
-                      } else if (value == 2) {
                         _checkDialog(context, widget.snapshot, widget.index);
-                      } else if (value == 3) {}
+                      } else if (value == 2) {}
                     },
                     itemBuilder: (ctx) => [
                       _buildPopupMenuItem(
-                        "Ödev İptal",
-                        0,
-                        FontAwesomeIcons.exclamation,
-                        context,
-                      ),
-                      _buildPopupMenuItem(
                         "Soru Sor",
-                        1,
+                        0,
                         Icons.info_outline_rounded,
                         context,
                       ),
@@ -92,13 +84,13 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                               "pushed"
                           ? _buildPopupMenuItem(
                               "Gönderildi",
-                              3,
+                              2,
                               Icons.arrow_circle_right_outlined,
                               context,
                             )
                           : _buildPopupMenuItem(
                               "Tamamlandı",
-                              2,
+                              1,
                               Icons.check_rounded,
                               context,
                             ),
