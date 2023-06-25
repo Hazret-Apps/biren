@@ -5,6 +5,7 @@ import 'package:biren_kocluk/features/admin/view/exams/mixin/enter_exams_operati
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
+import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -53,6 +54,8 @@ class _BodyState extends State<_Body> {
   File? myPDFFile;
   Uint8List? file;
   String? name;
+
+  TextEditingController descriptionController = TextEditingController();
 
   Future<void> loadPdfToStorage() async {
     Navigator.pop(context);
@@ -159,25 +162,45 @@ class _BodyState extends State<_Body> {
         child: Column(
           children: [
             fileType == "file"
-                ? GestureDetector(
-                    onTap: () {
-                      _showBottomSheet(context);
-                    },
-                    child: SizedBox(
-                      height: context.height / 2,
-                      child: SfPdfViewer.file(
-                        myPDFFile!,
-                        controller: pdfViewerController,
-                      ),
-                    ),
-                  )
+                ? _pdfViewWidget(context, pdfViewerController)
                 : enterExamFileContainer(),
             context.emptySizedHeightBoxLow3x,
             _selectStudentDropdown(context),
             context.emptySizedHeightBoxLow3x,
-            _submitButton(context)
+            _descriptionTextField(context),
+            context.emptySizedHeightBoxLow3x,
+            _submitButton(context),
+            context.emptySizedHeightBoxNormal,
           ],
         ),
+      ),
+    );
+  }
+
+  GestureDetector _pdfViewWidget(
+      BuildContext context, PdfViewerController? pdfViewerController) {
+    return GestureDetector(
+      onTap: () {
+        _showBottomSheet(context);
+      },
+      child: SizedBox(
+        height: context.height / 2,
+        child: SfPdfViewer.file(
+          myPDFFile!,
+          controller: pdfViewerController,
+        ),
+      ),
+    );
+  }
+
+  Padding _descriptionTextField(BuildContext context) {
+    return Padding(
+      padding: context.horizontalPaddingNormal,
+      child: MainTextField(
+        hintText: "Açıklama (İsteğe Bağlı)",
+        keyboardType: TextInputType.text,
+        controller: descriptionController,
+        minLines: 4,
       ),
     );
   }
@@ -189,34 +212,38 @@ class _BodyState extends State<_Body> {
         color: fileType == null || widget.selectedStudentValue == null
             ? LightThemeColors.grey
             : LightThemeColors.blazeOrange,
-        onPressed: () async {
-          if (fileType != null && widget.selectedStudentValue != null) {
-            Navigator.pop(context);
-            // * Load Firebase storage
-            if (fileType == "image") {
-              var snapshot = await FirebaseStorage.instance
-                  .ref()
-                  .child('exams/${image!.name}')
-                  .putFile(File(image!.path));
-              dowloadUrl = await snapshot.ref.getDownloadURL();
-            }
-            if (fileType == "file") {
-              var pdfFile = FirebaseStorage.instance.ref().child("exams/$name");
-              UploadTask task = pdfFile.putData(file!);
-              TaskSnapshot snapshot = await task;
-              dowloadUrl = await snapshot.ref.getDownloadURL();
-            }
-            FirebaseCollections.exams.reference.add({
-              "file": dowloadUrl,
-              "student": widget.selectedStudentValue,
-              "createdTime": Timestamp.now(),
-              "fileType": fileType,
-            });
-          }
+        onPressed: () {
+          onSubmitButton();
         },
         text: "KAYDET",
       ),
     );
+  }
+
+  Future<void> onSubmitButton() async {
+    if (fileType != null && widget.selectedStudentValue != null) {
+      Navigator.pop(context);
+      if (fileType == "image") {
+        var snapshot = await FirebaseStorage.instance
+            .ref()
+            .child('exams/${image!.name}')
+            .putFile(File(image!.path));
+        dowloadUrl = await snapshot.ref.getDownloadURL();
+      }
+      if (fileType == "file") {
+        var pdfFile = FirebaseStorage.instance.ref().child("exams/$name");
+        UploadTask task = pdfFile.putData(file!);
+        TaskSnapshot snapshot = await task;
+        dowloadUrl = await snapshot.ref.getDownloadURL();
+      }
+      FirebaseCollections.exams.reference.add({
+        "file": dowloadUrl,
+        "student": widget.selectedStudentValue,
+        "createdTime": Timestamp.now(),
+        "fileType": fileType,
+        "description": descriptionController.text,
+      });
+    }
   }
 
   Padding _selectStudentDropdown(BuildContext context) {
