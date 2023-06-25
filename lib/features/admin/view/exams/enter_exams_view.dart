@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kartal/kartal.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -50,7 +51,7 @@ class _BodyState extends State<_Body> {
   XFile? image;
   String dowloadUrl = "";
   File? myPDFFile;
-  var file;
+  Uint8List? file;
   String? name;
 
   Future<void> loadPdfToStorage() async {
@@ -201,7 +202,7 @@ class _BodyState extends State<_Body> {
             }
             if (fileType == "file") {
               var pdfFile = FirebaseStorage.instance.ref().child("exams/$name");
-              UploadTask task = pdfFile.putData(file);
+              UploadTask task = pdfFile.putData(file!);
               TaskSnapshot snapshot = await task;
               dowloadUrl = await snapshot.ref.getDownloadURL();
             }
