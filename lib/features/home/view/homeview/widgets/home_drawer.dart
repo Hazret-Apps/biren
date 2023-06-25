@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/announcement/announcements_view.dart';
+import 'package:biren_kocluk/features/home/view/exams/exams_home_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -81,7 +82,7 @@ class HomeViewDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => Scaffold(appBar: AppBar()),
+                  builder: (context) => const ExamsView(),
                 ),
               );
             },

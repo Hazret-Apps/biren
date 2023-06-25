@@ -1,0 +1,140 @@
+Date : 2023-06-25 14:30:36
+Directory : c:\Users\oguzk\Documents\GitHub\biren
+Total : 62 files,  479 codes, -51 comments, -13 blanks, all 415 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         61 |        473 |        -40 |        -12 |        421 |
+| YAML     |          1 |          6 |        -11 |         -1 |         -6 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                         |         62 |        479 |        -51 |        -13 |        415 |
+| . (Files)                                                                                                                 |          1 |          6 |        -11 |         -1 |         -6 |
+| lib                                                                                                                       |         61 |        473 |        -40 |        -12 |        421 |
+| lib (Files)                                                                                                               |          1 |          1 |          0 |          0 |          1 |
+| lib\features                                                                                                              |         44 |        514 |        -39 |         -1 |        474 |
+| lib\features\admin                                                                                                        |         21 |        204 |        -15 |         -2 |        187 |
+| lib\features\admin\view                                                                                                   |         17 |        276 |          3 |         31 |        310 |
+| lib\features\admin\view (Files)                                                                                           |          1 |         -8 |          0 |         -1 |         -9 |
+| lib\features\admin\view\announcement                                                                                      |          5 |         -1 |          0 |          3 |          2 |
+| lib\features\admin\view\announcement (Files)                                                                              |          4 |        -17 |          0 |         -2 |        -19 |
+| lib\features\admin\view\announcement\mixin                                                                                |          1 |         16 |          0 |          5 |         21 |
+| lib\features\admin\view\exams                                                                                             |          5 |        282 |          3 |         29 |        314 |
+| lib\features\admin\view\exams (Files)                                                                                     |          4 |        272 |          3 |         26 |        301 |
+| lib\features\admin\view\exams\mixin                                                                                       |          1 |         10 |          0 |          3 |         13 |
+| lib\features\admin\view\homework                                                                                          |          5 |          2 |          0 |          0 |          2 |
+| lib\features\admin\view\homework (Files)                                                                                  |          2 |          0 |          0 |          0 |          0 |
+| lib\features\admin\view\homework\mixin                                                                                    |          3 |          2 |          0 |          0 |          2 |
+| lib\features\admin\view\students                                                                                          |          1 |          1 |          0 |          0 |          1 |
+| lib\features\admin\view\students\mixin                                                                                    |          1 |          1 |          0 |          0 |          1 |
+| lib\features\admin\viewmodel                                                                                              |          4 |        -72 |        -18 |        -33 |       -123 |
+| lib\features\auth                                                                                                         |          8 |        -67 |        -24 |        -36 |       -127 |
+| lib\features\auth\login                                                                                                   |          4 |        -39 |        -11 |        -18 |        -68 |
+| lib\features\auth\login\mixin                                                                                             |          1 |         27 |          0 |          5 |         32 |
+| lib\features\auth\login\view                                                                                              |          1 |         -8 |          1 |         -6 |        -13 |
+| lib\features\auth\login\viewmodel                                                                                         |          2 |        -58 |        -12 |        -17 |        -87 |
+| lib\features\auth\register                                                                                                |          4 |        -28 |        -13 |        -18 |        -59 |
+| lib\features\auth\register\mixin                                                                                          |          1 |         18 |          0 |          4 |         22 |
+| lib\features\auth\register\view                                                                                           |          1 |         -9 |         -1 |         -7 |        -17 |
+| lib\features\auth\register\viewmodel                                                                                      |          2 |        -37 |        -12 |        -15 |        -64 |
+| lib\features\home                                                                                                         |         15 |        377 |          0 |         37 |        414 |
+| lib\features\home\mixin                                                                                                   |          4 |         87 |          0 |         14 |        101 |
+| lib\features\home\view                                                                                                    |          9 |        302 |          5 |         33 |        340 |
+| lib\features\home\view (Files)                                                                                            |          1 |       -246 |          0 |        -16 |       -262 |
+| lib\features\home\view\announcement                                                                                       |          1 |         86 |          0 |          7 |         93 |
+| lib\features\home\view\homeview                                                                                           |          3 |        335 |          5 |         23 |        363 |
+| lib\features\home\view\homeview (Files)                                                                                   |          1 |        137 |          0 |          8 |        145 |
+| lib\features\home\view\homeview\widgets                                                                                   |          2 |        198 |          5 |         15 |        218 |
+| lib\features\home\view\homeworks                                                                                          |          4 |        127 |          0 |         19 |        146 |
+| lib\features\home\viewmodel                                                                                               |          2 |        -12 |         -5 |        -10 |        -27 |
+| lib\gen                                                                                                                   |          1 |          1 |          1 |          1 |          3 |
+| lib\product                                                                                                               |         15 |        -43 |         -2 |        -12 |        -57 |
+| lib\product\base                                                                                                          |          2 |        -41 |         -1 |        -11 |        -53 |
+| lib\product\base\model                                                                                                    |          1 |         -6 |          0 |         -3 |         -9 |
+| lib\product\base\view                                                                                                     |          1 |        -35 |         -1 |         -8 |        -44 |
+| lib\product\enum                                                                                                          |          2 |          2 |          0 |          0 |          2 |
+| lib\product\gen                                                                                                           |          1 |          1 |          1 |          1 |          3 |
+| lib\product\init                                                                                                          |          2 |         88 |         -2 |          8 |         94 |
+| lib\product\init\theme                                                                                                    |          2 |         88 |         -2 |          8 |         94 |
+| lib\product\widget                                                                                                        |          8 |        -93 |          0 |        -10 |       -103 |
+| lib\product\widget\admin                                                                                                  |          1 |          6 |          0 |          0 |          6 |
+| lib\product\widget\button                                                                                                 |          1 |         11 |          0 |          0 |         11 |
+| lib\product\widget\card                                                                                                   |          4 |       -123 |          0 |        -10 |       -133 |
+| lib\product\widget\drawer                                                                                                 |          1 |         10 |          0 |          0 |         10 |
+| lib\product\widget\text_field                                                                                             |          1 |          3 |          0 |          0 |          3 |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                  | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\admin_home_view.dart                                        | Dart     |         -8 |          0 |         -1 |         -9 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\announcement\add_announcement_view.dart                     | Dart     |       -146 |          0 |        -11 |       -157 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\announcement\announcements_view.dart                        | Dart     |        -43 |          0 |         -6 |        -49 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\announcement\announcements_view_admin.dart                  | Dart     |         43 |          0 |          6 |         49 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\announcement\create_announcement_view.dart                  | Dart     |        129 |          0 |          9 |        138 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\announcement\mixin\create_announcement_operation_mixin.dart | Dart     |         16 |          0 |          5 |         21 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\exams\enter_exams_view.dart                                 | Dart     |        251 |          3 |         18 |        272 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\exams\exams_results_view.dart                               | Dart     |         14 |          0 |          4 |         18 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\exams\exams_view.dart                                       | Dart     |         -7 |          0 |          0 |         -7 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\exams\mixin\enter_exams_operation_mixin.dart                | Dart     |         10 |          0 |          3 |         13 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\exams\search_exam_result_view.dart                          | Dart     |         14 |          0 |          4 |         18 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\homework\admin_all_homework_view.dart                       | Dart     |         37 |          0 |          5 |         42 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\homework\all_homework_view.dart                             | Dart     |        -37 |          0 |         -5 |        -42 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\homework\mixin\admin_all_homeworks_operation_mixin.dart     | Dart     |          8 |          0 |          2 |         10 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\homework\mixin\all_homeworks_operation_mixin.dart           | Dart     |         -8 |          0 |         -2 |        -10 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\homework\mixin\incoming_homeworks_operation_mixin.dart      | Dart     |          2 |          0 |          0 |          2 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\view\students\mixin\login_accept_operation_mixin.dart            | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\viewmodel\add_announcement_viewmodel.dart                        | Dart     |        -17 |         -1 |         -8 |        -26 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\viewmodel\add_announcement_viewmodel.g.dart                      | Dart     |        -42 |         -5 |        -13 |        -60 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\viewmodel\admin_home_viewmodel.dart                              | Dart     |         -5 |         -7 |         -6 |        -18 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\admin\viewmodel\admin_home_viewmodel.g.dart                            | Dart     |         -8 |         -5 |         -6 |        -19 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\login\mixin\login_operation_mixin.dart                            | Dart     |         27 |          0 |          5 |         32 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\login\view\login_view.dart                                        | Dart     |         -8 |          1 |         -6 |        -13 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\login\viewmodel\login_viewmodel.dart                              | Dart     |        -28 |         -7 |         -8 |        -43 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\login\viewmodel\login_viewmodel.g.dart                            | Dart     |        -30 |         -5 |         -9 |        -44 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\register\mixin\register_operation_mixin.dart                      | Dart     |         18 |          0 |          4 |         22 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\register\view\register_view.dart                                  | Dart     |         -9 |         -1 |         -7 |        -17 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\register\viewmodel\register_viewmodel.dart                        | Dart     |        -17 |         -7 |         -7 |        -31 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\auth\register\viewmodel\register_viewmodel.g.dart                      | Dart     |        -20 |         -5 |         -8 |        -33 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\mixin\all_homeworks_operation_mixin.dart                          | Dart     |         11 |          0 |          2 |         13 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\mixin\didnt_made_homeworks_operation_mixin.dart                   | Dart     |         12 |          0 |          2 |         14 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\mixin\home_operation_mixin.dart                                   | Dart     |         52 |          0 |          8 |         60 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\mixin\missing_homeworks_operation_mixin.dart                      | Dart     |         12 |          0 |          2 |         14 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\announcement\announcements_view.dart                         | Dart     |         86 |          0 |          7 |         93 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\home_view.dart                                               | Dart     |       -246 |          0 |        -16 |       -262 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeview\home_view.dart                                      | Dart     |        137 |          0 |          8 |        145 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeview\widgets\home_drawer.dart                            | Dart     |        136 |          5 |         11 |        152 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeview\widgets\home_select_feature_card.dart               | Dart     |         62 |          0 |          4 |         66 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeworks\all_homeworks_view.dart                            | Dart     |         37 |          0 |          5 |         42 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeworks\didnt_made_homeworks_view.dart                     | Dart     |         46 |          0 |          7 |         53 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeworks\missing_homeworks_view.dart                        | Dart     |         46 |          0 |          7 |         53 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\view\homeworks\pushed_homeworks_view.dart                         | Dart     |         -2 |          0 |          0 |         -2 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\viewmodel\home_viewmodel.dart                                     | Dart     |         -4 |          0 |         -4 |         -8 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\features\home\viewmodel\home_viewmodel.g.dart                                   | Dart     |         -8 |         -5 |         -6 |        -19 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\gen\assets.gen.dart                                                             | Dart     |          1 |          1 |          1 |          3 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\main.dart                                                                       | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\base\model\base_view_model.dart                                         | Dart     |         -6 |          0 |         -3 |         -9 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\base\view\base_view.dart                                                | Dart     |        -35 |         -1 |         -8 |        -44 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\enum\admin_feature_types.dart                                           | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\enum\firebase_collection_enum.dart                                      | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\gen\assets.gen.dart                                                     | Dart     |          1 |          1 |          1 |          3 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\init\theme\theme.dart                                                   | Dart     |         29 |         -2 |          5 |         32 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\init\theme\typography.dart                                              | Dart     |         59 |          0 |          3 |         62 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\admin\admin_select_feature.dart                                  | Dart     |          6 |          0 |          0 |          6 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\button\main_button.dart                                          | Dart     |         11 |          0 |          0 |         11 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\card\admin_features_select_widget.dart                           | Dart     |          1 |          0 |          0 |          1 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\card\all_homework_card_large.dart                                | Dart     |       -151 |          0 |        -13 |       -164 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\card\homework_card_large.dart                                    | Dart     |        -15 |          0 |          0 |        -15 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\card\pushed_homework_card_large.dart                             | Dart     |         42 |          0 |          3 |         45 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\drawer\homework_drawer.dart                                      | Dart     |         10 |          0 |          0 |         10 |
+| c:\Users\oguzk\Documents\GitHub\biren\lib\product\widget\text_field\auth_text_field.dart                                  | Dart     |          3 |          0 |          0 |          3 |
+| c:\Users\oguzk\Documents\GitHub\biren\pubspec.yaml                                                                        | YAML     |          6 |        -11 |         -1 |         -6 |
+| Total                                                                                                                     |          |        479 |        -51 |        -13 |        415 |
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
