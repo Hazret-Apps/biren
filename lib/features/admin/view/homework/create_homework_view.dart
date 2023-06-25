@@ -141,7 +141,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
                     return const Center(child: CircularProgressIndicator());
                   },
                 );
-                addHomework;
+                addHomework();
               }
             },
           ),
