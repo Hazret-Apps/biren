@@ -33,6 +33,7 @@ mixin LoginAcceptOperationMixin on State<LoginAcceptView> {
         "studentPhone": studentPhone.text,
         "parentPhone": parentPhone.text,
       });
+      Navigator.pop(context);
     }
   }
 }
