@@ -53,8 +53,8 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
   }
 
   Future<void> onSubmitButton() async {
-    downloadUrl = await uploadImage(imageXfile!);
     Navigator.pop(context);
+    downloadUrl = await uploadImage(imageXfile!);
     await FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
       "date": Timestamp.fromDate(DateTime.now()),
