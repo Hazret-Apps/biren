@@ -6,6 +6,6 @@ import 'package:flutter/material.dart';
 mixin IncomingHomeworksOperationMixin on State<IncomingHomeworksView> {
   final Stream<QuerySnapshot> stream = FirebaseCollections
       .homeworkPush.reference
-      .where("madeEnum", isEqualTo: "pushed")
+      .where("makeEnum", isEqualTo: "pushed")
       .snapshots();
 }
