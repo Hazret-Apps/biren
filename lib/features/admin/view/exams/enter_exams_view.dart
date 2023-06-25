@@ -55,6 +55,7 @@ class _BodyState extends State<_Body> {
   Uint8List? file;
   String? name;
 
+  TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
   Future<void> loadPdfToStorage() async {
@@ -167,6 +168,8 @@ class _BodyState extends State<_Body> {
             context.emptySizedHeightBoxLow3x,
             _selectStudentDropdown(context),
             context.emptySizedHeightBoxLow3x,
+            _titleTextField(context),
+            context.emptySizedHeightBoxLow3x,
             _descriptionTextField(context),
             context.emptySizedHeightBoxLow3x,
             _submitButton(context),
@@ -189,6 +192,17 @@ class _BodyState extends State<_Body> {
           myPDFFile!,
           controller: pdfViewerController,
         ),
+      ),
+    );
+  }
+
+  Padding _titleTextField(BuildContext context) {
+    return Padding(
+      padding: context.horizontalPaddingNormal,
+      child: MainTextField(
+        hintText: "Başlık (İsteğe Bağlı)",
+        keyboardType: TextInputType.text,
+        controller: titleController,
       ),
     );
   }
@@ -242,6 +256,7 @@ class _BodyState extends State<_Body> {
         "createdTime": Timestamp.now(),
         "fileType": fileType,
         "description": descriptionController.text,
+        "title": titleController.text,
       });
     }
   }

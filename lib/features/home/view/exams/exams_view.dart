@@ -1,6 +1,6 @@
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/home/mixin/exams_home_operation_mixin.dart';
+import 'package:biren_kocluk/features/home/view/exams/widget/exam_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -12,7 +12,7 @@ class ExamsView extends StatefulWidget {
   State<ExamsView> createState() => _ExamsViewState();
 }
 
-class _ExamsViewState extends State<ExamsView> {
+class _ExamsViewState extends State<ExamsView> with ExamsHomeOperationMixin {
   PdfViewerController? pdfViewerController;
 
   @override
@@ -21,18 +21,14 @@ class _ExamsViewState extends State<ExamsView> {
       appBar: AppBar(title: const Text("Denemeler")),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseCollections.exams.reference
-              .where("student",
-                  isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-              .snapshots(),
+          stream: stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
+                padding: context.horizontalPaddingNormal,
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: context.verticalPaddingLow,
-                  );
+                  return ExamWidget(snapshot, index);
                 },
               );
             }
