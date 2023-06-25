@@ -1038,18 +1038,58 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "952f5ee970bc3fba2db95a8dac71a295d9a70ad2c0993c7279e3a883c3e1459f"
+      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.34"
+    version: "21.2.10"
   syncfusion_flutter_pdf:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: syncfusion_flutter_pdf
-      sha256: fd9b3dd2fde35be9bd61b7b22145e39f77b06bde65ae549d37669a61f2b0c8d1
+      sha256: e97daea47f9ac4cf25cc8fc11a0475580ad9c592056d9c2bdc809c73e276decf
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.34"
+    version: "21.2.10"
+  syncfusion_flutter_pdfviewer:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_pdfviewer
+      sha256: fdd2ff565cd42247b8e86e26304329bae924fdfe8ddc1f4a3a264916f6c1ff1f
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_pdfviewer_macos:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_macos
+      sha256: "8cc925cae532c0fa17e849165796d962107f45b86e66ee334dcaabf6b7305c82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_pdfviewer_platform_interface:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_platform_interface
+      sha256: "08039ecdb8f79454fb367c6bf5a833846a666039415d2b5d76a7e59a5b3ff710"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_pdfviewer_web:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_web
+      sha256: "8e5ed0d313a1aa3869e4f2e8d079bc9bfa37ce79d91be7bb328e456f37b7995f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_pdfviewer_windows:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_windows
+      sha256: "3e93f281135fb0562f7e6c343d2db741cf3cbd78c5b04884eef9af414408bc77"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
   table_calendar:
     dependency: "direct main"
     description:
