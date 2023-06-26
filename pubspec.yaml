@@ -25,7 +25,6 @@ dependencies:
 
   #Image
   image_picker: ^0.8.7+1
-  mime:
 
   #Icons
   cupertino_icons: ^1.0.2

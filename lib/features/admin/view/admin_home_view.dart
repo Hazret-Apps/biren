@@ -34,9 +34,10 @@ class _AdminHomeViewState extends State<AdminHomeView> {
         ),
         children: const [
           AdminSelectFeature(featureTypes: FeatureTypes.homeworks),
+          AdminSelectFeature(featureTypes: FeatureTypes.attendance),
           AdminSelectFeature(featureTypes: FeatureTypes.exams),
-          AdminSelectFeature(featureTypes: FeatureTypes.classes),
           AdminSelectFeature(featureTypes: FeatureTypes.announcement),
+          AdminSelectFeature(featureTypes: FeatureTypes.classes),
           AdminSelectFeature(featureTypes: FeatureTypes.students),
         ],
       ),

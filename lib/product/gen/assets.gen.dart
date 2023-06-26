@@ -26,14 +26,12 @@ class $AssetsImagesGen {
   AssetGenImage get announcement =>
       const AssetGenImage('assets/images/announcement.png');
 
+  /// File path: assets/images/calender.png
+  AssetGenImage get calender =>
+      const AssetGenImage('assets/images/calender.png');
+
   /// File path: assets/images/classes.png
   AssetGenImage get classes => const AssetGenImage('assets/images/classes.png');
-
-  /// File path: assets/images/history.png
-  AssetGenImage get history => const AssetGenImage('assets/images/history.png');
-
-  /// File path: assets/images/login.png
-  AssetGenImage get login => const AssetGenImage('assets/images/login.png');
 
   /// File path: assets/images/exams.png
   AssetGenImage get exams => const AssetGenImage('assets/images/exams.png');
@@ -45,13 +43,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/task.png
   AssetGenImage get task => const AssetGenImage('assets/images/task.png');
 
-  /// File path: assets/images/teachers.png
-  AssetGenImage get teachers =>
-      const AssetGenImage('assets/images/teachers.png');
-
   /// List of all assets
   List<AssetGenImage> get values =>
-      [announcement, classes, history, login, students, task, teachers];
+      [announcement, calender, classes, exams, students, task];
 }
 
 class $AssetsJsonsGen {
