@@ -9,7 +9,7 @@ Bu uygulama Flutter ile 2023 Nisan ayında başlamıştır.
 ```
 
 Bu uygulama ile admin olarak giriş yapan öğretmen veya yönetici ([Admin Uygulaması](https://github.com/Hazret-Apps/biren-admin)) öğrenci için:
-<img src="/screenshotss/admin_home_view.png">
+<img src="/screenshots/admin_home_view.png">
 
 > Ödev Oluşturabilir,
 
