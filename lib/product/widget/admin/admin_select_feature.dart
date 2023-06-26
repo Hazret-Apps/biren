@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/announcement/announcements_view_admin.dart';
+import 'package:biren_kocluk/features/admin/view/attendance/attendance_view.dart';
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_view.dart';
@@ -51,6 +52,11 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         imagePath = Assets.images.exams.path;
         title = "Denemeler";
         callView = const ExamsView();
+        break;
+      case FeatureTypes.attendance:
+        imagePath = Assets.images.calender.path;
+        title = "Yoklama";
+        callView = const AdminAttendanceView();
         break;
       default:
     }
