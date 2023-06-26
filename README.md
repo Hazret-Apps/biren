@@ -1,16 +1,34 @@
-# biren_kocluk
+# Dershane Öğrenci Takip Uygulaması
 
-A new Flutter project.
+Bu uygulama Flutter ile 2023 Nisan ayında başlamıştır.
 
-## Getting Started
+### Projeyi Kopyala
 
-This project is a starting point for a Flutter application.
+```bash
+  git clone https://github.com/Hazret-Apps/biren.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+Bu uygulama ile admin olarak giriş yapan öğretmen veya yönetici ([Admin Uygulaması](https://github.com/Hazret-Apps/biren-admin)) öğrenci için:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+> Ödev Oluşturabilir,
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+> Duyuru Oluşturabilir,
+
+
+> Yoklama Alabilir,
+
+
+> Deneme sonucu girebilir
+
+### Ödev Oluşturma Algoritması
+Ödev oluştururken öğretmen bir tarihi, öğrenciyi, dersi ve konuyu girer. Seçilen öğrenci anasayfasındaki takvimde ve ödevler kısmında ödevini görür. Tamamladığı zaman "tamamlandı" seçeneğini işaretler ve ödevinin fotoğrafını çeker. Öğretmen ise gelen ödevler içerisinde öğrencinin ödevini görür ve "yaptı, yapmadı veya eksik" olarak işaretler. 
+
+### Duyuru Oluşturma Algoritması
+Öğretmen belli bir öğrenci grubuna veya herkese fotoğraf veya PDF ile birlikte duyuru atabilir.
+
+## Paketler
+- [easy_localization](https://pub.dev/packages/easy_localization) (Uygulama dil desteği için)
+- [firebase_core](https://pub.dev/packages/firebase_core) (+ diğer temel Firebase paketleri)
+- [kartal](https://pub.dev/packages/kartal) (Context extension)
+- [image_picker](https://pub.dev/packages/image_picker)
