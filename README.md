@@ -31,7 +31,7 @@ Bu uygulama ile admin olarak giriş yapan öğretmen veya yönetici ([Admin Uygu
 ### Duyuru Oluşturma Algoritması
 Öğretmen belli bir öğrenci grubuna veya herkese fotoğraf veya PDF ile birlikte duyuru atabilir.
 
-<img src="/screenshots/create_announcement_view" width=35%>
+<img src="/screenshots/create_announcement_view.png" width=35%>
 
 ## Paketler
 - [easy_localization](https://pub.dev/packages/easy_localization) (Uygulama dil desteği için)
