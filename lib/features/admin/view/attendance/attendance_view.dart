@@ -58,8 +58,10 @@ class _StudentWidget extends StatelessWidget {
           context,
           CupertinoPageRoute(
             builder: (context) => EnterAttendanceView(
-              snapshot: snapshot,
-              index: index,
+              name: snapshot.data!.docs[index]["name"],
+              uid: snapshot.data!.docs[index]["uid"],
+              // snapshot: snapshot,
+              // index: index,
             ),
           ),
         );

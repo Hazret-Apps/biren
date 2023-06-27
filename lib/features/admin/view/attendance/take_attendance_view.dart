@@ -4,27 +4,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class AddEvent extends StatefulWidget {
-  const AddEvent({
+class TakeAttendanceView extends StatefulWidget {
+  const TakeAttendanceView({
     Key? key,
     required this.firstDate,
     required this.lastDate,
     this.selectedDate,
-    required this.snapshot,
-    required this.index,
+    required this.name,
+    required this.uid,
+    // required this.snapshot,
+    // required this.index,
   }) : super(key: key);
 
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTime? selectedDate;
-  final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
-  final int index;
+  final String name;
+  final String uid;
+  // final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
+  // final int index;
 
   @override
-  State<AddEvent> createState() => _AddEventState();
+  State<TakeAttendanceView> createState() => _TakeAttendanceViewState();
 }
 
-class _AddEventState extends State<AddEvent> {
+class _TakeAttendanceViewState extends State<TakeAttendanceView> {
   late DateTime _selectedDate;
 
   List<String> statusList = <String>["Geldi", "Gelmedi"];
@@ -107,8 +111,8 @@ class _AddEventState extends State<AddEvent> {
 
   void _addEvent() async {
     await FirebaseCollections.attendance.reference.add({
-      "name": widget.snapshot.data!.docs[widget.index]["name"],
-      "uid": widget.snapshot.data!.docs[widget.index]["uid"],
+      "name": widget.name,
+      "uid": widget.uid,
       "status": statusValue,
       "date": Timestamp.fromDate(_selectedDate),
     });

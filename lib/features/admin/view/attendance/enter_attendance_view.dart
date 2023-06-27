@@ -1,20 +1,27 @@
 import 'dart:collection';
 import 'package:biren_kocluk/features/admin/view/attendance/take_attendance_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class EnterAttendanceView extends StatefulWidget {
-  const EnterAttendanceView(
-      {super.key, required this.snapshot, required this.index});
+  const EnterAttendanceView({
+    super.key,
+    required this.name,
+    required this.uid,
+    // required this.snapshot,
+    // required this.index,
+  });
 
-  final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
-  final int index;
+  // final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
+  // final int index;
+  final String name;
+  final String uid;
 
   @override
   State<EnterAttendanceView> createState() => _EnterAttendanceViewState();
@@ -50,8 +57,8 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
     final lastDay = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
     _events = {};
 
-    final snap = await FirebaseFirestore.instance
-        .collection('attendance')
+    final snap = await FirebaseCollections.attendance.reference
+        .where("uid", isEqualTo: widget.uid)
         .where('date', isGreaterThanOrEqualTo: firstDay)
         .where('date', isLessThanOrEqualTo: lastDay)
         .withConverter(
@@ -82,12 +89,14 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
           final result = await Navigator.push<bool>(
             context,
             MaterialPageRoute(
-              builder: (_) => AddEvent(
+              builder: (_) => TakeAttendanceView(
                 firstDate: _firstDay,
                 lastDate: _lastDay,
                 selectedDate: _selectedDay,
-                snapshot: widget.snapshot,
-                index: widget.index,
+                name: widget.name,
+                uid: widget.uid,
+                // snapshot: widget.snapshot,
+                // index: widget.index,
               ),
             ),
           );
@@ -163,7 +172,7 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
 
   AppBar _appBar() {
     return AppBar(
-      title: Text(widget.snapshot.data!.docs[widget.index]["name"]),
+      title: Text(widget.uid),
     );
   }
 }
