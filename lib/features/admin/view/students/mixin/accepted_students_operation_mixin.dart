@@ -20,6 +20,8 @@ mixin AcceptedStudentsOperationMixin on State<AcceptedStudentsView> {
         builder: (context) => StudentEditView(
           userModel: UserModel(
             grade: snapshot.data!.docs[index]["grade"],
+            parentPhoneNumber: snapshot.data!.docs[index]["parentPhone"],
+            studentPhoneNumber: snapshot.data!.docs[index]["studentPhone"],
             classText: snapshot.data!.docs[index]["class"],
             name: snapshot.data!.docs[index]["name"],
             mail: snapshot.data!.docs[index]["mail"],

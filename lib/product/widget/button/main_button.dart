@@ -22,16 +22,18 @@ class MainButton extends StatelessWidget {
         width: double.infinity,
         height: context.height / 13,
         decoration: BoxDecoration(
-          boxShadow: const [
-            BoxShadow(
-              color: LightThemeColors.blazeOrange,
-              spreadRadius: 0,
-              blurRadius: 15,
-              offset: Offset(
-                0,
-                0,
-              ),
-            ),
+          boxShadow: [
+            color == null
+                ? const BoxShadow(
+                    color: LightThemeColors.blazeOrange,
+                    spreadRadius: 0,
+                    blurRadius: 15,
+                    offset: Offset(
+                      0,
+                      0,
+                    ),
+                  )
+                : const BoxShadow(),
           ],
           borderRadius: context.lowBorderRadius + context.lowBorderRadius,
           color: color,
