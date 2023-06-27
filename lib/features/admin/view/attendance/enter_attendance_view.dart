@@ -1,9 +1,11 @@
 import 'dart:collection';
+import 'package:biren_kocluk/features/admin/view/attendance/take_attendance_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -49,7 +51,7 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
     _events = {};
 
     final snap = await FirebaseFirestore.instance
-        .collection('events')
+        .collection('attendance')
         .where('date', isGreaterThanOrEqualTo: firstDay)
         .where('date', isLessThanOrEqualTo: lastDay)
         .withConverter(
@@ -75,63 +77,85 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await Navigator.push<bool>(
+            context,
+            MaterialPageRoute(
+              builder: (_) => AddEvent(
+                firstDate: _firstDay,
+                lastDate: _lastDay,
+                selectedDate: _selectedDay,
+                snapshot: widget.snapshot,
+                index: widget.index,
+              ),
+            ),
+          );
+          if (result ?? false) {
+            _loadFirestoreEvents();
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
       appBar: _appBar(),
       body: SafeArea(
         child: ListView(
           children: [
-            Card(
-              child: TableCalendar(
-                headerStyle: const HeaderStyle(
-                  titleCentered: true,
-                  formatButtonVisible: false,
-                ),
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  weekendStyle:
-                      context.textTheme.titleMedium!.copyWith(fontSize: 12),
-                  weekdayStyle:
-                      context.textTheme.titleMedium!.copyWith(fontSize: 12),
-                ),
-                locale: AppConstants.TR_LANG,
-                eventLoader: _getEventsForTheDay,
-                focusedDay: _focusedDay,
-                firstDay: _firstDay,
-                lastDay: _lastDay,
-                onPageChanged: (focusedDay) {
-                  setState(() {
-                    _focusedDay = focusedDay;
-                  });
-                  _loadFirestoreEvents();
-                },
-                selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                calendarStyle: CalendarStyle(
-                  defaultTextStyle: context.textTheme.titleMedium!,
-                  outsideTextStyle: context.textTheme.titleMedium!.copyWith(
-                    color: LightThemeColors.grey,
-                  ),
-                  weekendTextStyle: context.textTheme.titleMedium!,
-                  todayDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: LightThemeColors.blazeOrange.withOpacity(.6),
-                  ),
-                  selectedDecoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: LightThemeColors.blazeOrange,
-                  ),
-                ),
-              ),
-            ),
+            _card(context),
             ..._getEventsForTheDay(_selectedDay).map(
               (event) => EventItem(
                 event: event,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Card _card(BuildContext context) {
+    return Card(
+      child: TableCalendar(
+        headerStyle: const HeaderStyle(
+          titleCentered: true,
+          formatButtonVisible: false,
+        ),
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekendStyle: context.textTheme.titleMedium!.copyWith(fontSize: 12),
+          weekdayStyle: context.textTheme.titleMedium!.copyWith(fontSize: 12),
+        ),
+        locale: AppConstants.TR_LANG,
+        eventLoader: _getEventsForTheDay,
+        focusedDay: _focusedDay,
+        firstDay: _firstDay,
+        lastDay: _lastDay,
+        onPageChanged: (focusedDay) {
+          setState(() {
+            _focusedDay = focusedDay;
+          });
+          _loadFirestoreEvents();
+        },
+        selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
+        onDaySelected: (selectedDay, focusedDay) {
+          setState(() {
+            _selectedDay = selectedDay;
+            _focusedDay = focusedDay;
+          });
+        },
+        calendarStyle: CalendarStyle(
+          defaultTextStyle: context.textTheme.titleMedium!,
+          outsideTextStyle: context.textTheme.titleMedium!.copyWith(
+            color: LightThemeColors.grey,
+          ),
+          weekendTextStyle: context.textTheme.titleMedium!,
+          todayDecoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: LightThemeColors.blazeOrange.withOpacity(.6),
+          ),
+          selectedDecoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: LightThemeColors.blazeOrange,
+          ),
         ),
       ),
     );
@@ -145,24 +169,36 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
 }
 
 class EventItem extends StatelessWidget {
+  const EventItem({Key? key, required this.event}) : super(key: key);
+
   final AttendanceModel event;
-  final Function()? onTap;
-  const EventItem({
-    Key? key,
-    required this.event,
-    this.onTap,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String? status;
+    Color? color;
+
+    switch (event.status) {
+      case "came":
+        status = "Geldi";
+        color = LightThemeColors.green;
+        break;
+      case "didntCame":
+        status = "Gelmedi";
+        color = LightThemeColors.red;
+        break;
+      default:
+    }
     return ListTile(
       title: Text(
-        event.status,
+        DateFormat('dd/MM/yyyy').format(
+          event.date,
+        ),
       ),
       subtitle: Text(
-        event.date.toString(),
+        status!,
+        style: TextStyle(color: color),
       ),
-      onTap: onTap,
     );
   }
 }
