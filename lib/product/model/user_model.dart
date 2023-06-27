@@ -8,6 +8,8 @@ class UserModel {
   final String name;
   final String mail;
   final String password;
+  final String? studentPhoneNumber;
+  final String? parentPhoneNumber;
   final bool isVerified;
   final grade;
   final classText;
@@ -17,6 +19,8 @@ class UserModel {
   const UserModel({
     this.grade,
     this.classText,
+    this.studentPhoneNumber,
+    this.parentPhoneNumber,
     required this.name,
     required this.mail,
     required this.password,

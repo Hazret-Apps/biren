@@ -34,10 +34,11 @@ class _StudentEditViewState extends State<StudentEditView>
               context.emptySizedHeightBoxLow,
               _nameText(context),
               context.emptySizedHeightBoxLow3x,
-              _mailListTile(context),
+              _studentPhoneListTile(context),
+              _parentPhoneListTile(context),
               _createdDateListTile(context),
               _gradeListTile(context),
-              context.emptySizedHeightBoxLow,
+              context.emptySizedHeightBoxLow3x,
               _submitButton(),
             ],
           ),
@@ -66,15 +67,32 @@ class _StudentEditViewState extends State<StudentEditView>
     );
   }
 
-  ListTile _mailListTile(BuildContext context) {
+  ListTile _studentPhoneListTile(BuildContext context) {
     return ListTile(
       title: Text(
-        "Mail Adresi:",
-        style: context.textTheme.titleMedium,
+        "Öğrenci Telefon:",
+        style: context.textTheme.bodyMedium,
       ),
       trailing: Text(
-        widget.userModel.mail,
-        style: context.textTheme.bodyLarge,
+        widget.userModel.studentPhoneNumber == ""
+            ? "-"
+            : widget.userModel.studentPhoneNumber!,
+        style: context.textTheme.bodyMedium,
+      ),
+    );
+  }
+
+  ListTile _parentPhoneListTile(BuildContext context) {
+    return ListTile(
+      title: Text(
+        "Veli Telefon:",
+        style: context.textTheme.bodyMedium,
+      ),
+      trailing: Text(
+        widget.userModel.parentPhoneNumber == ""
+            ? "-"
+            : widget.userModel.parentPhoneNumber!,
+        style: context.textTheme.bodyMedium,
       ),
     );
   }
@@ -83,11 +101,11 @@ class _StudentEditViewState extends State<StudentEditView>
     return ListTile(
       title: Text(
         "Oluşturulma Zamanı:",
-        style: context.textTheme.titleMedium,
+        style: context.textTheme.bodyMedium,
       ),
       trailing: Text(
         formattedDate,
-        style: context.textTheme.bodyLarge,
+        style: context.textTheme.bodyMedium,
       ),
     );
   }
@@ -96,10 +114,10 @@ class _StudentEditViewState extends State<StudentEditView>
     return ListTile(
       title: Text(
         "Sınıf:",
-        style: context.textTheme.titleMedium,
+        style: context.textTheme.bodyMedium,
       ),
       trailing:
-          SizedBox(width: context.width / 3, child: _selectClassDropdown()),
+          SizedBox(width: context.width / 6, child: _selectClassDropdown()),
     );
   }
 
