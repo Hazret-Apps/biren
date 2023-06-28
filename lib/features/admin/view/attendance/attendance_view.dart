@@ -1,5 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/attendance/enter_attendance_view.dart';
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,8 @@ class AdminAttendanceView extends StatefulWidget {
   State<AdminAttendanceView> createState() => _AdminAttendanceViewState();
 }
 
-class _AdminAttendanceViewState extends State<AdminAttendanceView> {
+class _AdminAttendanceViewState extends State<AdminAttendanceView>
+    with AdminAttendanceOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +20,7 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView> {
       body: SafeArea(
         child: SafeArea(
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseCollections.students.reference
-                .where("isVerified", isEqualTo: true)
-                .snapshots(),
+            stream: stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
