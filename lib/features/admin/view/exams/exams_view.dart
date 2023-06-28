@@ -1,5 +1,5 @@
+import 'package:biren_kocluk/features/admin/view/exams/all_exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/enter_exams_view.dart';
-import 'package:biren_kocluk/features/admin/view/exams/exams_results_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/search_exam_result_view.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _Body extends StatelessWidget {
               icon: Icons.source_rounded,
               title: "Sınav Sonuçlarını Gör",
               subtitle: "Öğrencilerin deneme sonuçlarını gör",
-              callView: ExamsResultsView(),
+              callView: AllExamsView(),
             ),
             SelectFeatureListTile(
               icon: Icons.account_circle_rounded,
