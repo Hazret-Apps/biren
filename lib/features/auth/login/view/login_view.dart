@@ -19,7 +19,6 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _appBar(),
       body: _body(context),
     );
   }
@@ -83,7 +82,7 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
   MainButton _loginButton(BuildContext context) {
     return MainButton(
       onPressed: () {
-        //! Admin test hızlı olsun diye böyle ayrı bir uygulamaya taşınacak
+        //! Admin test hızlı olsun diye böyle, ayrı bir uygulamaya taşınacak
         if (mailController.text == AuthService.adminMail &&
             passwordController.text == AuthService.adminPassword) {
           callAdminHomeView(context);

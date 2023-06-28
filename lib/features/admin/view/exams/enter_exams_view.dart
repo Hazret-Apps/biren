@@ -66,8 +66,6 @@ class _BodyState extends State<_Body> {
     file = myPDFFile!.readAsBytesSync();
     name = DateTime.now().millisecondsSinceEpoch.toString();
     setState(() {});
-
-    // * Load Storage
   }
 
   Future<void> loadImageToStorage(ImageSource imageSource) async {

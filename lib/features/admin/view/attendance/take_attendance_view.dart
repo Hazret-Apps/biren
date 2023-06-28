@@ -1,11 +1,11 @@
-import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/features/admin/view/attendance/mixin/take_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-class AddEvent extends StatefulWidget {
-  const AddEvent({
+class TakeAttendanceView extends StatefulWidget {
+  const TakeAttendanceView({
     Key? key,
     required this.firstDate,
     required this.lastDate,
@@ -21,26 +21,15 @@ class AddEvent extends StatefulWidget {
   final int index;
 
   @override
-  State<AddEvent> createState() => _AddEventState();
+  State<TakeAttendanceView> createState() => _TakeAttendanceViewState();
 }
 
-class _AddEventState extends State<AddEvent> {
-  late DateTime _selectedDate;
-
-  List<String> statusList = <String>["Geldi", "Gelmedi"];
-  String? statusValueTR;
-  String? statusValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDate = widget.selectedDate ?? DateTime.now();
-  }
-
+class _TakeAttendanceViewState extends State<TakeAttendanceView>
+    with TakeAttendanceOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yoklama Al")),
+      appBar: _appBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: context.horizontalPaddingNormal,
@@ -59,14 +48,7 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  MainButton _submitButton() {
-    return MainButton(
-      onPressed: () {
-        _addEvent();
-      },
-      text: "Kaydet",
-    );
-  }
+  AppBar _appBar() => AppBar(title: const Text("Yoklama Al"));
 
   DropdownButtonFormField<String> _takeStatusDropdown() {
     return DropdownButtonFormField(
@@ -96,24 +78,21 @@ class _AddEventState extends State<AddEvent> {
     return InputDatePickerFormField(
       firstDate: widget.firstDate,
       lastDate: widget.lastDate,
-      initialDate: _selectedDate,
+      initialDate: selectedDate,
       onDateSubmitted: (date) {
         setState(() {
-          _selectedDate = date;
+          selectedDate = date;
         });
       },
     );
   }
 
-  void _addEvent() async {
-    await FirebaseCollections.attendance.reference.add({
-      "name": widget.snapshot.data!.docs[widget.index]["name"],
-      "uid": widget.snapshot.data!.docs[widget.index]["uid"],
-      "status": statusValue,
-      "date": Timestamp.fromDate(_selectedDate),
-    });
-    if (mounted) {
-      Navigator.pop<bool>(context, true);
-    }
+  MainButton _submitButton() {
+    return MainButton(
+      onPressed: () {
+        onSubmitButton();
+      },
+      text: "Kaydet",
+    );
   }
 }

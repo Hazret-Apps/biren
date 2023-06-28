@@ -1,5 +1,4 @@
-import 'dart:collection';
-import 'package:biren_kocluk/features/admin/view/attendance/take_attendance_view.dart';
+import 'package:biren_kocluk/features/admin/view/attendance/mixin/enter_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
@@ -10,8 +9,11 @@ import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class EnterAttendanceView extends StatefulWidget {
-  const EnterAttendanceView(
-      {super.key, required this.snapshot, required this.index});
+  const EnterAttendanceView({
+    super.key,
+    required this.snapshot,
+    required this.index,
+  });
 
   final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
   final int index;
@@ -20,96 +22,33 @@ class EnterAttendanceView extends StatefulWidget {
   State<EnterAttendanceView> createState() => _EnterAttendanceViewState();
 }
 
-class _EnterAttendanceViewState extends State<EnterAttendanceView> {
-  late DateTime _focusedDay;
-  late DateTime _firstDay;
-  late DateTime _lastDay;
-  late DateTime _selectedDay;
-  late Map<DateTime, List<AttendanceModel>> _events;
-
-  int getHashCode(DateTime key) {
-    return key.day * 1000000 + key.month * 10000 + key.year;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _events = LinkedHashMap(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    );
-    _focusedDay = DateTime.now();
-    _firstDay = DateTime.now().subtract(const Duration(days: 1000));
-    _lastDay = DateTime.now().add(const Duration(days: 1000));
-    _selectedDay = DateTime.now();
-    _loadFirestoreEvents();
-  }
-
-  _loadFirestoreEvents() async {
-    final firstDay = DateTime(_focusedDay.year, _focusedDay.month, 1);
-    final lastDay = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
-    _events = {};
-
-    final snap = await FirebaseFirestore.instance
-        .collection('attendance')
-        .where('date', isGreaterThanOrEqualTo: firstDay)
-        .where('date', isLessThanOrEqualTo: lastDay)
-        .withConverter(
-            fromFirestore: AttendanceModel.fromFirestore,
-            toFirestore: (event, options) => event.toFirestore())
-        .get();
-    for (var doc in snap.docs) {
-      final event = doc.data();
-      final day =
-          DateTime.utc(event.date.year, event.date.month, event.date.day);
-      if (_events[day] == null) {
-        _events[day] = [];
-      }
-      _events[day]!.add(event);
-    }
-    setState(() {});
-  }
-
-  List<AttendanceModel> _getEventsForTheDay(DateTime day) {
-    return _events[day] ?? [];
-  }
-
+class _EnterAttendanceViewState extends State<EnterAttendanceView>
+    with EnterAttendanceOperationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final result = await Navigator.push<bool>(
-            context,
-            MaterialPageRoute(
-              builder: (_) => AddEvent(
-                firstDate: _firstDay,
-                lastDate: _lastDay,
-                selectedDate: _selectedDay,
-                snapshot: widget.snapshot,
-                index: widget.index,
-              ),
-            ),
-          );
-          if (result ?? false) {
-            _loadFirestoreEvents();
-          }
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: _takeAttendanceButton(context),
       appBar: _appBar(),
       body: SafeArea(
-        child: ListView(
-          children: [
-            _card(context),
-            ..._getEventsForTheDay(_selectedDay).map(
-              (event) => EventItem(
-                event: event,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _card(context),
+              ...getEventsForTheDay(selectedDay).map(
+                (event) => EventItem(
+                  event: event,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      title: Text(widget.snapshot.data!.docs[widget.index]["name"]),
     );
   }
 
@@ -125,21 +64,21 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
           weekdayStyle: context.textTheme.titleMedium!.copyWith(fontSize: 12),
         ),
         locale: AppConstants.TR_LANG,
-        eventLoader: _getEventsForTheDay,
-        focusedDay: _focusedDay,
-        firstDay: _firstDay,
-        lastDay: _lastDay,
-        onPageChanged: (focusedDay) {
+        eventLoader: getEventsForTheDay,
+        focusedDay: focusedDay,
+        firstDay: firstDay,
+        lastDay: lastDay,
+        onPageChanged: (newFocusedDay) {
           setState(() {
-            _focusedDay = focusedDay;
+            focusedDay = newFocusedDay;
           });
-          _loadFirestoreEvents();
+          loadFirestoreEvents();
         },
-        selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
-        onDaySelected: (selectedDay, focusedDay) {
+        selectedDayPredicate: (day) => isSameDay(day, selectedDay),
+        onDaySelected: (newSelectedDay, newFocusedDay) {
           setState(() {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
+            selectedDay = newSelectedDay;
+            focusedDay = newFocusedDay;
           });
         },
         calendarStyle: CalendarStyle(
@@ -161,9 +100,12 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView> {
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      title: Text(widget.snapshot.data!.docs[widget.index]["name"]),
+  FloatingActionButton _takeAttendanceButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () async {
+        callTakeAttendanceView();
+      },
+      child: const Icon(Icons.add),
     );
   }
 }

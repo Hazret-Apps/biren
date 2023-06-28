@@ -37,7 +37,6 @@ class HomeViewDrawer extends StatelessWidget {
               ),
             ),
           ),
-          // * Ödevler *//
           _HomeViewListTile(
             "Ödevler",
             () {
@@ -51,8 +50,6 @@ class HomeViewDrawer extends StatelessWidget {
             },
             Icons.business_center_rounded,
           ),
-
-          // * Duyurular *//
           _HomeViewListTile(
             "Duyurular",
             () {
@@ -66,15 +63,11 @@ class HomeViewDrawer extends StatelessWidget {
             },
             FontAwesomeIcons.triangleExclamation,
           ),
-
-          // * Yoklama *//
           _HomeViewListTile(
             "Yoklama",
             () {},
             Icons.calendar_month_rounded,
           ),
-
-          // * Denemeler *//
           _HomeViewListTile(
             "Denemeler",
             () {
@@ -88,8 +81,6 @@ class HomeViewDrawer extends StatelessWidget {
             },
             Icons.auto_graph_rounded,
           ),
-
-          // * Çıkış Yap *//
           _HomeViewListTile(
             "Çıkış Yap",
             () {
