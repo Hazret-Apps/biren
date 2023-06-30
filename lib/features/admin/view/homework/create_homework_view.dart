@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:biren_kocluk/features/admin/view/homework/mixin/create_homework_operation_mixin.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/enum/homework_type_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
-import 'package:biren_kocluk/product/widget/button/done_action_button.dart';
+import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
@@ -26,84 +28,121 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
           padding: context.horizontalPaddingNormal,
           child: Column(
             children: [
+              // context.emptySizedHeightBoxLow3x,
+              // StreamBuilder<QuerySnapshot>(
+              //   stream: studentsStream,
+              //   builder: (context, snapshot) {
+              //     List<DropdownMenuItem> items = [];
+              //     if (!snapshot.hasData) {
+              //       return const Center(child: CircularProgressIndicator());
+              //     } else {
+              //       final users = snapshot.data!.docs.reversed.toList();
+              //       for (var classes in users) {
+              //         items.add(
+              //           DropdownMenuItem(
+              //             value: classes.id,
+              //             child: Text(
+              //               classes["name"],
+              //             ),
+              //           ),
+              //         );
+              //       }
+              //       return DropdownButtonFormField(
+              //         value: selectedUserValue,
+              //         isExpanded: true,
+              //         hint: const Text(
+              //           "Öğrenci Seç",
+              //         ),
+              //         onChanged: (value) {
+              //           setState(() {
+              //             selectedUserValue = value;
+              //             loadUser();
+              //             loadLessons();
+              //             selectedSubjectText = null;
+              //             selectedSubjectValue = null;
+              //             selectedTopicValue = null;
+              //           });
+              //         },
+              //         items: items,
+              //       );
+              //     }
+              //   },
+              // ),
+              context.emptySizedHeightBoxLow,
+              _TypeSelectionRow(homeworkType, onChanged: changeHelpType),
+              context.emptySizedHeightBoxLow3x,
               _dateFormField(),
               context.emptySizedHeightBoxLow3x,
-              StreamBuilder<QuerySnapshot>(
-                stream: stream,
-                builder: (context, snapshot) {
-                  List<DropdownMenuItem> items = [];
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    final users = snapshot.data!.docs.reversed.toList();
-                    for (var classes in users) {
-                      items.add(
-                        DropdownMenuItem(
-                          value: classes.id,
-                          child: Text(
-                            classes["name"],
-                          ),
-                        ),
-                      );
-                    }
-                    return DropdownButtonFormField(
-                      value: selectedUserValue,
-                      isExpanded: true,
-                      hint: const Text(
-                        "Öğrenci Seç",
-                      ),
-                      onChanged: (value) {
+              isClass
+                  ? SelectTypeDropdown(
+                      selectedValue: selectedGradeValue,
+                      stream: FirebaseCollections.classes.reference
+                          .orderBy('name', descending: false)
+                          .snapshots(),
+                      type: HomeworkType.classText,
+                      onTap: (value) {
+                        setState(() {
+                          selectedGradeValue = value;
+                          loadClass();
+                          selectedSubjectText = null;
+                          selectedSubjectValue = null;
+                          selectedTopicValue = null;
+                          topics = {"": ""};
+                        });
+                      },
+                    )
+                  : SelectTypeDropdown(
+                      selectedValue: selectedUserValue,
+                      stream:
+                          FirebaseCollections.students.reference.snapshots(),
+                      type: HomeworkType.student,
+                      onTap: (value) {
                         setState(() {
                           selectedUserValue = value;
                           loadUser();
-                          loadLessons();
                           selectedSubjectText = null;
                           selectedSubjectValue = null;
                           selectedTopicValue = null;
                         });
                       },
-                      items: items,
-                    );
-                  }
-                },
-              ),
-              // isClass
-              //     ? SelectTypeDropdown(
-              //         selectedValue: selectedGradeValue,
-              //         stream: FirebaseCollections.classes.reference
-              //             .orderBy('name', descending: false)
-              //             .snapshots(),
-              //         type: HomeworkType.classText,
-              //         onTap: (value) {
-              //           setState(() {
-              //             selectedGradeValue = value;
-              //             loadClass();
-              //             selectedSubjectText = null;
-              //             selectedSubjectValue = null;
-              //             selectedTopicValue = null;
-              //             topics = {"": ""};
-              //           });
-              //         },
-              //       )
-              //     : SelectTypeDropdown(
-              //         selectedValue: selectedUserValue,
-              //         stream:
-              //             FirebaseCollections.students.reference.snapshots(),
-              //         type: HomeworkType.student,
-              //         onTap: (value) {
-              //           setState(() {
-              //             selectedUserValue = value;
-              //             loadUser();
-              //             selectedSubjectText = null;
-              //             selectedSubjectValue = null;
-              //             selectedTopicValue = null;
-              //           });
-              //         },
-              //       ),
+                    ),
               context.emptySizedHeightBoxLow3x,
               _selectSubjectDropdown(),
               context.emptySizedHeightBoxLow3x,
               _selectTopicDropdown(),
+              context.emptySizedHeightBoxLow3x,
+              MainButton(
+                color: isClass
+                    ? selectedClass == null ||
+                            selectedDate == null ||
+                            selectedSubjectValue == null ||
+                            selectedTopicValue == null
+                        ? LightThemeColors.grey
+                        : null
+                    : selectedDate == null ||
+                            selectedSubjectValue == null ||
+                            selectedTopicValue == null ||
+                            selectedUserValue == null
+                        ? LightThemeColors.grey
+                        : null,
+                onPressed: () {
+                  if (isClass) {
+                    if (selectedGradeValue != null &&
+                        selectedTopicValue != null &&
+                        selectedSubjectValue != null) {
+                      addHomework();
+                    }
+                  } else {
+                    if (selectedDate != null &&
+                        selectedSubjectValue != null &&
+                        selectedTopicValue != null &&
+                        selectedUserValue != null) {
+                      addHomework();
+                    }
+                  }
+                },
+                text: "Kaydet",
+              )
             ],
           ),
         ),
@@ -111,43 +150,8 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     );
   }
 
-  AppBar _appBar(BuildContext context) => AppBar(
-        title: const Text("Ders Programı Oluştur"),
-        actions: [
-          DoneActionButton(
-            color: grade == null ||
-                    selectedUserValue == null ||
-                    selectedDate == null ||
-                    jsonNumber == null ||
-                    selectedSubjectText == null ||
-                    selectedSubjectValue == null ||
-                    selectedTopicValue == null
-                ? LightThemeColors.blazeOrange.withOpacity(.6)
-                : LightThemeColors.blazeOrange,
-            onTap: () {
-              if (grade == null ||
-                  selectedUserValue == null ||
-                  selectedDate == null ||
-                  jsonNumber == null ||
-                  selectedSubjectText == null ||
-                  selectedSubjectValue == null ||
-                  selectedTopicValue == null) {
-                return;
-              } else {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                );
-                addHomework();
-              }
-            },
-          ),
-          context.emptySizedWidthBoxNormal,
-        ],
-      );
+  AppBar _appBar(BuildContext context) =>
+      AppBar(title: const Text("Ders Programı Oluştur"));
 
   DateTimeFormField _dateFormField() {
     return DateTimeFormField(
@@ -228,124 +232,122 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
   }
 }
 
-// ! Sınıf olayını sorun yaşattı şimdilik kaldırdım dummy kod değil :)
+class _SelectionButton extends StatelessWidget {
+  const _SelectionButton({
+    required this.label,
+    required this.isSelected,
+    required this.onPressed,
+  });
 
-// class _SelectionButton extends StatelessWidget {
-//   const _SelectionButton({
-//     required this.label,
-//     required this.isSelected,
-//     required this.onPressed,
-//   });
+  final String label;
+  final bool isSelected;
+  final VoidCallback onPressed;
 
-//   final String label;
-//   final bool isSelected;
-//   final VoidCallback onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: context.paddingNormal,
+          side: BorderSide(
+            color: isSelected
+                ? LightThemeColors.blazeOrange
+                : LightThemeColors.snowbank,
+          ),
+        ),
+        onPressed: onPressed,
+        child: FittedBox(
+          child: Text(
+            label,
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: OutlinedButton(
-//         style: OutlinedButton.styleFrom(
-//           padding: context.paddingNormal,
-//           side: BorderSide(
-//             color: isSelected
-//                 ? LightThemeColors.blazeOrange
-//                 : LightThemeColors.snowbank,
-//           ),
-//         ),
-//         onPressed: onPressed,
-//         child: FittedBox(
-//           child: Text(
-//             label,
-//             style: context.textTheme.titleSmall?.copyWith(
-//               fontWeight: FontWeight.w400,
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _TypeSelectionRow extends StatelessWidget {
+  const _TypeSelectionRow(this.selection, {required this.onChanged});
 
-// class _TypeSelectionRow extends StatelessWidget {
-//   const _TypeSelectionRow(this.selection, {required this.onChanged});
+  final HomeworkType selection;
+  final ValueChanged<HomeworkType> onChanged;
 
-//   final HomeworkType selection;
-//   final ValueChanged<HomeworkType> onChanged;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _SelectionButton(
+          label: "Bireysel Ödev",
+          isSelected: selection == HomeworkType.student,
+          onPressed: () => onChanged(HomeworkType.student),
+        ),
+        context.emptySizedWidthBoxLow3x,
+        _SelectionButton(
+          label: "Sınıf Ödev",
+          isSelected: selection == HomeworkType.classText,
+          onPressed: () => onChanged(HomeworkType.classText),
+        ),
+      ],
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         _SelectionButton(
-//           label: "Bireysel Ödev",
-//           isSelected: selection == HomeworkType.student,
-//           onPressed: () => onChanged(HomeworkType.student),
-//         ),
-//         context.emptySizedWidthBoxLow3x,
-//         _SelectionButton(
-//           label: "Sınıf Ödev",
-//           isSelected: selection == HomeworkType.classText,
-//           onPressed: () => onChanged(HomeworkType.classText),
-//         ),
-//       ],
-//     );
-//   }
-// }
+class SelectTypeDropdown extends StatefulWidget {
+  SelectTypeDropdown({
+    super.key,
+    this.selectedValue,
+    this.stream,
+    this.type,
+    required this.onTap,
+  });
 
-// class SelectTypeDropdown extends StatefulWidget {
-//   SelectTypeDropdown({
-//     super.key,
-//     this.selectedValue,
-//     this.stream,
-//     this.type,
-//     required this.onTap,
-//   });
+  String? selectedValue;
+  Stream<QuerySnapshot<Object?>>? stream;
+  HomeworkType? type;
+  final ValueChanged onTap;
 
-//   String? selectedValue;
-//   Stream<QuerySnapshot<Object?>>? stream;
-//   HomeworkType? type;
-//   final ValueChanged onTap;
+  @override
+  State<SelectTypeDropdown> createState() => _SelectTypeDropdownState();
+}
 
-//   @override
-//   State<SelectTypeDropdown> createState() => _SelectTypeDropdownState();
-// }
-
-// class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<QuerySnapshot>(
-//       stream: widget.stream,
-//       builder: (context, snapshot) {
-//         List<DropdownMenuItem> items = [];
-//         if (!snapshot.hasData) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else {
-//           final users = snapshot.data!.docs.reversed.toList();
-//           for (var classes in users) {
-//             items.add(
-//               DropdownMenuItem(
-//                 value: classes.id,
-//                 child: Text(
-//                   classes["name"],
-//                 ),
-//               ),
-//             );
-//           }
-//           return DropdownButtonFormField(
-//             value: widget.selectedValue,
-//             isExpanded: true,
-//             hint: Text(
-//               widget.type == HomeworkType.classText
-//                   ? "Sınıf Seç"
-//                   : "Öğrenci Seç",
-//             ),
-//             onChanged: widget.onTap,
-//             items: items,
-//           );
-//         }
-//       },
-//     );
-//   }
-// }
+class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: widget.stream,
+      builder: (context, snapshot) {
+        List<DropdownMenuItem> items = [];
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final users = snapshot.data!.docs.reversed.toList();
+          for (var classes in users) {
+            items.add(
+              DropdownMenuItem(
+                value: classes.id,
+                child: Text(
+                  classes["name"],
+                ),
+              ),
+            );
+          }
+          return DropdownButtonFormField(
+            value: widget.selectedValue,
+            isExpanded: true,
+            hint: Text(
+              widget.type == HomeworkType.classText
+                  ? "Sınıf Seç"
+                  : "Öğrenci Seç",
+            ),
+            onChanged: widget.onTap,
+            items: items,
+          );
+        }
+      },
+    );
+  }
+}

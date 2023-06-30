@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,30 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
     }
   }
 
+  DocumentSnapshot<Object?>? myClassSnapshot;
+  DocumentSnapshot<Object?>? myUserSnapshot;
+
+  Future<bool> isClass() async {
+    String classSnapshot =
+        await widget.snapshot.data!.docs[widget.index]["assignedId"];
+    myClassSnapshot =
+        await FirebaseCollections.classes.reference.doc(classSnapshot).get();
+    setState(() {});
+    if (await widget.snapshot.data!.docs[widget.index]["type"] == "class") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> isStudent() async {
+    String userSnapshotString =
+        await widget.snapshot.data!.docs[widget.index]["assignedId"];
+    myUserSnapshot = await FirebaseCollections.students.reference
+        .doc(userSnapshotString)
+        .get();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -66,6 +91,8 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       dateTime,
     );
     loadComponents();
+    isClass();
+    isStudent();
   }
 
   @override
@@ -104,15 +131,44 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                             flex: 8,
-                            child: _subjectText(
-                                widget.snapshot, widget.index, context)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.snapshot.data!.docs[widget.index]
+                                              ["type"] ==
+                                          "class"
+                                      ? (myClassSnapshot?["name"] ?? "")
+                                      : (myUserSnapshot?["name"] ?? ""),
+                                  style: context.textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: color == LightThemeColors.white
+                                        ? LightThemeColors.black
+                                        : LightThemeColors.white,
+                                  ),
+                                ),
+                                context.emptySizedHeightBoxLow,
+                                _subjectText(
+                                  widget.snapshot,
+                                  widget.index,
+                                  context,
+                                ),
+                              ],
+                            )),
                         const Spacer(),
-                        _madeText(context),
+                        widget.snapshot.data!.docs[widget.index]["type"] ==
+                                "class"
+                            ? const SizedBox.shrink()
+                            : _madeText(context),
                         context.emptySizedWidthBoxLow,
-                        _icon(),
+                        widget.snapshot.data!.docs[widget.index]["type"] ==
+                                "class"
+                            ? const SizedBox.shrink()
+                            : _icon(),
                       ],
                     ),
                     context.emptySizedHeightBoxLow,

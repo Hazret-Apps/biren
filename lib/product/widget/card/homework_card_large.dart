@@ -24,6 +24,7 @@ class HomeworkCardLarge extends StatefulWidget {
 class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   late DateTime dateTime;
   late String formattedDate;
+  late bool isClass;
 
   @override
   void initState() {
@@ -32,6 +33,9 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
+    widget.snapshot.data!.docs[widget.index]["type"] == "class"
+        ? isClass = true
+        : isClass = false;
   }
 
   @override

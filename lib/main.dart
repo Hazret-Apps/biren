@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
+import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/homeview/home_view.dart';
 import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/reject/rejected_view.dart';
@@ -32,6 +33,18 @@ Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseAuth.instance.currentUser == null ? null : await loadUserClass();
+}
+
+Future<void> loadUserClass() async {
+  DocumentSnapshot<Object?> user = await FirebaseCollections.students.reference
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  String userClassName = await user["class"];
+  var userClass = await FirebaseCollections.classes.reference
+      .where("name", isEqualTo: userClassName)
+      .get();
+  AuthService.userClassId = userClass.docs.first.id;
 }
 
 void _initSystemUi() {

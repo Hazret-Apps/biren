@@ -365,12 +365,11 @@
         "6": "Zarflar",
         "7": "Parçada Anlam",
         "8": "Söz Gruplarında Anlam",
-        "9": "Cümlede Anlam",
-        "10": "Anlatım Bozuklukları",
-        "12": "Parçada Anlam",
-        "13": "Yazım Kuralları",
-        "14": "Noktalama İşaretleri",
-        "15": "Metin Türleri"
+        "9": "Anlatım Bozuklukları",
+        "10": "Parçada Anlam",
+        "11": "Yazım Kuralları",
+        "12": "Noktalama İşaretleri",
+        "13": "Metin Türleri"
         },
         "math": {
         "1": "Tam Sayılarla İşlemler",

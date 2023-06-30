@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AuthService {
-  static final String? userName =
-      FirebaseAuth.instance.currentUser?.displayName;
-  static final String? mail = FirebaseAuth.instance.currentUser?.email;
-  static final String? userId = FirebaseAuth.instance.currentUser?.uid;
+  static String? userName = FirebaseAuth.instance.currentUser?.displayName;
+  static String? mail = FirebaseAuth.instance.currentUser?.email;
+  static String? userId = FirebaseAuth.instance.currentUser?.uid;
+  static String? userClassId;
 
   static const String adminMail = "admin";
   static const String adminPassword = "123";
