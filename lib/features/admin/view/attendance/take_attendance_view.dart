@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/take_attendance_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +90,9 @@ class _TakeAttendanceViewState extends State<TakeAttendanceView>
 
   MainButton _submitButton() {
     return MainButton(
+      color: statusValue == null ? LightThemeColors.grey : null,
       onPressed: () {
-        onSubmitButton();
+        statusValue == null ? null : onSubmitButton();
       },
       text: "Kaydet",
     );
