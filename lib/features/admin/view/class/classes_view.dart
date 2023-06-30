@@ -221,7 +221,7 @@ class _ClassesViewState extends State<ClassesView> {
       color: selectedGradeNumber == null || selectedGradeText == null
           ? LightThemeColors.grey
           : null,
-      onPressed: () {
+      onPressed: () async {
         if (selectedGradeNumber != null || selectedGradeText != null) {
           Navigator.pop(context);
           final snackBar = _snackBar();
@@ -230,11 +230,12 @@ class _ClassesViewState extends State<ClassesView> {
             ..hideCurrentSnackBar()
             ..showSnackBar(snackBar);
 
-          FirebaseCollections.classes.reference
-              .add({"name": "$selectedGradeNumber/$selectedGradeText"});
+          await FirebaseCollections.classes.reference.add({
+            "name": "$selectedGradeNumber/$selectedGradeText",
+          });
         }
       },
-      text: "OLUŞTUR",
+      text: "Oluştur",
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card_large.dart';
 import 'package:biren_kocluk/product/widget/drawer/homework_drawer.dart';
@@ -21,15 +22,31 @@ class HomeworksView extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body();
 
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseCollections.homeworks.reference
-          .where("user", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .where("makeEnum", isEqualTo: "empty")
+          .where(
+            Filter.or(
+              Filter(
+                "assignedId",
+                isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+              ),
+              Filter(
+                "assignedId",
+                isEqualTo: AuthService.userClassId,
+              ),
+            ),
+          )
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
