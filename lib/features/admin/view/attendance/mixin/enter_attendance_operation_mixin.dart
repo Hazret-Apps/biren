@@ -19,14 +19,13 @@ mixin EnterAttendanceOperationMixin on State<EnterAttendanceView> {
 
   loadFirestoreEvents() async {
     final firstDay = DateTime(focusedDay.year, focusedDay.month, 1);
-    final lastDay = DateTime(focusedDay.year, focusedDay.month + 1, 0);
     events = {};
 
+    String uid = widget.snapshot.data!.docs[widget.index]["uid"];
+
     final snap = await FirebaseCollections.attendance.reference
-        .where("uid",
-            isEqualTo: widget.snapshot.data!.docs[widget.index]["uid"])
-        .where('date', isGreaterThanOrEqualTo: firstDay)
-        .where('date', isLessThanOrEqualTo: lastDay)
+        .where("uid", isEqualTo: uid)
+        .where("date", isGreaterThanOrEqualTo: firstDay)
         .withConverter(
             fromFirestore: AttendanceModel.fromFirestore,
             toFirestore: (event, options) => event.toFirestore())
