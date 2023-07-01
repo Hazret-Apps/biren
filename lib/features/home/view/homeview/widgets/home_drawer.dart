@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/announcement/announcements_view.dart';
+import 'package:biren_kocluk/features/home/view/attendance/attendance_view.dart';
 import 'package:biren_kocluk/features/home/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -65,7 +66,15 @@ class HomeViewDrawer extends StatelessWidget {
           ),
           _HomeViewListTile(
             "Yoklama",
-            () {},
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const AttendanceView(),
+                ),
+              );
+            },
             Icons.calendar_month_rounded,
           ),
           _HomeViewListTile(
