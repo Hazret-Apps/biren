@@ -1,11 +1,16 @@
 import 'package:biren_kocluk/features/admin/view/attendance/take_attendance_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 mixin TakeAttendanceOperationMixin on State<TakeAttendanceView> {
   late DateTime selectedDate;
-  List<String> statusList = <String>["Geldi", "Gelmedi"];
+  List<String> statusList = <String>[
+    LocaleKeys.came.tr(),
+    LocaleKeys.didntCame.tr()
+  ];
   String? statusValueTR;
   String? statusValue;
 

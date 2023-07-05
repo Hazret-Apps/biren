@@ -1,7 +1,9 @@
 import 'package:biren_kocluk/features/admin/view/exams/all_exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/enter_exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/search_exam_result_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -18,7 +20,7 @@ class ExamsView extends StatelessWidget {
 
   AppBar get _appBar {
     return AppBar(
-      title: const Text("Denemeler"),
+      title: Text(LocaleKeys.features_exams.tr()),
     );
   }
 }
@@ -31,25 +33,30 @@ class _Body extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         padding: context.horizontalPaddingLow,
-        child: const Column(
+        child: Column(
           children: [
             SelectFeatureListTile(
               icon: Icons.edit_note_rounded,
-              title: "Sonuç Gir",
-              subtitle: "Öğrencilerin deneme sonuçlarını gir",
-              callView: EnterExamsView(),
+              title: LocaleKeys.features_enterResult.tr(),
+              subtitle: LocaleKeys
+                  .featureDescriptions_enterExamResultDescription
+                  .tr(),
+              callView: const EnterExamsView(),
             ),
             SelectFeatureListTile(
               icon: Icons.source_rounded,
-              title: "Sınav Sonuçlarını Gör",
-              subtitle: "Öğrencilerin deneme sonuçlarını gör",
-              callView: AllExamsView(),
+              title: LocaleKeys.features_showExamResults.tr(),
+              subtitle: LocaleKeys
+                  .featureDescriptions_showExamResultsDescription
+                  .tr(),
+              callView: const AllExamsView(),
             ),
             SelectFeatureListTile(
               icon: Icons.account_circle_rounded,
-              title: "Sonuç Ara",
-              subtitle: "Bir öğrencinin deneme sonuçlarını gör",
-              callView: SearchExamResultView(),
+              title: LocaleKeys.features_searchResult.tr(),
+              subtitle:
+                  LocaleKeys.featureDescriptions_searchResultDescription.tr(),
+              callView: const SearchExamResultView(),
             ),
           ],
         ),

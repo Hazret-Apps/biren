@@ -1,3 +1,5 @@
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class RejectedView extends StatelessWidget {
@@ -5,9 +7,9 @@ class RejectedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Giriş Talebiniz Reddedildi"),
+        child: Text(LocaleKeys.auth_loginRejected.tr()),
       ),
     );
   }

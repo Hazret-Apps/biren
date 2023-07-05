@@ -1,10 +1,11 @@
 import 'package:biren_kocluk/features/home/view/homeworks/check_homework_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
 class HomeworkCardLarge extends StatefulWidget {
@@ -79,7 +80,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                     },
                     itemBuilder: (ctx) => [
                       _buildPopupMenuItem(
-                        "Soru Sor",
+                        LocaleKeys.askQuestion.tr(),
                         0,
                         Icons.info_outline_rounded,
                         context,
@@ -87,13 +88,13 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                       widget.snapshot.data!.docs[widget.index]["makeEnum"] ==
                               "pushed"
                           ? _buildPopupMenuItem(
-                              "Gönderildi",
+                              LocaleKeys.pushed.tr(),
                               2,
                               Icons.arrow_circle_right_outlined,
                               context,
                             )
                           : _buildPopupMenuItem(
-                              "Tamamlandı",
+                              LocaleKeys.complated.tr(),
                               1,
                               Icons.check_rounded,
                               context,
@@ -123,11 +124,8 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog.adaptive(
-          title: const Text("Fotoğraf Çek"),
-          content: const Text(
-            "Öğretmenlerinin ödevinden emin olabilmesi "
-            "için ödevinin fotoğrafını çek",
-          ),
+          title: Text(LocaleKeys.takePhoto.tr()),
+          content: Text(LocaleKeys.submitHomeworkDescriptionDialog.tr()),
           actions: [
             TextButton(
               onPressed: () {
@@ -148,9 +146,9 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                   ),
                 );
               },
-              child: const Text(
-                "Anladım",
-                style: TextStyle(
+              child: Text(
+                LocaleKeys.understand.tr(),
+                style: const TextStyle(
                   color: LightThemeColors.blazeOrange,
                 ),
               ),

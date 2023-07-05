@@ -1,8 +1,9 @@
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
 class PushedHomeworkCardLarge extends StatefulWidget {
@@ -33,27 +34,27 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       case "pushed":
         icon = Icons.alarm_rounded;
         color = LightThemeColors.blazeOrange;
-        madeText = "Gönderildi";
+        madeText = LocaleKeys.pushed.tr();
         break;
       case "missing":
         icon = Icons.remove_circle_outline;
         color = const Color.fromARGB(255, 254, 207, 15);
-        madeText = "Eksik";
+        madeText = LocaleKeys.missing.tr();
         break;
       case "made":
         icon = Icons.check_box_rounded;
         color = LightThemeColors.green;
-        madeText = "Yapıldı";
+        madeText = LocaleKeys.made.tr();
         break;
       case "didntMade":
         icon = Icons.close;
         color = LightThemeColors.red;
-        madeText = "Yapılmadı";
+        madeText = LocaleKeys.didntMade.tr();
         break;
       case "empty":
         icon = Icons.hourglass_empty_rounded;
         color = LightThemeColors.white;
-        madeText = "Gönderilmedi";
+        madeText = LocaleKeys.notPushed.tr();
         break;
       default:
     }
@@ -120,7 +121,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              madeText == "Gönderilmedi"
+              madeText == LocaleKeys.notPushed.tr()
                   ? const SizedBox.shrink()
                   : _imageContainer(context),
               color == LightThemeColors.white
@@ -173,7 +174,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                     ),
                     context.emptySizedHeightBoxLow,
                     _topicText(widget.snapshot, widget.index, context),
-                    madeText == "Gönderilmedi"
+                    madeText == LocaleKeys.notPushed.tr()
                         ? const SizedBox.shrink()
                         : _dateText(widget.snapshot, widget.index, context),
                   ],
@@ -227,7 +228,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   Text _dateText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      "Gönderilme Zamanı: $formattedDate",
+      "${LocaleKeys.notPushed.tr()}: $formattedDate",
       style: context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w400,
         overflow: TextOverflow.ellipsis,

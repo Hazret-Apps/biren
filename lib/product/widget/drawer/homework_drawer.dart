@@ -2,7 +2,9 @@ import 'package:biren_kocluk/features/home/view/homeworks/all_homeworks_view.dar
 import 'package:biren_kocluk/features/home/view/homeworks/didnt_made_homeworks_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/missing_homeworks_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/pushed_homeworks_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -27,7 +29,7 @@ class HomeworkDrawer extends StatelessWidget {
               padding: context.verticalPaddingMedium +
                   context.horizontalPaddingNormal,
               child: Text(
-                "Biren Koçluk",
+                LocaleKeys.appName.tr(),
                 style: context.textTheme.titleLarge?.copyWith(
                   color: LightThemeColors.white,
                 ),
@@ -35,7 +37,7 @@ class HomeworkDrawer extends StatelessWidget {
             ),
           ),
           _HomeworkListTile(
-            "Geçmiş Ödevler",
+            LocaleKeys.features_homeworkHistory.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -48,7 +50,7 @@ class HomeworkDrawer extends StatelessWidget {
             Icons.history,
           ),
           _HomeworkListTile(
-            "Yapılmayan Ödevler",
+            LocaleKeys.features_didntMadeHomeworks.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -61,7 +63,7 @@ class HomeworkDrawer extends StatelessWidget {
             Icons.close_rounded,
           ),
           _HomeworkListTile(
-            "Eksik Ödevler",
+            LocaleKeys.features_missingHomeworks.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -74,7 +76,7 @@ class HomeworkDrawer extends StatelessWidget {
             Icons.remove_circle_outline_rounded,
           ),
           _HomeworkListTile(
-            "Gönderilen Ödevler",
+            LocaleKeys.features_pushedHomeworks.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(

@@ -1,5 +1,7 @@
 import 'package:biren_kocluk/features/home/view/exams/exam_detail_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -59,7 +61,7 @@ class ExamWidget extends StatelessWidget {
   Text _titleText(BuildContext context) {
     return Text(
       snapshot.data?.docs[index]["title"] == ""
-          ? "Başlık Yok"
+          ? LocaleKeys.noTitle.tr()
           : snapshot.data?.docs[index]["title"],
       overflow: TextOverflow.ellipsis,
     );
@@ -68,7 +70,7 @@ class ExamWidget extends StatelessWidget {
   Text _descriptionText(BuildContext context) {
     return Text(
       snapshot.data?.docs[index]["description"] == ""
-          ? "Açıklama yok"
+          ? LocaleKeys.noDescription.tr()
           : snapshot.data?.docs[index]["description"],
       style: context.textTheme.labelMedium,
       overflow: TextOverflow.ellipsis,

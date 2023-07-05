@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:biren_kocluk/features/admin/view/students/mixin/student_edit_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -70,7 +72,7 @@ class _StudentEditViewState extends State<StudentEditView>
   ListTile _studentPhoneListTile(BuildContext context) {
     return ListTile(
       title: Text(
-        "Öğrenci Telefon:",
+        LocaleKeys.auth_studentPhone.tr(),
         style: context.textTheme.bodyMedium,
       ),
       trailing: Text(
@@ -85,7 +87,7 @@ class _StudentEditViewState extends State<StudentEditView>
   ListTile _parentPhoneListTile(BuildContext context) {
     return ListTile(
       title: Text(
-        "Veli Telefon:",
+        LocaleKeys.auth_parentPhone.tr(),
         style: context.textTheme.bodyMedium,
       ),
       trailing: Text(
@@ -100,7 +102,7 @@ class _StudentEditViewState extends State<StudentEditView>
   ListTile _createdDateListTile(BuildContext context) {
     return ListTile(
       title: Text(
-        "Oluşturulma Zamanı:",
+        LocaleKeys.auth_creationTime.tr(),
         style: context.textTheme.bodyMedium,
       ),
       trailing: Text(
@@ -113,7 +115,7 @@ class _StudentEditViewState extends State<StudentEditView>
   ListTile _gradeListTile(BuildContext context) {
     return ListTile(
       title: Text(
-        "Sınıf:",
+        LocaleKeys.classText.tr(),
         style: context.textTheme.bodyMedium,
       ),
       trailing:
@@ -142,7 +144,7 @@ class _StudentEditViewState extends State<StudentEditView>
           }
           return DropdownButton(
             value: selectedGradeValue,
-            hint: Text(widget.userModel.classText ?? "Sınıf Yok"),
+            hint: Text(widget.userModel.classText ?? LocaleKeys.noClass.tr()),
             onChanged: (value) async {
               setState(() {
                 selectedGradeValue = value;
@@ -163,7 +165,7 @@ class _StudentEditViewState extends State<StudentEditView>
         onPressed: () {
           onSubmitButton();
         },
-        text: "KAYDET",
+        text: LocaleKeys.submit.tr(),
       ),
     );
   }

@@ -34,12 +34,12 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
             children: [
               context.emptySizedHeightBoxHigh,
               Text(
-                "Tekrar Hoşgeldin!",
+                LocaleKeys.auth_welcomeAgain.tr(),
                 style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
               ),
               context.emptySizedHeightBoxLow,
               Text(
-                "Seni tekrar gördüğümüze çok \nsevindik",
+                LocaleKeys.auth_welcomeAgainText.tr(),
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: LightThemeColors.grey),

@@ -1,6 +1,8 @@
 import 'package:biren_kocluk/features/admin/view/homework/mixin/incoming_homeworks_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/coming_homeworks_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class IncomingHomeworksView extends StatefulWidget {
@@ -20,7 +22,8 @@ class _IncomingHomeworksViewState extends State<IncomingHomeworksView>
     );
   }
 
-  AppBar get _appBar => AppBar(title: const Text("Gelen Ödevler"));
+  AppBar get _appBar =>
+      AppBar(title: Text(LocaleKeys.features_incomingHomeworks.tr()));
 }
 
 class _Body extends StatelessWidget {

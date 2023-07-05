@@ -1,8 +1,9 @@
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
 class ComingHomeworkCardLarge extends StatefulWidget {
@@ -169,19 +170,19 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                           },
                           itemBuilder: (ctx) => [
                             _buildPopupMenuItem(
-                              "Yaptı",
+                              LocaleKeys.made.tr(),
                               0,
                               Icons.check_box_outlined,
                               context,
                             ),
                             _buildPopupMenuItem(
-                              "Yapmadı",
+                              LocaleKeys.didntMade.tr(),
                               1,
                               Icons.close,
                               context,
                             ),
                             _buildPopupMenuItem(
-                              "Eksik",
+                              LocaleKeys.missing.tr(),
                               2,
                               Icons.remove_circle_outline,
                               context,

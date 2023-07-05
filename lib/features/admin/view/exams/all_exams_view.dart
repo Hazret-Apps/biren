@@ -1,6 +1,8 @@
 import 'package:biren_kocluk/features/home/view/exams/widget/exam_widget.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -20,7 +22,7 @@ class _AllExamsViewState extends State<AllExamsView> {
     );
   }
 
-  AppBar _appBar() => AppBar(title: const Text("Tüm Sınavlar"));
+  AppBar _appBar() => AppBar(title: Text(LocaleKeys.features_allExams.tr()));
 }
 
 class _Body extends StatelessWidget {

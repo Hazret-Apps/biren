@@ -1,6 +1,8 @@
 import 'package:biren_kocluk/features/admin/view/students/mixin/accepted_students_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AcceptedStudentsView extends StatefulWidget {
@@ -16,7 +18,7 @@ class _AcceptedStudentsViewState extends State<AcceptedStudentsView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kayıtlı Öğrenciler"),
+        title: Text(LocaleKeys.features_registeredStudents.tr()),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: stream,

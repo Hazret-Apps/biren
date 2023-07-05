@@ -5,8 +5,10 @@ import 'package:biren_kocluk/features/admin/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kartal/kartal.dart';
 
@@ -30,32 +32,32 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
     switch (widget.featureTypes) {
       case FeatureTypes.announcement:
         imagePath = Assets.images.announcement.path;
-        title = "Duyurular";
+        title = LocaleKeys.features_announcements.tr();
         callView = const AnnouncementsViewAdmin();
         break;
       case FeatureTypes.homeworks:
         imagePath = Assets.images.task.path;
-        title = "Ödevler";
+        title = LocaleKeys.features_homeworks.tr();
         callView = const HomeworkView();
         break;
       case FeatureTypes.classes:
         imagePath = Assets.images.classes.path;
-        title = "Sınıflar";
+        title = LocaleKeys.classes.tr();
         callView = const ClassesView();
         break;
       case FeatureTypes.students:
         imagePath = Assets.images.students.path;
-        title = "Öğrenciler";
+        title = LocaleKeys.features_students.tr();
         callView = const StudentsView();
         break;
       case FeatureTypes.exams:
         imagePath = Assets.images.exams.path;
-        title = "Denemeler";
+        title = LocaleKeys.features_exams.tr();
         callView = const ExamsView();
         break;
       case FeatureTypes.attendance:
         imagePath = Assets.images.calender.path;
-        title = "Yoklama";
+        title = LocaleKeys.features_attendance.tr();
         callView = const AdminAttendanceView();
         break;
       default:

@@ -1,8 +1,10 @@
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card_large.dart';
 import 'package:biren_kocluk/product/widget/drawer/homework_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class HomeworksView extends StatelessWidget {
     return Scaffold(
       endDrawer: const HomeworkDrawer(),
       appBar: AppBar(
-        title: const Text("Aktif Ödevler"),
+        title: Text(LocaleKeys.features_activeHomeworks.tr()),
         actions: const [],
       ),
       body: const _Body(),

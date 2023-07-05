@@ -3,10 +3,12 @@
 import 'package:biren_kocluk/features/admin/view/homework/mixin/create_homework_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/enum/homework_type_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -28,46 +30,6 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
           padding: context.horizontalPaddingNormal,
           child: Column(
             children: [
-              // context.emptySizedHeightBoxLow3x,
-              // StreamBuilder<QuerySnapshot>(
-              //   stream: studentsStream,
-              //   builder: (context, snapshot) {
-              //     List<DropdownMenuItem> items = [];
-              //     if (!snapshot.hasData) {
-              //       return const Center(child: CircularProgressIndicator());
-              //     } else {
-              //       final users = snapshot.data!.docs.reversed.toList();
-              //       for (var classes in users) {
-              //         items.add(
-              //           DropdownMenuItem(
-              //             value: classes.id,
-              //             child: Text(
-              //               classes["name"],
-              //             ),
-              //           ),
-              //         );
-              //       }
-              //       return DropdownButtonFormField(
-              //         value: selectedUserValue,
-              //         isExpanded: true,
-              //         hint: const Text(
-              //           "Öğrenci Seç",
-              //         ),
-              //         onChanged: (value) {
-              //           setState(() {
-              //             selectedUserValue = value;
-              //             loadUser();
-              //             loadLessons();
-              //             selectedSubjectText = null;
-              //             selectedSubjectValue = null;
-              //             selectedTopicValue = null;
-              //           });
-              //         },
-              //         items: items,
-              //       );
-              //     }
-              //   },
-              // ),
               context.emptySizedHeightBoxLow,
               _TypeSelectionRow(homeworkType, onChanged: changeHelpType),
               context.emptySizedHeightBoxLow3x,
@@ -141,7 +103,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
                     }
                   }
                 },
-                text: "Kaydet",
+                text: LocaleKeys.submit.tr(),
               )
             ],
           ),
@@ -151,13 +113,13 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
   }
 
   AppBar _appBar(BuildContext context) =>
-      AppBar(title: const Text("Ders Programı Oluştur"));
+      AppBar(title: const Text(LocaleKeys.features_createHomework));
 
   DateTimeFormField _dateFormField() {
     return DateTimeFormField(
-      decoration: const InputDecoration(
-        suffixIcon: Icon(Icons.event_note),
-        hintText: "Gün Seçiniz",
+      decoration: InputDecoration(
+        suffixIcon: const Icon(Icons.event_note),
+        hintText: LocaleKeys.selectDay.tr(),
       ),
       mode: DateTimeFieldPickerMode.date,
       autovalidateMode: AutovalidateMode.always,
@@ -173,28 +135,28 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     return DropdownButtonFormField(
       isExpanded: true,
       value: selectedSubjectValue,
-      hint: const Text("Ders seçiniz"),
+      hint: Text(LocaleKeys.selectSubject.tr()),
       onChanged: (value) {
         setState(() {
           selectedSubjectValue = value;
           switch (selectedSubjectValue) {
             case "turkish":
-              selectedSubjectText = "Türkçe";
+              selectedSubjectText = LocaleKeys.subjects_turkish.tr();
               break;
             case "math":
-              selectedSubjectText = "Matematik";
+              selectedSubjectText = LocaleKeys.subjects_math.tr();
               break;
             case "science":
-              selectedSubjectText = "Fen Bilimleri";
+              selectedSubjectText = LocaleKeys.subjects_science.tr();
               break;
             case "english":
-              selectedSubjectText = "İngilizce";
+              selectedSubjectText = LocaleKeys.subjects_english.tr();
               break;
             case "regligion":
-              selectedSubjectText = "Din";
+              selectedSubjectText = LocaleKeys.subjects_regligion.tr();
               break;
             case "social":
-              selectedSubjectText = "Sosyal";
+              selectedSubjectText = LocaleKeys.subjects_social.tr();
               break;
             default:
           }
@@ -217,7 +179,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     return DropdownButtonFormField(
         isExpanded: true,
         value: selectedTopicValue,
-        hint: const Text("Konu seçiniz"),
+        hint: Text(LocaleKeys.selectTopic.tr()),
         onChanged: (value) {
           setState(() {
             selectedTopicValue = value;
@@ -281,13 +243,13 @@ class _TypeSelectionRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _SelectionButton(
-          label: "Bireysel Ödev",
+          label: LocaleKeys.individualHomework.tr(),
           isSelected: selection == HomeworkType.student,
           onPressed: () => onChanged(HomeworkType.student),
         ),
         context.emptySizedWidthBoxLow3x,
         _SelectionButton(
-          label: "Sınıf Ödev",
+          label: LocaleKeys.classHomework.tr(),
           isSelected: selection == HomeworkType.classText,
           onPressed: () => onChanged(HomeworkType.classText),
         ),
@@ -340,8 +302,8 @@ class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
             isExpanded: true,
             hint: Text(
               widget.type == HomeworkType.classText
-                  ? "Sınıf Seç"
-                  : "Öğrenci Seç",
+                  ? LocaleKeys.selectClass.tr()
+                  : LocaleKeys.selectStudent.tr(),
             ),
             onChanged: widget.onTap,
             items: items,
