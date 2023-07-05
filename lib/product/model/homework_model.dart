@@ -27,7 +27,7 @@ class Homework {
       date: data['date'].toDate(),
       lesson: data['subject'],
       topic: data['topic'],
-      user: data['user'],
+      user: data['assignedId'],
       makeEnum: data['makeEnum'],
     );
   }

@@ -26,7 +26,7 @@ mixin HomeOperationMixin on State<HomeView> {
     events = {};
 
     final snap = await FirebaseCollections.homeworks.reference
-        .where('user', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('assignedId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .withConverter(
             fromFirestore: Homework.fromFirestore,
             toFirestore: (event, options) => event.toFirestore())

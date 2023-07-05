@@ -138,7 +138,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                         date: snapshot.data!.docs[index]["date"].toDate(),
                         lesson: snapshot.data!.docs[index]["subject"],
                         topic: snapshot.data!.docs[index]["topic"],
-                        user: snapshot.data!.docs[index]["user"],
+                        user: snapshot.data!.docs[index]["assignedId"],
                         makeEnum: snapshot.data!.docs[index]["makeEnum"],
                         id: snapshot.data!.docs[index].id,
                       ),
