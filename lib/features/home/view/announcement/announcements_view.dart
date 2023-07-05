@@ -1,7 +1,8 @@
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 
 class AnnouncementView extends StatefulWidget {
@@ -86,7 +87,7 @@ class _AnnouncementViewState extends State<AnnouncementView> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text("Duyurular"),
+      title: Text(LocaleKeys.features_announcements.tr()),
     );
   }
 }

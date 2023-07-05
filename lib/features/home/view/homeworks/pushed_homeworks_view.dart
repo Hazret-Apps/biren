@@ -1,6 +1,8 @@
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/pushed_homework_card_large.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class _PushedHomeworksViewState extends State<PushedHomeworksView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gönderilen Ödevler"),
+        title: Text(LocaleKeys.features_pushedHomeworks.tr()),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseCollections.homeworkPush.reference

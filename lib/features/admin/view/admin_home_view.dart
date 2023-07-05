@@ -21,7 +21,7 @@ class _AdminHomeViewState extends State<AdminHomeView> {
   }
 
   AppBar get _buildAppBar => AppBar(
-        title: Text(LocaleKeys.adminText.tr()),
+        title: Text(LocaleKeys.admin_adminText.tr()),
       );
 
   SafeArea _body() {

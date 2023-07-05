@@ -36,12 +36,12 @@ class _RegisterViewState extends State<RegisterView>
             children: [
               context.emptySizedHeightBoxHigh,
               Text(
-                "Merhaba!",
+                LocaleKeys.hello.tr(),
                 style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
               ),
               context.emptySizedHeightBoxLow,
               Text(
-                "Seni aramızda göreceğimiz için \nçok heyecanlıyız!",
+                LocaleKeys.auth_registerText.tr(),
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: LightThemeColors.grey),

@@ -1,4 +1,6 @@
 import 'package:biren_kocluk/product/gen/assets.gen.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -15,7 +17,7 @@ class _WaitingViewState extends State<WaitingView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("İçeri alınmayı bekliyorsunuz"),
+        title: Text(LocaleKeys.auth_waitingAcceptTitle.tr()),
       ),
       body: SafeArea(
         child: Padding(
@@ -25,7 +27,7 @@ class _WaitingViewState extends State<WaitingView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Giriş yapma talebiniz yöneticiye gönderilmiştir. Lütfen yöneticinin sizi içeri almasını bekleyiniz.",
+                  LocaleKeys.auth_waitingAcceptDescription.tr(),
                   style: context.textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),

@@ -40,26 +40,26 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
             padding: context.horizontalPaddingNormal,
             child: Row(
               children: [
-                const SelectFeatureCard(
+                SelectFeatureCard(
                   color: LightThemeColors.blazeOrange,
-                  text: "Ödevler",
-                  icon: Icon(
+                  text: LocaleKeys.features_homeworks.tr(),
+                  icon: const Icon(
                     Icons.business_center_rounded,
                     color: LightThemeColors.white,
                     size: 50,
                   ),
-                  callView: HomeworksView(),
+                  callView: const HomeworksView(),
                 ),
                 context.emptySizedWidthBoxNormal,
-                const SelectFeatureCard(
+                SelectFeatureCard(
                   color: LightThemeColors.red,
-                  text: "Duyurular",
-                  icon: FaIcon(
+                  text: LocaleKeys.features_announcements.tr(),
+                  icon: const FaIcon(
                     FontAwesomeIcons.exclamation,
                     color: LightThemeColors.white,
                     size: 50,
                   ),
-                  callView: AnnouncementView(),
+                  callView: const AnnouncementView(),
                 ),
               ],
             ),

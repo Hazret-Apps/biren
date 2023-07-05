@@ -1,9 +1,11 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:biren_kocluk/features/admin/view/class/class_detail_view.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -96,7 +98,7 @@ class _ClassesViewState extends State<ClassesView> {
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      title: const Text("Sınıflar"),
+      title: Text(LocaleKeys.classes.tr()),
       actions: [
         GestureDetector(
           onTap: () {
@@ -174,7 +176,7 @@ class _ClassesViewState extends State<ClassesView> {
 
   Text _createClassText(BuildContext context) {
     return Text(
-      "Sınıf Oluştur",
+      LocaleKeys.features_createHomework.tr(),
       style: context.textTheme.headlineMedium
           ?.copyWith(fontWeight: FontWeight.w600),
     );
@@ -183,7 +185,7 @@ class _ClassesViewState extends State<ClassesView> {
   DropdownButton<String> _selectGradeDropdown(StateSetter setState) {
     return DropdownButton(
       value: selectedGradeNumber,
-      hint: const Text("Sınıf"),
+      hint: Text(LocaleKeys.classText.tr()),
       items: grades.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -201,7 +203,7 @@ class _ClassesViewState extends State<ClassesView> {
   DropdownButton<String> _selectClassDropdown(StateSetter setState) {
     return DropdownButton(
       value: selectedGradeText,
-      hint: const Text("Şube"),
+      hint: Text(LocaleKeys.branch.tr()),
       items: classes.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -235,7 +237,7 @@ class _ClassesViewState extends State<ClassesView> {
           });
         }
       },
-      text: "Oluştur",
+      text: LocaleKeys.create.tr(),
     );
   }
 
@@ -245,8 +247,8 @@ class _ClassesViewState extends State<ClassesView> {
       behavior: SnackBarBehavior.fixed,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
-        title: "Başarılı!",
-        message: 'Sınıf oluşturma işlemi başarılı',
+        title: LocaleKeys.success.tr(),
+        message: LocaleKeys.createClassSuccess.tr(),
         contentType: ContentType.success,
       ),
     );

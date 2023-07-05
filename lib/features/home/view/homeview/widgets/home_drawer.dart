@@ -5,7 +5,9 @@ import 'package:biren_kocluk/features/home/view/announcement/announcements_view.
 import 'package:biren_kocluk/features/home/view/attendance/attendance_view.dart';
 import 'package:biren_kocluk/features/home/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,7 +33,7 @@ class HomeViewDrawer extends StatelessWidget {
               padding: context.verticalPaddingMedium +
                   context.horizontalPaddingNormal,
               child: Text(
-                "Biren Koçluk",
+                LocaleKeys.appName.tr(),
                 style: context.textTheme.displaySmall?.copyWith(
                   color: LightThemeColors.white,
                 ),
@@ -39,7 +41,7 @@ class HomeViewDrawer extends StatelessWidget {
             ),
           ),
           _HomeViewListTile(
-            "Ödevler",
+            LocaleKeys.features_homeworks.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -52,7 +54,7 @@ class HomeViewDrawer extends StatelessWidget {
             Icons.business_center_rounded,
           ),
           _HomeViewListTile(
-            "Duyurular",
+            LocaleKeys.features_announcements.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -65,7 +67,7 @@ class HomeViewDrawer extends StatelessWidget {
             FontAwesomeIcons.triangleExclamation,
           ),
           _HomeViewListTile(
-            "Yoklama",
+            LocaleKeys.features_attendance.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -78,7 +80,7 @@ class HomeViewDrawer extends StatelessWidget {
             Icons.calendar_month_rounded,
           ),
           _HomeViewListTile(
-            "Denemeler",
+            LocaleKeys.features_exams.tr(),
             () {
               Navigator.pop(context);
               Navigator.push(
@@ -91,7 +93,7 @@ class HomeViewDrawer extends StatelessWidget {
             Icons.auto_graph_rounded,
           ),
           _HomeViewListTile(
-            "Çıkış Yap",
+            LocaleKeys.auth_logOut.tr(),
             () {
               _signOutConfirmDialog(context).show();
             },
@@ -107,8 +109,8 @@ class HomeViewDrawer extends StatelessWidget {
       context: context,
       dialogType: DialogType.question,
       animType: AnimType.scale,
-      desc: "Çıkış Yapmak İstediğinden Emin misin?",
-      btnOkText: "EVET",
+      desc: LocaleKeys.auth_logOutSubmitText.tr(),
+      btnOkText: LocaleKeys.yes.tr(),
       btnOkOnPress: () {
         AuthService().logOut(context);
         Navigator.pop(context);
@@ -127,8 +129,8 @@ class HomeViewDrawer extends StatelessWidget {
       behavior: SnackBarBehavior.fixed,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
-        title: "Çıkış Yapıldı",
-        message: "Çıkış Yapma İşlemi Başarılı",
+        title: LocaleKeys.auth_logOutSuccess.tr(),
+        message: LocaleKeys.auth_logOutSuccessText.tr(),
         contentType: ContentType.success,
       ),
     );

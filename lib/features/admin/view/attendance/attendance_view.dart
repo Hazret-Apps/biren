@@ -1,6 +1,8 @@
 import 'package:biren_kocluk/features/admin/view/attendance/enter_attendance_view.dart';
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +40,7 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView>
     );
   }
 
-  AppBar _appBar() => AppBar(title: const Text("Yoklama"));
+  AppBar _appBar() => AppBar(title: Text(LocaleKeys.features_attendance.tr()));
 }
 
 class _StudentWidget extends StatelessWidget {

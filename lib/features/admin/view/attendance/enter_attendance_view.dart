@@ -1,10 +1,11 @@
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/enter_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -122,11 +123,11 @@ class EventItem extends StatelessWidget {
 
     switch (event.status) {
       case "came":
-        status = "Geldi";
+        status = LocaleKeys.came.tr();
         color = LightThemeColors.green;
         break;
       case "didntCame":
-        status = "Gelmedi";
+        status = LocaleKeys.didntCame.tr();
         color = LightThemeColors.red;
         break;
       default:

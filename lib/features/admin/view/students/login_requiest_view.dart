@@ -2,10 +2,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/features/admin/view/students/login_accept_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/mixin/login_requiest_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/admin/cross_check_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
@@ -23,7 +25,7 @@ class _LoginRequiestViewState extends State<LoginRequiestView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Giriş Talepleri"),
+        title: Text(LocaleKeys.features_loginRequests.tr()),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: stream,
@@ -32,7 +34,7 @@ class _LoginRequiestViewState extends State<LoginRequiestView>
             if (snapshot.data!.docs.isEmpty) {
               return Center(
                 child: Text(
-                  "Bir Talep Yok",
+                  LocaleKeys.noDemand.tr(),
                   style: context.textTheme.titleLarge,
                 ),
               );
@@ -100,14 +102,13 @@ class _LoginRequiestViewState extends State<LoginRequiestView>
     return AwesomeDialog(
       context: context,
       dialogType: DialogType.warning,
-      title: "Emin misin?",
-      desc:
-          "${name(snapshot, index)} adlı kişiyi reddetmek istediğinizden emin misiniz?",
+      title: LocaleKeys.areYouSure.tr(),
+      desc: "${name(snapshot, index)} ${LocaleKeys.refuseMessage.tr()}",
       btnOkOnPress: () {
         deleteUser(snapshot, index);
       },
-      btnOkText: "Evet",
-      btnCancelText: "Vazgeç",
+      btnOkText: LocaleKeys.yes.tr(),
+      btnCancelText: LocaleKeys.giveUp.tr(),
       btnCancelOnPress: () {},
     );
   }

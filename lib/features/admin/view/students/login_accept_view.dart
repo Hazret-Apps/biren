@@ -1,9 +1,11 @@
 import 'package:biren_kocluk/features/admin/view/students/mixin/login_accept_operation_mixin.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -26,34 +28,34 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
         child: Column(
           children: [
             MyListTile(
-              hint: "İsim:",
+              hint: LocaleKeys.auth_name.tr(),
               trailingHint: widget.userModel.name,
             ),
             context.emptySizedHeightBoxLow3x,
             MyListTile(
-              hint: "Mail Adresi:",
+              hint: LocaleKeys.auth_mailAddress.tr(),
               trailingHint: widget.userModel.mail,
             ),
             context.emptySizedHeightBoxLow3x,
             MyListTile(
-              hint: "Oluşturulma Zamanı:",
+              hint: LocaleKeys.auth_creationTime.tr(),
               trailingHint: formattedDate,
             ),
             context.emptySizedHeightBoxLow,
             MyListTile(
-              hint: "Sınıf:",
+              hint: LocaleKeys.classText.tr(),
               trailing: _selectClassDropdown(),
             ),
             context.emptySizedHeightBoxLow3x,
             MainTextField(
-              hintText: "Öğrenci Telefonu",
+              hintText: LocaleKeys.auth_studentPhone.tr(),
               keyboardType: TextInputType.phone,
               prefixIcon: const Icon(Icons.phone_rounded),
               controller: studentPhone,
             ),
             context.emptySizedHeightBoxLow3x,
             MainTextField(
-              hintText: "Veli Telefonu",
+              hintText: LocaleKeys.auth_parentPhone.tr(),
               keyboardType: TextInputType.phone,
               prefixIcon: const Icon(Icons.phone_rounded),
               controller: parentPhone,
@@ -63,7 +65,7 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
               onPressed: () {
                 onSubmitButton();
               },
-              text: "Kabul Et",
+              text: LocaleKeys.admitIt.tr(),
               color: selectedGradeValue == null ? LightThemeColors.grey : null,
             )
           ],
@@ -74,9 +76,9 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
 
   AppBar get _appBar {
     return AppBar(
-      title: const Text(
-        "Öğrenciyi Kabul Et",
-        style: TextStyle(color: LightThemeColors.green),
+      title: Text(
+        LocaleKeys.acceptStudent.tr(),
+        style: const TextStyle(color: LightThemeColors.green),
       ),
       foregroundColor: LightThemeColors.green,
     );
@@ -103,7 +105,7 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
           }
           return DropdownButton(
             value: selectedGradeValue,
-            hint: const Text("Sınıf Seç"),
+            hint: Text(LocaleKeys.selectClass.tr()),
             onChanged: (value) async {
               setState(() {
                 selectedGradeValue = value;

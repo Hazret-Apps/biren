@@ -2,7 +2,9 @@ import 'package:biren_kocluk/features/admin/view/homework/incoming_homeworks_vie
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_search_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/admin_all_homework_view.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
@@ -19,7 +21,7 @@ class HomeworkView extends StatelessWidget {
 
   AppBar get _appBar {
     return AppBar(
-      title: const Text("Ödev"),
+      title: Text(LocaleKeys.homework.tr()),
     );
   }
 }
@@ -32,31 +34,36 @@ class _Body extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         padding: context.horizontalPaddingLow,
-        child: const Column(
+        child: Column(
           children: [
             SelectFeatureListTile(
               icon: Icons.add_circle_outline_rounded,
-              title: "Ödev Oluştur",
-              subtitle: "Öğrenciler için ödev oluştur",
-              callView: CreateHomeworkView(),
+              title: LocaleKeys.features_createHomework.tr(),
+              subtitle:
+                  LocaleKeys.featureDescriptions_createHomeworkDescription.tr(),
+              callView: const CreateHomeworkView(),
             ),
             SelectFeatureListTile(
               icon: Icons.warning_amber_rounded,
-              title: "Gelen Ödevler",
-              subtitle: "Öğrencilerin gönderdiği ödevler",
-              callView: IncomingHomeworksView(),
+              title: LocaleKeys.features_incomingHomeworks.tr(),
+              subtitle: LocaleKeys
+                  .featureDescriptions_incomingHomeworksDescription
+                  .tr(),
+              callView: const IncomingHomeworksView(),
             ),
             SelectFeatureListTile(
               icon: Icons.all_inbox_rounded,
-              title: "Tüm Ödevler",
-              subtitle: "Verilen bütün ödevler",
-              callView: AdminAllHomeworksView(),
+              title: LocaleKeys.features_allHomeworks.tr(),
+              subtitle:
+                  LocaleKeys.featureDescriptions_allHomeworksDescription.tr(),
+              callView: const AdminAllHomeworksView(),
             ),
             SelectFeatureListTile(
               icon: Icons.account_circle_rounded,
-              title: "Ödev Ara",
-              subtitle: "Bir öğrenciye verdiğiniz ödevleri arayın",
-              callView: HomeworkSearchView(),
+              title: LocaleKeys.features_searchHomework.tr(),
+              subtitle:
+                  LocaleKeys.featureDescriptions_searchHomeworkDescription.tr(),
+              callView: const HomeworkSearchView(),
             ),
           ],
         ),

@@ -1,3 +1,5 @@
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementHistoryView extends StatelessWidget {
@@ -10,5 +12,6 @@ class AnnouncementHistoryView extends StatelessWidget {
     );
   }
 
-  AppBar _appBar() => AppBar(title: const Text("Geçmiş Duyurular"));
+  AppBar _appBar() =>
+      AppBar(title: Text(LocaleKeys.features_announcementHistory.tr()));
 }

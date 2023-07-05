@@ -3,10 +3,12 @@
 import 'dart:io';
 import 'package:biren_kocluk/features/admin/view/exams/mixin/enter_exams_operation_mixin.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
+import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
 import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,7 @@ class _EnterExamsViewState extends State<EnterExamsView>
   }
 
   AppBar _appBar() => AppBar(
-        title: const Text("Deneme Sonucu Gir"),
+        title: Text(LocaleKeys.enterExamResult.tr()),
       );
 }
 
@@ -105,8 +107,7 @@ class _BodyState extends State<_Body> {
                       padding: context.horizontalPaddingNormal +
                           context.verticalPaddingLow,
                       child: Text(
-                        "Deneme sonucunun bir ekran görüntüsünü, "
-                        "PDF'ini veya fotoğrafını ekle",
+                        LocaleKeys.enterExamFileDescription.tr(),
                         style: context.textTheme.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
@@ -127,21 +128,21 @@ class _BodyState extends State<_Body> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _AddFileBottomSheetListTile(
-              "Dosya",
+              LocaleKeys.file.tr(),
               () {
                 loadPdfToStorage();
               },
               Icons.insert_drive_file_outlined,
             ),
             _AddFileBottomSheetListTile(
-              "Galeri",
+              LocaleKeys.gallery.tr(),
               () {
                 loadImageToStorage(ImageSource.gallery);
               },
               Icons.image_outlined,
             ),
             _AddFileBottomSheetListTile(
-              "Kamera",
+              LocaleKeys.camera.tr(),
               () {
                 loadImageToStorage(ImageSource.camera);
               },
@@ -198,7 +199,7 @@ class _BodyState extends State<_Body> {
     return Padding(
       padding: context.horizontalPaddingNormal,
       child: MainTextField(
-        hintText: "Başlık (İsteğe Bağlı)",
+        hintText: LocaleKeys.descriptionOptional.tr(),
         keyboardType: TextInputType.text,
         controller: titleController,
       ),
@@ -209,7 +210,7 @@ class _BodyState extends State<_Body> {
     return Padding(
       padding: context.horizontalPaddingNormal,
       child: MainTextField(
-        hintText: "Açıklama (İsteğe Bağlı)",
+        hintText: LocaleKeys.titleOptional.tr(),
         keyboardType: TextInputType.text,
         controller: descriptionController,
         minLines: 4,
@@ -227,7 +228,7 @@ class _BodyState extends State<_Body> {
         onPressed: () {
           onSubmitButton();
         },
-        text: "KAYDET",
+        text: LocaleKeys.submit.tr(),
       ),
     );
   }
@@ -283,9 +284,7 @@ class _BodyState extends State<_Body> {
             return DropdownButtonFormField(
               value: widget.selectedStudentValue,
               isExpanded: true,
-              hint: const Text(
-                "Öğrenci Seç",
-              ),
+              hint: Text(LocaleKeys.selectStudent.tr()),
               onChanged: (value) {
                 setState(() {
                   widget.selectedStudentValue = value;
