@@ -40,7 +40,8 @@ dependencies:
   awesome_snackbar_content:  
   syncfusion_flutter_pdfviewer:
   file_picker:
-
+  calendar_timeline: ^1.1.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
