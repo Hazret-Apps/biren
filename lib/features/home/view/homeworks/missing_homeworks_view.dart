@@ -23,7 +23,7 @@ class _MissingHomeworksViewState extends State<MissingHomeworksView>
   }
 
   AppBar _appBar() =>
-      AppBar(title: Text(LocaleKeys.features_didntMadeHomeworks.tr()));
+      AppBar(title: Text(LocaleKeys.features_missingHomeworks.tr()));
 }
 
 class _Body extends StatelessWidget {
