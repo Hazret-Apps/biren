@@ -76,7 +76,8 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                       if (value == 0) {
                       } else if (value == 1) {
                         _checkDialog(context, widget.snapshot, widget.index);
-                      } else if (value == 2) {}
+                      } else if (value == 2) {
+                      } else if (value == 3) {}
                     },
                     itemBuilder: (ctx) => [
                       _buildPopupMenuItem(
@@ -93,12 +94,20 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                               Icons.arrow_circle_right_outlined,
                               context,
                             )
-                          : _buildPopupMenuItem(
-                              LocaleKeys.complated.tr(),
-                              1,
-                              Icons.check_rounded,
-                              context,
-                            ),
+                          : widget.snapshot.data!.docs[widget.index]["type"] ==
+                                  "student"
+                              ? _buildPopupMenuItem(
+                                  LocaleKeys.complated.tr(),
+                                  1,
+                                  Icons.check_rounded,
+                                  context,
+                                )
+                              : _buildPopupMenuItem(
+                                  "Sınıf Ödevleri Gönderilemez",
+                                  3,
+                                  Icons.group_outlined,
+                                  context,
+                                )
                     ],
                   )
                 ],
