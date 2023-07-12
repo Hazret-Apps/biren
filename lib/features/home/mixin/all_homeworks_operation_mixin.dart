@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 mixin AllHomeworksOperationMixin on State<AllHomeworksView> {
   final Stream<QuerySnapshot> stream = FirebaseCollections.homeworks.reference
-      .where("assignedUserID",
-          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where("assignedId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       .snapshots();
 }
