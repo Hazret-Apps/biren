@@ -152,12 +152,6 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                                       : LightThemeColors.white,
                                 ),
                               ),
-                              context.emptySizedHeightBoxLow,
-                              _subjectText(
-                                widget.snapshot,
-                                widget.index,
-                                context,
-                              ),
                             ],
                           ),
                         ),
@@ -228,7 +222,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   Text _dateText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      "${LocaleKeys.pushed.tr()}: $formattedDate",
+      "Gönderilme Zamanı:\n$formattedDate",
       style: context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w400,
         overflow: TextOverflow.ellipsis,
@@ -246,20 +240,6 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 16,
-        color: color == LightThemeColors.white
-            ? LightThemeColors.black
-            : LightThemeColors.white,
-      ),
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  Text _subjectText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
-      BuildContext context) {
-    return Text(
-      snapshot.data!.docs[index]["subject"],
-      style: context.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
         color: color == LightThemeColors.white
             ? LightThemeColors.black
             : LightThemeColors.white,
