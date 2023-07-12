@@ -32,49 +32,10 @@ class _AnnouncementViewState extends State<AnnouncementView> {
                   dateTime,
                 );
 
-                return Card(
-                  child: Container(
-                    height: context.height / 5,
-                    decoration: BoxDecoration(
-                      borderRadius: context.normalBorderRadius,
-                    ),
-                    child: Padding(
-                      padding: context.paddingLow + context.verticalPaddingLow,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: context.height / 5,
-                            width: context.width / 5,
-                            decoration: BoxDecoration(
-                              borderRadius: context.normalBorderRadius,
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  snapshot.data!.docs[index]["imagePath"],
-                                ),
-                              ),
-                            ),
-                          ),
-                          context.emptySizedWidthBoxLow3x,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(snapshot.data!.docs[index]["title"]),
-                              Text(
-                                snapshot.data!.docs[index]["description"],
-                                style: context.textTheme.labelMedium,
-                              ),
-                              context.emptySizedHeightBoxLow,
-                              Text(
-                                formattedDate,
-                                style: context.textTheme.labelMedium,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                return _AnnouncementCard(
+                  formattedDate: formattedDate,
+                  snapshot: snapshot,
+                  index: index,
                 );
               },
             );
@@ -88,6 +49,74 @@ class _AnnouncementViewState extends State<AnnouncementView> {
   AppBar _appBar() {
     return AppBar(
       title: Text(LocaleKeys.features_announcements.tr()),
+    );
+  }
+}
+
+class _AnnouncementCard extends StatelessWidget {
+  const _AnnouncementCard({
+    required this.formattedDate,
+    required this.snapshot,
+    required this.index,
+  });
+
+  final String formattedDate;
+  final AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        height: context.height / 5,
+        decoration: BoxDecoration(
+          borderRadius: context.normalBorderRadius,
+        ),
+        child: Padding(
+          padding: context.paddingLow + context.verticalPaddingLow,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: context.height / 5,
+                width: context.width / 5,
+                decoration: BoxDecoration(
+                  borderRadius: context.normalBorderRadius,
+                  image: snapshot.data!.docs[index]["imagePath"] == null
+                      ? null
+                      : DecorationImage(
+                          image: NetworkImage(
+                            snapshot.data!.docs[index]["imagePath"],
+                          ),
+                        ),
+                ),
+              ),
+              context.emptySizedWidthBoxLow3x,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      snapshot.data!.docs[index]["title"],
+                      overflow: TextOverflow.clip,
+                    ),
+                    Text(
+                      snapshot.data!.docs[index]["description"],
+                      style: context.textTheme.labelMedium,
+                      overflow: TextOverflow.clip,
+                    ),
+                    context.emptySizedHeightBoxLow,
+                    Text(
+                      formattedDate,
+                      style: context.textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
