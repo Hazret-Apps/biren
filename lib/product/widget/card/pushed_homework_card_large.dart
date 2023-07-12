@@ -101,7 +101,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
     return Padding(
       padding: context.horizontalPaddingNormal + context.verticalPaddingLow,
       child: Container(
-        height: context.height / 5,
+        height: context.height / 4.7,
         decoration: BoxDecoration(
             color: color,
             borderRadius: context.normalBorderRadius,
@@ -135,31 +135,32 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                            flex: 8,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.snapshot.data!.docs[widget.index]
-                                              ["type"] ==
-                                          "class"
-                                      ? (myClassSnapshot?["name"] ?? "")
-                                      : (myUserSnapshot?["name"] ?? ""),
-                                  style: context.textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: color == LightThemeColors.white
-                                        ? LightThemeColors.black
-                                        : LightThemeColors.white,
-                                  ),
+                          flex: 8,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.snapshot.data!.docs[widget.index]
+                                            ["type"] ==
+                                        "class"
+                                    ? (myClassSnapshot?["name"] ?? "")
+                                    : (myUserSnapshot?["name"] ?? ""),
+                                style: context.textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: color == LightThemeColors.white
+                                      ? LightThemeColors.black
+                                      : LightThemeColors.white,
                                 ),
-                                context.emptySizedHeightBoxLow,
-                                _subjectText(
-                                  widget.snapshot,
-                                  widget.index,
-                                  context,
-                                ),
-                              ],
-                            )),
+                              ),
+                              context.emptySizedHeightBoxLow,
+                              _subjectText(
+                                widget.snapshot,
+                                widget.index,
+                                context,
+                              ),
+                            ],
+                          ),
+                        ),
                         const Spacer(),
                         widget.snapshot.data!.docs[widget.index]["type"] ==
                                 "class"
@@ -172,7 +173,6 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                             : _icon(),
                       ],
                     ),
-                    context.emptySizedHeightBoxLow,
                     _topicText(widget.snapshot, widget.index, context),
                     madeText == LocaleKeys.notPushed.tr()
                         ? const SizedBox.shrink()
@@ -228,7 +228,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   Text _dateText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      "${LocaleKeys.notPushed.tr()}: $formattedDate",
+      "${LocaleKeys.pushed.tr()}: $formattedDate",
       style: context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w400,
         overflow: TextOverflow.ellipsis,
@@ -245,11 +245,12 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
       snapshot.data!.docs[index]["topic"],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
-        fontSize: 18,
+        fontSize: 16,
         color: color == LightThemeColors.white
             ? LightThemeColors.black
             : LightThemeColors.white,
       ),
+      overflow: TextOverflow.ellipsis,
     );
   }
 
