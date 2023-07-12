@@ -113,7 +113,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
   }
 
   AppBar _appBar(BuildContext context) =>
-      AppBar(title: const Text(LocaleKeys.features_createHomework));
+      AppBar(title: Text(LocaleKeys.features_createHomework.tr()));
 
   DateTimeFormField _dateFormField() {
     return DateTimeFormField(
