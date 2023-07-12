@@ -75,7 +75,8 @@ class _ClassesViewState extends State<ClassesView> {
                       context,
                       CupertinoPageRoute(
                         builder: (context) => ClassDetailView(
-                          snapshot: snapshot.data!.docs[index],
+                          snapshot: snapshot,
+                          index: index,
                         ),
                       ),
                     );
