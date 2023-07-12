@@ -60,6 +60,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     await FirebaseCollections.homeworkPush.reference.add({
       "description": descriptionController.text,
       "date": Timestamp.fromDate(DateTime.now()),
+      "pushedTime": Timestamp.now(),
       "makeEnum": "pushed",
       "topic": widget.homework.topic,
       "subject": widget.homework.lesson,
@@ -78,6 +79,7 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
       "senderName": FirebaseAuth.instance.currentUser!.displayName,
       "senderMail": FirebaseAuth.instance.currentUser!.email,
       "senderUserID": FirebaseAuth.instance.currentUser!.uid,
+      "pushedTime": Timestamp.now(),
     });
   }
 
