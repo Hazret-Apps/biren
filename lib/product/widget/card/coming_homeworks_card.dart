@@ -47,7 +47,7 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
   @override
   void initState() {
     super.initState();
-    dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
+    dateTime = widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
@@ -202,7 +202,7 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                   ),
                   context.emptySizedHeightBoxLow,
                   Text(
-                    formattedDate,
+                    "Gönderilme Zamanı:\n$formattedDate",
                     style: context.textTheme.bodyLarge?.copyWith(
                       color: LightThemeColors.white,
                     ),
