@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/home/view/homeworks/check_homework_view.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/homework_model.dart';
@@ -30,11 +31,15 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   @override
   void initState() {
     super.initState();
-    dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
+    dateTime = widget
+        .snapshot.data!.docs[widget.index][FirestoreFieldConstants.dateField]
+        .toDate();
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
-    widget.snapshot.data!.docs[widget.index]["type"] == "class"
+    widget.snapshot.data!.docs[widget.index]
+                [FirestoreFieldConstants.typeField] ==
+            FirestoreFieldConstants.classField
         ? isClass = true
         : isClass = false;
   }
@@ -86,7 +91,8 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                         Icons.info_outline_rounded,
                         context,
                       ),
-                      widget.snapshot.data!.docs[widget.index]["makeEnum"] ==
+                      widget.snapshot.data!.docs[widget.index]
+                                  [FirestoreFieldConstants.makeEnumField] ==
                               "pushed"
                           ? _buildPopupMenuItem(
                               LocaleKeys.pushed.tr(),
@@ -94,8 +100,9 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                               Icons.arrow_circle_right_outlined,
                               context,
                             )
-                          : widget.snapshot.data!.docs[widget.index]["type"] ==
-                                  "student"
+                          : widget.snapshot.data!.docs[widget.index]
+                                      [FirestoreFieldConstants.typeField] ==
+                                  FirestoreFieldConstants.studentField
                               ? _buildPopupMenuItem(
                                   LocaleKeys.complated.tr(),
                                   1,
@@ -144,11 +151,17 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                   CupertinoPageRoute(
                     builder: (context) => CheckHomeworkView(
                       homework: Homework(
-                        date: snapshot.data!.docs[index]["date"].toDate(),
-                        lesson: snapshot.data!.docs[index]["subject"],
-                        topic: snapshot.data!.docs[index]["topic"],
-                        user: snapshot.data!.docs[index]["assignedId"],
-                        makeEnum: snapshot.data!.docs[index]["makeEnum"],
+                        date: snapshot.data!
+                            .docs[index][FirestoreFieldConstants.dateField]
+                            .toDate(),
+                        lesson: snapshot.data!.docs[index]
+                            [FirestoreFieldConstants.subjectField],
+                        topic: snapshot.data!.docs[index]
+                            [FirestoreFieldConstants.topicField],
+                        user: snapshot.data!.docs[index]
+                            [FirestoreFieldConstants.assignedIdField],
+                        makeEnum: snapshot.data!.docs[index]
+                            [FirestoreFieldConstants.makeEnumField],
                         id: snapshot.data!.docs[index].id,
                       ),
                     ),
@@ -189,7 +202,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   Text _subjectText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["subject"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.subjectField],
       style: context.textTheme.titleLarge?.copyWith(
         fontWeight: FontWeight.w600,
         color: LightThemeColors.black,
@@ -200,7 +213,7 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   Text _topicText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["topic"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.topicField],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,

@@ -5,6 +5,7 @@ import 'package:biren_kocluk/features/loading/loading_view.dart';
 import 'package:biren_kocluk/features/reject/rejected_view.dart';
 import 'package:biren_kocluk/features/wait/waiting_view.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/language_manager.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -40,9 +41,9 @@ Future<void> loadUserClass() async {
   DocumentSnapshot<Object?> user = await FirebaseCollections.students.reference
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .get();
-  String userClassName = await user["class"];
+  String userClassName = await user[FirestoreFieldConstants.classField];
   var userClass = await FirebaseCollections.classes.reference
-      .where("name", isEqualTo: userClassName)
+      .where(FirestoreFieldConstants.nameField, isEqualTo: userClassName)
       .get();
   AuthService.userClassId = userClass.docs.first.id;
 }
@@ -79,9 +80,12 @@ class Biren extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data?.exists ?? false) {
-                    if (snapshot.data!["isVerified"]) {
+                    if (snapshot
+                        .data![FirestoreFieldConstants.isVerifiedField]) {
                       return const HomeView();
-                    } else if (snapshot.data!["isVerified"] == false) {
+                    } else if (snapshot
+                            .data![FirestoreFieldConstants.isVerifiedField] ==
+                        false) {
                       return const WaitingView();
                     } else {
                       return const RejectedView();

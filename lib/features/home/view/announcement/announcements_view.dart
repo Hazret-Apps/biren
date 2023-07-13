@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,8 +26,9 @@ class _AnnouncementViewState extends State<AnnouncementView> {
               padding: context.horizontalPaddingNormal,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                final DateTime dateTime =
-                    snapshot.data!.docs[index]["createdTime"].toDate();
+                final DateTime dateTime = snapshot
+                    .data!.docs[index][FirestoreFieldConstants.createdTimeField]
+                    .toDate();
 
                 final formattedDate = DateFormat("dd/MM/yyyy").format(
                   dateTime,
@@ -82,11 +84,14 @@ class _AnnouncementCard extends StatelessWidget {
                 width: context.width / 5,
                 decoration: BoxDecoration(
                   borderRadius: context.normalBorderRadius,
-                  image: snapshot.data!.docs[index]["imagePath"] == null
+                  image: snapshot.data!.docs[index]
+                              [FirestoreFieldConstants.imagePathField] ==
+                          null
                       ? null
                       : DecorationImage(
                           image: NetworkImage(
-                            snapshot.data!.docs[index]["imagePath"],
+                            snapshot.data!.docs[index]
+                                [FirestoreFieldConstants.imagePathField],
                           ),
                         ),
                 ),
@@ -97,11 +102,13 @@ class _AnnouncementCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      snapshot.data!.docs[index]["title"],
+                      snapshot.data!.docs[index]
+                          [FirestoreFieldConstants.titleField],
                       overflow: TextOverflow.clip,
                     ),
                     Text(
-                      snapshot.data!.docs[index]["description"],
+                      snapshot.data!.docs[index]
+                          [FirestoreFieldConstants.descriptionField],
                       style: context.textTheme.labelMedium,
                       overflow: TextOverflow.clip,
                     ),

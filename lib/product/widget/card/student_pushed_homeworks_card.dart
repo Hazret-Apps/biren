@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,9 @@ class _StudentPushedHomeworkCardState extends State<StudentPushedHomeworkCard> {
   @override
   void initState() {
     super.initState();
-    dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
+    dateTime = widget
+        .snapshot.data!.docs[widget.index][FirestoreFieldConstants.dateField]
+        .toDate();
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
@@ -82,7 +85,7 @@ class _StudentPushedHomeworkCardState extends State<StudentPushedHomeworkCard> {
                             children: [
                               Text(
                                 widget.snapshot.data!.docs[widget.index]
-                                    ["senderName"],
+                                    [FirestoreFieldConstants.senderNameField],
                                 style: context.textTheme.titleLarge?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: color == LightThemeColors.white
@@ -148,7 +151,8 @@ class _StudentPushedHomeworkCardState extends State<StudentPushedHomeworkCard> {
           borderRadius: context.normalBorderRadius,
           image: DecorationImage(
             image: NetworkImage(
-              widget.snapshot.data!.docs[widget.index]["image"],
+              widget.snapshot.data!.docs[widget.index]
+                  [FirestoreFieldConstants.imageField],
             ),
             fit: BoxFit.cover,
           ),
@@ -174,7 +178,7 @@ class _StudentPushedHomeworkCardState extends State<StudentPushedHomeworkCard> {
   Text _topicText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["topic"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.topicField],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 16,
@@ -189,7 +193,7 @@ class _StudentPushedHomeworkCardState extends State<StudentPushedHomeworkCard> {
   Text _subjectText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["subject"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.subjectField],
       style: context.textTheme.titleLarge?.copyWith(
         fontWeight: FontWeight.w600,
         color: color == LightThemeColors.white

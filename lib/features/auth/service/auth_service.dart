@@ -2,6 +2,7 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/main.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
@@ -33,14 +34,14 @@ class AuthService {
       FirebaseCollections.students.reference
           .doc(_firebaseAuth.currentUser!.uid)
           .set({
-        "name": userModel.name.trim(),
-        "mail": userModel.mail.trim(),
-        "password": userModel.password.trim(),
-        "createdTime": userModel.createdTime,
-        "grade": "Sınıf Yok",
-        "class": "Sınıf Yok",
-        "isVerified": userModel.isVerified,
-        "uid": _firebaseAuth.currentUser!.uid,
+        FirestoreFieldConstants.nameField: userModel.name.trim(),
+        FirestoreFieldConstants.mailField: userModel.mail.trim(),
+        FirestoreFieldConstants.passwordField: userModel.password.trim(),
+        FirestoreFieldConstants.createdTimeField: userModel.createdTime,
+        FirestoreFieldConstants.gradeField: "Sınıf Yok",
+        FirestoreFieldConstants.classField: "Sınıf Yok",
+        FirestoreFieldConstants.isVerifiedField: userModel.isVerified,
+        FirestoreFieldConstants.uidField: _firebaseAuth.currentUser!.uid,
       });
       Navigator.pushAndRemoveUntil(
         context,
@@ -61,9 +62,9 @@ class AuthService {
         .students.reference
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
-    String userClassName = await user["class"];
+    String userClassName = await user[FirestoreFieldConstants.classField];
     var userClass = await FirebaseCollections.classes.reference
-        .where("name", isEqualTo: userClassName)
+        .where(FirestoreFieldConstants.nameField, isEqualTo: userClassName)
         .get();
     AuthService.userClassId = userClass.docs.first.id;
   }

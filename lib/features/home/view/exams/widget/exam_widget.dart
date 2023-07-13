@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/home/view/exams/exam_detail_view.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -60,18 +61,19 @@ class ExamWidget extends StatelessWidget {
 
   Text _titleText(BuildContext context) {
     return Text(
-      snapshot.data?.docs[index]["title"] == ""
+      snapshot.data?.docs[index][FirestoreFieldConstants.titleField] == ""
           ? LocaleKeys.noTitle.tr()
-          : snapshot.data?.docs[index]["title"],
+          : snapshot.data?.docs[index][FirestoreFieldConstants.titleField],
       overflow: TextOverflow.ellipsis,
     );
   }
 
   Text _descriptionText(BuildContext context) {
     return Text(
-      snapshot.data?.docs[index]["description"] == ""
+      snapshot.data?.docs[index][FirestoreFieldConstants.descriptionField] == ""
           ? LocaleKeys.noDescription.tr()
-          : snapshot.data?.docs[index]["description"],
+          : snapshot.data?.docs[index]
+              [FirestoreFieldConstants.descriptionField],
       style: context.textTheme.labelMedium,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,

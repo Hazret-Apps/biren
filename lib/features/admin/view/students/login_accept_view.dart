@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/students/mixin/login_accept_operation_mixin.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
@@ -96,9 +97,9 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
           for (var classes in users) {
             classItems.add(
               DropdownMenuItem(
-                value: classes["name"],
+                value: classes[FirestoreFieldConstants.nameField],
                 child: Text(
-                  classes["name"],
+                  classes[FirestoreFieldConstants.nameField],
                 ),
               ),
             );

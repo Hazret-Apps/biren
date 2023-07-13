@@ -1,5 +1,6 @@
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/enter_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
@@ -49,7 +50,8 @@ class _EnterAttendanceViewState extends State<EnterAttendanceView>
 
   AppBar _appBar() {
     return AppBar(
-      title: Text(widget.snapshot.data!.docs[widget.index]["name"]),
+      title: Text(widget.snapshot.data!.docs[widget.index]
+          [FirestoreFieldConstants.nameField]),
     );
   }
 

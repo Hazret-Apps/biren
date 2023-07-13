@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:biren_kocluk/features/admin/view/attendance/enter_attendance_view.dart';
 import 'package:biren_kocluk/features/admin/view/attendance/take_attendance_view.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/attendance_model.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +22,13 @@ mixin EnterAttendanceOperationMixin on State<EnterAttendanceView> {
     final firstDay = DateTime(focusedDay.year, focusedDay.month, 1);
     events = {};
 
-    String uid = widget.snapshot.data!.docs[widget.index]["uid"];
+    String uid = widget.snapshot.data!.docs[widget.index]
+        [FirestoreFieldConstants.uidField];
 
     final snap = await FirebaseCollections.attendance.reference
-        .where("uid", isEqualTo: uid)
-        .where("date", isGreaterThanOrEqualTo: firstDay)
+        .where(FirestoreFieldConstants.uidField, isEqualTo: uid)
+        .where(FirestoreFieldConstants.dateField,
+            isGreaterThanOrEqualTo: firstDay)
         .withConverter(
             fromFirestore: AttendanceModel.fromFirestore,
             toFirestore: (event, options) => event.toFirestore())

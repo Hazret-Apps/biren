@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:biren_kocluk/features/admin/view/homework/mixin/create_homework_operation_mixin.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/enum/homework_type_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
@@ -293,7 +294,7 @@ class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
               DropdownMenuItem(
                 value: classes.id,
                 child: Text(
-                  classes["name"],
+                  classes[FirestoreFieldConstants.nameField],
                 ),
               ),
             );

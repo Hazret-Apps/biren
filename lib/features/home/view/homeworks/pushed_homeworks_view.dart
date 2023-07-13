@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/student_pushed_homeworks_card.dart';
@@ -22,9 +23,9 @@ class _PushedHomeworksViewState extends State<PushedHomeworksView> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseCollections.homeworkPush.reference
-            .where("senderUserID",
+            .where(FirestoreFieldConstants.senderUserIDField,
                 isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-            .where("makeEnum", isEqualTo: "pushed")
+            .where(FirestoreFieldConstants.makeEnumField, isEqualTo: "pushed")
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

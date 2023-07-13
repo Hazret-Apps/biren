@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
@@ -27,12 +28,18 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView>
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 UserModel userModel = UserModel(
-                  name: snapshot.data!.docs[index]["name"],
-                  mail: snapshot.data!.docs[index]["mail"],
-                  password: snapshot.data!.docs[index]["password"],
-                  createdTime: snapshot.data!.docs[index]["createdTime"],
-                  isVerified: snapshot.data!.docs[index]["isVerified"],
-                  uid: snapshot.data!.docs[index]["uid"],
+                  name: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.nameField],
+                  mail: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.mailField],
+                  password: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.passwordField],
+                  createdTime: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.createdTimeField],
+                  isVerified: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.isVerifiedField],
+                  uid: snapshot.data!.docs[index]
+                      [FirestoreFieldConstants.uidField],
                 );
                 return _StudentWidget(userModel);
               },
@@ -72,10 +79,10 @@ class __StudentWidgetState extends State<_StudentWidget> {
             DateTime.now().day.toString() +
             widget.userModel.uid)
         .set({
-      "status": status,
-      "student": widget.userModel.uid,
-      "studentName": widget.userModel.name,
-      "date": Timestamp.now(),
+      FirestoreFieldConstants.statusField: status,
+      FirestoreFieldConstants.studentField: widget.userModel.uid,
+      FirestoreFieldConstants.studentNameField: widget.userModel.name,
+      FirestoreFieldConstants.dateField: Timestamp.now(),
     });
   }
 
