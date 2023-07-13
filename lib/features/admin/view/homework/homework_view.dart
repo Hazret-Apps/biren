@@ -1,6 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/homework/incoming_homeworks_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
-import 'package:biren_kocluk/features/admin/view/homework/homework_search_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/admin_all_homework_view.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
@@ -57,13 +56,6 @@ class _Body extends StatelessWidget {
               subtitle:
                   LocaleKeys.featureDescriptions_allHomeworksDescription.tr(),
               callView: const AdminAllHomeworksView(),
-            ),
-            SelectFeatureListTile(
-              icon: Icons.account_circle_rounded,
-              title: LocaleKeys.features_searchHomework.tr(),
-              subtitle:
-                  LocaleKeys.featureDescriptions_searchHomeworkDescription.tr(),
-              callView: const HomeworkSearchView(),
             ),
           ],
         ),

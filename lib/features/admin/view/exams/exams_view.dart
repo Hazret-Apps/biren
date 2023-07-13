@@ -1,6 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/exams/all_exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/enter_exams_view.dart';
-import 'package:biren_kocluk/features/admin/view/exams/search_exam_result_view.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/admin_features_select_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -50,13 +49,6 @@ class _Body extends StatelessWidget {
                   .featureDescriptions_showExamResultsDescription
                   .tr(),
               callView: const AllExamsView(),
-            ),
-            SelectFeatureListTile(
-              icon: Icons.account_circle_rounded,
-              title: LocaleKeys.features_searchResult.tr(),
-              subtitle:
-                  LocaleKeys.featureDescriptions_searchResultDescription.tr(),
-              callView: const SearchExamResultView(),
             ),
           ],
         ),
