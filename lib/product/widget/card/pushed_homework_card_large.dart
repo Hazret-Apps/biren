@@ -35,26 +35,35 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
         icon = Icons.alarm_rounded;
         color = LightThemeColors.blazeOrange;
         madeText = LocaleKeys.pushed.tr();
+        dateTime =
+            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
         break;
       case "missing":
         icon = Icons.remove_circle_outline;
         color = const Color.fromARGB(255, 254, 207, 15);
         madeText = LocaleKeys.missing.tr();
+        dateTime =
+            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
         break;
       case "made":
         icon = Icons.check_box_rounded;
         color = LightThemeColors.green;
         madeText = LocaleKeys.made.tr();
+        dateTime =
+            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
         break;
       case "didntMade":
         icon = Icons.close;
         color = LightThemeColors.red;
         madeText = LocaleKeys.didntMade.tr();
+        dateTime =
+            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
         break;
       case "empty":
         icon = Icons.hourglass_empty_rounded;
         color = LightThemeColors.white;
         madeText = LocaleKeys.notPushed.tr();
+        dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
         break;
       default:
     }
@@ -87,13 +96,12 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   @override
   void initState() {
     super.initState();
-    dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
-    formattedDate = DateFormat('dd/MM/yyyy').format(
-      dateTime,
-    );
     loadComponents();
     isClass();
     isStudent();
+    formattedDate = DateFormat('dd/MM/yyyy').format(
+      dateTime,
+    );
   }
 
   @override
