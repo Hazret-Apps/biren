@@ -40,6 +40,11 @@ class _Body extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
+                if (snapshot.data!.docs.isEmpty) {
+                  return const Center(
+                    child: Text("Hiç Ödev Yok"),
+                  );
+                }
                 return PushedHomeworkCardLarge(
                   index: index,
                   snapshot: snapshot,
