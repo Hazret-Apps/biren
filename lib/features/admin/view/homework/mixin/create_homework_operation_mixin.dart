@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/create_homework_view.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/enum/homework_type_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
@@ -28,7 +29,7 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
 
   final Stream<QuerySnapshot> studentsStream = FirebaseCollections
       .students.reference
-      .where("isVerified", isEqualTo: true)
+      .where(FirestoreFieldConstants.isVerifiedField, isEqualTo: true)
       .snapshots();
 
   final Stream<QuerySnapshot> classesStream =
@@ -51,9 +52,10 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
         .doc(selectedUserValue)
         .get();
 
-    grade = await selectedUser!["grade"] == LocaleKeys.noClass.tr()
+    grade = await selectedUser![FirestoreFieldConstants.gradeField] ==
+            LocaleKeys.noClass.tr()
         ? null
-        : selectedUser!["grade"];
+        : selectedUser![FirestoreFieldConstants.gradeField];
 
     switch (grade) {
       case 5:
@@ -79,7 +81,8 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
         .doc(selectedGradeValue)
         .get();
 
-    String classText = selectedClass!["name"].toString();
+    String classText =
+        selectedClass![FirestoreFieldConstants.nameField].toString();
 
     grade = int.parse(classText.characters.first);
 
@@ -125,12 +128,16 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
 
   void addHomework() async {
     await FirebaseCollections.homeworks.reference.add({
-      "subject": selectedSubjectText,
-      "topic": selectedTopicValue,
-      "date": Timestamp.fromDate(selectedDate!),
-      "assignedId": isClass ? selectedGradeValue : selectedUser!["uid"],
-      "type": isClass ? "class" : "student",
-      "makeEnum": "empty",
+      FirestoreFieldConstants.subjectField: selectedSubjectText,
+      FirestoreFieldConstants.topicField: selectedTopicValue,
+      FirestoreFieldConstants.dateField: Timestamp.fromDate(selectedDate!),
+      FirestoreFieldConstants.assignedIdField: isClass
+          ? selectedGradeValue
+          : selectedUser![FirestoreFieldConstants.uidField],
+      FirestoreFieldConstants.typeField: isClass
+          ? FirestoreFieldConstants.classField
+          : FirestoreFieldConstants.studentField,
+      FirestoreFieldConstants.makeEnumField: FirestoreFieldConstants.emptyField,
     });
     Navigator.pushAndRemoveUntil(
       context,

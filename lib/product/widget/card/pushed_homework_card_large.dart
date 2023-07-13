@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -30,40 +31,47 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   late String madeText;
 
   void loadComponents() {
-    switch (widget.snapshot.data!.docs[widget.index]["makeEnum"]) {
+    switch (widget.snapshot.data!.docs[widget.index]
+        [FirestoreFieldConstants.makeEnumField]) {
       case "pushed":
         icon = Icons.alarm_rounded;
         color = LightThemeColors.blazeOrange;
         madeText = LocaleKeys.pushed.tr();
-        dateTime =
-            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
+        dateTime = widget.snapshot.data!
+            .docs[widget.index][FirestoreFieldConstants.pushedTimeField]
+            .toDate();
         break;
       case "missing":
         icon = Icons.remove_circle_outline;
         color = const Color.fromARGB(255, 254, 207, 15);
         madeText = LocaleKeys.missing.tr();
-        dateTime =
-            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
+        dateTime = widget.snapshot.data!
+            .docs[widget.index][FirestoreFieldConstants.pushedTimeField]
+            .toDate();
         break;
       case "made":
         icon = Icons.check_box_rounded;
         color = LightThemeColors.green;
         madeText = LocaleKeys.made.tr();
-        dateTime =
-            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
+        dateTime = widget.snapshot.data!
+            .docs[widget.index][FirestoreFieldConstants.pushedTimeField]
+            .toDate();
         break;
       case "didntMade":
         icon = Icons.close;
         color = LightThemeColors.red;
         madeText = LocaleKeys.didntMade.tr();
-        dateTime =
-            widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
+        dateTime = widget.snapshot.data!
+            .docs[widget.index][FirestoreFieldConstants.pushedTimeField]
+            .toDate();
         break;
       case "empty":
         icon = Icons.hourglass_empty_rounded;
         color = LightThemeColors.white;
         madeText = LocaleKeys.notPushed.tr();
-        dateTime = widget.snapshot.data!.docs[widget.index]["date"].toDate();
+        dateTime = widget.snapshot.data!
+            .docs[widget.index][FirestoreFieldConstants.dateField]
+            .toDate();
         break;
       default:
     }
@@ -73,12 +81,14 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   DocumentSnapshot<Object?>? myUserSnapshot;
 
   Future<bool> isClass() async {
-    String classSnapshot =
-        await widget.snapshot.data!.docs[widget.index]["assignedId"];
+    String classSnapshot = await widget.snapshot.data!.docs[widget.index]
+        [FirestoreFieldConstants.assignedIdField];
     myClassSnapshot =
         await FirebaseCollections.classes.reference.doc(classSnapshot).get();
     setState(() {});
-    if (await widget.snapshot.data!.docs[widget.index]["type"] == "class") {
+    if (await widget.snapshot.data!.docs[widget.index]
+            [FirestoreFieldConstants.typeField] ==
+        FirestoreFieldConstants.classField) {
       return true;
     } else {
       return false;
@@ -86,8 +96,8 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   }
 
   Future<void> isStudent() async {
-    String userSnapshotString =
-        await widget.snapshot.data!.docs[widget.index]["assignedId"];
+    String userSnapshotString = await widget.snapshot.data!.docs[widget.index]
+        [FirestoreFieldConstants.assignedIdField];
     myUserSnapshot = await FirebaseCollections.students.reference
         .doc(userSnapshotString)
         .get();
@@ -148,11 +158,16 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.snapshot.data!.docs[widget.index]
-                                            ["type"] ==
-                                        "class"
-                                    ? (myClassSnapshot?["name"] ?? "")
-                                    : (myUserSnapshot?["name"] ?? ""),
+                                widget.snapshot.data!.docs[widget.index][
+                                            FirestoreFieldConstants
+                                                .typeField] ==
+                                        FirestoreFieldConstants.classField
+                                    ? (myClassSnapshot?[FirestoreFieldConstants
+                                            .nameField] ??
+                                        "")
+                                    : (myUserSnapshot?[FirestoreFieldConstants
+                                            .nameField] ??
+                                        ""),
                                 style: context.textTheme.titleLarge?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: color == LightThemeColors.white
@@ -164,13 +179,15 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
                           ),
                         ),
                         const Spacer(),
-                        widget.snapshot.data!.docs[widget.index]["type"] ==
-                                "class"
+                        widget.snapshot.data!.docs[widget.index]
+                                    [FirestoreFieldConstants.typeField] ==
+                                FirestoreFieldConstants.classField
                             ? const SizedBox.shrink()
                             : _madeText(context),
                         context.emptySizedWidthBoxLow,
-                        widget.snapshot.data!.docs[widget.index]["type"] ==
-                                "class"
+                        widget.snapshot.data!.docs[widget.index]
+                                    [FirestoreFieldConstants.typeField] ==
+                                FirestoreFieldConstants.classField
                             ? const SizedBox.shrink()
                             : _icon(),
                       ],
@@ -218,7 +235,8 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
           borderRadius: context.normalBorderRadius,
           image: DecorationImage(
             image: NetworkImage(
-              widget.snapshot.data!.docs[widget.index]["image"],
+              widget.snapshot.data!.docs[widget.index]
+                  [FirestoreFieldConstants.imageField],
             ),
             fit: BoxFit.cover,
           ),
@@ -244,7 +262,7 @@ class _PushedHomeworkCardLargeState extends State<PushedHomeworkCardLarge> {
   Text _topicText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["topic"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.topicField],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 16,

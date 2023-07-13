@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/announcement_card_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -24,10 +25,10 @@ class AnnouncementService {
     context,
   ) async {
     await FirebaseCollections.announcement.reference.add({
-      "createdTime": announcementModel.createdTime,
-      "description": announcementModel.description,
-      "imagePath": announcementModel.imagePath,
-      "title": announcementModel.title,
+      FirestoreFieldConstants.createdTimeField: announcementModel.createdTime,
+      FirestoreFieldConstants.descriptionField: announcementModel.description,
+      FirestoreFieldConstants.imagePathField: announcementModel.imagePath,
+      FirestoreFieldConstants.titleField: announcementModel.title,
     });
     Navigator.pop(context);
     Navigator.pop(context);

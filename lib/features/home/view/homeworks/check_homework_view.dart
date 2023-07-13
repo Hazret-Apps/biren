@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -58,28 +59,34 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
     Navigator.pop(context);
     downloadUrl = await uploadImage(imageXfile!);
     await FirebaseCollections.homeworkPush.reference.add({
-      "description": descriptionController.text,
-      "date": Timestamp.fromDate(DateTime.now()),
-      "pushedTime": Timestamp.now(),
-      "makeEnum": "pushed",
-      "topic": widget.homework.topic,
-      "subject": widget.homework.lesson,
-      "image": downloadUrl,
-      "homeworkId": widget.homework.id,
-      "senderName": FirebaseAuth.instance.currentUser!.displayName,
-      "senderMail": FirebaseAuth.instance.currentUser!.email,
-      "senderUserID": FirebaseAuth.instance.currentUser!.uid,
+      FirestoreFieldConstants.descriptionField: descriptionController.text,
+      FirestoreFieldConstants.dateField: Timestamp.fromDate(DateTime.now()),
+      FirestoreFieldConstants.pushedTimeField: Timestamp.now(),
+      FirestoreFieldConstants.makeEnumField: "pushed",
+      FirestoreFieldConstants.topicField: widget.homework.topic,
+      FirestoreFieldConstants.subjectField: widget.homework.lesson,
+      FirestoreFieldConstants.imageField: downloadUrl,
+      FirestoreFieldConstants.homeworkIdField: widget.homework.id,
+      FirestoreFieldConstants.senderNameField:
+          FirebaseAuth.instance.currentUser!.displayName,
+      FirestoreFieldConstants.senderMailField:
+          FirebaseAuth.instance.currentUser!.email,
+      FirestoreFieldConstants.senderUserIDField:
+          FirebaseAuth.instance.currentUser!.uid,
     });
     await FirebaseCollections.homeworks.reference
         .doc(widget.homework.id)
         .update({
-      "makeEnum": "pushed",
-      "image": downloadUrl,
-      "description": descriptionController.text,
-      "senderName": FirebaseAuth.instance.currentUser!.displayName,
-      "senderMail": FirebaseAuth.instance.currentUser!.email,
-      "senderUserID": FirebaseAuth.instance.currentUser!.uid,
-      "pushedTime": Timestamp.now(),
+      FirestoreFieldConstants.makeEnumField: "pushed",
+      FirestoreFieldConstants.imageField: downloadUrl,
+      FirestoreFieldConstants.descriptionField: descriptionController.text,
+      FirestoreFieldConstants.senderNameField:
+          FirebaseAuth.instance.currentUser!.displayName,
+      FirestoreFieldConstants.senderMailField:
+          FirebaseAuth.instance.currentUser!.email,
+      FirestoreFieldConstants.senderUserIDField:
+          FirebaseAuth.instance.currentUser!.uid,
+      FirestoreFieldConstants.pushedTimeField: Timestamp.now(),
     });
   }
 

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Homework {
@@ -24,20 +25,20 @@ class Homework {
       [SnapshotOptions? options]) {
     final data = snapshot.data()!;
     return Homework(
-      date: data['date'].toDate(),
-      lesson: data['subject'],
-      topic: data['topic'],
-      user: data['assignedId'],
-      makeEnum: data['makeEnum'],
+      date: data[FirestoreFieldConstants.dateField].toDate(),
+      lesson: data[FirestoreFieldConstants.subjectField],
+      topic: data[FirestoreFieldConstants.topicField],
+      user: data[FirestoreFieldConstants.assignedIdField],
+      makeEnum: data[FirestoreFieldConstants.makeEnumField],
     );
   }
 
   Map<String, Object?> toFirestore() {
     return {
-      "date": Timestamp.fromDate(date),
-      "subject": lesson,
-      "topic": topic,
-      "makeEnum": makeEnum,
+      FirestoreFieldConstants.dateField: Timestamp.fromDate(date),
+      FirestoreFieldConstants.subjectField: lesson,
+      FirestoreFieldConstants.topicField: topic,
+      FirestoreFieldConstants.makeEnumField: makeEnum,
     };
   }
 }

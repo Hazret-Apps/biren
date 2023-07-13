@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,9 @@ class _ClassDetailViewState extends State<ClassDetailView> {
       appBar: _appBar(),
       body: StreamBuilder(
         stream: FirebaseCollections.students.reference
-            .where("class",
-                isEqualTo: widget.snapshot.data!.docs[widget.index]["name"])
+            .where(FirestoreFieldConstants.classField,
+                isEqualTo: widget.snapshot.data!.docs[widget.index]
+                    [FirestoreFieldConstants.nameField])
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -42,16 +44,21 @@ class _ClassDetailViewState extends State<ClassDetailView> {
     return ListTile(
       leading: CircleAvatar(
         child: Text(
-          snapshot.data!.docs[index]["name"].toString().characters.first,
+          snapshot.data!.docs[index][FirestoreFieldConstants.nameField]
+              .toString()
+              .characters
+              .first,
         ),
       ),
-      title: Text(snapshot.data!.docs[index]["name"]),
+      title:
+          Text(snapshot.data!.docs[index][FirestoreFieldConstants.nameField]),
     );
   }
 
   AppBar _appBar() {
     return AppBar(
-      title: Text(widget.snapshot.data!.docs[widget.index]["name"]),
+      title: Text(widget.snapshot.data!.docs[widget.index]
+          [FirestoreFieldConstants.nameField]),
     );
   }
 }

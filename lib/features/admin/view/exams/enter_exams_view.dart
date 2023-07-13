@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:biren_kocluk/features/admin/view/exams/mixin/enter_exams_operation_mixin.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -253,12 +254,12 @@ class _BodyState extends State<_Body> {
         dowloadUrl = await snapshot.ref.getDownloadURL();
       }
       FirebaseCollections.exams.reference.add({
-        "file": dowloadUrl,
-        "student": widget.selectedStudentValue,
-        "createdTime": Timestamp.now(),
-        "fileType": fileType,
-        "description": descriptionController.text,
-        "title": titleController.text,
+        FirestoreFieldConstants.fileField: dowloadUrl,
+        FirestoreFieldConstants.studentField: widget.selectedStudentValue,
+        FirestoreFieldConstants.createdTimeField: Timestamp.now(),
+        FirestoreFieldConstants.fileTypeField: fileType,
+        FirestoreFieldConstants.descriptionField: descriptionController.text,
+        FirestoreFieldConstants.titleField: titleController.text,
       });
     }
   }
@@ -279,7 +280,7 @@ class _BodyState extends State<_Body> {
                 DropdownMenuItem(
                   value: classes.id,
                   child: Text(
-                    classes["name"],
+                    classes[FirestoreFieldConstants.nameField],
                   ),
                 ),
               );

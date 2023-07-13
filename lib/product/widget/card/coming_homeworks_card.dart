@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -27,7 +28,8 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
   late Color color;
 
   void loadComponents() {
-    switch (widget.snapshot.data!.docs[widget.index]["makeEnum"]) {
+    switch (widget.snapshot.data!.docs[widget.index]
+        [FirestoreFieldConstants.makeEnumField]) {
       case "pushed":
         color = LightThemeColors.blazeOrange;
         break;
@@ -47,7 +49,9 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
   @override
   void initState() {
     super.initState();
-    dateTime = widget.snapshot.data!.docs[widget.index]["pushedTime"].toDate();
+    dateTime = widget.snapshot.data!
+        .docs[widget.index][FirestoreFieldConstants.pushedTimeField]
+        .toDate();
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
@@ -85,7 +89,8 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                   borderRadius: context.normalBorderRadius,
                   image: DecorationImage(
                     image: NetworkImage(
-                      widget.snapshot.data!.docs[widget.index]["image"],
+                      widget.snapshot.data!.docs[widget.index]
+                          [FirestoreFieldConstants.imageField],
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -117,13 +122,15 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                                     .doc(widget
                                         .snapshot.data!.docs[widget.index].id)
                                     .update({
-                                  "makeEnum": "made",
+                                  FirestoreFieldConstants.makeEnumField: "made",
                                 });
                                 FirebaseCollections.homeworks.reference
-                                    .doc(widget.snapshot.data!
-                                        .docs[widget.index]["homeworkId"])
+                                    .doc(
+                                        widget.snapshot.data!.docs[widget.index]
+                                            [FirestoreFieldConstants
+                                                .homeworkIdField])
                                     .update({
-                                  "makeEnum": "made",
+                                  FirestoreFieldConstants.makeEnumField: "made",
                                 });
                                 setState(() {
                                   color = LightThemeColors.green;
@@ -135,13 +142,17 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                                     .doc(widget
                                         .snapshot.data!.docs[widget.index].id)
                                     .update({
-                                  "makeEnum": "didntMade",
+                                  FirestoreFieldConstants.makeEnumField:
+                                      "didntMade",
                                 });
                                 FirebaseCollections.homeworks.reference
-                                    .doc(widget.snapshot.data!
-                                        .docs[widget.index]["homeworkId"])
+                                    .doc(
+                                        widget.snapshot.data!.docs[widget.index]
+                                            [FirestoreFieldConstants
+                                                .homeworkIdField])
                                     .update({
-                                  "makeEnum": "didntMade",
+                                  FirestoreFieldConstants.makeEnumField:
+                                      "didntMade",
                                 });
                                 setState(() {
                                   color = LightThemeColors.red;
@@ -153,13 +164,17 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
                                     .doc(widget
                                         .snapshot.data!.docs[widget.index].id)
                                     .update({
-                                  "makeEnum": "missing",
+                                  FirestoreFieldConstants.makeEnumField:
+                                      "missing",
                                 });
                                 FirebaseCollections.homeworks.reference
-                                    .doc(widget.snapshot.data!
-                                        .docs[widget.index]["homeworkId"])
+                                    .doc(
+                                        widget.snapshot.data!.docs[widget.index]
+                                            [FirestoreFieldConstants
+                                                .homeworkIdField])
                                     .update({
-                                  "makeEnum": "missing",
+                                  FirestoreFieldConstants.makeEnumField:
+                                      "missing",
                                 });
                                 setState(() {
                                   color =
@@ -237,7 +252,7 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
   Text _topicText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["topic"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.topicField],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,
@@ -250,7 +265,7 @@ class _HomeworkCardLargeState extends State<ComingHomeworkCardLarge> {
   Text _senderStudentText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot,
       int index, BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["senderName"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.senderNameField],
       style: context.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 18,

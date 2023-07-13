@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card_large.dart';
@@ -36,15 +37,15 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseCollections.homeworks.reference
-          .where("makeEnum", isEqualTo: "empty")
+          .where(FirestoreFieldConstants.makeEnumField, isEqualTo: "empty")
           .where(
             Filter.or(
               Filter(
-                "assignedId",
+                FirestoreFieldConstants.assignedIdField,
                 isEqualTo: FirebaseAuth.instance.currentUser!.uid,
               ),
               Filter(
-                "assignedId",
+                FirestoreFieldConstants.assignedIdField,
                 isEqualTo: AuthService.userClassId,
               ),
             ),

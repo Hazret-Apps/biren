@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:biren_kocluk/features/admin/view/class/class_detail_view.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -121,7 +122,7 @@ class _ClassesViewState extends State<ClassesView> {
   Text _classText(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
       BuildContext context) {
     return Text(
-      snapshot.data!.docs[index]["name"],
+      snapshot.data!.docs[index][FirestoreFieldConstants.nameField],
       style: context.textTheme.titleMedium?.copyWith(
         fontSize: 24,
       ),
@@ -234,7 +235,8 @@ class _ClassesViewState extends State<ClassesView> {
             ..showSnackBar(snackBar);
 
           await FirebaseCollections.classes.reference.add({
-            "name": "$selectedGradeNumber/$selectedGradeText",
+            FirestoreFieldConstants.nameField:
+                "$selectedGradeNumber/$selectedGradeText",
           });
         }
       },

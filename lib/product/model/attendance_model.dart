@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -20,19 +21,19 @@ class AttendanceModel {
       [SnapshotOptions? options]) {
     final data = snapshot.data()!;
     return AttendanceModel(
-      uid: data["uid"],
-      status: data["status"],
-      date: data['date'].toDate(),
-      name: data['name'],
+      uid: data[FirestoreFieldConstants.uidField],
+      status: data[FirestoreFieldConstants.statusField],
+      date: data[FirestoreFieldConstants.dateField].toDate(),
+      name: data[FirestoreFieldConstants.nameField],
     );
   }
 
   Map<String, Object?> toFirestore() {
     return {
-      "date": Timestamp.fromDate(date),
-      "uid": uid,
-      "name": name,
-      "status": status,
+      FirestoreFieldConstants.dateField: Timestamp.fromDate(date),
+      FirestoreFieldConstants.uidField: uid,
+      FirestoreFieldConstants.nameField: name,
+      FirestoreFieldConstants.statusField: status,
     };
   }
 }

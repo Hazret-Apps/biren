@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/features/admin/view/students/login_accept_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/mixin/login_requiest_operation_mixin.dart';
+import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/cross_check_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
@@ -69,7 +70,8 @@ class _LoginRequiestViewState extends State<LoginRequiestView>
                                     password: password(snapshot, index),
                                     createdTime: createdTime(snapshot, index),
                                     isVerified: isVerified(snapshot, index),
-                                    uid: snapshot.data!.docs[index]["uid"],
+                                    uid: snapshot.data!.docs[index]
+                                        [FirestoreFieldConstants.uidField],
                                     classText: classText(snapshot, index),
                                     grade: grade(snapshot, index),
                                   ),
