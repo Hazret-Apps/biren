@@ -37,6 +37,11 @@ class _Body extends StatelessWidget {
         stream: stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            if (snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text("Hiç Ödev Yok"),
+              );
+            }
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
