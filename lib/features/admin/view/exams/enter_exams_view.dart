@@ -14,7 +14,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kartal/kartal.dart';
+import 'package:kartal/kartal.dart' hide FileType;
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class EnterExamsView extends StatefulWidget {
@@ -62,7 +62,10 @@ class _BodyState extends State<_Body> {
 
   Future<void> loadPdfToStorage() async {
     Navigator.pop(context);
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
     myPDFFile = File(result!.files.single.path.toString());
     fileType = "file";
     file = myPDFFile!.readAsBytesSync();
@@ -199,7 +202,7 @@ class _BodyState extends State<_Body> {
     return Padding(
       padding: context.horizontalPaddingNormal,
       child: MainTextField(
-        hintText: LocaleKeys.descriptionOptional.tr(),
+        hintText: LocaleKeys.titleOptional.tr(),
         keyboardType: TextInputType.text,
         controller: titleController,
       ),
@@ -210,7 +213,7 @@ class _BodyState extends State<_Body> {
     return Padding(
       padding: context.horizontalPaddingNormal,
       child: MainTextField(
-        hintText: LocaleKeys.titleOptional.tr(),
+        hintText: LocaleKeys.descriptionOptional.tr(),
         keyboardType: TextInputType.text,
         controller: descriptionController,
         minLines: 4,

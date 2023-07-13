@@ -5,6 +5,7 @@ import 'package:biren_kocluk/main.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
 import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,18 @@ class AuthService {
     }
   }
 
+  Future<void> loadUserClass() async {
+    DocumentSnapshot<Object?> user = await FirebaseCollections
+        .students.reference
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    String userClassName = await user["class"];
+    var userClass = await FirebaseCollections.classes.reference
+        .where("name", isEqualTo: userClassName)
+        .get();
+    AuthService.userClassId = userClass.docs.first.id;
+  }
+
   Future<void> loginUser(
     String email,
     String password,
@@ -62,11 +75,11 @@ class AuthService {
   ) async {
     try {
       _loadingDialog(context);
-
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      loadUserClass();
       Navigator.pushAndRemoveUntil(
         context,
         CupertinoPageRoute(builder: (context) => const Biren()),
