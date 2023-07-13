@@ -177,9 +177,9 @@ class _ClassesViewState extends State<ClassesView> {
 
   Text _createClassText(BuildContext context) {
     return Text(
-      LocaleKeys.features_createHomework.tr(),
-      style: context.textTheme.headlineMedium
-          ?.copyWith(fontWeight: FontWeight.w600),
+      "Sınıf Oluştur",
+      style:
+          context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
     );
   }
 
