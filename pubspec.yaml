@@ -40,6 +40,7 @@ dependencies:
   awesome_snackbar_content:  
   syncfusion_flutter_pdfviewer:
   file_picker:
+  shared_preferences: ^2.2.0
   calendar_timeline: ^1.1.2
   
 dev_dependencies:

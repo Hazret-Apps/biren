@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
+import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
 import 'package:biren_kocluk/main.dart';
 import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
@@ -10,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @immutable
 class AuthService {
@@ -18,10 +21,34 @@ class AuthService {
   static String? userId = FirebaseAuth.instance.currentUser?.uid;
   static String? userClassId;
 
-  static const String adminMail = "admin";
-  static const String adminPassword = "123";
+  static String? adminMail;
+  static String? adminPassword;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<void> loginAdmin(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("adminLogin", true);
+    Navigator.pushAndRemoveUntil(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const AdminHomeView(),
+      ),
+      (route) => false,
+    );
+  }
+
+  Future<void> logOutAdmin(BuildContext context) async {
+    Navigator.pushAndRemoveUntil(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const LoginView(),
+      ),
+      (route) => false,
+    );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("adminLogin", false);
+  }
 
   Future<void> registerUser(UserModel userModel, BuildContext context) async {
     try {
@@ -45,7 +72,8 @@ class AuthService {
       });
       Navigator.pushAndRemoveUntil(
         context,
-        CupertinoPageRoute(builder: (context) => const Biren()),
+        CupertinoPageRoute(
+            builder: (context) => const Biren(adminLogin: false)),
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
@@ -83,7 +111,9 @@ class AuthService {
       loadUserClass();
       Navigator.pushAndRemoveUntil(
         context,
-        CupertinoPageRoute(builder: (context) => const Biren()),
+        CupertinoPageRoute(
+          builder: (context) => const Biren(adminLogin: false),
+        ),
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
