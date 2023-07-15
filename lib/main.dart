@@ -1,3 +1,4 @@
+import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/homeview/home_view.dart';
@@ -16,16 +17,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await _init();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? adminLogin = prefs.getBool("adminLogin") ?? false;
   _initSystemUi();
   runApp(
     EasyLocalization(
       supportedLocales: LanguageManager.instance.supportedLocales,
       path: AppConstants.LANG_ASSET_PATH,
       fallbackLocale: LanguageManager.instance.trLocale,
-      child: const Biren(),
+      child: Biren(adminLogin: adminLogin),
     ),
   );
 }
@@ -61,7 +65,8 @@ void _initSystemUi() {
 }
 
 class Biren extends StatelessWidget {
-  const Biren({super.key});
+  const Biren({super.key, required this.adminLogin});
+  final bool adminLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -72,30 +77,32 @@ class Biren extends StatelessWidget {
       title: "Biren Koçluk",
       theme: LightTheme(context).theme,
       debugShowCheckedModeBanner: false,
-      home: FirebaseAuth.instance.currentUser != null
-          ? StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseCollections.students.reference
-                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data?.exists ?? false) {
-                    if (snapshot
-                        .data![FirestoreFieldConstants.isVerifiedField]) {
-                      return const HomeView();
-                    } else if (snapshot
-                            .data![FirestoreFieldConstants.isVerifiedField] ==
-                        false) {
-                      return const WaitingView();
-                    } else {
-                      return const RejectedView();
+      home: adminLogin
+          ? const AdminHomeView()
+          : FirebaseAuth.instance.currentUser != null
+              ? StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseCollections.students.reference
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data?.exists ?? false) {
+                        if (snapshot
+                            .data![FirestoreFieldConstants.isVerifiedField]) {
+                          return const HomeView();
+                        } else if (snapshot.data![
+                                FirestoreFieldConstants.isVerifiedField] ==
+                            false) {
+                          return const WaitingView();
+                        } else {
+                          return const RejectedView();
+                        }
+                      }
                     }
-                  }
-                }
-                return const LoadingView();
-              },
-            )
-          : const LoginView(),
+                    return const LoadingView();
+                  },
+                )
+              : const LoginView(),
     );
   }
 }

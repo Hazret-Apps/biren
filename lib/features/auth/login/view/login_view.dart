@@ -82,12 +82,10 @@ class _LoginViewState extends State<LoginView> with LoginOperationMixin {
   MainButton _loginButton(BuildContext context) {
     return MainButton(
       onPressed: () {
-        //! Admin test hızlı olsun diye böyle, ayrı bir uygulamaya taşınacak
         if (mailController.text == AuthService.adminMail &&
             passwordController.text == AuthService.adminPassword) {
-          callAdminHomeView(context);
-        }
-        if (formKey.currentState!.validate()) {
+          AuthService().loginAdmin(context);
+        } else if (formKey.currentState!.validate()) {
           AuthService().loginUser(
             mailController.text.trim(),
             passwordController.text.trim(),

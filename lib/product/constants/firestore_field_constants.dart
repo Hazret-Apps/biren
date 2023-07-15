@@ -1,5 +1,6 @@
 class FirestoreFieldConstants {
   static String get assignedIdField => "assignedId";
+  static String get login => "login";
   static String get classField => "class";
   static String get createdTimeField => "createdTime";
   static String get dateField => "date";
