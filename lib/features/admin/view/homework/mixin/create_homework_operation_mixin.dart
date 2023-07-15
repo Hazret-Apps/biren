@@ -32,8 +32,10 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
       .where(FirestoreFieldConstants.isVerifiedField, isEqualTo: true)
       .snapshots();
 
-  final Stream<QuerySnapshot> classesStream =
-      FirebaseCollections.classes.reference.snapshots();
+  final Stream<QuerySnapshot> classesStream = FirebaseCollections
+      .classes.reference
+      .orderBy('name', descending: false)
+      .snapshots();
 
   void changeHelpType(HomeworkType type) {
     setState(() => homeworkType = type);

@@ -39,9 +39,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
               isClass
                   ? SelectTypeDropdown(
                       selectedValue: selectedGradeValue,
-                      stream: FirebaseCollections.classes.reference
-                          .orderBy('name', descending: false)
-                          .snapshots(),
+                      stream: classesStream,
                       type: HomeworkType.classText,
                       onTap: (value) {
                         setState(() {
@@ -56,8 +54,7 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
                     )
                   : SelectTypeDropdown(
                       selectedValue: selectedUserValue,
-                      stream:
-                          FirebaseCollections.students.reference.snapshots(),
+                      stream: studentsStream,
                       type: HomeworkType.student,
                       onTap: (value) {
                         setState(() {
