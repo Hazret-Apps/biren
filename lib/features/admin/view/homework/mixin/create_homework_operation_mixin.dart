@@ -26,6 +26,7 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
   String? selectedSubjectText;
   String? selectedTopicValue;
   String? selectedGradeValue;
+  TextEditingController descriptionController = TextEditingController();
 
   final Stream<QuerySnapshot> studentsStream = FirebaseCollections
       .students.reference
@@ -138,6 +139,10 @@ mixin CreateHomeworkOperationMixin on State<CreateHomeworkView> {
           ? FirestoreFieldConstants.classField
           : FirestoreFieldConstants.studentField,
       FirestoreFieldConstants.makeEnumField: FirestoreFieldConstants.emptyField,
+      FirestoreFieldConstants.assignedNameField: isClass
+          ? selectedClass![FirestoreFieldConstants.nameField]
+          : selectedUser![FirestoreFieldConstants.nameField],
+      FirestoreFieldConstants.descriptionField: descriptionController.text,
     });
     Navigator.pushAndRemoveUntil(
       context,

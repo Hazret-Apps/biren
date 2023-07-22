@@ -5,8 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 mixin IncomingHomeworksOperationMixin on State<IncomingHomeworksView> {
-  final Stream<QuerySnapshot> stream = FirebaseCollections
-      .homeworkPush.reference
+  final Stream<QuerySnapshot> stream = FirebaseCollections.homeworks.reference
       .where(FirestoreFieldConstants.makeEnumField,
           isEqualTo: FirestoreFieldConstants.pushedField)
       .snapshots();

@@ -7,6 +7,7 @@ import 'package:biren_kocluk/product/enum/homework_type_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/widget/button/main_button.dart';
+import 'package:biren_kocluk/product/widget/text_field/main_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_field/date_field.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -74,6 +75,13 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
               context.emptySizedHeightBoxLow3x,
               _selectTopicDropdown(),
               context.emptySizedHeightBoxLow3x,
+              MainTextField(
+                hintText: LocaleKeys.descriptionOptional.tr(),
+                keyboardType: TextInputType.text,
+                controller: descriptionController,
+                minLines: 3,
+              ),
+              context.emptySizedHeightBoxLow3x,
               MainButton(
                 color: isClass
                     ? selectedClass == null ||
@@ -137,7 +145,14 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     return DropdownButtonFormField(
       isExpanded: true,
       value: selectedSubjectValue,
-      hint: Text(LocaleKeys.selectSubject.tr()),
+      hint: Text(
+        LocaleKeys.selectSubject.tr(),
+        style: const TextStyle(
+          fontFamily: "Poppins",
+          color: LightThemeColors.grey,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       onChanged: (value) {
         setState(() {
           selectedSubjectValue = value;
@@ -181,7 +196,14 @@ class _CreateHomeworkViewState extends State<CreateHomeworkView>
     return DropdownButtonFormField(
         isExpanded: true,
         value: selectedTopicValue,
-        hint: Text(LocaleKeys.selectTopic.tr()),
+        hint: Text(
+          LocaleKeys.selectTopic.tr(),
+          style: const TextStyle(
+            fontFamily: "Poppins",
+            color: LightThemeColors.grey,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         onChanged: (value) {
           setState(() {
             selectedTopicValue = value;
@@ -306,6 +328,11 @@ class _SelectTypeDropdownState extends State<SelectTypeDropdown> {
               widget.type == HomeworkType.classText
                   ? LocaleKeys.selectClass.tr()
                   : LocaleKeys.selectStudent.tr(),
+              style: const TextStyle(
+                fontFamily: "Poppins",
+                color: LightThemeColors.grey,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             onChanged: widget.onTap,
             items: items,

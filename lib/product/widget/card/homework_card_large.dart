@@ -28,17 +28,17 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   late String formattedDate;
   late bool isClass;
 
+  late QueryDocumentSnapshot<Object?> snapshot;
+
   @override
   void initState() {
     super.initState();
-    dateTime = widget
-        .snapshot.data!.docs[widget.index][FirestoreFieldConstants.dateField]
-        .toDate();
+    snapshot = widget.snapshot.data!.docs[widget.index];
+    dateTime = snapshot[FirestoreFieldConstants.dateField].toDate();
     formattedDate = DateFormat('dd/MM/yyyy').format(
       dateTime,
     );
-    widget.snapshot.data!.docs[widget.index]
-                [FirestoreFieldConstants.typeField] ==
+    snapshot[FirestoreFieldConstants.typeField] ==
             FirestoreFieldConstants.classField
         ? isClass = true
         : isClass = false;
@@ -47,22 +47,13 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: context.horizontalPaddingNormal + context.verticalPaddingLow,
+      padding: context.paddingNormal,
       child: Container(
-        height: context.height / 5,
+        height: context.height / 4,
         decoration: BoxDecoration(
-            color: LightThemeColors.white,
-            borderRadius: context.normalBorderRadius,
-            boxShadow: [
-              BoxShadow(
-                color: LightThemeColors.grey.withOpacity(0.5),
-                blurRadius: 10,
-                offset: const Offset(
-                  5,
-                  15,
-                ),
-              ),
-            ]),
+          color: LightThemeColors.white,
+          borderRadius: context.normalBorderRadius,
+        ),
         child: Padding(
           padding: context.horizontalPaddingNormal + context.verticalPaddingLow,
           child: Column(
@@ -72,65 +63,87 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
                 children: [
                   _subjectText(widget.snapshot, widget.index, context),
                   const Spacer(),
-                  PopupMenuButton(
-                    offset: const Offset(-10, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: context.normalBorderRadius,
-                    ),
-                    onSelected: (value) {
-                      if (value == 0) {
-                      } else if (value == 1) {
-                        _checkDialog(context, widget.snapshot, widget.index);
-                      } else if (value == 2) {
-                      } else if (value == 3) {}
-                    },
-                    itemBuilder: (ctx) => [
-                      _buildPopupMenuItem(
-                        LocaleKeys.askQuestion.tr(),
-                        0,
-                        Icons.info_outline_rounded,
-                        context,
-                      ),
-                      widget.snapshot.data!.docs[widget.index]
-                                  [FirestoreFieldConstants.makeEnumField] ==
-                              "pushed"
-                          ? _buildPopupMenuItem(
-                              LocaleKeys.pushed.tr(),
-                              2,
-                              Icons.arrow_circle_right_outlined,
-                              context,
-                            )
-                          : widget.snapshot.data!.docs[widget.index]
-                                      [FirestoreFieldConstants.typeField] ==
-                                  FirestoreFieldConstants.studentField
-                              ? _buildPopupMenuItem(
-                                  LocaleKeys.complated.tr(),
-                                  1,
-                                  Icons.check_rounded,
-                                  context,
-                                )
-                              : _buildPopupMenuItem(
-                                  "Sınıf Ödevleri Gönderilemez",
-                                  3,
-                                  Icons.group_outlined,
-                                  context,
-                                )
-                    ],
-                  )
+                  _popupMenuButton(context)
                 ],
               ),
               _topicText(widget.snapshot, widget.index, context),
               context.emptySizedHeightBoxLow,
-              Text(
-                formattedDate,
-                style: context.textTheme.bodyLarge?.copyWith(
-                  color: LightThemeColors.black,
-                ),
-              ),
+              snapshot[FirestoreFieldConstants.descriptionField] == ""
+                  ? const SizedBox.shrink()
+                  : _descriptionText(context),
+              context.emptySizedHeightBoxLow,
+              _dateText(context),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Text _descriptionText(BuildContext context) {
+    return Text(
+      snapshot[FirestoreFieldConstants.descriptionField],
+      style: context.textTheme.bodyMedium?.copyWith(
+        fontWeight: FontWeight.normal,
+      ),
+      maxLines: 3,
+    );
+  }
+
+  Text _dateText(BuildContext context) {
+    return Text(
+      formattedDate,
+      style: context.textTheme.bodyLarge?.copyWith(
+        color: LightThemeColors.black,
+      ),
+    );
+  }
+
+  PopupMenuButton<dynamic> _popupMenuButton(BuildContext context) {
+    return PopupMenuButton(
+      offset: const Offset(-10, 50),
+      shape: RoundedRectangleBorder(
+        borderRadius: context.normalBorderRadius,
+      ),
+      onSelected: (value) {
+        if (value == 0) {
+        } else if (value == 1) {
+          _checkDialog(context, widget.snapshot, widget.index);
+        } else if (value == 2) {
+        } else if (value == 3) {}
+      },
+      itemBuilder: (ctx) => [
+        _buildPopupMenuItem(
+          LocaleKeys.askQuestion.tr(),
+          0,
+          Icons.info_outline_rounded,
+          context,
+        ),
+        widget.snapshot.data!.docs[widget.index]
+                    [FirestoreFieldConstants.makeEnumField] ==
+                "pushed"
+            ? _buildPopupMenuItem(
+                LocaleKeys.pushed.tr(),
+                2,
+                Icons.arrow_circle_right_outlined,
+                context,
+              )
+            : widget.snapshot.data!.docs[widget.index]
+                        [FirestoreFieldConstants.typeField] ==
+                    FirestoreFieldConstants.studentField
+                ? _buildPopupMenuItem(
+                    LocaleKeys.complated.tr(),
+                    1,
+                    Icons.check_rounded,
+                    context,
+                  )
+                : _buildPopupMenuItem(
+                    "Sınıf Ödevleri Gönderilemez",
+                    3,
+                    Icons.group_outlined,
+                    context,
+                  )
+      ],
     );
   }
 

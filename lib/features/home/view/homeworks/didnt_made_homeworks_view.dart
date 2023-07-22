@@ -1,6 +1,6 @@
 import 'package:biren_kocluk/features/home/mixin/didnt_made_homeworks_operation_mixin.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
-import 'package:biren_kocluk/product/widget/card/pushed_homework_card_large.dart';
+import 'package:biren_kocluk/product/widget/card/marked_homework_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _Body extends StatelessWidget {
                     child: Text("Hiç Ödev Yok"),
                   );
                 }
-                return PushedHomeworkCardLarge(
+                return MarkedHomeworkCard(
                   index: index,
                   snapshot: snapshot,
                 );

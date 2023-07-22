@@ -58,22 +58,6 @@ class _CheckHomeworkViewState extends State<CheckHomeworkView> {
   Future<void> onSubmitButton() async {
     Navigator.pop(context);
     downloadUrl = await uploadImage(imageXfile!);
-    await FirebaseCollections.homeworkPush.reference.add({
-      FirestoreFieldConstants.descriptionField: descriptionController.text,
-      FirestoreFieldConstants.dateField: Timestamp.fromDate(DateTime.now()),
-      FirestoreFieldConstants.pushedTimeField: Timestamp.now(),
-      FirestoreFieldConstants.makeEnumField: "pushed",
-      FirestoreFieldConstants.topicField: widget.homework.topic,
-      FirestoreFieldConstants.subjectField: widget.homework.lesson,
-      FirestoreFieldConstants.imageField: downloadUrl,
-      FirestoreFieldConstants.homeworkIdField: widget.homework.id,
-      FirestoreFieldConstants.senderNameField:
-          FirebaseAuth.instance.currentUser!.displayName,
-      FirestoreFieldConstants.senderMailField:
-          FirebaseAuth.instance.currentUser!.email,
-      FirestoreFieldConstants.senderUserIDField:
-          FirebaseAuth.instance.currentUser!.uid,
-    });
     await FirebaseCollections.homeworks.reference
         .doc(widget.homework.id)
         .update({
