@@ -6,7 +6,6 @@ enum FirebaseCollections {
   announcement,
   attendance,
   homeworks,
-  homeworkPush,
   exams,
   classes;
 
