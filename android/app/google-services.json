@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:997162249545:android:c05018c92e78c420357e98",
+        "mobilesdk_app_id": "1:997162249545:android:26f5cf4038091284357e98",
         "android_client_info": {
           "package_name": "com.hazret.biren_kocluk"
         }
@@ -29,6 +29,13 @@
             {
               "client_id": "997162249545-77tjji696drceb0r697djvhb0gd24spd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "997162249545-gic82ftf3gskgos3gc30sg3ik2s5f4d2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.birenKocluk"
+              }
             }
           ]
         }
