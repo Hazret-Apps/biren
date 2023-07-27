@@ -4,5 +4,6 @@ enum FeatureTypes {
   students,
   classes,
   attendance,
+  showcase,
   exams,
 }

@@ -1,16 +1,15 @@
-import 'package:biren_kocluk/features/home/view/announcement/announcements_view.dart';
 import 'package:biren_kocluk/features/home/view/homeview/widgets/home_drawer.dart';
-import 'package:biren_kocluk/features/home/view/homeview/widgets/home_select_feature_card.dart';
-import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
 import 'package:biren_kocluk/features/home/mixin/home_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/app_constants.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/product/widget/card/homework_card_mini.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -22,6 +21,16 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with HomeOperationMixin {
+  late Stream<QuerySnapshot> stream;
+  int currentSlideIndex = 0;
+  CarouselController carouselController = CarouselController();
+
+  @override
+  void initState() {
+    super.initState();
+    stream = FirebaseCollections.showcase.reference.snapshots();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,49 +42,52 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
 
   SafeArea _body(BuildContext context) {
     return SafeArea(
-      child: ListView(
-        children: [
-          context.emptySizedHeightBoxLow,
-          Padding(
-            padding: context.horizontalPaddingNormal,
-            child: Row(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            context.emptySizedHeightBoxLow,
+            SizedBox(
+              height: context.height / 5,
+              width: double.infinity,
+              child: StreamBuilder<QuerySnapshot>(
+                stream: stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return CarouselSlider.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index, realIndex) {
+                        DocumentSnapshot sliderData =
+                            snapshot.data!.docs[index];
+                        return Image.network(
+                          sliderData["image"],
+                        );
+                      },
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }
+                },
+              ),
+            ),
+            Column(
               children: [
-                SelectFeatureCard(
-                  color: LightThemeColors.blazeOrange,
-                  text: LocaleKeys.features_homeworks.tr(),
-                  icon: const Icon(
-                    Icons.business_center_rounded,
-                    color: LightThemeColors.white,
-                    size: 50,
+                _calendar,
+                ...getEventsForTheDay(selectedDay).map(
+                  (event) => HomeworkItem(
+                    event: event,
                   ),
-                  callView: const HomeworksView(),
-                ),
-                context.emptySizedWidthBoxNormal,
-                SelectFeatureCard(
-                  color: LightThemeColors.red,
-                  text: LocaleKeys.features_announcements.tr(),
-                  icon: const FaIcon(
-                    FontAwesomeIcons.exclamation,
-                    color: LightThemeColors.white,
-                    size: 50,
-                  ),
-                  callView: const AnnouncementView(),
                 ),
               ],
             ),
-          ),
-          context.emptySizedHeightBoxLow,
-          Column(
-            children: [
-              _calendar,
-              ...getEventsForTheDay(selectedDay).map(
-                (event) => HomeworkItem(
-                  event: event,
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

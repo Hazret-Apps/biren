@@ -7,9 +7,8 @@ mixin CreateAnnouncementOperationMixin on State<CreateAnnouncementView> {
   XFile? image;
   File? fileImage;
 
-    final TextEditingController titleController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-
 
   Future<void> selectImage() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
