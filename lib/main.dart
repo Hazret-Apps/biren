@@ -1,4 +1,5 @@
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
+import 'package:biren_kocluk/features/admin/view/attendance/provider/attendance_provider.dart';
 import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/homeview/home_view.dart';
@@ -17,6 +18,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
@@ -73,39 +75,46 @@ class Biren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      title: "Biren Koçluk",
-      theme: LightTheme(context).theme,
-      debugShowCheckedModeBanner: false,
-      home: adminLogin
-          ? const AdminHomeView()
-          : FirebaseAuth.instance.currentUser != null
-              ? StreamBuilder<DocumentSnapshot>(
-                  stream: FirebaseCollections.students.reference
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data?.exists ?? false) {
-                        if (snapshot
-                            .data![FirestoreFieldConstants.isVerifiedField]) {
-                          return const HomeView();
-                        } else if (snapshot.data![
-                                FirestoreFieldConstants.isVerifiedField] ==
-                            false) {
-                          return const WaitingView();
-                        } else {
-                          return const RejectedView();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AttendanceProvider(),
+        )
+      ],
+      child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        title: "Biren Koçluk",
+        theme: LightTheme(context).theme,
+        debugShowCheckedModeBanner: false,
+        home: adminLogin
+            ? const AdminHomeView()
+            : FirebaseAuth.instance.currentUser != null
+                ? StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseCollections.students.reference
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data?.exists ?? false) {
+                          if (snapshot
+                              .data![FirestoreFieldConstants.isVerifiedField]) {
+                            return const HomeView();
+                          } else if (snapshot.data![
+                                  FirestoreFieldConstants.isVerifiedField] ==
+                              false) {
+                            return const WaitingView();
+                          } else {
+                            return const RejectedView();
+                          }
                         }
                       }
-                    }
-                    return const LoadingView();
-                  },
-                )
-              : const LoginView(),
+                      return const LoadingView();
+                    },
+                  )
+                : const LoginView(),
+      ),
     );
   }
 }
