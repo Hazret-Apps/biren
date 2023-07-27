@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
@@ -22,45 +24,91 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView>
       appBar: _appBar(),
       body: StreamBuilder<QuerySnapshot>(
         stream: stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                UserModel userModel = UserModel(
-                  name: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.nameField],
-                  mail: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.mailField],
-                  password: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.passwordField],
-                  createdTime: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.createdTimeField],
-                  isVerified: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.isVerifiedField],
-                  uid: snapshot.data!.docs[index]
-                      [FirestoreFieldConstants.uidField],
-                );
-                return _StudentWidget(userModel);
+        builder: (context, userSnapshot) {
+          if (userSnapshot.hasData) {
+            return StreamBuilder<QuerySnapshot>(
+              stream: FirebaseCollections.attendance.reference
+                  .where(
+                    "date",
+                    isEqualTo: DateTime.now().day.toString() +
+                        DateTime.now().month.toString() +
+                        DateTime.now().year.toString(),
+                  )
+                  .snapshots(),
+              builder: (context, attendanceSnapshot) {
+                if (attendanceSnapshot.hasData) {
+                  if (attendanceSnapshot.data!.docs.isNotNullOrEmpty) {
+                    return ListView.builder(
+                      itemCount: userSnapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final userSnapshotRef = userSnapshot.data!.docs[index];
+                        UserModel userModel = UserModel(
+                          name: userSnapshotRef[
+                              FirestoreFieldConstants.nameField],
+                          mail: userSnapshotRef[
+                              FirestoreFieldConstants.mailField],
+                          password: userSnapshotRef[
+                              FirestoreFieldConstants.passwordField],
+                          createdTime: userSnapshotRef[
+                              FirestoreFieldConstants.createdTimeField],
+                          isVerified: userSnapshotRef[
+                              FirestoreFieldConstants.isVerifiedField],
+                          uid:
+                              userSnapshotRef[FirestoreFieldConstants.uidField],
+                        );
+
+                        return _StudentWidget(
+                          userModel,
+                          attendanceSnapshot.data!.docs,
+                          index,
+                        );
+                      },
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: userSnapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final userSnapshotRef = userSnapshot.data!.docs[index];
+                        UserModel userModel = UserModel(
+                          name: userSnapshotRef[
+                              FirestoreFieldConstants.nameField],
+                          mail: userSnapshotRef[
+                              FirestoreFieldConstants.mailField],
+                          password: userSnapshotRef[
+                              FirestoreFieldConstants.passwordField],
+                          createdTime: userSnapshotRef[
+                              FirestoreFieldConstants.createdTimeField],
+                          isVerified: userSnapshotRef[
+                              FirestoreFieldConstants.isVerifiedField],
+                          uid:
+                              userSnapshotRef[FirestoreFieldConstants.uidField],
+                        );
+
+                        return _StudentWidget(userModel, null, index);
+                      },
+                    );
+                  }
+                } else {
+                  return const _LoadingWidget();
+                }
               },
             );
+          } else {
+            return const _LoadingWidget();
           }
-          return const Center(child: CircularProgressIndicator.adaptive());
         },
       ),
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      title: Text(formattedDate),
-    );
-  }
+  AppBar _appBar() => AppBar(title: Text(formattedDate));
 }
 
 class _StudentWidget extends StatefulWidget {
-  const _StudentWidget(this.userModel);
+  const _StudentWidget(this.userModel, this.attendanceDocs, this.index);
   final UserModel userModel;
+  final List<QueryDocumentSnapshot<Object?>>? attendanceDocs;
+  final int index;
 
   @override
   State<_StudentWidget> createState() => __StudentWidgetState();
@@ -68,11 +116,17 @@ class _StudentWidget extends StatefulWidget {
 
 class __StudentWidgetState extends State<_StudentWidget> {
   int statusIndex = 0;
-  String status = "";
   Color bgColor = LightThemeColors.scaffoldBackgroundColor;
   Color textColor = LightThemeColors.black;
+  String status = "";
 
-  void _loadFirestore() {
+  @override
+  void initState() {
+    super.initState();
+    initComponents();
+  }
+
+  void loadFirebase() {
     FirebaseCollections.attendance.reference
         .doc(DateTime.now().year.toString() +
             DateTime.now().month.toString() +
@@ -82,8 +136,41 @@ class __StudentWidgetState extends State<_StudentWidget> {
       FirestoreFieldConstants.statusField: status,
       FirestoreFieldConstants.studentField: widget.userModel.uid,
       FirestoreFieldConstants.studentNameField: widget.userModel.name,
-      FirestoreFieldConstants.dateField: Timestamp.now(),
+      FirestoreFieldConstants.dateField: DateTime.now().day.toString() +
+          DateTime.now().month.toString() +
+          DateTime.now().year.toString()
     });
+  }
+
+  void initComponents() async {
+    if ((await widget.attendanceDocs?[widget.index]["status"] ?? false) ==
+        null) {
+      status = "";
+    } else {
+      status = await widget.attendanceDocs?[widget.index]["status"] ?? "";
+    }
+
+    setState(() {
+      if (status != "") {
+        if (status == "came") {
+          status = "came";
+          statusIndex = 1;
+          textColor = LightThemeColors.white;
+          bgColor = LightThemeColors.green;
+        } else if (status == "didntCame") {
+          status = "didntCame";
+          statusIndex = 0;
+          textColor = LightThemeColors.white;
+          bgColor = LightThemeColors.red;
+        }
+      } else {
+        status = "";
+        statusIndex = 0;
+        textColor = LightThemeColors.black;
+        bgColor = LightThemeColors.scaffoldBackgroundColor;
+      }
+    });
+    log(widget.index.toString());
   }
 
   @override
@@ -92,23 +179,17 @@ class __StudentWidgetState extends State<_StudentWidget> {
       onTap: () {
         setState(() {
           if (statusIndex == 0) {
-            bgColor = LightThemeColors.green;
             statusIndex = 1;
             status = "came";
+            bgColor = LightThemeColors.green;
             textColor = LightThemeColors.white;
-            _loadFirestore();
+            loadFirebase();
           } else if (statusIndex == 1) {
-            bgColor = LightThemeColors.red;
-            statusIndex = 2;
-            status = "didntCame";
-            textColor = LightThemeColors.white;
-            _loadFirestore();
-          } else if (statusIndex == 2) {
-            bgColor = LightThemeColors.scaffoldBackgroundColor;
             statusIndex = 0;
-            status = "empty";
-            textColor = LightThemeColors.black;
-            _loadFirestore();
+            status = "didntCame";
+            bgColor = LightThemeColors.red;
+            textColor = LightThemeColors.white;
+            loadFirebase();
           }
         });
       },
@@ -125,11 +206,24 @@ class __StudentWidgetState extends State<_StudentWidget> {
             ),
             title: Text(
               widget.userModel.name,
-              style: TextStyle(color: textColor),
+              style: TextStyle(
+                color: textColor,
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _LoadingWidget extends StatelessWidget {
+  const _LoadingWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: CircularProgressIndicator.adaptive(),
     );
   }
 }
