@@ -133,10 +133,8 @@ class _MarkedHomeworkCardState extends State<MarkedHomeworkCard> {
   Text _descriptionText(BuildContext context) {
     return Text(
       snapshot[FirestoreFieldConstants.descriptionField],
-      style: context.textTheme.bodyMedium?.copyWith(
-        fontWeight: FontWeight.normal,
-        color: textColor,
-      ),
+      style: context.textTheme.bodyMedium
+          ?.copyWith(fontWeight: FontWeight.normal, color: textColor),
       maxLines: 3,
     );
   }
