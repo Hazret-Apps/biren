@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.2.0
   calendar_timeline: ^1.1.2
   change_app_package_name: ^1.1.0
+  carousel_slider: ^4.2.1
   
 dev_dependencies:
   flutter_test:

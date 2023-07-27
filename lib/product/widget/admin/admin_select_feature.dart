@@ -3,6 +3,7 @@ import 'package:biren_kocluk/features/admin/view/attendance/attendance_view.dart
 import 'package:biren_kocluk/features/admin/view/class/classes_view.dart';
 import 'package:biren_kocluk/features/admin/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/admin/view/homework/homework_view.dart';
+import 'package:biren_kocluk/features/admin/view/showcase/showcase_view.dart';
 import 'package:biren_kocluk/features/admin/view/students/students_view.dart';
 import 'package:biren_kocluk/product/enum/admin_feature_types.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
@@ -59,6 +60,11 @@ class _AdminSelectFeatureState extends State<AdminSelectFeature> {
         imagePath = Assets.images.calender.path;
         title = LocaleKeys.features_attendance.tr();
         callView = const AdminAttendanceView();
+        break;
+      case FeatureTypes.showcase:
+        imagePath = Assets.images.showcase.path;
+        title = "Tanıtımlar";
+        callView = const CreateShowcaseView();
         break;
       default:
     }

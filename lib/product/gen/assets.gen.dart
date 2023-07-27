@@ -36,6 +36,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/exams.png
   AssetGenImage get exams => const AssetGenImage('assets/images/exams.png');
 
+  /// File path: assets/images/showcase.png
+  AssetGenImage get showcase =>
+      const AssetGenImage('assets/images/showcase.png');
+
   /// File path: assets/images/students.png
   AssetGenImage get students =>
       const AssetGenImage('assets/images/students.png');
@@ -45,7 +49,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [announcement, calender, classes, exams, students, task];
+      [announcement, calender, classes, exams, showcase, students, task];
 }
 
 class $AssetsJsonsGen {
@@ -144,7 +148,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
