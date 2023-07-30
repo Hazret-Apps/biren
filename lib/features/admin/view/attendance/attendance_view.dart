@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:biren_kocluk/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
 import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
@@ -23,74 +21,45 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView>
     return Scaffold(
       appBar: _appBar(),
       body: StreamBuilder<QuerySnapshot>(
-        stream: stream,
+        stream: FirebaseCollections.students.reference
+            .where(FirestoreFieldConstants.isVerifiedField, isEqualTo: true)
+            .snapshots(),
         builder: (context, userSnapshot) {
           if (userSnapshot.hasData) {
-            return StreamBuilder<QuerySnapshot>(
-              stream: FirebaseCollections.attendance.reference
-                  .where(
-                    "date",
-                    isEqualTo: DateTime.now().day.toString() +
-                        DateTime.now().month.toString() +
-                        DateTime.now().year.toString(),
-                  )
-                  .snapshots(),
-              builder: (context, attendanceSnapshot) {
-                if (attendanceSnapshot.hasData) {
-                  if (attendanceSnapshot.data!.docs.isNotNullOrEmpty) {
-                    return ListView.builder(
-                      itemCount: userSnapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final userSnapshotRef = userSnapshot.data!.docs[index];
-                        UserModel userModel = UserModel(
-                          name: userSnapshotRef[
-                              FirestoreFieldConstants.nameField],
-                          mail: userSnapshotRef[
-                              FirestoreFieldConstants.mailField],
-                          password: userSnapshotRef[
-                              FirestoreFieldConstants.passwordField],
-                          createdTime: userSnapshotRef[
-                              FirestoreFieldConstants.createdTimeField],
-                          isVerified: userSnapshotRef[
-                              FirestoreFieldConstants.isVerifiedField],
-                          uid:
-                              userSnapshotRef[FirestoreFieldConstants.uidField],
-                        );
-
-                        return _StudentWidget(
-                          userModel,
-                          attendanceSnapshot.data!.docs,
-                          index,
-                        );
-                      },
-                    );
-                  } else {
-                    return ListView.builder(
-                      itemCount: userSnapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final userSnapshotRef = userSnapshot.data!.docs[index];
-                        UserModel userModel = UserModel(
-                          name: userSnapshotRef[
-                              FirestoreFieldConstants.nameField],
-                          mail: userSnapshotRef[
-                              FirestoreFieldConstants.mailField],
-                          password: userSnapshotRef[
-                              FirestoreFieldConstants.passwordField],
-                          createdTime: userSnapshotRef[
-                              FirestoreFieldConstants.createdTimeField],
-                          isVerified: userSnapshotRef[
-                              FirestoreFieldConstants.isVerifiedField],
-                          uid:
-                              userSnapshotRef[FirestoreFieldConstants.uidField],
-                        );
-
-                        return _StudentWidget(userModel, null, index);
-                      },
-                    );
-                  }
-                } else {
-                  return const _LoadingWidget();
-                }
+            return ListView.builder(
+              itemCount: userSnapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final QueryDocumentSnapshot<Object?> data =
+                    userSnapshot.data!.docs[index];
+                final UserModel userModel = UserModel(
+                  name: data[FirestoreFieldConstants.nameField],
+                  mail: data[FirestoreFieldConstants.mailField],
+                  password: data[FirestoreFieldConstants.passwordField],
+                  createdTime: data[FirestoreFieldConstants.createdTimeField],
+                  isVerified: data[FirestoreFieldConstants.isVerifiedField],
+                  uid: data[FirestoreFieldConstants.uidField],
+                );
+                return StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseCollections.students.reference
+                      .doc(data[FirestoreFieldConstants.uidField])
+                      .collection("attendance")
+                      .doc(
+                        DateTime.now().day.toString() +
+                            DateTime.now().month.toString() +
+                            DateTime.now().year.toString(),
+                      )
+                      .snapshots(),
+                  builder: (context, attendanceSnapshot) {
+                    if (attendanceSnapshot.hasData) {
+                      return _StudentWidget(
+                        userModel,
+                        attendanceSnapshot,
+                      );
+                    } else {
+                      return const _LoadingWidget();
+                    }
+                  },
+                );
               },
             );
           } else {
@@ -104,73 +73,82 @@ class _AdminAttendanceViewState extends State<AdminAttendanceView>
   AppBar _appBar() => AppBar(title: Text(formattedDate));
 }
 
+class AttendanceModel {
+  final String status;
+
+  AttendanceModel(this.status);
+}
+
 class _StudentWidget extends StatefulWidget {
-  const _StudentWidget(this.userModel, this.attendanceDocs, this.index);
+  const _StudentWidget(
+    this.userModel,
+    this.attendanceSnapshot,
+  );
   final UserModel userModel;
-  final List<QueryDocumentSnapshot<Object?>>? attendanceDocs;
-  final int index;
+  final AsyncSnapshot<DocumentSnapshot<Object?>> attendanceSnapshot;
 
   @override
   State<_StudentWidget> createState() => __StudentWidgetState();
 }
 
 class __StudentWidgetState extends State<_StudentWidget> {
-  int statusIndex = 0;
   Color bgColor = LightThemeColors.scaffoldBackgroundColor;
   Color textColor = LightThemeColors.black;
   String status = "";
+  int statusIndex = 0;
+
+  Future<void> loadStatus() async {
+    if (widget.attendanceSnapshot.data!.exists) {
+      status = await widget.attendanceSnapshot.data?["status"];
+    }
+  }
+
+  void loadComponents() async {
+    await loadStatus();
+
+    setState(() {
+      switch (status) {
+        case "came":
+          bgColor = LightThemeColors.green;
+          textColor = LightThemeColors.white;
+          statusIndex = 1;
+          break;
+        case "didntCame":
+          bgColor = LightThemeColors.red;
+          textColor = LightThemeColors.white;
+          statusIndex = 2;
+          break;
+        case "":
+          bgColor = LightThemeColors.scaffoldBackgroundColor;
+          textColor = LightThemeColors.black;
+          statusIndex = 0;
+          break;
+        default:
+      }
+    });
+  }
+
+  void loadFirebase() {
+    FirebaseCollections.students.reference
+        .doc(widget.userModel.uid)
+        .collection("attendance")
+        .doc(
+          DateTime.now().day.toString() +
+              DateTime.now().month.toString() +
+              DateTime.now().year.toString(),
+        )
+        .set({
+      FirestoreFieldConstants.statusField: status,
+      FirestoreFieldConstants.nameField: widget.userModel.name,
+      FirestoreFieldConstants.dateField: Timestamp.now(),
+      FirestoreFieldConstants.uidField: widget.userModel.uid,
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    initComponents();
-  }
-
-  void loadFirebase() {
-    FirebaseCollections.attendance.reference
-        .doc(DateTime.now().year.toString() +
-            DateTime.now().month.toString() +
-            DateTime.now().day.toString() +
-            widget.userModel.uid)
-        .set({
-      FirestoreFieldConstants.statusField: status,
-      FirestoreFieldConstants.studentField: widget.userModel.uid,
-      FirestoreFieldConstants.studentNameField: widget.userModel.name,
-      FirestoreFieldConstants.dateField: DateTime.now().day.toString() +
-          DateTime.now().month.toString() +
-          DateTime.now().year.toString()
-    });
-  }
-
-  void initComponents() async {
-    if ((await widget.attendanceDocs?[widget.index]["status"] ?? false) ==
-        null) {
-      status = "";
-    } else {
-      status = await widget.attendanceDocs?[widget.index]["status"] ?? "";
-    }
-
-    setState(() {
-      if (status != "") {
-        if (status == "came") {
-          status = "came";
-          statusIndex = 1;
-          textColor = LightThemeColors.white;
-          bgColor = LightThemeColors.green;
-        } else if (status == "didntCame") {
-          status = "didntCame";
-          statusIndex = 0;
-          textColor = LightThemeColors.white;
-          bgColor = LightThemeColors.red;
-        }
-      } else {
-        status = "";
-        statusIndex = 0;
-        textColor = LightThemeColors.black;
-        bgColor = LightThemeColors.scaffoldBackgroundColor;
-      }
-    });
-    log(widget.index.toString());
+    loadComponents();
   }
 
   @override
@@ -179,16 +157,22 @@ class __StudentWidgetState extends State<_StudentWidget> {
       onTap: () {
         setState(() {
           if (statusIndex == 0) {
-            statusIndex = 1;
             status = "came";
             bgColor = LightThemeColors.green;
             textColor = LightThemeColors.white;
+            statusIndex = 1;
             loadFirebase();
           } else if (statusIndex == 1) {
-            statusIndex = 0;
             status = "didntCame";
             bgColor = LightThemeColors.red;
             textColor = LightThemeColors.white;
+            statusIndex = 2;
+            loadFirebase();
+          } else if (statusIndex == 2) {
+            status = "";
+            bgColor = LightThemeColors.scaffoldBackgroundColor;
+            textColor = LightThemeColors.black;
+            statusIndex = 0;
             loadFirebase();
           }
         });
