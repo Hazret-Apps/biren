@@ -1,6 +1,6 @@
 import 'package:biren_kocluk/features/admin/view/admin_home_view.dart';
 import 'package:biren_kocluk/features/admin/view/attendance/provider/attendance_provider.dart';
-import 'package:biren_kocluk/features/auth/login/view/login_view.dart';
+import 'package:biren_kocluk/features/auth/register/view/register_view.dart';
 import 'package:biren_kocluk/features/auth/service/auth_service.dart';
 import 'package:biren_kocluk/features/home/view/homeview/home_view.dart';
 import 'package:biren_kocluk/features/loading/loading_view.dart';
@@ -113,7 +113,7 @@ class Biren extends StatelessWidget {
                       return const LoadingView();
                     },
                   )
-                : const LoginView(),
+                : const RegisterView(),
       ),
     );
   }
