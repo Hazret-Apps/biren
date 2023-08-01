@@ -33,6 +33,7 @@ class AnnouncementHistoryView extends StatelessWidget {
                   formattedDate: formattedDate,
                   snapshot: snapshot,
                   index: index,
+                  isAdmin: true, 
                 );
               },
             );

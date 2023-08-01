@@ -39,6 +39,7 @@ class _AnnouncementViewState extends State<AnnouncementView> {
                   formattedDate: formattedDate,
                   snapshot: snapshot,
                   index: index,
+                  isAdmin: false,
                 );
               },
             );
