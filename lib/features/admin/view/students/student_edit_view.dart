@@ -90,6 +90,15 @@ class _StudentEditViewState extends State<StudentEditView>
     );
   }
 
+  Text _nameText(BuildContext context) {
+    return Text(
+      widget.userModel.name,
+      style: context.textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   CircleAvatar _avatar() {
     return CircleAvatar(
       radius: 75,
@@ -97,15 +106,6 @@ class _StudentEditViewState extends State<StudentEditView>
       child: Text(
         widget.userModel.name.characters.first,
         style: const TextStyle(fontSize: 35),
-      ),
-    );
-  }
-
-  Text _nameText(BuildContext context) {
-    return Text(
-      widget.userModel.name,
-      style: context.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.bold,
       ),
     );
   }
