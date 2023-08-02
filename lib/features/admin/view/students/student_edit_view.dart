@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:biren_kocluk/features/admin/view/students/mixin/student_edit_operation_mixin.dart';
 import 'package:biren_kocluk/product/constants/firestore_field_constants.dart';
+import 'package:biren_kocluk/product/enum/firebase_collection_enum.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:biren_kocluk/product/model/user_model.dart';
@@ -25,7 +27,45 @@ class _StudentEditViewState extends State<StudentEditView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                title: "Uyarı!",
+                desc:
+                    "Bu öğrenciyi kalıcı olarak silmek istediğinizden emin misiniz?",
+                btnOkText: "Sil",
+                btnOkColor: LightThemeColors.red,
+                btnOkOnPress: () {
+                  FirebaseCollections.students.reference
+                      .doc(widget.userModel.uid)
+                      .delete();
+                  Navigator.pop(context);
+                },
+              ).show();
+            },
+            child: Row(
+              children: [
+                const Text(
+                  "Öğrenciyi Sil",
+                  style: TextStyle(
+                    color: LightThemeColors.red,
+                  ),
+                ),
+                context.emptySizedWidthBoxLow,
+                const Icon(
+                  Icons.delete_rounded,
+                  color: LightThemeColors.red,
+                ),
+              ],
+            ),
+          ),
+          context.emptySizedWidthBoxNormal,
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: context.horizontalPaddingNormal,
