@@ -10,17 +10,19 @@ class SelectFeatureListTile extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     required this.callView,
+    this.color,
   });
 
   final String title;
   final String subtitle;
   final IconData icon;
   final Widget callView;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: LightThemeColors.blazeOrangeLight,
+      color: color ?? LightThemeColors.blazeOrangeLight,
       shape: RoundedRectangleBorder(
         borderRadius: context.lowBorderRadius,
       ),
