@@ -41,7 +41,7 @@ class _AcceptedStudentsViewState extends State<AcceptedStudentsView>
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             );
           }
         },

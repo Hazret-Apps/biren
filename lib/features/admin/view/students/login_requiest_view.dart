@@ -89,9 +89,7 @@ class _LoginRequiestViewState extends State<LoginRequiestView>
             }
           } else {
             return const Center(
-              child: CircularProgressIndicator(
-                color: LightThemeColors.blazeOrange,
-              ),
+              child: CircularProgressIndicator.adaptive()
             );
           }
         },

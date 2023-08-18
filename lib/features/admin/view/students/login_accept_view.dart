@@ -91,7 +91,7 @@ class _LoginAcceptViewState extends State<LoginAcceptView>
       builder: (context, snapshot) {
         List<DropdownMenuItem> classItems = [];
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator.adaptive());
         } else {
           final users = snapshot.data!.docs.reversed.toList();
           for (var classes in users) {

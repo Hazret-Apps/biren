@@ -75,7 +75,7 @@ class _CreateAnnouncementViewState extends State<CreateAnnouncementView>
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator.adaptive());
             },
           );
           var imageUrl =

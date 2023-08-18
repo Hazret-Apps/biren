@@ -170,7 +170,7 @@ class _StudentEditViewState extends State<StudentEditView>
       builder: (context, snapshot) {
         List<DropdownMenuItem> classItems = [];
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator.adaptive());
         } else {
           final users = snapshot.data!.docs.reversed.toList();
           for (var classes in users) {

@@ -272,7 +272,7 @@ class _BodyState extends State<_Body> {
         builder: (context, snapshot) {
           List<DropdownMenuItem> items = [];
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator.adaptive());
           } else {
             final users = snapshot.data!.docs.reversed.toList();
             for (var classes in users) {

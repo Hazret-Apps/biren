@@ -21,25 +21,11 @@ class HomeViewDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: LightThemeColors.white,
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: context.verticalPaddingMedium,
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: LightThemeColors.blazeOrange,
-            ),
-            height: context.height / 7,
-            child: Padding(
-              padding: context.verticalPaddingMedium +
-                  context.horizontalPaddingNormal,
-              child: Text(
-                LocaleKeys.appName.tr(),
-                style: context.textTheme.displaySmall?.copyWith(
-                  color: LightThemeColors.white,
-                ),
-              ),
-            ),
-          ),
+          context.emptySizedHeightBoxLow3x,
           _HomeViewListTile(
             LocaleKeys.features_homeworks.tr(),
             () {
