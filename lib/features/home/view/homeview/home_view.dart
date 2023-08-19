@@ -46,36 +46,8 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
         child: Column(
           children: [
             context.emptySizedHeightBoxLow,
-            SizedBox(
-              height: context.height / 5,
-              width: double.infinity,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: stream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return CarouselSlider.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index, realIndex) {
-                        DocumentSnapshot sliderData =
-                            snapshot.data!.docs[index];
-                        return Image.network(
-                          sliderData["image"],
-                        );
-                      },
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  }
-                },
-              ),
-            ),
+            _promotionCard(context),
+            context.emptySizedHeightBoxLow,
             Column(
               children: [
                 _calendar,
@@ -88,6 +60,38 @@ class _HomeViewState extends State<HomeView> with HomeOperationMixin {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  SizedBox _promotionCard(BuildContext context) {
+    return SizedBox(
+      height: context.height / 5,
+      width: double.infinity,
+      child: StreamBuilder<QuerySnapshot>(
+        stream: stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return CarouselSlider.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index, realIndex) {
+                DocumentSnapshot sliderData = snapshot.data!.docs[index];
+                return Image.network(
+                  sliderData["image"],
+                );
+              },
+              options: CarouselOptions(
+                autoPlay: true,
+                aspectRatio: 2.0,
+                enlargeCenterPage: true,
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+        },
       ),
     );
   }
