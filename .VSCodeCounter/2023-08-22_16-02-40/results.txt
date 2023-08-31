@@ -1,0 +1,262 @@
+Date : 2023-08-22 16:02:40
+Directory : /Users/hazret/Documents/GitHub/biren
+Total : 129 files,  8064 codes, 159 comments, 750 blanks, all 8973 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Dart       |         96 |      6,576 |         63 |        644 |      7,283 |
+| JSON       |          9 |        991 |          0 |          4 |        995 |
+| XML        |         11 |        173 |         46 |         11 |        230 |
+| Groovy     |          3 |        107 |          3 |         24 |        134 |
+| HTML       |          1 |         98 |         16 |         18 |        132 |
+| YAML       |          2 |         65 |         29 |         20 |        114 |
+| Markdown   |          2 |         26 |          0 |         20 |         46 |
+| Swift      |          2 |         19 |          2 |          6 |         27 |
+| Properties |          2 |          8 |          0 |          2 |         10 |
+| C++        |          1 |          1 |          0 |          1 |          2 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |        129 |      8,064 |        159 |        750 |      8,973 |
+| . (Files)                                                                                                                |          3 |         88 |         29 |         38 |        155 |
+| android                                                                                                                  |         15 |        266 |         47 |         35 |        348 |
+| android (Files)                                                                                                          |          3 |         40 |          0 |         10 |         50 |
+| android/app                                                                                                              |         11 |        221 |         47 |         24 |        292 |
+| android/app (Files)                                                                                                      |          2 |        116 |          3 |         15 |        134 |
+| android/app/src                                                                                                          |          9 |        105 |         44 |          9 |        158 |
+| android/app/src/debug                                                                                                    |          1 |          4 |          4 |          1 |          9 |
+| android/app/src/main                                                                                                     |          7 |         97 |         36 |          7 |        140 |
+| android/app/src/main (Files)                                                                                             |          1 |         29 |          4 |          1 |         34 |
+| android/app/src/main/res                                                                                                 |          6 |         68 |         32 |          6 |        106 |
+| android/app/src/main/res/drawable                                                                                        |          1 |          9 |          0 |          1 |         10 |
+| android/app/src/main/res/drawable-v21                                                                                    |          1 |          9 |          0 |          1 |         10 |
+| android/app/src/main/res/values                                                                                          |          1 |         13 |          9 |          1 |         23 |
+| android/app/src/main/res/values-night                                                                                    |          1 |         13 |          9 |          1 |         23 |
+| android/app/src/main/res/values-night-v31                                                                                |          1 |         12 |          7 |          1 |         20 |
+| android/app/src/main/res/values-v31                                                                                      |          1 |         12 |          7 |          1 |         20 |
+| android/app/src/profile                                                                                                  |          1 |          4 |          4 |          1 |          9 |
+| android/gradle                                                                                                           |          1 |          5 |          0 |          1 |          6 |
+| android/gradle/wrapper                                                                                                   |          1 |          5 |          0 |          1 |          6 |
+| assets                                                                                                                   |          3 |        737 |          0 |          0 |        737 |
+| assets/jsons                                                                                                             |          3 |        737 |          0 |          0 |        737 |
+| assets/jsons/lang                                                                                                        |          1 |        137 |          0 |          0 |        137 |
+| assets/jsons/study                                                                                                       |          2 |        600 |          0 |          0 |        600 |
+| ios                                                                                                                      |         10 |        264 |          4 |         14 |        282 |
+| ios (Files)                                                                                                              |          1 |          7 |          0 |          0 |          7 |
+| ios/Runner                                                                                                               |          8 |        250 |          2 |         10 |        262 |
+| ios/Runner (Files)                                                                                                       |          2 |         13 |          0 |          3 |         16 |
+| ios/Runner/Assets.xcassets                                                                                               |          4 |        169 |          0 |          5 |        174 |
+| ios/Runner/Assets.xcassets/AppIcon.appiconset                                                                            |          1 |        122 |          0 |          1 |        123 |
+| ios/Runner/Assets.xcassets/LaunchBackground.imageset                                                                     |          1 |         21 |          0 |          1 |         22 |
+| ios/Runner/Assets.xcassets/LaunchImage.imageset                                                                          |          2 |         26 |          0 |          3 |         29 |
+| ios/Runner/Base.lproj                                                                                                    |          2 |         68 |          2 |          2 |         72 |
+| ios/RunnerTests                                                                                                          |          1 |          7 |          2 |          4 |         13 |
+| lib                                                                                                                      |         95 |      6,562 |         53 |        637 |      7,252 |
+| lib (Files)                                                                                                              |          2 |        173 |         12 |         12 |        197 |
+| lib/features                                                                                                             |         61 |      4,560 |          6 |        436 |      5,002 |
+| lib/features/admin                                                                                                       |         33 |      2,766 |          4 |        261 |      3,031 |
+| lib/features/admin/service                                                                                               |          1 |         32 |          0 |          5 |         37 |
+| lib/features/admin/view                                                                                                  |         32 |      2,734 |          4 |        256 |      2,994 |
+| lib/features/admin/view (Files)                                                                                          |          1 |         55 |          0 |          6 |         61 |
+| lib/features/admin/view/announcement                                                                                     |          4 |        239 |          0 |         24 |        263 |
+| lib/features/admin/view/announcement (Files)                                                                             |          3 |        223 |          0 |         20 |        243 |
+| lib/features/admin/view/announcement/mixin                                                                               |          1 |         16 |          0 |          4 |         20 |
+| lib/features/admin/view/attendance                                                                                       |          3 |        254 |          0 |         27 |        281 |
+| lib/features/admin/view/attendance (Files)                                                                               |          1 |        196 |          0 |         18 |        214 |
+| lib/features/admin/view/attendance/mixin                                                                                 |          1 |         19 |          0 |          4 |         23 |
+| lib/features/admin/view/attendance/provider                                                                              |          1 |         39 |          0 |          5 |         44 |
+| lib/features/admin/view/class                                                                                            |          2 |        303 |          0 |         22 |        325 |
+| lib/features/admin/view/exams                                                                                            |          4 |        409 |          1 |         41 |        451 |
+| lib/features/admin/view/exams (Files)                                                                                    |          3 |        398 |          1 |         38 |        437 |
+| lib/features/admin/view/exams/mixin                                                                                      |          1 |         11 |          0 |          3 |         14 |
+| lib/features/admin/view/homework                                                                                         |          7 |        629 |          2 |         62 |        693 |
+| lib/features/admin/view/homework (Files)                                                                                 |          4 |        476 |          1 |         37 |        514 |
+| lib/features/admin/view/homework/mixin                                                                                   |          3 |        153 |          1 |         25 |        179 |
+| lib/features/admin/view/showcase                                                                                         |          2 |        133 |          0 |         15 |        148 |
+| lib/features/admin/view/showcase (Files)                                                                                 |          1 |        107 |          0 |          7 |        114 |
+| lib/features/admin/view/showcase/mixin                                                                                   |          1 |         26 |          0 |          8 |         34 |
+| lib/features/admin/view/students                                                                                         |          9 |        712 |          1 |         59 |        772 |
+| lib/features/admin/view/students (Files)                                                                                 |          5 |        572 |          1 |         41 |        614 |
+| lib/features/admin/view/students/mixin                                                                                   |          4 |        140 |          0 |         18 |        158 |
+| lib/features/auth                                                                                                        |          5 |        426 |          1 |         43 |        470 |
+| lib/features/auth/login                                                                                                  |          2 |        143 |          0 |         16 |        159 |
+| lib/features/auth/login/mixin                                                                                            |          1 |         32 |          0 |          6 |         38 |
+| lib/features/auth/login/view                                                                                             |          1 |        111 |          0 |         10 |        121 |
+| lib/features/auth/register                                                                                               |          2 |        145 |          0 |         15 |        160 |
+| lib/features/auth/register/mixin                                                                                         |          1 |         18 |          0 |          4 |         22 |
+| lib/features/auth/register/view                                                                                          |          1 |        127 |          0 |         11 |        138 |
+| lib/features/auth/service                                                                                                |          1 |        138 |          1 |         12 |        151 |
+| lib/features/home                                                                                                        |         20 |      1,300 |          1 |        122 |      1,423 |
+| lib/features/home/mixin                                                                                                  |          5 |        135 |          0 |         16 |        151 |
+| lib/features/home/view                                                                                                   |         15 |      1,165 |          1 |        106 |      1,272 |
+| lib/features/home/view/announcement                                                                                      |          1 |         52 |          0 |          7 |         59 |
+| lib/features/home/view/attendance                                                                                        |          2 |        161 |          0 |         16 |        177 |
+| lib/features/home/view/exams                                                                                             |          3 |        189 |          0 |         17 |        206 |
+| lib/features/home/view/exams (Files)                                                                                     |          2 |        112 |          0 |         11 |        123 |
+| lib/features/home/view/exams/widget                                                                                      |          1 |         77 |          0 |          6 |         83 |
+| lib/features/home/view/homeview                                                                                          |          3 |        346 |          0 |         22 |        368 |
+| lib/features/home/view/homeview (Files)                                                                                  |          1 |        150 |          0 |         11 |        161 |
+| lib/features/home/view/homeview/widgets                                                                                  |          2 |        196 |          0 |         11 |        207 |
+| lib/features/home/view/homeworks                                                                                         |          6 |        417 |          1 |         44 |        462 |
+| lib/features/loading                                                                                                     |          1 |         12 |          0 |          3 |         15 |
+| lib/features/reject                                                                                                      |          1 |         14 |          0 |          3 |         17 |
+| lib/features/wait                                                                                                        |          1 |         42 |          0 |          4 |         46 |
+| lib/product                                                                                                              |         32 |      1,829 |         35 |        189 |      2,053 |
+| lib/product/constants                                                                                                    |          2 |         40 |          1 |          3 |         44 |
+| lib/product/enum                                                                                                         |          4 |         27 |          0 |          6 |         33 |
+| lib/product/gen                                                                                                          |          2 |        116 |         30 |         36 |        182 |
+| lib/product/init                                                                                                         |          6 |        329 |          2 |         23 |        354 |
+| lib/product/init/lang                                                                                                    |          2 |        153 |          2 |          8 |        163 |
+| lib/product/init/theme                                                                                                   |          3 |        167 |          0 |         13 |        180 |
+| lib/product/init/validation                                                                                              |          1 |          9 |          0 |          2 |         11 |
+| lib/product/model                                                                                                        |          4 |        115 |          2 |         18 |        135 |
+| lib/product/widget                                                                                                       |         14 |      1,202 |          0 |        103 |      1,305 |
+| lib/product/widget/admin                                                                                                 |          3 |        353 |          0 |         30 |        383 |
+| lib/product/widget/button                                                                                                |          3 |        100 |          0 |         13 |        113 |
+| lib/product/widget/card                                                                                                  |          5 |        534 |          0 |         43 |        577 |
+| lib/product/widget/drawer                                                                                                |          1 |         91 |          0 |          5 |         96 |
+| lib/product/widget/text_field                                                                                            |          2 |        124 |          0 |         12 |        136 |
+| test                                                                                                                     |          1 |         14 |         10 |          7 |         31 |
+| web                                                                                                                      |          2 |        133 |         16 |         19 |        168 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                 | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/hazret/Documents/GitHub/biren/README.md                                                                           | Markdown   |         23 |          0 |         18 |         41 |
+| /Users/hazret/Documents/GitHub/biren/analysis_options.yaml                                                               | YAML       |          3 |         23 |          4 |         30 |
+| /Users/hazret/Documents/GitHub/biren/android/app/build.gradle                                                            | Groovy     |         70 |          3 |         15 |         88 |
+| /Users/hazret/Documents/GitHub/biren/android/app/google-services.json                                                    | JSON       |         46 |          0 |          0 |         46 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/debug/AndroidManifest.xml                                           | XML        |          4 |          4 |          1 |          9 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/AndroidManifest.xml                                            | XML        |         29 |          4 |          1 |         34 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/drawable-v21/launch_background.xml                         | XML        |          9 |          0 |          1 |         10 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/drawable/launch_background.xml                             | XML        |          9 |          0 |          1 |         10 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/values-night-v31/styles.xml                                | XML        |         12 |          7 |          1 |         20 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/values-night/styles.xml                                    | XML        |         13 |          9 |          1 |         23 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/values-v31/styles.xml                                      | XML        |         12 |          7 |          1 |         20 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/main/res/values/styles.xml                                          | XML        |         13 |          9 |          1 |         23 |
+| /Users/hazret/Documents/GitHub/biren/android/app/src/profile/AndroidManifest.xml                                         | XML        |          4 |          4 |          1 |          9 |
+| /Users/hazret/Documents/GitHub/biren/android/build.gradle                                                                | Groovy     |         29 |          0 |          5 |         34 |
+| /Users/hazret/Documents/GitHub/biren/android/gradle.properties                                                           | Properties |          3 |          0 |          1 |          4 |
+| /Users/hazret/Documents/GitHub/biren/android/gradle/wrapper/gradle-wrapper.properties                                    | Properties |          5 |          0 |          1 |          6 |
+| /Users/hazret/Documents/GitHub/biren/android/settings.gradle                                                             | Groovy     |          8 |          0 |          4 |         12 |
+| /Users/hazret/Documents/GitHub/biren/assets/jsons/lang/tr-TR.json                                                        | JSON       |        137 |          0 |          0 |        137 |
+| /Users/hazret/Documents/GitHub/biren/assets/jsons/study/lessons.json                                                     | JSON       |        588 |          0 |          0 |        588 |
+| /Users/hazret/Documents/GitHub/biren/assets/jsons/study/subjects.json                                                    | JSON       |         12 |          0 |          0 |         12 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/AppDelegate.swift                                                        | Swift      |         12 |          0 |          2 |         14 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json                         | JSON       |        122 |          0 |          1 |        123 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json                  | JSON       |         21 |          0 |          1 |         22 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json                       | JSON       |         23 |          0 |          1 |         24 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md                           | Markdown   |          3 |          0 |          2 |          5 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Base.lproj/LaunchScreen.storyboard                                       | XML        |         43 |          1 |          1 |         45 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Base.lproj/Main.storyboard                                               | XML        |         25 |          1 |          1 |         27 |
+| /Users/hazret/Documents/GitHub/biren/ios/Runner/Runner-Bridging-Header.h                                                 | C++        |          1 |          0 |          1 |          2 |
+| /Users/hazret/Documents/GitHub/biren/ios/RunnerTests/RunnerTests.swift                                                   | Swift      |          7 |          2 |          4 |         13 |
+| /Users/hazret/Documents/GitHub/biren/ios/firebase_app_id_file.json                                                       | JSON       |          7 |          0 |          0 |          7 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/service/announcement_service.dart                                | Dart       |         32 |          0 |          5 |         37 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/admin_home_view.dart                                        | Dart       |         55 |          0 |          6 |         61 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/announcement/announcement_history_view.dart                 | Dart       |         45 |          0 |          5 |         50 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/announcement/announcements_view_admin.dart                  | Dart       |         49 |          0 |          6 |         55 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/announcement/create_announcement_view.dart                  | Dart       |        129 |          0 |          9 |        138 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/announcement/mixin/create_announcement_operation_mixin.dart | Dart       |         16 |          0 |          4 |         20 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/attendance/attendance_view.dart                             | Dart       |        196 |          0 |         18 |        214 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/attendance/mixin/admin_attendance_operation_mixin.dart      | Dart       |         19 |          0 |          4 |         23 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/attendance/provider/attendance_provider.dart                | Dart       |         39 |          0 |          5 |         44 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/class/class_detail_view.dart                                | Dart       |         59 |          0 |          6 |         65 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/class/classes_view.dart                                     | Dart       |        244 |          0 |         16 |        260 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/exams/all_exams_view.dart                                   | Dart       |         45 |          0 |          7 |         52 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/exams/enter_exams_view.dart                                 | Dart       |        300 |          1 |         25 |        326 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/exams/exams_view.dart                                       | Dart       |         53 |          0 |          6 |         59 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/exams/mixin/enter_exams_operation_mixin.dart                | Dart       |         11 |          0 |          3 |         14 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/admin_all_homework_view.dart                       | Dart       |         40 |          0 |          5 |         45 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/create_homework_view.dart                          | Dart       |        325 |          1 |         19 |        345 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/homework_view.dart                                 | Dart       |         60 |          0 |          6 |         66 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/incoming_homeworks_view.dart                       | Dart       |         51 |          0 |          7 |         58 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/mixin/admin_all_homeworks_operation_mixin.dart     | Dart       |          8 |          0 |          2 |         10 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/mixin/create_homework_operation_mixin.dart         | Dart       |        134 |          1 |         21 |        156 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/homework/mixin/incoming_homeworks_operation_mixin.dart      | Dart       |         11 |          0 |          2 |         13 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/showcase/mixin/create_showcase_operation_mixin.dart         | Dart       |         26 |          0 |          8 |         34 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/showcase/showcase_view.dart                                 | Dart       |        107 |          0 |          7 |        114 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/accepted_students_view.dart                        | Dart       |         59 |          0 |          6 |         65 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/login_accept_view.dart                             | Dart       |        146 |          0 |          9 |        155 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/login_requiest_view.dart                           | Dart       |        120 |          0 |          6 |        126 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/mixin/accepted_students_operation_mixin.dart       | Dart       |         43 |          0 |          4 |         47 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/mixin/login_accept_operation_mixin.dart            | Dart       |         37 |          0 |          5 |         42 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/mixin/login_requiest_operation_mixin.dart          | Dart       |         29 |          0 |          4 |         33 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/mixin/student_edit_operation_mixin.dart            | Dart       |         31 |          0 |          5 |         36 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/student_edit_view.dart                             | Dart       |        199 |          1 |         14 |        214 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/admin/view/students/students_view.dart                                 | Dart       |         48 |          0 |          6 |         54 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/auth/login/mixin/login_operation_mixin.dart                            | Dart       |         32 |          0 |          6 |         38 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/auth/login/view/login_view.dart                                        | Dart       |        111 |          0 |         10 |        121 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/auth/register/mixin/register_operation_mixin.dart                      | Dart       |         18 |          0 |          4 |         22 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/auth/register/view/register_view.dart                                  | Dart       |        127 |          0 |         11 |        138 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/auth/service/auth_service.dart                                         | Dart       |        138 |          1 |         12 |        151 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/mixin/all_homeworks_operation_mixin.dart                          | Dart       |         23 |          0 |          2 |         25 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/mixin/didnt_made_homeworks_operation_mixin.dart                   | Dart       |         24 |          0 |          2 |         26 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/mixin/exams_home_operation_mixin.dart                             | Dart       |         12 |          0 |          2 |         14 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/mixin/home_operation_mixin.dart                                   | Dart       |         52 |          0 |          8 |         60 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/mixin/missing_homeworks_operation_mixin.dart                      | Dart       |         24 |          0 |          2 |         26 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/announcement/announcements_view.dart                         | Dart       |         52 |          0 |          7 |         59 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/attendance/attendance_view.dart                              | Dart       |        103 |          0 |         10 |        113 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/attendance/didnt_came_days_view.dart                         | Dart       |         58 |          0 |          6 |         64 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/exams/exam_detail_view.dart                                  | Dart       |         73 |          0 |          6 |         79 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/exams/exams_view.dart                                        | Dart       |         39 |          0 |          5 |         44 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/exams/widget/exam_widget.dart                                | Dart       |         77 |          0 |          6 |         83 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeview/home_view.dart                                      | Dart       |        150 |          0 |         11 |        161 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeview/widgets/home_drawer.dart                            | Dart       |        134 |          0 |          7 |        141 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeview/widgets/home_select_feature_card.dart               | Dart       |         62 |          0 |          4 |         66 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/all_homeworks_view.dart                            | Dart       |         45 |          0 |          5 |         50 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/check_homework_view.dart                           | Dart       |        139 |          1 |         15 |        155 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/didnt_made_homeworks_view.dart                     | Dart       |         54 |          0 |          7 |         61 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/homeworks_view.dart                                | Dart       |         73 |          0 |          6 |         79 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/missing_homeworks_view.dart                        | Dart       |         54 |          0 |          7 |         61 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/home/view/homeworks/pushed_homeworks_view.dart                         | Dart       |         52 |          0 |          4 |         56 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/loading/loading_view.dart                                              | Dart       |         12 |          0 |          3 |         15 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/reject/rejected_view.dart                                              | Dart       |         14 |          0 |          3 |         17 |
+| /Users/hazret/Documents/GitHub/biren/lib/features/wait/waiting_view.dart                                                 | Dart       |         42 |          0 |          4 |         46 |
+| /Users/hazret/Documents/GitHub/biren/lib/firebase_options.dart                                                           | Dart       |         59 |         12 |          5 |         76 |
+| /Users/hazret/Documents/GitHub/biren/lib/main.dart                                                                       | Dart       |        114 |          0 |          7 |        121 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/constants/app_constants.dart                                            | Dart       |          4 |          1 |          2 |          7 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/constants/firestore_field_constants.dart                                | Dart       |         36 |          0 |          1 |         37 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/enum/admin_feature_types.dart                                           | Dart       |          9 |          0 |          1 |         10 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/enum/cross_check_enum.dart                                              | Dart       |          1 |          0 |          1 |          2 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/enum/firebase_collection_enum.dart                                      | Dart       |         13 |          0 |          3 |         16 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/enum/homework_type_enum.dart                                            | Dart       |          4 |          0 |          1 |          5 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/gen/assets.gen.dart                                                     | Dart       |        112 |         22 |         32 |        166 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/gen/fonts.gen.dart                                                      | Dart       |          4 |          8 |          4 |         16 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/lang/language_manager.dart                                         | Dart       |         11 |          0 |          5 |         16 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/lang/locale_keys.g.dart                                            | Dart       |        142 |          2 |          3 |        147 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/theme/light_theme_colors.dart                                      | Dart       |         13 |          0 |          2 |         15 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/theme/theme.dart                                                   | Dart       |         95 |          0 |          8 |        103 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/theme/typography.dart                                              | Dart       |         59 |          0 |          3 |         62 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/init/validation/regex_validations.dart                                  | Dart       |          9 |          0 |          2 |         11 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/model/announcement_card_model.dart                                      | Dart       |         15 |          0 |          3 |         18 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/model/attendance_model.dart                                             | Dart       |         35 |          0 |          5 |         40 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/model/homework_model.dart                                               | Dart       |         38 |          1 |          6 |         45 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/model/user_model.dart                                                   | Dart       |         27 |          1 |          4 |         32 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/admin/admin_homework_card.dart                                   | Dart       |        218 |          0 |         19 |        237 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/admin/admin_select_feature.dart                                  | Dart       |        102 |          0 |          7 |        109 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/admin/cross_check_container.dart                                 | Dart       |         33 |          0 |          4 |         37 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/button/done_action_button.dart                                   | Dart       |         21 |          0 |          4 |         25 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/button/main_button.dart                                          | Dart       |         59 |          0 |          5 |         64 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/button/next_action_button.dart                                   | Dart       |         20 |          0 |          4 |         24 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/card/admin_features_select_widget.dart                           | Dart       |         49 |          0 |          4 |         53 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/card/announcement_card.dart                                      | Dart       |        111 |          0 |          4 |        115 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/card/homework_card_large.dart                                    | Dart       |        223 |          0 |         15 |        238 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/card/homework_card_mini.dart                                     | Dart       |         18 |          0 |          3 |         21 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/card/marked_homework_card.dart                                   | Dart       |        133 |          0 |         17 |        150 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/drawer/homework_drawer.dart                                      | Dart       |         91 |          0 |          5 |         96 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/text_field/auth_text_field.dart                                  | Dart       |         74 |          0 |          8 |         82 |
+| /Users/hazret/Documents/GitHub/biren/lib/product/widget/text_field/main_text_field.dart                                  | Dart       |         50 |          0 |          4 |         54 |
+| /Users/hazret/Documents/GitHub/biren/pubspec.yaml                                                                        | YAML       |         62 |          6 |         16 |         84 |
+| /Users/hazret/Documents/GitHub/biren/test/widget_test.dart                                                               | Dart       |         14 |         10 |          7 |         31 |
+| /Users/hazret/Documents/GitHub/biren/web/index.html                                                                      | HTML       |         98 |         16 |         18 |        132 |
+| /Users/hazret/Documents/GitHub/biren/web/manifest.json                                                                   | JSON       |         35 |          0 |          1 |         36 |
+| Total                                                                                                                    |            |      8,064 |        159 |        750 |      8,973 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

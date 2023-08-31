@@ -147,4 +147,18 @@ class AuthService {
       );
     });
   }
+
+  Future<void> deleteAccount(BuildContext context) async {
+    Navigator.pushAndRemoveUntil(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const RegisterView(),
+      ),
+      (route) => false,
+    );
+    FirebaseCollections.students.reference
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete();
+    FirebaseAuth.instance.currentUser!.delete();
+  }
 }
