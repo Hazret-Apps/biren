@@ -113,12 +113,12 @@ class _HomeworkCardLargeState extends State<HomeworkCardLarge> {
         } else if (value == 3) {}
       },
       itemBuilder: (ctx) => [
-        _buildPopupMenuItem(
-          LocaleKeys.askQuestion.tr(),
-          0,
-          Icons.info_outline_rounded,
-          context,
-        ),
+        // _buildPopupMenuItem(
+        //   LocaleKeys.askQuestion.tr(),
+        //   0,
+        //   Icons.info_outline_rounded,
+        //   context,
+        // ),
         widget.snapshot.data!.docs[widget.index]
                     [FirestoreFieldConstants.makeEnumField] ==
                 "pushed"
