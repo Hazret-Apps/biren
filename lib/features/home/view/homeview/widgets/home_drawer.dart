@@ -5,6 +5,7 @@ import 'package:biren_kocluk/features/home/view/announcement/announcements_view.
 import 'package:biren_kocluk/features/home/view/attendance/attendance_view.dart';
 import 'package:biren_kocluk/features/home/view/exams/exams_view.dart';
 import 'package:biren_kocluk/features/home/view/homeworks/homeworks_view.dart';
+import 'package:biren_kocluk/features/home/view/profile/profile_view.dart';
 import 'package:biren_kocluk/product/init/lang/locale_keys.g.dart';
 import 'package:biren_kocluk/product/init/theme/light_theme_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -26,6 +27,19 @@ class HomeViewDrawer extends StatelessWidget {
         padding: context.verticalPaddingMedium,
         children: [
           context.emptySizedHeightBoxLow3x,
+          _HomeViewListTile(
+            "Profil",
+            () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const ProfileView(),
+                ),
+              );
+            },
+            Icons.account_circle_rounded,
+          ),
           _HomeViewListTile(
             LocaleKeys.features_homeworks.tr(),
             () {
